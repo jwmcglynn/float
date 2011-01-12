@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.Reflection;
+using Sputnik.Game;
 
 namespace Sputnik {
 	public class SpawnPoint {
