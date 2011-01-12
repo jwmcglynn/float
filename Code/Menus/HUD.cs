@@ -53,7 +53,6 @@ namespace Sputnik.Menus {
 			ShipHealth.Position = new Vector2(10.0f + ScreenSize.X * 0.25f / 2, -20.0f);
 			ShipHealth.VertexColor = Color.Green;
 			ShipHealth.Zindex = 0.5f;
-			ShipHealth.Alpha = 0.0f;
 			AddChild(ShipHealth);
 
 			// Ship health background.
@@ -62,7 +61,6 @@ namespace Sputnik.Menus {
 			ShipHealthBG.Position = new Vector2(10.0f + ScreenSize.X * 0.25f / 2, -20.0f);
 			ShipHealthBG.VertexColor = Color.Black;
 			ShipHealthBG.Zindex = 1.0f;
-			ShipHealthBG.Alpha = 0.0f;
 			AddChild(ShipHealthBG);
 		}
 
