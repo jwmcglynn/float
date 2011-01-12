@@ -32,6 +32,19 @@ namespace Sputnik {
 
 			base.Dispose();
 		}
+		
+		/*********************************************************************/
+		// Wind/pressure reaction.
+
+		public virtual void OnTempChange(float amount) {
+			// Call for children.
+			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnTempChange(amount); });
+		}
+
+		public virtual void OnPressureChange(float amount) {
+			// Call for children.
+			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnPressureChange(amount); });
+		}
 
 		/*********************************************************************/
 		// Culling.
