@@ -60,7 +60,9 @@ namespace Sputnik.Game {
             //I want to create a balloon in this world.
             GameEntity balloon = new Balloon(this);
             //I then want to add it as a child.
+            GameEntity cloud = new Cloud(this);
             AddChild(balloon);
+            AddChild(cloud);
 
 		}
 	}

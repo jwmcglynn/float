@@ -36,7 +36,8 @@ namespace Sputnik.Game
         private float currentSpecialStateRemainingTime;
         private bool visible;
         private Vector2 currentVelocity;
-
+        public static Vector2 RIGHT = new Vector2(1, 0);
+        public static Vector2 UP = new Vector2(0, -1);
 
        	public Balloon(GameEnvironment env) : base(env) {
             
@@ -63,7 +64,6 @@ namespace Sputnik.Game
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
             AddCollisionCircle(Texture.Width / 2, Vector2.Zero);
-            DesiredVelocity = new Vector2(0.0f, 0.0f);
 
             Environment.Camera.Focus = this;
         }
