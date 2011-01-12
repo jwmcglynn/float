@@ -10,9 +10,24 @@ using System.Text;
 
 namespace Sputnik.Game
 {
+    /**
+     * Created: Tuesday Jan 11 2011 by student.kaushik@gmail.com
+     * 
+     * BALLOON_STATE enum stores the possible states the balloon could be.
+     * It may become more useful in future editions of the game, where other factors of the balloon may come into play.
+     * For now it indicates the play-state of the balloon (invulnerable, alive, or dead).
+     *
+     */
     enum BALLOON_STATE {
         DEAD, ALIVE, INVULNERABLE
     }
+
+    /**
+     * Created: Tuesday Jan 11 2011 by student.kaushik@gmail.com
+     * 
+     * Balloon is the entity which the entity to which the player associates.
+     * It interacts with pressure and temperature, as well as birds, and wind.
+     */
     class Balloon : GameEntity
     {
         public const float MAX_SPEED = 10.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
@@ -20,6 +35,8 @@ namespace Sputnik.Game
         private BALLOON_STATE currentState;
         private float currentSpecialStateRemainingTime;
         private bool visible;
+        private Vector2 currentVelocity;
+
 
        	public Balloon(GameEnvironment env) : base(env) {
             
@@ -30,6 +47,11 @@ namespace Sputnik.Game
             Initialize();
 		}
 
+        public override void OnPressureChange(float amount)
+        {
+            base.OnPressureChange(amount);
+
+        }
         private void Initialize()
         {
             currentState = BALLOON_STATE.INVULNERABLE;
@@ -41,7 +63,7 @@ namespace Sputnik.Game
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
             AddCollisionCircle(Texture.Width / 2, Vector2.Zero);
-            DesiredVelocity = new Vector2(250.0f, 0.0f);
+            DesiredVelocity = new Vector2(0.0f, 0.0f);
 
             Environment.Camera.Focus = this;
         }
