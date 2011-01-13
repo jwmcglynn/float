@@ -146,6 +146,22 @@ namespace Sputnik {
 				Controller.Exit();
 			}
 
+			// Update controls.
+			KeyboardState keyState = Keyboard.GetState();
+			KeyboardState oldkeyState = OldKeyboard.GetState();
+
+			int dirX = 0;
+			int dirY = 0;
+			if (keyState.IsKeyDown(Keys.Up) && !oldkeyState.IsKeyDown(Keys.Up)) --dirY;
+			if (keyState.IsKeyDown(Keys.Down) && !oldkeyState.IsKeyDown(Keys.Down)) ++dirY;
+
+			if (keyState.IsKeyDown(Keys.Left) && !oldkeyState.IsKeyDown(Keys.Left)) --dirX;
+			if (keyState.IsKeyDown(Keys.Right) && !oldkeyState.IsKeyDown(Keys.Right)) ++dirX;
+
+			if (dirX != 0) OnPressureChange(-dirX); // Left = pressure increase.
+			if (dirY != 0) OnTempChange(-dirY); // Up = temp increase.
+
+
 			if (elapsedTime > 0.0f) {
 				// Update physics.
 				CollisionWorld.Step(elapsedTime);

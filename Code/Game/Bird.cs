@@ -49,7 +49,7 @@ namespace Sputnik.Game {
 		
 		/***************************************************************************/
 
-		public override void  OnPressureChange(float amount) {
+		public override void OnPressureChange(float amount) {
 			if (amount < 0) {
 				--m_speedLevel;
 				if (m_speedLevel < 0) m_speedLevel = 0;
