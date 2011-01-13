@@ -23,7 +23,7 @@ namespace Sputnik {
 		public SpawnController SpawnController { get; private set; }
 
 		// Camera.
-		public static Vector2 k_maxVirtualSize { get { return new Vector2(1680, 1050) * 1.25f; } }
+		public static Vector2 k_idealScreenSize { get { return new Vector2(1680, 1024); } }
 		public Vector2 ScreenVirtualSize = new Vector2(1680, 1050);
 		public Camera2D Camera;
 
@@ -54,12 +54,19 @@ namespace Sputnik {
 
 			Sound.StopAll(true);
 
+			// Camera.
+			Camera = new Camera2D(this);
+			Camera.Position = new Vector2(0.0f, k_idealScreenSize.Y * 0.5f);
+			Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
+			Camera.ResetEffectScale(1.1f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
+
+			// Window.
+			Controller.Window.ClientSizeChanged += WindowSizeChanged;
+			WindowSizeChanged(null, null);
 			Controller.IsMouseVisible = true;
 
+			// Collision.
 			CollisionWorld = new Physics.Dynamics.World(Vector2.Zero);
-			Controller.Window.ClientSizeChanged += WindowSizeChanged;
-			Camera = new Camera2D(this);
-			WindowSizeChanged(null, null);
 
 			// Create a new SpriteBatch which can be used to draw textures.
 			m_spriteBatch = new SpriteBatch(ctrl.GraphicsDevice);
@@ -103,9 +110,8 @@ namespace Sputnik {
 
 			// Correct virtual screen aspect ratio.
 			float ratio = (float) rect.Width / rect.Height;
-			ScreenVirtualSize = k_maxVirtualSize;
-			if (ratio <= 16.0f / 10.0f) ScreenVirtualSize.X = ScreenVirtualSize.Y * ratio;
-			else ScreenVirtualSize.Y = ScreenVirtualSize.X / ratio;
+			ScreenVirtualSize = k_idealScreenSize;
+			ScreenVirtualSize.X = ScreenVirtualSize.Y * ratio;
 
 			// TODO: Make SpriteBatch drawing use this projection too.
 			m_projection = Matrix.CreateOrthographicOffCenter(0.0f, rect.Width, rect.Height, 0.0f, -1.0f, 1.0f);

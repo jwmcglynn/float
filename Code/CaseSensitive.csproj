@@ -132,6 +132,7 @@
     <Compile Include="Engine\SpawnPoint.cs" />
     <Compile Include="Game\GameEnvironment.cs" />
     <Compile Include="Game\GymEnvironment.cs" />
+    <Compile Include="Game\RepeatingBackground.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
     <Compile Include="Menus\HUD.cs" />

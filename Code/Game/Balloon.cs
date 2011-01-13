@@ -37,14 +37,14 @@ namespace Sputnik.Game
     {
         public static Vector2 RIGHT = Vector2.UnitX;
         public static Vector2 UP = -Vector2.UnitY;
-        private static Vector2 DEFAULT_VELOCITY = 180 * RIGHT;
-        private static Vector2 MAX_VELOCITY = 3 * DEFAULT_VELOCITY, MIN_VELOCITY = 0.25f * DEFAULT_VELOCITY;
+        private static Vector2 DEFAULT_VELOCITY = 100 * RIGHT;
+        private static Vector2 MAX_VELOCITY = 3 * DEFAULT_VELOCITY, MIN_VELOCITY = -1 * DEFAULT_VELOCITY;
         private static Vector2 MOVE_UP = new Vector2(0, -DEFAULT_VELOCITY.X / 1.1f);
         private static Vector2 MOVE_DOWN = new Vector2(0, DEFAULT_VELOCITY.X / 1.1f);
         public static float DEFAULT_MOVE_DURATION = 1;
 
         public const float SPECIAL_STATE_DURATION_IN_SECONDS = 0.2f;
-        public const float PRESSURE_SPEED_STEP = 1.5f;
+        private static Vector2 PRESSURE_SPEED_STEP = new Vector2(50.0f, 0.0f);
         public const float DEFAULT_DISTANCE_FROM_LEFT_SCREEN = 50.0f;
 
         private BALLOON_STATE currentState;
@@ -61,6 +61,9 @@ namespace Sputnik.Game
         private bool visible;
         private Vector2 currentVelocity;
 
+		private bool m_dead = false;
+
+
        	public Balloon(GameEnvironment env) : base(env) {
             Initialize();
 		}
@@ -71,6 +74,8 @@ namespace Sputnik.Game
 
         private void Initialize()
         {
+			Scale = 0.7f;
+
             currentState = BALLOON_STATE.INVULNERABLE;
             currentMotionStates = new List<BALLOON_MOTION_STATE>();
             currentMotionStates.Add(BALLOON_MOTION_STATE.UNCHANGED);
@@ -146,10 +151,10 @@ namespace Sputnik.Game
                 switch (state)
                 {
                     case BALLOON_MOTION_STATE.PRESSURE_DECREASED:
-                        currentVelocity = MinX(currentVelocity*PRESSURE_SPEED_STEP, MAX_VELOCITY);
+                        currentVelocity = MinX(currentVelocity + PRESSURE_SPEED_STEP, MAX_VELOCITY);
                         break;
                     case BALLOON_MOTION_STATE.PRESSURE_INCREASED:
-                        currentVelocity = MaxX(currentVelocity/PRESSURE_SPEED_STEP,  MIN_VELOCITY);
+                        currentVelocity = MaxX(currentVelocity - PRESSURE_SPEED_STEP,  MIN_VELOCITY);
                         break;
                     case BALLOON_MOTION_STATE.TEMP_DECREASED:
                         // if position of next track is less than K units away
@@ -211,11 +216,14 @@ namespace Sputnik.Game
         }
         public override bool ShouldCull()
         {
-            return false;
+            return m_dead;
         }
 
         public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
+			// TODO: Explode!
+			m_dead = true;
+			contact.Enabled = false;
             base.OnCollide(entB, contact);
         }
     }

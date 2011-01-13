@@ -70,8 +70,8 @@ namespace Sputnik.Game {
 		/// <param name="rect"></param>
 		/// <returns></returns>
 		protected bool InsideCullRect(Rectangle rect) {
-			int halfwidth = (int) (GameEnvironment.k_maxVirtualSize.X / 2 + GameEnvironment.k_cullRadius);
-			int halfheight = (int) (GameEnvironment.k_maxVirtualSize.Y / 2 + GameEnvironment.k_cullRadius);
+			int halfwidth = (int) (GameEnvironment.k_idealScreenSize.X / 2 + GameEnvironment.k_cullRadius);
+			int halfheight = (int) (GameEnvironment.k_idealScreenSize.Y / 2 + GameEnvironment.k_cullRadius);
 
 			int x = (int) Environment.Camera.Position.X;
 			int y = (int) Environment.Camera.Position.Y;

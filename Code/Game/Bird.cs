@@ -10,7 +10,7 @@ using FarseerPhysics.Dynamics;
 namespace Sputnik.Game {
 	class Bird : GameEntity {
 		public static float k_defaultVelX = 50.0f;
-		public static float[] k_horizVels = {-30.0f, -50.0f, -70.0f};
+		public static float[] k_horizVels = {-100.0f, -70.0f, -40.0f};
 		
 		private int m_speedLevel = 1;
 
@@ -33,7 +33,7 @@ namespace Sputnik.Game {
 			LoadTexture(Environment.contentManager, "bird");
 			Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
-			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
+			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
 			AddCollisionCircle(Texture.Width / 4, Vector2.Zero);
 			DesiredVelocity = new Vector2(k_horizVels[m_speedLevel], 0.0f);

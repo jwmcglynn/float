@@ -30,8 +30,8 @@ namespace Sputnik {
 		}
 
 		public void Update(float elapsedTime) {
-			int halfwidth = (int) (GameEnvironment.k_maxVirtualSize.X / 2 + GameEnvironment.k_spawnRadius);
-			int halfheight = (int) (GameEnvironment.k_maxVirtualSize.Y / 2 + GameEnvironment.k_spawnRadius);
+			int halfwidth = (int) (GameEnvironment.k_idealScreenSize.X / 2 + GameEnvironment.k_spawnRadius);
+			int halfheight = (int) (GameEnvironment.k_idealScreenSize.Y / 2 + GameEnvironment.k_spawnRadius);
 
 			int x = (int) Environment.Camera.Position.X;
 			int y = (int) Environment.Camera.Position.Y;

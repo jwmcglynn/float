@@ -25,6 +25,7 @@ namespace Sputnik.Game {
             GameEntity balloon = new Balloon(this);
             //I then want to add it as a child.
             GameEntity cloud = new Cloud(this);
+			cloud.Position = new Vector2(700.0f, 300.0f);
             AddChild(balloon);
             AddChild(cloud);
 
@@ -32,6 +33,9 @@ namespace Sputnik.Game {
 			Bird b = new Bird(this);
 			b.Position = new Vector2(500.0f, 200.0f);
 			AddChild(b);
+
+			RepeatingBackground bg = new RepeatingBackground(this);
+			AddChild(bg);
 		}
 	}
 }

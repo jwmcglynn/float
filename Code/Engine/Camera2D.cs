@@ -11,7 +11,6 @@ namespace Sputnik {
 	public class Camera2D {
 		public Camera2D(GameEnvironment env) {
 			Environment = env;
-			MoveSpeed = 1.5f;
 
 			// Set default window size.
 			WindowSizeChanged();
@@ -41,9 +40,14 @@ namespace Sputnik {
 				return m_inverseTransform;
 			}
 		}
-		public Entity Focus;
-		public float MoveSpeed;
+
+		public Vector2 MoveSpeed;
 		public float Scale;
+
+		public float ScaleSpeed = 1.0f;
+
+		public float EffectScale = 1.0f;
+		private float m_actualEffectScale = 1.0f;
 
 		private bool m_inverseIsValid = false;
 		private Matrix m_inverseTransform;
@@ -60,6 +64,8 @@ namespace Sputnik {
 		#endregion
 
 		public void Update(float elapsedTime) {
+			m_actualEffectScale += (EffectScale - m_actualEffectScale) * ScaleSpeed * elapsedTime;
+			
 			// Create the Transform used by any
 			// spritebatch process
 			Transform = Matrix.CreateTranslation(-Position.X + CenterOffset.X, -Position.Y + CenterOffset.Y, 0)
@@ -67,7 +73,7 @@ namespace Sputnik {
 			m_inverseIsValid = false;
 
 			// Move the Camera to the position that it needs to go.
-			if (Focus != null) Position += (Focus.Position - Position) * MoveSpeed * elapsedTime;
+			Position += MoveSpeed * elapsedTime;
 
 			Sound.CameraPos = Position;
 		}
@@ -106,9 +112,9 @@ namespace Sputnik {
 			return Vector2.Transform(worldPos, Transform);
 		}
 
-		public void TeleportAndFocus(Entity ent) {
-			Focus = ent;
-			Position = ent.Position;
+		public void ResetEffectScale(float value) {
+			EffectScale = value;
+			m_actualEffectScale = value;
 		}
 	}
 }

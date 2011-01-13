@@ -19,7 +19,9 @@ namespace Sputnik {
 		// Graphics.
 		public Texture2D Texture;
 		public Vector2 Registration = new Vector2(0, 0);
-		public float Zindex = 1.0f;
+		public float Zindex = 0.95f;
+
+		public float Scale = 1.0f;
 
 		public Color VertexColor = Color.White;
 		public float Alpha = 1.0f;
@@ -104,6 +106,18 @@ namespace Sputnik {
 		}
 
 		/// <summary>
+		/// Load a sprite texture for this entity and scale.
+		/// </summary>
+		/// <param name="contentManager">ContentManager to use when loading asset.  Found inside of Environment.</param>
+		/// <param name="assetName">Filename (without file extension) of the .png to load.
+		/// 		Must be added to the TeamQContent project.
+		/// </param>
+		public void LoadTexture(ContentManager contentManager, string assetName, float scale) {
+			Texture = contentManager.Load<Texture2D>(assetName);
+			Scale = scale;
+		}
+
+		/// <summary>
 		/// Current position in local space.
 		/// </summary>
 		public Vector2 Position {
@@ -124,9 +138,9 @@ namespace Sputnik {
 				Rectangle rect = new Rectangle();
 
 				if (Texture != null) {
-					rect.Location = new Point((int) -Registration.X, (int) -Registration.Y);
-					rect.Width = Texture.Width;
-					rect.Height = Texture.Height;
+					rect.Location = new Point((int) (-Registration.X * Scale), (int) (-Registration.Y * Scale));
+					rect.Width = (int) Math.Round(Size.X);
+					rect.Height = (int) Math.Round(Size.Y);
 				}
 
 				rect.Offset((int) Position.X, (int) Position.Y);
@@ -170,6 +184,16 @@ namespace Sputnik {
 			set {
 				if (CollisionBody != null && !VisualRotationOnly) CollisionBody.Rotation = value;
 				else m_rotation = value;
+			}
+		}
+
+		/// <summary>
+		/// Size of entity.
+		/// </summary>
+		public Vector2 Size {
+			get {
+				if (Texture == null) return Vector2.Zero;
+				else return new Vector2(Texture.Width, Texture.Height) * Scale;
 			}
 		}
 
@@ -346,7 +370,7 @@ namespace Sputnik {
 		/// <param name="spriteBatch">SpriteBatch to render to.</param>
 		public virtual void Draw(SpriteBatch spriteBatch) {
 			if (Texture != null) {
-				spriteBatch.Draw(Texture, Position, null, VertexColor * Alpha, Rotation, Registration, 1.0f, SpriteEffects.None, Zindex);
+				spriteBatch.Draw(Texture, Position, null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
 			}
 
 			foreach (Entity ent in Children) {
