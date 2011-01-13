@@ -111,11 +111,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\Angle.cs" />
+    <Compile Include="Engine\Animation.cs" />
     <Compile Include="Engine\Camera2D.cs" />
     <Compile Include="Engine\Controller.cs" />
     <Compile Include="Engine\DebugViewXNA.cs" />
     <Compile Include="Engine\Entity.cs" />
     <Compile Include="Engine\Environment.cs" />
+    <Compile Include="Engine\Sequence.cs" />
     <Compile Include="Game\Balloon.cs" />
     <Compile Include="Game\Cloud.cs" />
     <Compile Include="Game\Bird.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
     <Compile Include="Menus\HUD.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\TextWidget.cs" />
     <Compile Include="Menus\Widget.cs" />
