@@ -4,6 +4,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,10 @@ namespace Sputnik.Game
         DEAD, ALIVE, INVULNERABLE
     }
 
+    enum BALLOON_MOTION_STATE
+    {
+       UNCHANGED, TEMP_INCREASED, TEMP_DECREASED, PRESSURE_INCREASED, PRESSURE_DECREASED
+    }
     /**
      * Created: Tuesday Jan 11 2011 by student.kaushik@gmail.com
      * 
@@ -30,17 +35,33 @@ namespace Sputnik.Game
      */
     class Balloon : GameEntity
     {
-        public const float MAX_SPEED = 10.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
+        public static Vector2 RIGHT = Vector2.UnitX;
+        public static Vector2 UP = -Vector2.UnitY;
+        private static Vector2 DEFAULT_VELOCITY = 180 * RIGHT;
+        private static Vector2 MAX_VELOCITY = 3 * DEFAULT_VELOCITY, MIN_VELOCITY = 0.25f * DEFAULT_VELOCITY;
+        private static Vector2 MOVE_UP = new Vector2(0, -DEFAULT_VELOCITY.X / 1.1f);
+        private static Vector2 MOVE_DOWN = new Vector2(0, DEFAULT_VELOCITY.X / 1.1f);
+        public static float DEFAULT_MOVE_DURATION = 1;
+
+        public const float SPECIAL_STATE_DURATION_IN_SECONDS = 0.2f;
+        public const float PRESSURE_SPEED_STEP = 1.5f;
+        public const float DEFAULT_DISTANCE_FROM_LEFT_SCREEN = 50.0f;
 
         private BALLOON_STATE currentState;
+        private List<BALLOON_MOTION_STATE> currentMotionStates;
+
         private float currentSpecialStateRemainingTime;
+
+        private int track;
+        private float forseenDistance;
+
+
+        private float moveDuration;
+
         private bool visible;
         private Vector2 currentVelocity;
-        public static Vector2 RIGHT = new Vector2(1, 0);
-        public static Vector2 UP = new Vector2(0, -1);
 
        	public Balloon(GameEnvironment env) : base(env) {
-            
             Initialize();
 		}
 
@@ -48,26 +69,29 @@ namespace Sputnik.Game
             Initialize();
 		}
 
-        public override void OnPressureChange(float amount)
-        {
-            base.OnPressureChange(amount);
-
-        }
         private void Initialize()
         {
             currentState = BALLOON_STATE.INVULNERABLE;
+            currentMotionStates = new List<BALLOON_MOTION_STATE>();
+            currentMotionStates.Add(BALLOON_MOTION_STATE.UNCHANGED);
+
             currentSpecialStateRemainingTime = SPECIAL_STATE_DURATION_IN_SECONDS;
+
+            DesiredVelocity = currentVelocity = DEFAULT_VELOCITY;
+
+            track = 0;
+            forseenDistance = 2.5f * TRACK_DISTANCE;
+            moveDuration = 0;
             LoadTexture(Environment.contentManager, "Balloon\\BalloonNorm1");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2;
-            Position = Vector2.Zero;
+            Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0);
+            //Position = Vector2.Zero;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
             AddCollisionCircle(Texture.Width / 5 - 5, 85*UP + 34*RIGHT);
 
-            Environment.Camera.Focus = this;
         }
-
         public BALLOON_STATE stateOfBalloon
         {
             get
@@ -79,7 +103,17 @@ namespace Sputnik.Game
                 currentState = value;
             }
         }
-
+        public List<BALLOON_MOTION_STATE> stateOfBalloonMotion
+        {
+            get
+            {
+                return currentMotionStates;
+            }
+            set
+            {
+                currentMotionStates = value;
+            }
+        }
         public bool isBalloonAlive
         {
             get
@@ -88,13 +122,80 @@ namespace Sputnik.Game
             }
         }
 
+        public override void OnPressureChange(float amount)
+        {
+            base.OnPressureChange(amount);
+            currentMotionStates.Add( amount < 0 ? BALLOON_MOTION_STATE.PRESSURE_DECREASED: BALLOON_MOTION_STATE.PRESSURE_INCREASED);
+        }
+
+        public override void OnTempChange(float amount)
+        {
+            base.OnTempChange(amount);
+            currentMotionStates.Add(amount < 0 ? BALLOON_MOTION_STATE.TEMP_DECREASED : BALLOON_MOTION_STATE.TEMP_INCREASED);
+        }
         public override void Update(float elapsedTime)
         {
-            currentSpecialStateRemainingTime -= elapsedTime;
+            if(currentSpecialStateRemainingTime > 0)
+                currentSpecialStateRemainingTime -= elapsedTime;
+            if (moveDuration > 0)
+                moveDuration -= elapsedTime;
+            
+
+            foreach (BALLOON_MOTION_STATE state in currentMotionStates)
+            {
+                switch (state)
+                {
+                    case BALLOON_MOTION_STATE.PRESSURE_DECREASED:
+                        currentVelocity = MinX(currentVelocity*PRESSURE_SPEED_STEP, MAX_VELOCITY);
+                        break;
+                    case BALLOON_MOTION_STATE.PRESSURE_INCREASED:
+                        currentVelocity = MaxX(currentVelocity/PRESSURE_SPEED_STEP,  MIN_VELOCITY);
+                        break;
+                    case BALLOON_MOTION_STATE.TEMP_DECREASED:
+                        // if position of next track is less than K units away
+                        if (Position.Y + forseenDistance > (track+1)*TRACK_DISTANCE + TRACK_0)
+                        {
+                            track++;
+                            currentVelocity += MOVE_DOWN;
+                        }
+                        break;
+                    case BALLOON_MOTION_STATE.TEMP_INCREASED:
+                        if (Position.Y - forseenDistance < TRACK_0 + (track-1)*TRACK_DISTANCE )
+                        {
+                            track--;
+                            currentVelocity += MOVE_UP;
+                        }
+                        break;
+                    case BALLOON_MOTION_STATE.UNCHANGED:
+                        
+                        continue;
+                }
+
+                DesiredVelocity = currentVelocity;
+
+                
+            }
+
+            currentMotionStates.Clear();
+
+            if ((DesiredVelocity.Y > 0.0f && Position.Y >= TRACK_0 + track * TRACK_DISTANCE)
+                    || (DesiredVelocity.Y < 0.0f && Position.Y <= TRACK_0 + track * TRACK_DISTANCE))
+            {
+                DesiredVelocity = new Vector2(DesiredVelocity.X, 0.0f);
+                currentVelocity.Y = 0;
+            }
 
             base.Update(elapsedTime);
         }
 
+        private Vector2 MinX(Vector2 m1, Vector2 m2)
+        {
+            return m1.X < m2.X ? m1 : m2;
+        }
+        private Vector2 MaxX(Vector2 m1, Vector2 m2)
+        {
+            return m1.X > m2.X ? m1 : m2;
+        }
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
             if (currentSpecialStateRemainingTime > 0.0f && currentState == BALLOON_STATE.INVULNERABLE)

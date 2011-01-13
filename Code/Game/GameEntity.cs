@@ -9,7 +9,11 @@ namespace Sputnik.Game {
 	public class GameEntity : Entity {
 		public GameEnvironment Environment;
 		public SpawnPoint SpawnPoint;
-		
+
+        public static int TRACK_NUM = 10;
+        public static float TRACK_DISTANCE = 90.0f;
+        public static float TRACK_0 = 50.0f;
+
 		public GameEntity(GameEnvironment env) {
 			Environment = env;
 		}
