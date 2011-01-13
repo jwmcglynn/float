@@ -88,13 +88,13 @@ namespace Sputnik.Game
             forseenDistance = 2.5f * TRACK_DISTANCE;
             moveDuration = 0;
             LoadTexture(Environment.contentManager, "Balloon\\BalloonNorm1");
-            Registration = new Vector2(Texture.Width, Texture.Height) / 2;
+			Registration = new Vector2(285.0f, 165.0f);
             Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0);
             //Position = Vector2.Zero;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
-            AddCollisionCircle(Texture.Width / 5 - 5, 85*UP + 34*RIGHT);
+            AddCollisionCircle(90.0f * Scale, Vector2.Zero);
 
         }
         public BALLOON_STATE stateOfBalloon
