@@ -64,6 +64,10 @@ namespace Sputnik.Game {
             AddChild(balloon);
             AddChild(cloud);
 
+
+			Bird b = new Bird(this);
+			b.Position = new Vector2(500.0f, 200.0f);
+			AddChild(b);
 		}
 	}
 }

@@ -118,6 +118,7 @@
     <Compile Include="Engine\Environment.cs" />
     <Compile Include="Game\Balloon.cs" />
     <Compile Include="Game\Cloud.cs" />
+    <Compile Include="Game\Bird.cs" />
     <Compile Include="Game\GameEntity.cs" />
     <Compile Include="Engine\OldGamePad.cs" />
     <Compile Include="Engine\OldKeyboard.cs" />
