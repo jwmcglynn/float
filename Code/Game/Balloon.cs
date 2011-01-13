@@ -57,13 +57,13 @@ namespace Sputnik.Game
         {
             currentState = BALLOON_STATE.INVULNERABLE;
             currentSpecialStateRemainingTime = SPECIAL_STATE_DURATION_IN_SECONDS;
-            LoadTexture(Environment.contentManager, "redball");
+            LoadTexture(Environment.contentManager, "Balloon\\BalloonNorm1");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2;
             Position = Vector2.Zero;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
-            AddCollisionCircle(Texture.Width / 2, Vector2.Zero);
+            AddCollisionCircle(Texture.Width / 5 - 5, 85*UP + 34*RIGHT);
 
             Environment.Camera.Focus = this;
         }

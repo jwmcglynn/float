@@ -39,13 +39,13 @@ namespace Sputnik.Game
         private void Initialize()
         {
             currentState = CLOUD_STATE.WHITE;
-            LoadTexture(Environment.contentManager, "astroid_1");
+            LoadTexture(Environment.contentManager, "cloud\\NormCloud");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2;
-            Position = Vector2.Zero + 5*UP + 5*RIGHT;
+            Position = Vector2.Zero + 400 * UP;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
-            AddCollisionCircle(Texture.Width / 2, Vector2.Zero);
+            AddCollisionCircle(Texture.Width / 3, Vector2.Zero);
         }
 
         public CLOUD_STATE stateOfCloud
