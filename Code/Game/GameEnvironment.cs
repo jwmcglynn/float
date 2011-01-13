@@ -13,6 +13,7 @@ using ProjectMercury.Emitters;
 using ProjectMercury.Modifiers;
 using ProjectMercury.Renderers;
 using System.IO;
+using Sputnik.Game;
 
 namespace Sputnik {
 	public class GameEnvironment : Environment {
@@ -255,6 +256,19 @@ namespace Sputnik {
 
 			entA.OnCollide(entB, contact);
 			entB.OnCollide(entA, contact);
+		}
+
+		/*********************************************************************/
+		// Wind/pressure reaction.
+
+		public virtual void OnTempChange(float amount) {
+			// Call for children.
+			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnTempChange(amount); });
+		}
+
+		public virtual void OnPressureChange(float amount) {
+			// Call for children.
+			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnPressureChange(amount); });
 		}
 	}
 }
