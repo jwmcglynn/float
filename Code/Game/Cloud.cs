@@ -31,11 +31,10 @@ namespace Sputnik.Game
 		public Cloud(GameEnvironment env, SpawnPoint sp) : base(env, sp) {
             Initialize();
 		}
-
-        public override void OnPressureChange(float amount)
+        public override void OnTempChange(float amount)
         {
-            base.OnPressureChange(amount);
-
+            /**this is where the main portion of the environment interaction will occur. */
+            base.OnTempChange(amount);
         }
         private void Initialize()
         {
