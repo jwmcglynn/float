@@ -76,7 +76,7 @@ namespace Sputnik.Game
 
         private void Initialize()
         {
-			Scale = 0.7f;
+			Scale = 0.5f;
 
             currentState = BALLOON_STATE.INVULNERABLE;
             currentMotionStates = new List<BALLOON_MOTION_STATE>();
