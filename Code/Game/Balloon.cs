@@ -43,6 +43,7 @@ namespace Sputnik.Game
         private static Vector2 MOVE_DOWN = new Vector2(0, DEFAULT_VELOCITY.X / 1.1f);
         public static float DEFAULT_MOVE_DURATION = 1;
 
+        private static int INITIAL_TRACK = 4;
         public const float SPECIAL_STATE_DURATION_IN_SECONDS = 0.2f;
         private static Vector2 PRESSURE_SPEED_STEP = new Vector2(50.0f, 0.0f);
         public const float DEFAULT_DISTANCE_FROM_LEFT_SCREEN = 50.0f;
@@ -84,12 +85,12 @@ namespace Sputnik.Game
 
             DesiredVelocity = currentVelocity = DEFAULT_VELOCITY;
 
-            track = 0;
+            track = INITIAL_TRACK;
             forseenDistance = 2.5f * TRACK_DISTANCE;
             moveDuration = 0;
             LoadTexture(Environment.contentManager, "Balloon\\BalloonNorm1");
 			Registration = new Vector2(285.0f, 165.0f);
-            Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0);
+            Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0 + track*TRACK_DISTANCE);
             //Position = Vector2.Zero;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
