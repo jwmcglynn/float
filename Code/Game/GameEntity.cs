@@ -10,9 +10,12 @@ namespace Sputnik.Game {
 		public GameEnvironment Environment;
 		public SpawnPoint SpawnPoint;
 
-        public static int TRACK_NUM = 10;
-        public static float TRACK_DISTANCE = 90.0f;
-        public static float TRACK_0 = 50.0f;
+        public const int NUMBER_OF_TRACKS = 10;
+
+        public const float TRACK_0 = 100.0f;
+		public const float TRACK_N = 1024.0f - 100.0f;
+
+		public const float TRACK_DISTANCE = (TRACK_N - TRACK_0)/NUMBER_OF_TRACKS;
 
 		public GameEntity(GameEnvironment env) {
 			Environment = env;

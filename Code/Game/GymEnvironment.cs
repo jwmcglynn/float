@@ -22,9 +22,14 @@ namespace Sputnik.Game {
 			*/
 
             //I want to create a balloon in this world.
-            GameEntity balloon = new Balloon(this);
-            //I then want to add it as a child.
-            AddChild(balloon);
+			//GameEntity balloon = new Balloon(this);
+			////I then want to add it as a child.
+			//AddChild(balloon);
+
+			Balloon newBalloon = new Balloon(this);
+			newBalloon.WarpPosition(new Vector2(0.0f, 500.0f));
+			AddChild(newBalloon);
+
 
             GameEntity cloud = new Cloud(this);
 
@@ -38,7 +43,10 @@ namespace Sputnik.Game {
             //Kaushik made a plane enter into the world :D
             GameEntity plane = new Plane(this);
             plane.Position = new Vector2(500.0f, 200.0f);
-            AddChild(plane);
+			AddChild(plane);
+
+			RepeatingBackground bg = new RepeatingBackground(this);
+			AddChild(bg);
 		}
 	}
 }
