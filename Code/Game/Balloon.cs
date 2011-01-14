@@ -71,6 +71,7 @@ namespace Sputnik.Game
 
 		public Balloon(GameEnvironment env, SpawnPoint sp) : base(env, sp) {
             Initialize();
+			Position = sp.Position;
 		}
 
         private void Initialize()

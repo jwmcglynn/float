@@ -30,6 +30,7 @@ namespace Sputnik.Game
 
 		public Cloud(GameEnvironment env, SpawnPoint sp) : base(env, sp) {
             Initialize();
+			Position = sp.Position;
 		}
         public override void OnTempChange(float amount)
         {
@@ -41,7 +42,6 @@ namespace Sputnik.Game
             currentState = CLOUD_STATE.WHITE;
             LoadTexture(Environment.contentManager, "cloud\\NormCloud");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2;
-            Position = Vector2.Zero + 400 * UP;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
@@ -74,6 +74,10 @@ namespace Sputnik.Game
         {
             return false;
         }
+
+		public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture) {
+			return (entB is Balloon);
+		}
 
         public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {

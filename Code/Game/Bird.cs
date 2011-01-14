@@ -27,15 +27,16 @@ namespace Sputnik.Game {
 		public Bird(GameEnvironment env, SpawnPoint sp)
 				: base(env, sp) {
 			Initialize();
+			Position = sp.Position;
 		}
 
 		private void Initialize() {
-			LoadTexture(Environment.contentManager, "bird");
+			LoadTexture(Environment.contentManager, "bird\\Bird1", 0.20f);
 			Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
-			AddCollisionCircle(Texture.Width / 4, Vector2.Zero);
+			AddCollisionCircle(100.0f * Scale, new Vector2(0.0f, 10.0f));
 			DesiredVelocity = new Vector2(k_horizVels[m_speedLevel], 0.0f);
 		}
 
@@ -48,6 +49,10 @@ namespace Sputnik.Game {
 
 		
 		/***************************************************************************/
+
+		public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture) {
+			return (entB is Balloon);
+		}
 
 		public override void OnPressureChange(float amount) {
 			if (amount < 0) {

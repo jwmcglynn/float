@@ -117,6 +117,7 @@
     <Compile Include="Engine\DebugViewXNA.cs" />
     <Compile Include="Engine\Entity.cs" />
     <Compile Include="Engine\Environment.cs" />
+    <Compile Include="Engine\MapLayer.cs" />
     <Compile Include="Engine\Sequence.cs" />
     <Compile Include="Game\Balloon.cs" />
     <Compile Include="Game\Plane.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Engine\SpawnPoint.cs" />
     <Compile Include="Game\GameEnvironment.cs" />
     <Compile Include="Game\GymEnvironment.cs" />
+    <Compile Include="Game\Level1Environment.cs" />
     <Compile Include="Game\RepeatingBackground.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />

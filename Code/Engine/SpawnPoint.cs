@@ -119,7 +119,6 @@ namespace Sputnik {
 			// Immediately spawn some entities.
 			switch (EntityType) {
 				case "spawn":
-				case "boss":
 					AlwaysSpawned = true;
 					Spawn();
 					break;
@@ -143,8 +142,17 @@ namespace Sputnik {
 			HasBeenOffscreen = false;
 
 			switch (EntityType) {
-				case "placeholder":
-					Entity = new GameEntity(SpawnController.Environment);
+				case "spawn":
+					Entity = new Balloon(SpawnController.Environment, this);
+					break;
+				case "bird":
+					Entity = new Bird(SpawnController.Environment, this);
+					break;
+				case "cloud":
+					Entity = new Cloud(SpawnController.Environment, this);
+					break;
+				case "plane":
+					Entity = new Bird(SpawnController.Environment, this);
 					break;
 				default:
 					throw new InvalidOperationException("Invalid entity type.");

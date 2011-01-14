@@ -27,7 +27,7 @@ namespace Sputnik.Menus {
 
 			float ypos = 50.0f;
 
-			TextButton button = new TextButton(this, "Start DR.OCTOGONAPUS BLLARRGHGHGHGGH!");
+			TextButton button = new TextButton(this, "Gym");
 			button.PositionPercent = title.PositionPercent;
 			button.Position = new Vector2(0.0f, ypos);
 			button.CreateButton(new Rectangle(-50, -16, 100, 32));
@@ -36,16 +36,27 @@ namespace Sputnik.Menus {
 			};
 			AddChild(button);
 
-            ypos += 50.0f;
-            button = new TextButton(this, "MainMenu");
-            button.PositionPercent = title.PositionPercent;
-            button.Position = new Vector2(0.0f, ypos);
-            button.CreateButton(new Rectangle(-50, -16, 100, 32));
-            button.OnActivate += () =>
-            {
-                Controller.ChangeEnvironment(new MainMenu(Controller));
-            };
-            AddChild(button);
+
+			ypos += 50.0f;
+			button = new TextButton(this, "Level 1");
+			button.PositionPercent = title.PositionPercent;
+			button.Position = new Vector2(0.0f, ypos);
+			button.CreateButton(new Rectangle(-50, -16, 100, 32));
+			button.OnActivate += () => {
+				Controller.ChangeEnvironment(new Level1Environment(Controller));
+			};
+			AddChild(button);
+
+			ypos += 50.0f;
+			button = new TextButton(this, "Main Menu");
+			button.PositionPercent = title.PositionPercent;
+			button.Position = new Vector2(0.0f, ypos);
+			button.CreateButton(new Rectangle(-50, -16, 100, 32));
+			button.OnActivate += () =>
+			{
+				Controller.ChangeEnvironment(new MainMenu(Controller));
+			};
+			AddChild(button);
 
 
 			ypos += 50.0f;

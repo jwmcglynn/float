@@ -328,7 +328,7 @@ namespace Squared.Tiled {
 			_TileInfoCache = cache.ToArray();
 		}
 
-		public void Draw(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, int tileWidth, int tileHeight)
+		public void Draw(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, int tileWidth, int tileHeight, float zindex = 0.95f)
 		{
 			int minX = (int) Math.Floor((float) rectangle.Left / tileWidth);
 			int minY = (int) Math.Floor((float) rectangle.Top / tileHeight);
@@ -361,7 +361,7 @@ namespace Squared.Tiled {
 					if ((index >= 0) && (index < _TileInfoCache.Length))
 					{
 						info = _TileInfoCache[index];
-						batch.Draw(info.Texture, destPos, info.Rectangle, new Color(1.0f, 1.0f, 1.0f, this.Opacity));
+						batch.Draw(info.Texture, destPos, info.Rectangle, new Color(1.0f, 1.0f, 1.0f, this.Opacity), 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, zindex);
 					}
 
 					destPos.X += tileWidth;

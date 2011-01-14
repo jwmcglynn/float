@@ -119,14 +119,137 @@ namespace Sputnik {
 			Camera.WindowSizeChanged();
 		}
 
+		byte[,] k_collision = {
+			{0, 1, 1, 1,  0, 1, 0, 0},
+			{0, 0, 0, 0,  0, 1, 1, 0},
+			{0, 0, 0, 0,  0, 1, 1, 0},
+			{0, 0, 0, 0,  0, 1, 1, 1}
+		};
+
+		const int k_colWidth = 8;
+		const int k_colHeight = 4;
+
+
+
+
 		/// <summary>
 		/// Load a map from file and create collision objects for it.
 		/// </summary>
 		/// <param name="filename">File to load map from.</param>
 		public void LoadMap(string filename) {
 			m_map = Tiled.Map.Load(Path.Combine(Controller.Content.RootDirectory, filename), Controller.Content);
-			
-			// CASESENSITIVE_TODO: Create world collision here.
+
+			// Destroy and re-create collision body for map.
+			DestroyCollisionBody();
+			CreateCollisionBody(CollisionWorld, Physics.Dynamics.BodyType.Static);
+
+			Vector2 tileHalfSize = new Vector2(m_map.TileWidth, m_map.TileHeight) / 2;
+			Vector2 tileSize = new Vector2(m_map.TileWidth, m_map.TileHeight);
+
+			bool[,] levelCollision = new bool[m_map.Width, m_map.Height];
+
+			float defaultZVal = 0.96f;
+
+			foreach (KeyValuePair<string, Tiled.Layer> layer in m_map.Layers) {
+				defaultZVal -= 0.001f;
+
+				for (int x = 0; x < layer.Value.Width; ++x)
+				for (int y = 0; y < layer.Value.Height; ++y) {
+					int tileId = layer.Value.GetTile(x, y) - 1;
+					if (tileId < 0) continue;
+
+					int row = tileId / k_colWidth;
+					int col = tileId - row * k_colWidth;
+					if (row >= 11 || col >= 15) continue;
+
+					levelCollision[x, y] |= (k_collision[row, col] != 0);
+				}
+
+				float z = defaultZVal;
+
+				if (layer.Value.Properties.ContainsKey("zindex")) {
+					if (!float.TryParse(layer.Value.Properties["zindex"], out z)) {
+						z = defaultZVal;
+					}
+				}
+
+				AddChild(new MapLayer(this, m_map, layer.Key, z));
+			}
+
+			// Go through collision and try to create large horizontal collision shapes.
+			for (int y = 0; y < m_map.Height; ++y) {
+				int firstX = 0;
+				bool hasCollision = false;
+
+				for (int x = 0; x < m_map.Width; ++x) {
+					if (levelCollision[x, y]) {
+						if (hasCollision) continue;
+						else {
+							hasCollision = true;
+							firstX = x;
+						}
+					} else {
+						if (hasCollision) {
+							hasCollision = false;
+							int tilesWide = x - firstX;
+							if (tilesWide == 1) continue;
+
+							for (int i = firstX; i <= x; ++i) levelCollision[i, y] = false;
+
+							AddCollisionRectangle(
+								tileHalfSize * new Vector2(tilesWide, 1.0f)
+								, new Vector2(tileSize.X * (x - (float) tilesWide / 2), tileSize.Y * (y + 0.5f))
+							);
+						}
+					}
+				}
+
+				// Create final collision.
+				if (hasCollision) {
+					for (int i = firstX; i < m_map.Width; ++i) levelCollision[i, y] = false;
+
+					int tilesWide = m_map.Width - firstX;
+					AddCollisionRectangle(
+						tileHalfSize * new Vector2(tilesWide, 1.0f)
+						, new Vector2(tileSize.X * (m_map.Width - (float) tilesWide / 2), tileSize.Y * (y + 0.5f))
+					);
+				}
+			}
+
+			// Go through collision and try to create large vertical collision shapes.
+			for (int x = 0; x < m_map.Width; ++x) {
+				int firstY = 0;
+				bool hasCollision = false;
+
+				for (int y = 0; y < m_map.Height; ++y) {
+					if (levelCollision[x, y]) {
+						if (hasCollision) continue;
+						else {
+							hasCollision = true;
+							firstY = y;
+						}
+					} else {
+						if (hasCollision) {
+							hasCollision = false;
+							int tilesTall = y - firstY;
+
+							AddCollisionRectangle(
+								tileHalfSize * new Vector2(1.0f, tilesTall)
+								, new Vector2(tileSize.X * (x + 0.5f), tileSize.Y * (y - (float) tilesTall / 2))
+							);
+						}
+					}
+				}
+
+				// Create final collision.
+				if (hasCollision) {
+					int tilesTall = m_map.Height - firstY;
+					AddCollisionRectangle(
+						tileHalfSize * new Vector2(1.0f, tilesTall)
+						, new Vector2(tileSize.X * (x + 0.5f), tileSize.Y * (m_map.Height - (float) tilesTall / 2))
+					);
+				}
+			}
 
 			SpawnController = new SpawnController(this, m_map.ObjectGroups.Values);
 		}
@@ -189,13 +312,6 @@ namespace Sputnik {
 		/// </summary>
 		public override void Draw() {
 			Matrix tform = Camera.Transform;
-
-			// Draw map.
-			if (m_map != null) {
-				m_map.Draw(m_spriteBatch, Camera.Rect, () => {
-					m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
-				});
-			}
 
 			// Draw entities.
 			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
