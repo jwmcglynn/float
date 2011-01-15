@@ -257,6 +257,12 @@ namespace Sputnik.Game
 				vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
 			}
 
+			//Calls the OnTemperatureChange method.
+			for (int i = 0; i < tracks.Length; i++)
+			{
+				if (Math.Sign(Position.Y - tracks[i]) != Math.Sign(previousPosition.Y - tracks[i]))
+					Environment.OnTempChange(1.0f);
+			}
 			previousPosition = pos;
 			Position = pos;
 			DesiredVelocity = vel;
