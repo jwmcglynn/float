@@ -109,7 +109,7 @@ namespace Sputnik.Game
             SnapToRung();
             //300 x 240
             CollisionBody.Active = false;
-            //AddCollisionCircle(Texture.Width / 3, Vector2.Zero);
+            AddCollisionCircle(220, new Vector2(0, -280));
         }
 
         public CLOUD_STATE stateOfCloud
