@@ -148,8 +148,25 @@ namespace Sputnik.Game
 			int dirX = 0;
 			int dirY = 0;
 
-			if (keyState.IsKeyDown(Keys.Up)) --dirY;
-			if (keyState.IsKeyDown(Keys.Down)) ++dirY;
+            //POMI: I realize this should be in Environment, but I'm throwing in cloud controls here
+            //      for testing purposes. This part can and will be moved.
+
+			if (keyState.IsKeyDown(Keys.Up))
+            {
+                if (!OldKeyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    Environment.OnTempChange(1);
+                }
+                --dirY;
+            }
+            if (keyState.IsKeyDown(Keys.Down))
+            {
+                if (!OldKeyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    Environment.OnTempChange(-1);
+                }
+                ++dirY;
+            }
 
 			if (keyState.IsKeyDown(Keys.Left)) --dirX;
 			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
