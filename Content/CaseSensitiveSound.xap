@@ -247,7 +247,7 @@ Wave Bank
     Wave
     {
         Name = up-wind13_cut;
-        File = C:\Documents and Settings\Administrator\Desktop\game1\Content\sfx\up-wind13_cut.wav;
+        File = sfx\up-wind13_cut.wav;
         Build Settings Last Modified Low = 3687213748;
         Build Settings Last Modified High = 30127212;
         Compression Preset Name = <none>;
@@ -271,7 +271,7 @@ Wave Bank
     Wave
     {
         Name = high-wind05_cut;
-        File = C:\Documents and Settings\Administrator\Desktop\game1\Content\sfx\high-wind05_cut.wav;
+        File = sfx\high-wind05_cut.wav;
         Build Settings Last Modified Low = 3687213748;
         Build Settings Last Modified High = 30127212;
 
@@ -294,7 +294,7 @@ Wave Bank
     Wave
     {
         Name = low-wind11_cut;
-        File = C:\Documents and Settings\Administrator\Desktop\game1\Content\sfx\low-wind11_cut.wav;
+        File = sfx\low-wind11_cut.wav;
         Build Settings Last Modified Low = 3687213748;
         Build Settings Last Modified High = 30127212;
 
@@ -317,7 +317,7 @@ Wave Bank
     Wave
     {
         Name = cold-wind12_cut;
-        File = C:\Documents and Settings\Administrator\Desktop\game1\Content\sfx\cold-wind12_cut.wav;
+        File = sfx\cold-wind12_cut.wav;
         Build Settings Last Modified Low = 3687213748;
         Build Settings Last Modified High = 30127212;
 
