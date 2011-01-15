@@ -45,6 +45,7 @@ namespace Sputnik.Game
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
             AddCollisionCircle(Texture.Width / 3, Vector2.Zero);
+			SnapToRung();
         }
 
         public CLOUD_STATE stateOfCloud

@@ -32,13 +32,7 @@ namespace Sputnik.Game
 		public const float MOVE_VEL = 250.0f;
 
         //DEFAULT POSITION CONSTANTS
-		public const float LEFT_POSITION_BUFFER = 100;
-		public const float RIGHT_POSITION_BUFFER = 100;
-        public const float TOP_POSITION_BUFFER = 50;
-        public const float BOTTOM_POSITION_BUFFER = -150;
-
-        public const int NUMBER_OF_RUNGS = 11;
-
+		
 		public const float INVULNERABILITY_TIME = 0.5f;
 
 		public const float SPEED_UP = 2.0f;
@@ -51,12 +45,10 @@ namespace Sputnik.Game
 
 		private BALLOON_STATE currentState;
 		private float currentSpecialStateRemainingTime;
-		private int currentTrack;
 
 		private Vector2 previousPosition;
 
 		private bool m_dead;
-        private float[] tracks;
 
 		public Balloon(GameEnvironment env)
 			: base(env)
@@ -80,16 +72,6 @@ namespace Sputnik.Game
 		{
 			Scale = 0.5f;
             m_dead = false;
-            tracks = new float[NUMBER_OF_RUNGS];
-            float incrementalHeight = (Environment.ScreenVirtualSize.Y
-                                            - TOP_POSITION_BUFFER
-                                            - BOTTOM_POSITION_BUFFER)
-                                            /(1 + NUMBER_OF_RUNGS);
-
-            for (int i = 0; i < tracks.Length; i++)
-            {
-                tracks[i] = TOP_POSITION_BUFFER + i * incrementalHeight;
-            }
 
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
@@ -103,6 +85,7 @@ namespace Sputnik.Game
 			AddCollisionCircle(90.0f * Scale, Vector2.Zero);
 
 			previousPosition = Position;
+			SnapToRung();
 		}
 
 		/// <summary>

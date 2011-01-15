@@ -40,6 +40,7 @@ namespace Sputnik.Game
 
             AddCollisionCircle(50.0f, Vector2.Zero);
             DesiredVelocity = new Vector2(k_defaultVelX, 0.0f);
+			SnapToRung();
         }
 
         /***************************************************************************/

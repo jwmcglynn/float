@@ -44,7 +44,7 @@ namespace Sputnik.Game {
 
 			AddCollisionCircle(100.0f * Scale, new Vector2(0.0f, 10.0f));
 
-			SetBirdVel(Environment.Pressure);
+			SetBirdVel(Environment.Pressure); SnapToRung();
 		}
 
 		/***************************************************************************/

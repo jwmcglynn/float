@@ -10,6 +10,31 @@ namespace Sputnik.Game {
 		public GameEnvironment Environment;
 		public SpawnPoint SpawnPoint;
 
+		public const float LEFT_POSITION_BUFFER = 100;
+		public const float RIGHT_POSITION_BUFFER = 100;
+		public const float TOP_POSITION_BUFFER = 50;
+		public const float BOTTOM_POSITION_BUFFER = -150;
+
+		public const int NUMBER_OF_RUNGS = 11;
+		
+		static protected float[] tracks;
+
+		static GameEntity()
+		{
+
+			tracks = new float[NUMBER_OF_RUNGS];
+			float screenVirtualSizeY = 1024;
+			float incrementalHeight = (screenVirtualSizeY
+									- TOP_POSITION_BUFFER
+									- BOTTOM_POSITION_BUFFER)
+									/ (1 + NUMBER_OF_RUNGS);
+
+			for (int i = 0; i < tracks.Length; i++)
+			{
+				tracks[i] = TOP_POSITION_BUFFER + i * incrementalHeight;
+			}
+		}
+
 		public GameEntity(GameEnvironment env) {
 			Environment = env;
 		}
@@ -33,11 +58,26 @@ namespace Sputnik.Game {
 
 			base.Dispose();
 		}
-		
+
+		public virtual void SnapToRung()
+		{
+			int closestRung = -1;
+			float closestDistance = float.PositiveInfinity;
+			for (int i = 0; i < tracks.Length - 1; i++)
+			{
+				if (Math.Abs(Position.Y - tracks[i]) < closestDistance)
+				{
+					closestDistance = Math.Abs(Position.Y - tracks[i]);
+					closestRung = i;
+				}
+			}
+			Position = new Vector2(Position.X, tracks[closestRung]);
+		}
 		/*********************************************************************/
 		// Wind/pressure reaction.
 
-		public virtual void OnTempChange(float amount) {
+		public virtual void OnTempChange(float amount)
+		{
 			// Call for children.
 			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnTempChange(amount); });
 		}
