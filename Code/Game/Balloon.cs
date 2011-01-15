@@ -173,9 +173,11 @@ namespace Sputnik.Game
 			if (dirY == -1 && !oldKeyState.IsKeyDown(Keys.Up) && keyState.IsKeyDown(Keys.Up))
 			{
 				upSound = Sound.PlayCue("up");
+				Environment.OnTempChange(1.0f);
 			}
 			if (dirY == 1 && !oldKeyState.IsKeyDown(Keys.Down) && keyState.IsKeyDown(Keys.Down)) {
 				downSound = Sound.PlayCue("down");
+				Environment.OnTempChange(-1.0f);
 			}
 
 			// Events on key down.
@@ -194,11 +196,13 @@ namespace Sputnik.Game
 			{
 				downSound.Stop(AudioStopOptions.AsAuthored);
 				downSound = null;
+				Environment.OnTempChange(0.0f);
 			}
 			if (upSound != null && !keyState.IsKeyDown(Keys.Up))
 			{
 				upSound.Stop(AudioStopOptions.AsAuthored);
 				upSound = null;
+				Environment.OnTempChange(0.0f);
 			}
 			if (leftSound != null && !keyState.IsKeyDown(Keys.Left))
 			{
