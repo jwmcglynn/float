@@ -70,7 +70,7 @@ namespace Sputnik.Game
 		}
 		private void Initialize()
 		{
-			Scale = 0.7f;
+			Scale = 0.5f;
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 			DesiredVelocity = DEFAULT_SPEED;

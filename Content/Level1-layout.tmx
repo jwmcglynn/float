@@ -17,7 +17,6 @@
   <object name="spawn" type="spawn" x="196" y="386" width="62" height="62"/>
   <object name="bird" type="bird" x="2622" y="644" width="126" height="54"/>
   <object name="InstructionalCloud" type="cloud" x="2248" y="450" width="188" height="116"/>
-  <object name="" x="-10" y="1028" width="1612" height="984"/>
   <object name="ShootingStar" type="star" x="3584" y="-8" width="64" height="72"/>
   <object name="star" type="star" x="3652" y="-12" width="56" height="72"/>
   <object name="star" type="star" x="3708" y="-4" width="64" height="64"/>
@@ -25,7 +24,7 @@
   <object name="star" type="star" x="3840" y="-4" width="64" height="64"/>
   <object name="SpeedCloud" type="cloud" x="1284" y="64" width="192" height="124"/>
   <object name="bird" type="bird" x="4288" y="380" width="124" height="64"/>
-  <object name="bird" type="bird" x="5252" y="126" width="128" height="60"/>
+  <object name="bird" type="bird" x="4868" y="134" width="128" height="60"/>
  </objectgroup>
  <objectgroup name="Instructions" width="150" height="16"/>
 </map>

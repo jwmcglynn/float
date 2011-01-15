@@ -154,6 +154,9 @@ namespace Sputnik {
 				case "plane":
 					Entity = new Bird(SpawnController.Environment, this);
 					break;
+                case "star":
+                    Entity = new Entity();  // Star behavior here.
+                    break;
 				default:
 					throw new InvalidOperationException("Invalid entity type.");
 			}
