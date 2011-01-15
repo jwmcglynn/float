@@ -111,7 +111,7 @@ namespace Sputnik {
 		protected override void UnloadContent() {
 			// TODO: Unload any non ContentManager content here
 		}
-		
+
 		public void UpdateControls() {
 			// Get the keyboard state for the next pass.
 			OldKeyboard.m_state = Keyboard.GetState();
@@ -142,6 +142,8 @@ namespace Sputnik {
 							&& OldKeyboard.GetState().IsKeyDown(Keys.Enter))) {
 				IsFullscreen = !IsFullscreen;
 			}
+
+
 
 			m_env.Update((float) gameTime.ElapsedGameTime.TotalSeconds);
 			base.Update(gameTime);

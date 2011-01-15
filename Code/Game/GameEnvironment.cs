@@ -14,6 +14,7 @@ using ProjectMercury.Modifiers;
 using ProjectMercury.Renderers;
 using System.IO;
 using Sputnik.Game;
+using Sputnik.Menus;
 
 namespace Sputnik {
 	public class GameEnvironment : Environment {
@@ -45,6 +46,10 @@ namespace Sputnik {
 
 		// Update loop.
 		public float m_updateAccum; // How much time has passed relative to the physics world.
+
+        //Pausing
+        private bool m_paused;
+        PausingMenu m_popUp;
 
 		// HUD.
 		public Menus.HUD HUD;
@@ -254,6 +259,17 @@ namespace Sputnik {
 			SpawnController = new SpawnController(this, m_map.ObjectGroups.Values);
 		}
 
+        public void pause(PausingMenu popup)
+        {
+            m_paused = true;
+            m_popUp = popup;
+        }
+        public void unPause()
+        {
+            m_popUp = null;
+            m_paused = false;
+        }
+
 		/// <summary>
 		/// Update the Environment each frame.
 		/// </summary>
@@ -264,6 +280,13 @@ namespace Sputnik {
 				if (m_debugView != null) m_debugView = null;
 				else m_debugView = new Physics.DebugViewXNA(CollisionWorld);
 			}
+            
+            //Pause with Enter
+            if (!m_paused)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                    pause(new PausingMenu(Controller, this));
+            }
 
 			// Debug Menu = F10.
 			if (Keyboard.GetState().IsKeyDown(Keys.F10) && !OldKeyboard.GetState().IsKeyDown(Keys.F10)) {
@@ -275,22 +298,28 @@ namespace Sputnik {
 				Controller.Exit();
 			}
 
+            if (!m_paused)
+            {
+                if (elapsedTime > 0.0f)
+                {
+                    // Update physics.
+                    CollisionWorld.Step(elapsedTime);
 
+                    if (SpawnController != null) SpawnController.Update(elapsedTime);
 
-			if (elapsedTime > 0.0f) {
-				// Update physics.
-				CollisionWorld.Step(elapsedTime);
+                    // Update entities.
+                    base.Update(elapsedTime);
+                    Camera.Update(elapsedTime);
 
-				if (SpawnController != null) SpawnController.Update(elapsedTime);
-
-				// Update entities.
-				base.Update(elapsedTime);
-				Camera.Update(elapsedTime);
-				HUD.Update(elapsedTime);
-
-				// Particles.
-				foreach (var effect in Effects) effect.Update(elapsedTime);
-			}
+                    // Particles.
+                    foreach (var effect in Effects) effect.Update(elapsedTime);
+                }
+            }
+            else
+            {
+                m_popUp.Update(elapsedTime);
+            }
+            HUD.Update(elapsedTime);
 		}
 
 		/// <summary>
@@ -317,6 +346,10 @@ namespace Sputnik {
 
 			// Draw HUD.
 			HUD.Draw();
+
+            //Draw popup
+            if (m_popUp != null)
+                m_popUp.Draw();
 		}
 
 		/// <summary>
