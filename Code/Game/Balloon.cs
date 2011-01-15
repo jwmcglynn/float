@@ -155,7 +155,7 @@ namespace Sputnik.Game
             {
                 if (!OldKeyboard.GetState().IsKeyDown(Keys.Up))
                 {
-                    Environment.OnTempChange(1);
+                    Environment.OnTempChange(-1);
                 }
                 --dirY;
             }
@@ -163,7 +163,7 @@ namespace Sputnik.Game
             {
                 if (!OldKeyboard.GetState().IsKeyDown(Keys.Down))
                 {
-                    Environment.OnTempChange(-1);
+                    Environment.OnTempChange(1);
                 }
                 ++dirY;
             }
