@@ -221,13 +221,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sky-desktop.PNG">
-      <Name>sky-desktop</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MenuInstructions.PNG">
       <Name>MenuInstructions</Name>
       <Importer>TextureImporter</Importer>

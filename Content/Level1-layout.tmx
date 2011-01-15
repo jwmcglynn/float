@@ -5,12 +5,12 @@
  </tileset>
  <layer name="Tile BG" width="350" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YWwuDMAyG4Sjd5f7/392FEyW0mtQebHkfCGxjswfjN1EEADCbpfcEAOBFQoMxFiF7AWAXpH72krsAcFj/FaReBi9C9gLAbpX62UvuAsBhlfrZS+YCwIHcBYC2dO7q/C2F7AWADbkLAG2lcrd09j7J3d55/ek8PoC5XOVujfveHL1z99t5fABzseZur+wd9flEbC9RRjDU7Put14uxeHI3Vi2Mlrvkrc9dT3n6MYht79+YW+c563VY167XoveAvnyHu9zV59z6POIqK61j1uiRnLFz6+kcY6/1Z09Y528dS+dGibLM03tOdIbp9aVyXCK/v9uH1HHP7z3Xn+de33NMPb/Yd1FOqX729BBFjVC1evrq/tzzu5bXW+o/CHl+yuLgloBXAAA=
+   H4sIAAAAAAAAC+3bcQ+CIBCHYWz2Z9//6zbnWu465TiBE3ufjS1bARL8ZpQpAQBaeSilh6lTOwBwNTJnl+O5Q7tTInsB/Ke93G2dveQuAKy2+w1zapfBUyJ7AWAh93pbZS+5CwAr7Xe2FtlL5gLAitwFgL603JX5WwvZCwDkLgC0NKffPYSj3K2dvWdyNzqvn8HtAxiP3Lf9lFzu9vp/b0507r6C2wcwhlyOluZuVPaOuj8RdU/2P9CuIbRrijvTvr8iVi4/vbmrlR5Gy13ytkxuTpXMRzmvvW1G2PZZW5+Wc5fnot2jyrz8yo2Hdcytn5Mlc7W6rPsRR1lZ2nbNOeJp21vO9lF7LJ87w9p/a1syN2oUSz9LPxO5NuT57a2VpLw/Nw579W6PS9ZfybV+SZ2yf9pr78Qzrp7s9ObtVeqnUHqXVnPau45rXD/VGos7iJxbbxUrEL2AVwAA
   </data>
  </layer>
  <layer name="Tile FG" width="350" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZSW/DIBBGnShdLl0uXS5d/v+v7FTqoUIZY2A8Y+A96bskIbGBeWCyLAAAPlz+clZy2SkAADPy34OezsW9ADAjqQO9nYt7AWAmrvkv5930tbPSLm2vtcO7ADATOeeWendtP4t3AWB2tu5Z8S4AQDu5PW6Ed3EvAIzMVudec6/2/pbz3ZzTYWxuJLeSO8l98LUAeFLiW827NfvdtX0u3p2DB8mj5EnyHHwt0B+9rts1zsW7x+IUfQEr5GrhRfIqeZO873851fRa36PTum5HjKuFc/Hu2LTOy1wtfEg+JV+S74rv34JFbZXWN57Wseyb1nXb+3mr1rml3q1pj3uPQ8S8tB57i3sorW/OT3Qs+6Z13fZ83ir9Dy3nTY9ADF7z0mLstc9a3ENpffdyfhLBkfrG43kr3WPi3VhOy7HPZn/Ze15azgGtjUdtpUT8Zi/M0DfaeSreHYu9+zFijBh/6JlWz87u3h+FI0oLgFcAAA==
+   H4sIAAAAAAAAC+3XyQ6DIBCA4drY5dLl0uXS5f2fsnMxMRMREWSg/l8yMWksHSkzyGYDAAAAAAAAAAAAAAAAAAAAAPXbSewlDhJH41wAYA1OEmeJi8TVOBfUh30bVhrrBEb4auEmcZd4SDyXT2c26rtMsft2Kf9rKXmUbKuu/yx2Pfhq4SXxlvhIfGeMP0WKNR1a39SRW8q5id23SzlvlZJHDVrrBDLIvR5aFSmkeIbQ+qaO3FLOTey+bXHeagailnNfTq3n+s9yrQfdb+f0Xte9KZ4htL6pI7eS5ibHeau/lvtn5H7f1Xl0n+e0VWFN94DuGpubxdyGWnpdjvXb0P7r+k6O2tIsfrMWa5ibobWo+5oO332+8UJrZkoulmp4303Vu2LGT23JsYGl+fpsSM8d6q0hfXls/Nx1PdUPT/yoFYBXAAA=
   </data>
  </layer>
  <objectgroup name="Objects" width="350" height="16">
@@ -69,6 +69,74 @@
   <object name="plane" type="plane" x="16196" y="448" width="188" height="64"/>
   <object name="bird" type="bird" x="16060" y="188" width="124" height="64"/>
   <object name="bird" type="bird" x="16064" y="64" width="132" height="64"/>
+  <object name="cloudR" type="cloud" x="17092" y="262" width="192" height="124"/>
+  <object name="cloudR" type="cloud" x="17412" y="514" width="188" height="128"/>
+  <object name="bird" type="bird" x="17730" y="642" width="124" height="60"/>
+  <object name="bird" type="bird" x="17726" y="778" width="124" height="60"/>
+  <object name="bird" type="bird" x="17850" y="710" width="124" height="60"/>
+  <object name="cloudL" type="cloud" x="16766" y="2" width="200" height="124"/>
+  <object name="plane" type="plane" x="17726" y="448" width="196" height="60"/>
+  <object name="plane" type="plane" x="17738" y="196" width="180" height="56"/>
+  <object name="cloudT" type="cloud" x="18046" y="128" width="196" height="124"/>
+  <object name="plane" type="plane" x="17730" y="324" width="180" height="56"/>
+  <object name="cloudR" type="cloud" x="18438" y="260" width="184" height="120"/>
+  <object name="bird" type="bird" x="18756" y="128" width="128" height="64"/>
+  <object name="bird" type="bird" x="19772" y="322" width="132" height="64"/>
+  <object name="bird" type="bird" x="19840" y="258" width="124" height="64"/>
+  <object name="bird" type="bird" x="19908" y="194" width="120" height="60"/>
+  <object name="bird" type="bird" x="19964" y="130" width="128" height="60"/>
+  <object name="bird" type="bird" x="20028" y="62" width="128" height="64"/>
+  <object name="bird" type="bird" x="20100" y="2" width="120" height="60"/>
+  <object name="bird" type="bird" x="19704" y="382" width="132" height="64"/>
+  <object name="bird" type="bird" x="19648" y="450" width="124" height="60"/>
+  <object name="bird" type="bird" x="19588" y="514" width="124" height="60"/>
+  <object name="bird" type="bird" x="19520" y="578" width="128" height="64"/>
+  <object name="bird" type="bird" x="19460" y="642" width="124" height="60"/>
+  <object name="bird" type="bird" x="19716" y="766" width="124" height="64"/>
+  <object name="bird" type="bird" x="19776" y="706" width="124" height="60"/>
+  <object name="bird" type="bird" x="19840" y="642" width="124" height="60"/>
+  <object name="bird" type="bird" x="19908" y="574" width="124" height="60"/>
+  <object name="bird" type="bird" x="19972" y="510" width="124" height="60"/>
+  <object name="bird" type="bird" x="20036" y="446" width="120" height="64"/>
+  <object name="bird" type="bird" x="20100" y="386" width="124" height="60"/>
+  <object name="bird" type="bird" x="20164" y="318" width="116" height="64"/>
+  <object name="bird" type="bird" x="20228" y="254" width="124" height="60"/>
+  <object name="bird" type="bird" x="20288" y="190" width="124" height="64"/>
+  <object name="bird" type="bird" x="20356" y="130" width="124" height="60"/>
+  <object name="bird" type="bird" x="20678" y="2" width="120" height="56"/>
+  <object name="bird" type="bird" x="20678" y="62" width="120" height="64"/>
+  <object name="bird" type="bird" x="20678" y="130" width="120" height="56"/>
+  <object name="bird" type="bird" x="20678" y="190" width="120" height="60"/>
+  <object name="bird" type="bird" x="20678" y="254" width="120" height="64"/>
+  <object name="bird" type="bird" x="20674" y="322" width="124" height="60"/>
+  <object name="bird" type="bird" x="20674" y="382" width="120" height="60"/>
+  <object name="bird" type="bird" x="20674" y="578" width="124" height="60"/>
+  <object name="bird" type="bird" x="20674" y="638" width="124" height="60"/>
+  <object name="bird" type="bird" x="20674" y="702" width="124" height="64"/>
+  <object name="bird" type="bird" x="20674" y="770" width="124" height="60"/>
+  <object name="bird" type="bird" x="21062" y="2" width="116" height="60"/>
+  <object name="bird" type="bird" x="21058" y="194" width="124" height="60"/>
+  <object name="bird" type="bird" x="21058" y="254" width="124" height="64"/>
+  <object name="bird" type="bird" x="21058" y="318" width="124" height="64"/>
+  <object name="bird" type="bird" x="21058" y="382" width="124" height="64"/>
+  <object name="bird" type="bird" x="21058" y="446" width="124" height="64"/>
+  <object name="bird" type="bird" x="21058" y="510" width="124" height="64"/>
+  <object name="bird" type="bird" x="21058" y="578" width="124" height="60"/>
+  <object name="bird" type="bird" x="21058" y="638" width="124" height="60"/>
+  <object name="bird" type="bird" x="21058" y="702" width="124" height="60"/>
+  <object name="bird" type="bird" x="21058" y="766" width="128" height="60"/>
+  <object name="bird" type="bird" x="21324" y="262" width="120" height="56"/>
+  <object name="bird" type="bird" x="21524" y="118" width="120" height="60"/>
+  <object name="bird" type="bird" x="21564" y="458" width="132" height="60"/>
+  <object name="bird" type="bird" x="21360" y="570" width="132" height="68"/>
+  <object name="bird" type="bird" x="21744" y="278" width="156" height="68"/>
+  <object name="bird" type="bird" x="21764" y="142" width="140" height="52"/>
+  <object name="bird" type="bird" x="21796" y="506" width="120" height="48"/>
+  <object name="bird" type="bird" x="21312" y="434" width="132" height="48"/>
+  <object name="bird" type="bird" x="21624" y="698" width="140" height="52"/>
+  <object name="bird" type="bird" x="22076" y="446" width="116" height="48"/>
+  <object name="bird" type="bird" x="21972" y="226" width="132" height="52"/>
+  <object name="plane" type="plane" x="2748" y="514" width="188" height="56"/>
  </objectgroup>
  <objectgroup name="Instructions" width="350" height="16"/>
 </map>

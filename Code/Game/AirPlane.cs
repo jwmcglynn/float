@@ -35,6 +35,7 @@ namespace Sputnik.Game
             LoadTexture(Environment.contentManager, "plane");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
+            Scale = 0.5f;           
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 
             AddCollisionCircle(Texture.Width / 4, Vector2.Zero);
