@@ -258,6 +258,8 @@ namespace Sputnik.Game
 			m_dead = true;
 			contact.Enabled = false;
 			base.OnCollide(entB, contact);
+            Sound.StopAll();
+            Sound.PlayCue("pop");
 		}
 	}
 }
