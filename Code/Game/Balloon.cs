@@ -31,14 +31,20 @@ namespace Sputnik.Game
 		private static Vector2 DEFAULT_SPEED = new Vector2(100.0f, 0.0f);
 		public const float MOVE_VEL = 250.0f;
 
-		public const float LEFT_MOST_POSITION = 100;
-		public const float RIGHT_MOST_POSITION = 100;
+        //DEFAULT POSITION CONSTANTS
+		public const float LEFT_POSITION_BUFFER = 100;
+		public const float RIGHT_POSITION_BUFFER = 100;
+        public const float TOP_POSITION_BUFFER = 50;
+        public const float BOTTOM_POSITION_BUFFER = -150;
+
+        public const int NUMBER_OF_RUNGS = 11;
 
 		public const float INVULNERABILITY_TIME = 0.5f;
 
 		public const float SPEED_UP = 2.0f;
 
-		public const float ON_TRACK_EPSILON = 0.01f;
+		public const float CLOSE_TO_EPSILON = 5.0f;
+
 		/// <summary>
 		/// Instance variables for Balloon:
 		/// </summary>
@@ -49,7 +55,8 @@ namespace Sputnik.Game
 
 		private Vector2 previousPosition;
 
-		private bool m_dead = false;
+		private bool m_dead;
+        private float[] tracks;
 
 		public Balloon(GameEnvironment env)
 			: base(env)
@@ -72,6 +79,18 @@ namespace Sputnik.Game
 		private void Initialize()
 		{
 			Scale = 0.5f;
+            m_dead = false;
+            tracks = new float[NUMBER_OF_RUNGS];
+            float incrementalHeight = (Environment.ScreenVirtualSize.Y
+                                            - TOP_POSITION_BUFFER
+                                            - BOTTOM_POSITION_BUFFER)
+                                            /(1 + NUMBER_OF_RUNGS);
+
+            for (int i = 0; i < tracks.Length; i++)
+            {
+                tracks[i] = TOP_POSITION_BUFFER + i * incrementalHeight;
+            }
+
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 			DesiredVelocity = DEFAULT_SPEED;
@@ -115,143 +134,138 @@ namespace Sputnik.Game
 			}
 		}
 
-		public virtual bool onTrack()
+        public virtual bool isCloseTo(float x, float y) {
+            return Math.Abs(x - y) < CLOSE_TO_EPSILON;
+        }
+
+		public virtual int onTrack()
 		{
-			return (Position.Y - TRACK_0) % TRACK_DISTANCE <= 0.5f;// ActualVelocity.Y;
+			for(int i = 0; i < tracks.Length; i++)
+                if( isCloseTo (Position.Y,tracks[i]) )
+                    return i;
+
+            return -1;
 		}
 
         Cue downSound, upSound, leftSound, rightSound;
 
 
-        /**
-         * I will be editing this very  soon but I will be back in 2 hours.
-         */
+		/**
+			* I will be editing this very  soon but I will be back in 2 hours.
+			*/
 		public override void Update(float elapsedTime)
 		{
 			if (currentSpecialStateRemainingTime > 0)
 				currentSpecialStateRemainingTime -= elapsedTime;
 
 			KeyboardState keyState = Keyboard.GetState();
-            KeyboardState oldKeyState = OldKeyboard.GetState();
+			KeyboardState oldKeyState = OldKeyboard.GetState();
 
 			int dirX = 0;
 			int dirY = 0;
 
-            if (keyState.IsKeyDown(Keys.Up)) --dirY;
-            if (keyState.IsKeyDown(Keys.Down)) ++dirY;
+			if (keyState.IsKeyDown(Keys.Up)) --dirY;
+			if (keyState.IsKeyDown(Keys.Down)) ++dirY;
 
-            if (keyState.IsKeyDown(Keys.Left)) --dirX;
-            if (keyState.IsKeyDown(Keys.Right)) ++dirX;
+			if (keyState.IsKeyDown(Keys.Left)) --dirX;
+			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
 
-            if (!oldKeyState.IsKeyDown(Keys.Up) && keyState.IsKeyDown(Keys.Up))
-            {
-                upSound = Sound.PlayCue("up");
-            }
-			if (!oldKeyState.IsKeyDown(Keys.Down) && keyState.IsKeyDown(Keys.Down)) {
-                downSound = Sound.PlayCue("down");
-            }
-            if (!oldKeyState.IsKeyDown(Keys.Left) && keyState.IsKeyDown(Keys.Left))
-            {
-                leftSound = Sound.PlayCue("left");
-            }
-            if (!oldKeyState.IsKeyDown(Keys.Right) && keyState.IsKeyDown(Keys.Right))
-            {
-                rightSound = Sound.PlayCue("right");
-            }
-
-            if (downSound != null && !keyState.IsKeyDown(Keys.Down))
-            {
-                downSound.Stop(AudioStopOptions.AsAuthored);
-                downSound = null;
-            }
-            if (upSound != null && !keyState.IsKeyDown(Keys.Up))
-            {
-                upSound.Stop(AudioStopOptions.AsAuthored);
-                upSound = null;
-            }
-            if (leftSound != null && !keyState.IsKeyDown(Keys.Left))
-            {
-                leftSound.Stop(AudioStopOptions.AsAuthored);
-                leftSound = null;
-            }
-            if (rightSound != null && !keyState.IsKeyDown(Keys.Right))
-            {
-                rightSound.Stop(AudioStopOptions.AsAuthored);
-                rightSound = null;
-            }
-
-			bool passedATrack = false;
-
-			for (int i = 0; i < NUMBER_OF_TRACKS; i++)
+			if (dirY == -1 && !oldKeyState.IsKeyDown(Keys.Up) && keyState.IsKeyDown(Keys.Up))
 			{
-				float yOfTracki = TRACK_0 + TRACK_DISTANCE * i;
-				bool crossedUp =
-						previousPosition.Y > yOfTracki && yOfTracki > Position.Y;
-				bool crossedDown =
-						previousPosition.Y < yOfTracki && yOfTracki < Position.Y;
-				if (crossedDown || crossedUp)
-					passedATrack = true;
-				if (crossedUp)
-					currentTrack = i;
-				if (crossedDown)
-					currentTrack = i;
+				upSound = Sound.PlayCue("up");
+			}
+			if (dirY == 1 && !oldKeyState.IsKeyDown(Keys.Down) && keyState.IsKeyDown(Keys.Down)) {
+				downSound = Sound.PlayCue("down");
 			}
 
-			Console.WriteLine("track = " + currentTrack);
-
-			bool onATrack = onTrack() || passedATrack;
-
-			if (onATrack && dirX == 0 && dirY == 0)
+			// Events on key down.
+			if (dirX == -1 && !oldKeyState.IsKeyDown(Keys.Left) && keyState.IsKeyDown(Keys.Left))
 			{
-				DesiredVelocity = DEFAULT_SPEED;
+				leftSound = Sound.PlayCue("left");
+				Environment.OnPressureChange(1.0f);
+			}
+			if (dirX == 1 && !oldKeyState.IsKeyDown(Keys.Right) && keyState.IsKeyDown(Keys.Right))
+			{
+				rightSound = Sound.PlayCue("right");
+				Environment.OnPressureChange(-1.0f);
 			}
 
+			if (downSound != null && !keyState.IsKeyDown(Keys.Down))
+			{
+				downSound.Stop(AudioStopOptions.AsAuthored);
+				downSound = null;
+			}
+			if (upSound != null && !keyState.IsKeyDown(Keys.Up))
+			{
+				upSound.Stop(AudioStopOptions.AsAuthored);
+				upSound = null;
+			}
+			if (leftSound != null && !keyState.IsKeyDown(Keys.Left))
+			{
+				leftSound.Stop(AudioStopOptions.AsAuthored);
+				leftSound = null;
+				Environment.OnPressureChange(0.0f);
+
+			}
+			if (rightSound != null && !keyState.IsKeyDown(Keys.Right))
+			{
+				rightSound.Stop(AudioStopOptions.AsAuthored);
+				rightSound = null;
+				Environment.OnPressureChange(0.0f);
+			}
+
+			//DEFAULT ACTION
+
+			Vector2 vel = DesiredVelocity;
+			Vector2 pos = Position;
+
+			if (dirY == 0)
+			{
+				for (int i = 0; i < tracks.Length; i++)
+				{
+					if (Math.Sign(tracks[i] - pos.Y) != Math.Sign(tracks[i] - previousPosition.Y))
+					{
+						vel.Y = DEFAULT_SPEED.Y;
+						pos.Y = tracks[i];
+					}
+				}
+			}
 			else
 			{
-				bool onLastTrack = onATrack && currentTrack >= NUMBER_OF_TRACKS - 1;
-				bool onFirstTrack = onATrack && currentTrack <= 0;
-				bool atLeft = Environment.Camera.Rect.Left + LEFT_MOST_POSITION >= Position.X;
-				bool atRight = Environment.Camera.Rect.Right - RIGHT_MOST_POSITION <= Position.X;
-
-				DesiredVelocity = DEFAULT_SPEED + new Vector2(MOVE_VEL * dirX, MOVE_VEL * dirY);
-
-				if (dirY > 0 && onLastTrack)
+				if ((dirY < 0 && pos.Y < tracks.First()) || (dirY > 0 && pos.Y > tracks.Last()))
 				{
-					DesiredVelocity = new Vector2(DesiredVelocity.X, DEFAULT_SPEED.Y);
+					vel.Y = DEFAULT_SPEED.Y;
+					pos.Y = MathUtils.Clamp(pos.Y, tracks.First(), tracks.Last());
 				}
-				else if (dirY < 0 && onFirstTrack)
+				else
 				{
-					DesiredVelocity = new Vector2(DesiredVelocity.X, DEFAULT_SPEED.Y);
-				}
-				//if(!onFirstTrack && !onLastTrack) {
-				//    if (dirX != 0 && onATrack) Environment.OnPressureChange(-dirX); // Left = pressure increase.
-				//    if (dirY != 0 && onATrack) Environment.OnTempChange(-dirY); // Up = temp increase.
-
-				//    DesiredVelocity = DesiredVelocity + new Vector2(STEP_RATE*dirX, STEP_RATE*dirY);
-				//}
-
-				if (dirX < 0 && atLeft)
-				{
-					DesiredVelocity = new Vector2(DEFAULT_SPEED.X, DesiredVelocity.Y);
-				}
-				else if (dirX > 0 && atRight)
-				{
-					DesiredVelocity = new Vector2(DEFAULT_SPEED.X, DesiredVelocity.Y);
+					vel.Y = MOVE_VEL * dirY;
 				}
 			}
 
+			bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
+			bool atRight = Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER <= Position.X;
 
+			if ((dirX < 0 && atLeft) || (dirX > 0 && atRight))
+			{
+				vel.X = DEFAULT_SPEED.X;
+				pos.X = MathUtils.Clamp(pos.X, Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER, Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER);
+			}
+			else
+			{
+				vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
+			}
 
-			previousPosition = Position;
+			previousPosition = pos;
+			Position = pos;
+			DesiredVelocity = vel;
+
 			base.Update(elapsedTime);
 		}
-
-
 		public override bool ShouldCull()
 		{
 			return m_dead;
 		}
-
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			// TODO: Explode!
