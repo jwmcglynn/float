@@ -58,14 +58,17 @@ namespace Sputnik.Game
 		}
         public override void OnTempChange(float amount)
         {
-            
+            /*
+			 * Going up -> amount > 0 -> cloudState dec
+			 * Going down -> amount < 0 -> cloudState inc
+			 */
             if (amount == 1 && cloudState < 2)
             {
-                cloudState++;
+                cloudState--;
             }
             else if (amount == -1 && cloudState > -2)
             {
-                cloudState--;
+                cloudState++;
             }
 
             switch (cloudState)

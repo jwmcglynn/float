@@ -264,11 +264,11 @@ namespace Sputnik.Game
 				{
 					if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(1))
 					{
-						Environment.OnTempChange(1.0f);
+						Environment.OnTempChange(-1.0f);
 					}
 					else
 					{
-						Environment.OnTempChange(-1.0f);
+						Environment.OnTempChange(1.0f);
 					}
 				}
 			}
