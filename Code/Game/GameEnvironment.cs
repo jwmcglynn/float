@@ -309,9 +309,9 @@ namespace Sputnik {
                     if (SpawnController != null) SpawnController.Update(elapsedTime);
 
                     // Update entities.
-                    base.Update(elapsedTime);
                     Camera.Update(elapsedTime);
-
+                    base.Update(elapsedTime);
+					
                     // Particles.
                     foreach (var effect in Effects) effect.Update(elapsedTime);
                 }
@@ -320,6 +320,7 @@ namespace Sputnik {
             {
                 //m_popUp.Update(elapsedTime);
             }
+
             HUD.Update(elapsedTime);
 		}
 

@@ -65,15 +65,16 @@ namespace Sputnik {
 
 		public void Update(float elapsedTime) {
 			m_actualEffectScale += (EffectScale - m_actualEffectScale) * ScaleSpeed * elapsedTime;
-			
-			// Create the Transform used by any
-			// spritebatch process
-			Transform = Matrix.CreateTranslation(-Position.X + CenterOffset.X, -Position.Y + CenterOffset.Y, 0)
-							* Matrix.CreateScale(Scale);
-			m_inverseIsValid = false;
 
 			// Move the Camera to the position that it needs to go.
 			Position += MoveSpeed * elapsedTime;
+
+			// Create the Transform used by any
+			// spritebatch process
+			Matrix tform = Matrix.CreateTranslation(-Position.X + CenterOffset.X, -Position.Y + CenterOffset.Y, 0)
+							* Matrix.CreateScale(Scale);
+			Transform = tform;
+			m_inverseIsValid = false;
 
 			Sound.CameraPos = Position;
 		}

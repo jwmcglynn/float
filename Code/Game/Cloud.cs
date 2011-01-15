@@ -19,7 +19,6 @@ namespace Sputnik.Game
         public const float MAX_SPEED = 10.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
 
         private CLOUD_STATE currentState;
-        private Vector2 currentVelocity;
         public static Vector2 RIGHT = new Vector2(1, 0);
         public static Vector2 UP = new Vector2(0, -1);
 

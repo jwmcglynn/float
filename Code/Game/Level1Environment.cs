@@ -11,8 +11,8 @@ namespace Sputnik.Game {
 
 			LoadMap("Level1-layout.tmx");
 
-			RepeatingBackground bg = new RepeatingBackground(this);
-			AddChild(bg);
+			AddChild(new RepeatingBackground(this));
+			AddChild(new Moon(this));
 		}
 	}
 }

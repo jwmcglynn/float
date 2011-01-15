@@ -68,6 +68,8 @@ namespace Squared.Tiled {
 		protected Texture2D _Texture;
 		protected int _TexWidth, _TexHeight;
 
+		protected List<Texture2D> TileTextures = new List<Texture2D>();
+
 		internal static Tileset Load (XmlReader reader) {
 			var result = new Tileset();
 
@@ -132,6 +134,70 @@ namespace Squared.Tiled {
 				_TexHeight = value.Height;
 			}
 		}
+
+		/*
+		public void CreateTiles(GraphicsDevice gd) {
+			Rectangle destination = new Rectangle(0, 0, TileWidth, TileHeight);
+
+			// Render the selected portion of the source image into the render target.
+			SpriteBatch sb = new SpriteBatch(gd);
+			Rectangle source = new Rectangle();
+			TileTextures.Clear();
+
+			int rowSize = _TexWidth / TileWidth;
+			int numRows = _TexHeight / TileHeight;
+			int numTiles = rowSize * numRows;
+
+			for (int i = 0; i < numTiles; ++i) {
+				// Create a new render target the size of the cropping region.
+				RenderTarget2D target = new RenderTarget2D(gd, TileWidth, TileHeight, true, SurfaceFormat.Color, DepthFormat.None);
+				
+				MapTileToRect(FirstTileID + i, ref source);
+
+				// Make it the current render target.
+				gd.SetRenderTarget(target);
+				gd.Clear(Color.Transparent);
+
+				sb.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+				sb.Draw(Texture, destination, source, Color.White);
+				sb.End();
+
+				// Resolve the render target.  This copies the target's buffer into a texture buffer.
+				gd.SetRenderTarget(null);
+
+				//using (Stream stream = File.OpenWrite("tile" + i + ".png")) {
+				//	target.SaveAsPng(stream, target.Width, target.Height);
+				//}
+
+				TileTextures.Add(target);
+			}
+		}*/
+
+		public void CreateTiles() {
+			Rectangle source = new Rectangle();
+			TileTextures.Clear();
+
+			int rowSize = _TexWidth / TileWidth;
+			int numRows = _TexHeight / TileHeight;
+			int numTiles = rowSize * numRows;
+
+			for (int i = 0; i < numTiles; ++i) {
+				MapTileToRect(FirstTileID + i, ref source);
+				
+				Texture2D output = new Texture2D(Texture.GraphicsDevice, source.Width, source.Height); 
+				Color[] data = new Color[output.Width * output.Height]; 
+				Texture.GetData<Color>(0, source, data, 0, data.Length); 
+				output.SetData<Color>(data);
+
+				TileTextures.Add(output);
+			}
+		}
+
+		internal Texture2D GetTileTexture(int index) {
+			if (index - FirstTileID < 0) return null;
+			return TileTextures[index - FirstTileID];
+		}
+
 
 		internal bool MapTileToRect (int index, ref Rectangle rect) {
 			index -= FirstTileID;
@@ -317,7 +383,7 @@ namespace Squared.Tiled {
 				{
 					cache.Add(new TileInfo
 					{
-						Texture = tilesets[t].Texture,
+						Texture = tilesets[t].GetTileTexture(i),
 						Rectangle = rect
 					});
 					i += 1;
@@ -361,7 +427,7 @@ namespace Squared.Tiled {
 					if ((index >= 0) && (index < _TileInfoCache.Length))
 					{
 						info = _TileInfoCache[index];
-						batch.Draw(info.Texture, destPos, info.Rectangle, new Color(1.0f, 1.0f, 1.0f, this.Opacity), 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, zindex);
+						batch.Draw(info.Texture, destPos, null, new Color(1.0f, 1.0f, 1.0f, this.Opacity), 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, zindex);
 					}
 
 					destPos.X += tileWidth;
@@ -635,6 +701,8 @@ namespace Squared.Tiled {
 				tileset.Texture = content.Load<Texture2D>(
 					Path.Combine(Path.GetDirectoryName(tileset.Image), Path.GetFileNameWithoutExtension(tileset.Image))
 				);
+
+				tileset.CreateTiles();
 			}
 
 			return result;
