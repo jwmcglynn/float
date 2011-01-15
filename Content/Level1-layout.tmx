@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="350" height="16" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="500" height="16" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png"/>
  </tileset>
- <layer name="Tile BG" width="350" height="16">
+ <layer name="Tile BG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3bcQ+CIBCHYWz2Z9//6zbnWu465TiBE3ufjS1bARL8ZpQpAQBaeSilh6lTOwBwNTJnl+O5Q7tTInsB/Ke93G2dveQuAKy2+w1zapfBUyJ7AWAh93pbZS+5CwAr7Xe2FtlL5gLAitwFgL603JX5WwvZCwDkLgC0NKffPYSj3K2dvWdyNzqvn8HtAxiP3Lf9lFzu9vp/b0507r6C2wcwhlyOluZuVPaOuj8RdU/2P9CuIbRrijvTvr8iVi4/vbmrlR5Gy13ytkxuTpXMRzmvvW1G2PZZW5+Wc5fnot2jyrz8yo2Hdcytn5Mlc7W6rPsRR1lZ2nbNOeJp21vO9lF7LJ87w9p/a1syN2oUSz9LPxO5NuT57a2VpLw/Nw579W6PS9ZfybV+SZ2yf9pr78Qzrp7s9ObtVeqnUHqXVnPau45rXD/VGos7iJxbbxUrEL2AVwAA
+   H4sIAAAAAAAAC+2c23LDIAwFSZs+9v9/t9MHpkTFCIEAE3ZnNPUNG8vHOiFOHQIAAIzicREAtUTNfBRilqbQLgCcxpWP4+lgJfXzz/Dq43H+d/1zYl8AAE4BLwdP0vH5Z/jv7dHPR3s6+gWA08jVPfwcWol+/gyv4/M4/xDLRnk7GgaA02F8Dr3kfDwdn8v1IzwdDQPAnVjhrfg59KL9Hk4uG+Hp6BcA7sAdnmdTD6EV6dEx8HMAOA38HHbGOj6Xvu4FGgaA1eDnsDO5sXkM/BwATmK2n8uam/YB9uEu1yz9DZyc1t434+npPflYncevxccHAB9mennpWSfsw53eHdDj5yPG6S2s9vPvxccHAB9G+7lWR/Hz8eTyX6KkgZJeVviS5f/VNB2uYPXnoVasmoJ6Ss+QTqmZue9xwYa3n2v1s0WbnnWktv3OtUvzs4j27r6aKDHqM6Onn+diBrv5+a73wio0TVn0KDXeeswVpH2W51F77vJcZA7Q5R+y/uWozXntddJ8RqLV55b2LfsvtV9FS9+j72mhbWvJU/Qvj1zlNGbxc9leWy/PodSnVg310KqBmX1O28tpuayH2v7XHittV1sHa7zJ+5rk7oeUqxocMu21PFztN5233H+W7yYs+5T9y237TrTk1XK9auvmiJrjuV3PPq5yXtrOs3+lsPiy1cc9r2XITEddpX9jP72OPVu3BDE6Rmm61R96vcUzF+/Aan0RhDXkvZ/O//r5D5pEgWwAfQAA
   </data>
  </layer>
- <layer name="Tile FG" width="350" height="16">
+ <layer name="Tile FG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XyQ6DIBCA4drY5dLl0uXS5f2fsnMxMRMREWSg/l8yMWksHSkzyGYDAAAAAAAAAAAAAAAAAAAAAPXbSewlDhJH41wAYA1OEmeJi8TVOBfUh30bVhrrBEb4auEmcZd4SDyXT2c26rtMsft2Kf9rKXmUbKuu/yx2Pfhq4SXxlvhIfGeMP0WKNR1a39SRW8q5id23SzlvlZJHDVrrBDLIvR5aFSmkeIbQ+qaO3FLOTey+bXHeagailnNfTq3n+s9yrQfdb+f0Xte9KZ4htL6pI7eS5ibHeau/lvtn5H7f1Xl0n+e0VWFN94DuGpubxdyGWnpdjvXb0P7r+k6O2tIsfrMWa5ibobWo+5oO332+8UJrZkoulmp4303Vu2LGT23JsYGl+fpsSM8d6q0hfXls/Nx1PdUPT/yoFYBXAAA=
+   H4sIAAAAAAAAC+3YyW6DMBQF0CSiw6bDpm02Hf7/K+tNJGQxxGBshnOkK6QqcV4IvEd9OgEAAAAAAAAAAAAAAAAAAABLegh5DHkKea5cCwAwzUvIa8hbyHvlWtgez4PAnpxrFzBgrMd+hHyGfIVcly9nMnNjneY+D67ld11LHXA0l+i4Z3P7zFiP/Q75CfkN+Zuw/j1y9MrUuaE/98t5buY+D65lf2gtdcBRNbULKKB0n2mi5JDjO6TODf25X85zM/d5sMb+0LkjW9mngq1rRo57VqrPxHN8ykzve22O75A6N/Tnfms6NyX2h9rXcntPrz3P4zpufy/pEgX2KJ4tt+Pca77GPZtq6X43NMdT53rfe0r07FiNz9yKI5ybrmsxnpdxxl43tl7qPXNPLbA3W/j/PNdMnLN+bkuuDUsbm98ps7xrZqfM+6H1S9/XUNM/qVOQmgB9AAA=
   </data>
  </layer>
- <objectgroup name="Objects" width="350" height="16">
+ <objectgroup name="Objects" width="500" height="16">
   <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
   <object name="bird" type="bird" x="3910" y="708" width="126" height="54"/>
   <object name="InstructionalCloud" type="cloud" x="3528" y="530" width="188" height="116"/>
@@ -81,62 +81,7 @@
   <object name="plane" type="plane" x="17730" y="324" width="180" height="56"/>
   <object name="cloudR" type="cloud" x="18438" y="260" width="184" height="120"/>
   <object name="bird" type="bird" x="18756" y="128" width="128" height="64"/>
-  <object name="bird" type="bird" x="19772" y="322" width="132" height="64"/>
-  <object name="bird" type="bird" x="19840" y="258" width="124" height="64"/>
-  <object name="bird" type="bird" x="19908" y="194" width="120" height="60"/>
-  <object name="bird" type="bird" x="19964" y="130" width="128" height="60"/>
-  <object name="bird" type="bird" x="20028" y="62" width="128" height="64"/>
-  <object name="bird" type="bird" x="20100" y="2" width="120" height="60"/>
-  <object name="bird" type="bird" x="19704" y="382" width="132" height="64"/>
-  <object name="bird" type="bird" x="19648" y="450" width="124" height="60"/>
-  <object name="bird" type="bird" x="19588" y="514" width="124" height="60"/>
-  <object name="bird" type="bird" x="19520" y="578" width="128" height="64"/>
-  <object name="bird" type="bird" x="19460" y="642" width="124" height="60"/>
-  <object name="bird" type="bird" x="19716" y="766" width="124" height="64"/>
-  <object name="bird" type="bird" x="19776" y="706" width="124" height="60"/>
-  <object name="bird" type="bird" x="19840" y="642" width="124" height="60"/>
-  <object name="bird" type="bird" x="19908" y="574" width="124" height="60"/>
-  <object name="bird" type="bird" x="19972" y="510" width="124" height="60"/>
-  <object name="bird" type="bird" x="20036" y="446" width="120" height="64"/>
-  <object name="bird" type="bird" x="20100" y="386" width="124" height="60"/>
-  <object name="bird" type="bird" x="20164" y="318" width="116" height="64"/>
-  <object name="bird" type="bird" x="20228" y="254" width="124" height="60"/>
-  <object name="bird" type="bird" x="20288" y="190" width="124" height="64"/>
-  <object name="bird" type="bird" x="20356" y="130" width="124" height="60"/>
-  <object name="bird" type="bird" x="20678" y="2" width="120" height="56"/>
-  <object name="bird" type="bird" x="20678" y="62" width="120" height="64"/>
-  <object name="bird" type="bird" x="20678" y="130" width="120" height="56"/>
-  <object name="bird" type="bird" x="20678" y="190" width="120" height="60"/>
-  <object name="bird" type="bird" x="20678" y="254" width="120" height="64"/>
-  <object name="bird" type="bird" x="20674" y="322" width="124" height="60"/>
-  <object name="bird" type="bird" x="20674" y="382" width="120" height="60"/>
-  <object name="bird" type="bird" x="20674" y="578" width="124" height="60"/>
-  <object name="bird" type="bird" x="20674" y="638" width="124" height="60"/>
-  <object name="bird" type="bird" x="20674" y="702" width="124" height="64"/>
-  <object name="bird" type="bird" x="20674" y="770" width="124" height="60"/>
-  <object name="bird" type="bird" x="21062" y="2" width="116" height="60"/>
-  <object name="bird" type="bird" x="21058" y="194" width="124" height="60"/>
-  <object name="bird" type="bird" x="21058" y="254" width="124" height="64"/>
-  <object name="bird" type="bird" x="21058" y="318" width="124" height="64"/>
-  <object name="bird" type="bird" x="21058" y="382" width="124" height="64"/>
-  <object name="bird" type="bird" x="21058" y="446" width="124" height="64"/>
-  <object name="bird" type="bird" x="21058" y="510" width="124" height="64"/>
-  <object name="bird" type="bird" x="21058" y="578" width="124" height="60"/>
-  <object name="bird" type="bird" x="21058" y="638" width="124" height="60"/>
-  <object name="bird" type="bird" x="21058" y="702" width="124" height="60"/>
-  <object name="bird" type="bird" x="21058" y="766" width="128" height="60"/>
-  <object name="bird" type="bird" x="21324" y="262" width="120" height="56"/>
-  <object name="bird" type="bird" x="21524" y="118" width="120" height="60"/>
-  <object name="bird" type="bird" x="21564" y="458" width="132" height="60"/>
-  <object name="bird" type="bird" x="21360" y="570" width="132" height="68"/>
-  <object name="bird" type="bird" x="21744" y="278" width="156" height="68"/>
-  <object name="bird" type="bird" x="21764" y="142" width="140" height="52"/>
-  <object name="bird" type="bird" x="21796" y="506" width="120" height="48"/>
-  <object name="bird" type="bird" x="21312" y="434" width="132" height="48"/>
-  <object name="bird" type="bird" x="21624" y="698" width="140" height="52"/>
-  <object name="bird" type="bird" x="22076" y="446" width="116" height="48"/>
-  <object name="bird" type="bird" x="21972" y="226" width="132" height="52"/>
   <object name="plane" type="plane" x="2748" y="514" width="188" height="56"/>
  </objectgroup>
- <objectgroup name="Instructions" width="350" height="16"/>
+ <objectgroup name="Instructions" width="500" height="16"/>
 </map>

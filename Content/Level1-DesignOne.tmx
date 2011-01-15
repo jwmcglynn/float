@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="200" height="16" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png"/>
+ </tileset>
+ <layer name="Tile BG" width="200" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WSwrDMAwFZeMue//rlkIXRdiJ/FGEYAYehEAi2dEQiwBAJCW6AYBF2gM1iuAI5KSJvyP4AVmpvzTxc6UIjkBOqvg7gh+QlSr+juAGZAU/AMZoP7Qnp8ARyAh+AIwZ+XHakR0/or16BdeHOK788PiPrBDtxzu4PsRh9SPKkaznst5ewhmaIaf2e8aPXp4gmx94McfdTM3MYxPb3lvn+M4P3Zf1HHY109aaHjO2Uns1uz32rvW9Haz9W2v9P2eZY0ssfc5+E+2ZXt/ItZ2cfh8h0fnO8wf1aHpTADIAAA==
+  </data>
+ </layer>
+ <layer name="Tile FG" width="200" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3XSQ/CIBCGYWpwubhc1F5c/v+vdDx4IWnZBmjxfZIvXCpOI2RGYwAAAAAAAAAAAIAwW8lOspccGtcCLM1RcpKcJZfGtaBPQ+sCZvh6wlVyk9wlY/lyktHnwm2ctWe558LXEx6Sp+QleSfsH0LjbMf2Oe6TMbZ1ARXUnn+sEw0a7xDb5/5pbrSetWe15h/3XqTckalnNd4hts+tZW7U4P5WvzV3vhrMsv87fJWef+buRew9mfpMjRnO1eI7W1lD/9A6Yzn7ayu5N/R8AG3uJI8AMgAA
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="200" height="16">
+  <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
+ </objectgroup>
+ <objectgroup name="Instructions" width="200" height="16"/>
+</map>
