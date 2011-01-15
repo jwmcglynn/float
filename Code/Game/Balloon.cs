@@ -118,6 +118,10 @@ namespace Sputnik.Game
 		{
 			return (Position.Y - TRACK_0) % TRACK_DISTANCE <= 0.5f;// ActualVelocity.Y;
 		}
+
+        /**
+         * I will be editing this very  soon but I will be back in 2 hours.
+         */
 		public override void Update(float elapsedTime)
 		{
 			if (currentSpecialStateRemainingTime > 0)
