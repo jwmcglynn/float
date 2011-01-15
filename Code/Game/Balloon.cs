@@ -261,7 +261,16 @@ namespace Sputnik.Game
 			for (int i = 0; i < tracks.Length; i++)
 			{
 				if (Math.Sign(Position.Y - tracks[i]) != Math.Sign(previousPosition.Y - tracks[i]))
-					Environment.OnTempChange(1.0f);
+				{
+					if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(1))
+					{
+						Environment.OnTempChange(-1.0f);
+					}
+					else
+					{
+						Environment.OnTempChange(1.0f);
+					}
+				}
 			}
 			previousPosition = pos;
 			Position = pos;
