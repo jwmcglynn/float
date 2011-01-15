@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Sputnik.Game
 {
@@ -119,6 +120,9 @@ namespace Sputnik.Game
 			return (Position.Y - TRACK_0) % TRACK_DISTANCE <= 0.5f;// ActualVelocity.Y;
 		}
 
+        Cue downSound, upSound, leftSound, rightSound;
+
+
         /**
          * I will be editing this very  soon but I will be back in 2 hours.
          */
@@ -128,17 +132,53 @@ namespace Sputnik.Game
 				currentSpecialStateRemainingTime -= elapsedTime;
 
 			KeyboardState keyState = Keyboard.GetState();
+            KeyboardState oldKeyState = OldKeyboard.GetState();
 
 			int dirX = 0;
 			int dirY = 0;
 
-			if (keyState.IsKeyDown(Keys.Up)) --dirY;
-			if (keyState.IsKeyDown(Keys.Down)) ++dirY;
+            if (keyState.IsKeyDown(Keys.Up)) --dirY;
+            if (keyState.IsKeyDown(Keys.Down)) ++dirY;
 
-			if (keyState.IsKeyDown(Keys.Left)) --dirX;
-			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
+            if (keyState.IsKeyDown(Keys.Left)) --dirX;
+            if (keyState.IsKeyDown(Keys.Right)) ++dirX;
 
+            if (!oldKeyState.IsKeyDown(Keys.Up) && keyState.IsKeyDown(Keys.Up))
+            {
+                upSound = Sound.PlayCue("up");
+            }
+			if (!oldKeyState.IsKeyDown(Keys.Down) && keyState.IsKeyDown(Keys.Down)) {
+                downSound = Sound.PlayCue("down");
+            }
+            if (!oldKeyState.IsKeyDown(Keys.Left) && keyState.IsKeyDown(Keys.Left))
+            {
+                leftSound = Sound.PlayCue("left");
+            }
+            if (!oldKeyState.IsKeyDown(Keys.Right) && keyState.IsKeyDown(Keys.Right))
+            {
+                rightSound = Sound.PlayCue("right");
+            }
 
+            if (downSound != null && !keyState.IsKeyDown(Keys.Down))
+            {
+                downSound.Stop(AudioStopOptions.AsAuthored);
+                downSound = null;
+            }
+            if (upSound != null && !keyState.IsKeyDown(Keys.Up))
+            {
+                upSound.Stop(AudioStopOptions.AsAuthored);
+                upSound = null;
+            }
+            if (leftSound != null && !keyState.IsKeyDown(Keys.Left))
+            {
+                leftSound.Stop(AudioStopOptions.AsAuthored);
+                leftSound = null;
+            }
+            if (rightSound != null && !keyState.IsKeyDown(Keys.Right))
+            {
+                rightSound.Stop(AudioStopOptions.AsAuthored);
+                rightSound = null;
+            }
 
 			bool passedATrack = false;
 

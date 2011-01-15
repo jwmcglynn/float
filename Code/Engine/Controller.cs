@@ -94,8 +94,7 @@ namespace Sputnik {
 		/// all of your content.
 		/// </summary>
 		protected override void LoadContent() {
-			// CASESENSITIVE_TODO: FIXME: Re-enable sound.
-			// Sound.Initialize();
+			Sound.Initialize();
 
 			// Prepare DebugView.
 			FarseerPhysics.DebugViewXNA.LoadContent(GraphicsDevice, Content);
