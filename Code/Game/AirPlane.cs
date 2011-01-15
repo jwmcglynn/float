@@ -20,7 +20,6 @@ namespace Sputnik.Game
             : base(env)
         {
             Initialize();
-            Position = Vector2.Zero;
         }
 
         // Regular constructor.
@@ -28,6 +27,7 @@ namespace Sputnik.Game
             : base(env, sp)
         {
             Initialize();
+			Position = sp.Position;
         }
 
         private void Initialize()
