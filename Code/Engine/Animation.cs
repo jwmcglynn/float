@@ -4,65 +4,47 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sputnik.Engine
+namespace Sputnik
 {
-    class Animation
-    {
-        Sequence m_currentSequence;
-		bool isdone=false;
-        int currentframe; 
-        float frametime; 
-         // Change to a new sequence.
-         void PlaySequence(Sequence sequence)
-         {
-			 isdone=false;
-         m_currentSequence=sequence;
-             currentframe=0;
-             frametime=0;
+	class Animation
+	{
+		private Sequence m_currentSequence;
+		private int currentframe;
+		private float frametime;
 
-             
-         }
+		public bool Done { get; private set; }
 
-           // Get current texture.
-           Texture2D CurrentFrame()
-            {      
-            
-			return  m_currentSequence.getFrames().ElementAt(currentframe);
-            }
+		// Change to a new sequence.
+		public void PlaySequence(Sequence sequence)
+		{
+			Done = false;
+			m_currentSequence = sequence;
+			currentframe = 0;
+			frametime = 0.0f;
+		}
 
-         // Update currently displayed frame.
-         void Update(float elapsedTime)
-         {
-             frametime+=elapsedTime;
+		// Get current texture.
+		public Texture2D CurrentFrame { get { return m_currentSequence.FrameAt(currentframe).Texture; } }
 
-			 if (frametime > m_currentSequence.getTime().ElementAt(currentframe))
-			 {
-				 currentframe++;
-				 frametime=0;
-			 }
+		// Update currently displayed frame.
+		public void Update(float elapsedTime)
+		{
+			frametime += elapsedTime;
 
+			while (currentframe < m_currentSequence.Count && frametime > m_currentSequence.FrameAt(currentframe).Time) {
+				frametime -= m_currentSequence.FrameAt(currentframe).Time;
+				currentframe++;
 
-
-
-			 if (currentframe == m_currentSequence.getFrames().Count)
-			 {
-
-				 if (m_currentSequence.Loop)
-				 {   // go back to first frame 
-					 currentframe = 0;
-				 }
-				 else
-				 {
-					 currentframe = currentframe - 1;
-					 isdone = true;
-				 }
-			 }
-
-
-		
-			 
-			
-			 
-         }
-    }
+				if (currentframe == m_currentSequence.Count) {
+					if (m_currentSequence.Loop) {
+						// go back to first frame 
+						currentframe = 0;
+					} else {
+						currentframe--;
+						Done = true;
+					}
+				}
+			}
+		}
+	}
 }

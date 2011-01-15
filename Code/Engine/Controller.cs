@@ -21,7 +21,7 @@ namespace Sputnik {
 		private Environment m_nextEnv;
 
 		// Windowed/fullscreen.
-		private Vector2 m_windowedSize = new Vector2(1280, 800);
+		private Vector2 m_windowedSize = new Vector2(960, 640);
 		private bool m_fullscreen = false;
 
 		// FPS Counters.
@@ -48,8 +48,8 @@ namespace Sputnik {
 				Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 			} else {
 				// Set default window size.
-				Graphics.PreferredBackBufferWidth = 960;
-				Graphics.PreferredBackBufferHeight = 640;
+				Graphics.PreferredBackBufferWidth = (int) m_windowedSize.X;
+				Graphics.PreferredBackBufferHeight = (int) m_windowedSize.Y;
 			}
 
 			IsFixedTimeStep = true;

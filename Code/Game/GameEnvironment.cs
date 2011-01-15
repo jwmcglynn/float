@@ -56,7 +56,7 @@ namespace Sputnik {
 
 			// Camera.
 			Camera = new Camera2D(this);
-			Camera.Position = new Vector2(0.0f, k_idealScreenSize.Y * 0.5f);
+			Camera.Position = new Vector2(1280.0f, k_idealScreenSize.Y * 0.5f);
 			Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
 			Camera.ResetEffectScale(1.1f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
 

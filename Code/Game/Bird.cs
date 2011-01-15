@@ -14,13 +14,14 @@ namespace Sputnik.Game {
 		
 		private int m_speedLevel = 1;
 
+		private Animation m_anim = new Animation();
+
 		/***************************************************************************/
 
 		// Debug constructor.
 		public Bird(GameEnvironment env)
 				: base(env) {
 			Initialize();
-			Position = Vector2.Zero;
 		}
 
 		// Regular constructor.
@@ -31,7 +32,15 @@ namespace Sputnik.Game {
 		}
 
 		private void Initialize() {
-			LoadTexture(Environment.contentManager, "bird\\Bird1", 0.20f);
+			Sequence seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("bird\\Bird1", 0.33f);
+			seq.AddFrame("bird\\Bird2", 0.33f);
+			seq.Loop = true;
+			m_anim.PlaySequence(seq);
+
+			Texture = m_anim.CurrentFrame;
+			Scale = 0.20f;
+
 			Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
@@ -44,6 +53,8 @@ namespace Sputnik.Game {
 
 		public override void Update(float elapsedTime) {
 			// TODO: Update animation.
+			m_anim.Update(elapsedTime);
+			Texture = m_anim.CurrentFrame;
 			base.Update(elapsedTime);
 		}
 

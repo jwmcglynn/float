@@ -5,32 +5,42 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-namespace Sputnik.Engine
+namespace Sputnik
 {
-    class Sequence
-    {
-        private List<Texture2D> frames = new List<Texture2D>();
-        private List<float> timeframes = new List<float>();
-		public bool Loop; 
+	class Sequence
+	{
+		private ContentManager m_contentManager;
 
-        void AddFrame(ContentManager contentManager, string filename, float duration)
-        {
-            frames.Add( contentManager.Load<Texture2D>(filename));
+		public struct Frame {
+			public Texture2D Texture;
+			public float Time;
+		}
 
-            timeframes.Add(duration);
-        }
+		private List<Frame> m_frames = new List<Frame>();
 
-        public List<Texture2D> getFrames()
-        {
-    
-         return frames;
-         }
+		public bool Loop { get; set; }
 
-        public List<float> getTime()
-        {
-            return timeframes;
-        }
+		public List<Frame> Frames { get { return m_frames; } }
+		public int Count { get { return m_frames.Count; } }
 
+		/***************************************************************************/
 
-    }
+		public Sequence(ContentManager manager) {
+			m_contentManager = manager;
+		}
+
+		public void AddFrame(string filename, float duration)
+		{
+			Frame f;
+			f.Texture = m_contentManager.Load<Texture2D>(filename);
+			f.Time = duration;
+
+			m_frames.Add(f);
+		}
+
+		public Frame FrameAt(int index)
+		{
+			return m_frames[index];
+		}
+	}
 }
