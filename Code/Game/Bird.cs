@@ -9,11 +9,8 @@ using FarseerPhysics.Dynamics;
 
 namespace Sputnik.Game {
 	class Bird : GameEntity {
-		public static float k_defaultVelX = 50.0f;
-		public static float[] k_horizVels = {-100.0f, -70.0f, -40.0f};
+		public static float[] k_horizVels = {-200.0f, -100.0f, 0.0f};
 		
-		private int m_speedLevel = 1;
-
 		private Animation m_anim = new Animation();
 
 		/***************************************************************************/
@@ -46,7 +43,8 @@ namespace Sputnik.Game {
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
 			AddCollisionCircle(100.0f * Scale, new Vector2(0.0f, 10.0f));
-			DesiredVelocity = new Vector2(k_horizVels[m_speedLevel], 0.0f);
+
+			SetBirdVel(Environment.Pressure);
 		}
 
 		/***************************************************************************/
@@ -65,17 +63,20 @@ namespace Sputnik.Game {
 			return (entB is Balloon);
 		}
 
-		public override void OnPressureChange(float amount) {
+		private void SetBirdVel(float amount) {
 			if (amount < 0) {
-				--m_speedLevel;
-				if (m_speedLevel < 0) m_speedLevel = 0;
+				DesiredVelocity = new Vector2(k_horizVels[0], 0.0f);
+			} else if (amount > 0) {
+				DesiredVelocity = new Vector2(k_horizVels[2], 0.0f);
 			} else {
-				++m_speedLevel;
-				if (m_speedLevel > k_horizVels.Length - 1) m_speedLevel = k_horizVels.Length - 1;
+				DesiredVelocity = new Vector2(k_horizVels[1], 0.0f);
 			}
 
-			DesiredVelocity = new Vector2(k_horizVels[m_speedLevel], 0.0f);
+			Console.WriteLine("Bird vel = " + DesiredVelocity.X);
+		}
 
+		public override void OnPressureChange(float amount) {
+			SetBirdVel(amount);
 			base.OnPressureChange(amount);
 		}
 	}

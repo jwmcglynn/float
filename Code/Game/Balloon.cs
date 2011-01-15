@@ -149,7 +149,8 @@ namespace Sputnik.Game
 
         Cue downSound, upSound, leftSound, rightSound;
 
-
+		int lastDirX = 0;
+		int lastDirY = 0;
 		/**
 			* I will be editing this very  soon but I will be back in 2 hours.
 			*/
@@ -170,48 +171,44 @@ namespace Sputnik.Game
 			if (keyState.IsKeyDown(Keys.Left)) --dirX;
 			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
 
-			if (dirY == -1 && !oldKeyState.IsKeyDown(Keys.Up) && keyState.IsKeyDown(Keys.Up))
+			if (dirY == -1 && dirY != lastDirY)
 			{
 				upSound = Sound.PlayCue("up");
-				Environment.OnTempChange(1.0f);
 			}
-			if (dirY == 1 && !oldKeyState.IsKeyDown(Keys.Down) && keyState.IsKeyDown(Keys.Down)) {
+			if (dirY == 1 && dirY != lastDirY) {
 				downSound = Sound.PlayCue("down");
-				Environment.OnTempChange(-1.0f);
 			}
 
 			// Events on key down.
-			if (dirX == -1 && !oldKeyState.IsKeyDown(Keys.Left) && keyState.IsKeyDown(Keys.Left))
+			if (dirX == -1 && dirX != lastDirX)
 			{
 				leftSound = Sound.PlayCue("left");
 				Environment.OnPressureChange(1.0f);
 			}
-			if (dirX == 1 && !oldKeyState.IsKeyDown(Keys.Right) && keyState.IsKeyDown(Keys.Right))
+			if (dirX == 1 && dirX != lastDirX)
 			{
 				rightSound = Sound.PlayCue("right");
 				Environment.OnPressureChange(-1.0f);
 			}
 
-			if (downSound != null && !keyState.IsKeyDown(Keys.Down))
+			if (downSound != null && dirY != 1)
 			{
 				downSound.Stop(AudioStopOptions.AsAuthored);
 				downSound = null;
-				Environment.OnTempChange(0.0f);
 			}
-			if (upSound != null && !keyState.IsKeyDown(Keys.Up))
+			if (upSound != null && dirY != -1)
 			{
 				upSound.Stop(AudioStopOptions.AsAuthored);
 				upSound = null;
-				Environment.OnTempChange(0.0f);
 			}
-			if (leftSound != null && !keyState.IsKeyDown(Keys.Left))
+			if (leftSound != null && dirX != -1)
 			{
 				leftSound.Stop(AudioStopOptions.AsAuthored);
 				leftSound = null;
 				Environment.OnPressureChange(0.0f);
 
 			}
-			if (rightSound != null && !keyState.IsKeyDown(Keys.Right))
+			if (rightSound != null && dirX != 1)
 			{
 				rightSound.Stop(AudioStopOptions.AsAuthored);
 				rightSound = null;
@@ -263,6 +260,9 @@ namespace Sputnik.Game
 			previousPosition = pos;
 			Position = pos;
 			DesiredVelocity = vel;
+
+			lastDirX = dirX;
+			lastDirY = dirY;
 
 			base.Update(elapsedTime);
 		}

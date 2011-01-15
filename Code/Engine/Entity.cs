@@ -167,9 +167,13 @@ namespace Sputnik {
 			get { return m_velocity; }
 
 			set {
-				m_applyVelocity = (value != Vector2.Zero);
+				m_applyVelocity = true;
 				m_velocity = value;
 			}
+		}
+
+		public void StopApplyingVelocity() {
+			m_applyVelocity = false;
 		}
 
 		/// <summary>
@@ -205,6 +209,7 @@ namespace Sputnik {
 		public void SetPhysicsVelocityOnce(Vector2 velocity) {
 			if (CollisionBody == null) throw new ArgumentException("No collision body exists.");
 			CollisionBody.LinearVelocity = velocity * GameEnvironment.k_physicsScale;
+			m_applyVelocity = false;
 		}
 
 		/*************************************************************************/

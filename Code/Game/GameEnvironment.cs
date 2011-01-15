@@ -54,8 +54,13 @@ namespace Sputnik {
 		// HUD.
 		public Menus.HUD HUD;
 
+		// Pressure.
+		public float Pressure { get; private set; }
+
 		public GameEnvironment(Controller ctrl)
 				: base(ctrl) {
+
+			Pressure = 0.0f;
 
 			Sound.StopAll(true);
 
@@ -426,6 +431,8 @@ namespace Sputnik {
 		}
 
 		public virtual void OnPressureChange(float amount) {
+			Pressure = amount;
+
 			// Call for children.
 			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnPressureChange(amount); });
 		}

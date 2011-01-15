@@ -11,7 +11,7 @@ namespace Sputnik.Game
 {
     class AirPlane : GameEntity
     {
-        public static float k_defaultVelX = -100.0f;
+        public static float k_defaultVelX = -150.0f;
 
         /***************************************************************************/
 
@@ -36,9 +36,9 @@ namespace Sputnik.Game
             Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
             Scale = 0.5f;           
-            CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
+            CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
-            AddCollisionCircle(Texture.Width / 4, Vector2.Zero);
+            AddCollisionCircle(50.0f, Vector2.Zero);
             DesiredVelocity = new Vector2(k_defaultVelX, 0.0f);
         }
 
@@ -46,16 +46,12 @@ namespace Sputnik.Game
 
         public override void Update(float elapsedTime)
         {
-            // TODO: Update animation.
+			// TODO: Particles?
             base.Update(elapsedTime);
         }
 
-
-        /***************************************************************************/
-
-        public override void OnPressureChange(float amount)
-        {
-            base.OnPressureChange(amount);
-        }
+		public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture) {
+			return (entB is Balloon);
+		}
     }
 }
