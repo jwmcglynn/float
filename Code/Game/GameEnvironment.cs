@@ -49,7 +49,7 @@ namespace Sputnik {
 
         //Pausing
         private bool m_paused;
-        // PausingMenu m_popUp;
+        PausingMenu m_popUp;
 
 		// HUD.
 		public Menus.HUD HUD;
@@ -265,14 +265,14 @@ namespace Sputnik {
 		}
 
 
-        //public void pause(PausingMenu popup)
-        //{
-        //    m_paused = true;
-        //    m_popUp = popup;
-        //}
+        public void pause(PausingMenu popup)
+        {
+            m_paused = true;
+            m_popUp = popup;
+        }
         public void unPause()
         {
-            //m_popUp = null;
+            m_popUp = null;
             m_paused = false;
         }
 
@@ -288,11 +288,11 @@ namespace Sputnik {
 			}
             
             //Pause with Enter
-            //if (!m_paused)
-            //{
-            //    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
-            //        pause(new PausingMenu(Controller, this));
-            //}
+            if (!m_paused)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                    pause(new PausingMenu(Controller, this));
+            }
 
 			// Debug Menu = F10.
 			if (Keyboard.GetState().IsKeyDown(Keys.F10) && !OldKeyboard.GetState().IsKeyDown(Keys.F10)) {
@@ -323,7 +323,7 @@ namespace Sputnik {
             }
             else
             {
-                //m_popUp.Update(elapsedTime);
+                m_popUp.Update(elapsedTime);
             }
 
             HUD.Update(elapsedTime);
@@ -355,8 +355,8 @@ namespace Sputnik {
 			HUD.Draw();
 
             //Draw popup
-            //if (m_popUp != null)
-            //    m_popUp.Draw();
+            if (m_popUp != null)
+                m_popUp.Draw();
 		}
 
 		/// <summary>
