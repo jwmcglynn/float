@@ -13,20 +13,15 @@ namespace Sputnik.Menus
     /// </summary>
     public class PopUp : Menu
     {
-        GameEnvironment Game;
+        protected GameEnvironment m_game;
         private bool m_justPaused;
         public PopUp(Controller cntl, GameEnvironment game)
             : base(cntl)
         {
             Controller.IsMouseVisible = true;
-            Game = game;
+            m_game = game;
             m_justPaused = true;
 
-			TextWidget title = new TextWidget(this, "font", "Paused");
-			title.PositionPercent = new Vector2(0.5f, 0.3f);
-			AddChild(title);
-
-			float ypos = 50.0f;
 		}
 
         public override void Update(float elapsedTime)
@@ -34,7 +29,7 @@ namespace Sputnik.Menus
             if (!m_justPaused)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
-                    Game.unPause();
+                    m_game.unPause();
             }
             m_justPaused = false;
             base.Update(elapsedTime);
