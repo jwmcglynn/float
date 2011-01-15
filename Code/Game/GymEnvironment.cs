@@ -41,7 +41,7 @@ namespace Sputnik.Game {
 			AddChild(b);
 
             //Kaushik made a plane enter into the world :D
-            GameEntity plane = new Plane(this);
+            GameEntity plane = new AirPlane(this);
             plane.Position = new Vector2(500.0f, 200.0f);
 			AddChild(plane);
 

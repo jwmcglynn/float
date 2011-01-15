@@ -120,7 +120,7 @@
     <Compile Include="Engine\MapLayer.cs" />
     <Compile Include="Engine\Sequence.cs" />
     <Compile Include="Game\Balloon.cs" />
-    <Compile Include="Game\Plane.cs" />
+    <Compile Include="Game\AirPlane.cs" />
     <Compile Include="Game\Cloud.cs" />
     <Compile Include="Game\Bird.cs" />
     <Compile Include="Game\GameEntity.cs" />

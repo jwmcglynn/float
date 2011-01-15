@@ -152,7 +152,7 @@ namespace Sputnik {
 					Entity = new Cloud(SpawnController.Environment, this);
 					break;
 				case "plane":
-					Entity = new Bird(SpawnController.Environment, this);
+					Entity = new AirPlane(SpawnController.Environment, this);
 					break;
                 case "star":
                     Entity = new Entity();  // Star behavior here.
