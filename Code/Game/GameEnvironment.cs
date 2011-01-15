@@ -49,7 +49,7 @@ namespace Sputnik {
 
         //Pausing
         private bool m_paused;
-        PausingMenu m_popUp;
+        PopUp m_popUp;
 
 		// HUD.
 		public Menus.HUD HUD;
@@ -265,7 +265,7 @@ namespace Sputnik {
 		}
 
 
-        public void pause(PausingMenu popup)
+        public void pause(PopUp popup)
         {
             m_paused = true;
             m_popUp = popup;
@@ -291,7 +291,7 @@ namespace Sputnik {
             if (!m_paused)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
-                    pause(new PausingMenu(Controller, this));
+                    pause(new GamePauseMenu(Controller, this));
             }
 
 			// Debug Menu = F10.

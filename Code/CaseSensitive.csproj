@@ -139,10 +139,11 @@
     <Compile Include="Game\RepeatingBackground.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
+    <Compile Include="Menus\GamePauseMenu.cs" />
     <Compile Include="Menus\HUD.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Menu.cs" />
-    <Compile Include="Menus\PausingMenu.cs" />
+    <Compile Include="Menus\PopUp.cs" />
     <Compile Include="Menus\TextWidget.cs" />
     <Compile Include="Menus\Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
