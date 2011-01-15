@@ -14,7 +14,7 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="350" height="16">
-  <object name="spawn" type="spawn" x="884" y="386" width="62" height="62"/>
+  <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
   <object name="bird" type="bird" x="3910" y="708" width="126" height="54"/>
   <object name="InstructionalCloud" type="cloud" x="3528" y="530" width="188" height="116"/>
   <object name="ShootingStar" type="star" x="4864" y="-8" width="64" height="72"/>

@@ -340,7 +340,7 @@ Wave Bank
     Wave
     {
         Name = cold-wind12-loop;
-        File = ..\..\cold-wind12-loop.wav;
+        File = sfx\cold-wind12-loop.wav;
         Build Settings Last Modified Low = 1774902702;
         Build Settings Last Modified High = 30127213;
 
@@ -386,7 +386,7 @@ Wave Bank
     Wave
     {
         Name = wind03_cut;
-        File = ..\..\wind03_cut.wav;
+        File = sfx\wind03_cut.wav;
         Build Settings Last Modified Low = 3020327854;
         Build Settings Last Modified High = 30127226;
 
