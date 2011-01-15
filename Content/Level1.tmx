@@ -13,7 +13,7 @@
    H4sIAAAAAAAAC+3Tuw6CQBCFYQpFG8XGS+Pl/Z+S05GQrO4OByYm/5ecDpYZZrbrAAAAAAAAAGCyV3rloByTa/nln2qtld3TSTkrg3LZ8LuRvrNqLXHMrrUn975clZtyVx6G82pFZrmk1t0sDo59bO3JfQeeykt5Kx/DebUis4zUOp97ZAdKzzruTmtPWffVbe29+zb31j0ovZNxd7b+pusfLjnfbc2zM40TpqBIACAAAA==
   </data>
  </layer>
- <objectgroup name="Objects" width="128" height="16">
+ <objectgroup name="Objects" width="128" height="16">                                                                                       
   <object name="spawn" type="spawn" x="144" y="354" width="82" height="78"/>
   <object name="cloud" type="cloud" x="812" y="114" width="196" height="74"/>
   <object name="cloud" type="cloud" x="2296" y="248" width="196" height="74"/>
