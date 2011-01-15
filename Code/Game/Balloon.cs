@@ -161,7 +161,7 @@ namespace Sputnik.Game
             }
             if (keyState.IsKeyDown(Keys.Down))
             {
-                if (!OldKeyboard.GetState().IsKeyDown(Keys.Up))
+                if (!OldKeyboard.GetState().IsKeyDown(Keys.Down))
                 {
                     Environment.OnTempChange(-1);
                 }
