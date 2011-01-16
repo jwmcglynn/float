@@ -62,9 +62,9 @@ namespace Sputnik.Game
 		}
 
 		public Cloud(GameEnvironment env, SpawnPoint sp) : base(env, sp) {
-			if (!sp.Properties.ContainsKey("neutral") || !int.TryParse(sp.Properties["neutral"], out m_neutralRung)) {
-				m_neutralRung = 5; // Default value;
-			}
+            if (!sp.Properties.ContainsKey("neutral") || !int.TryParse(sp.Properties["neutral"], out m_neutralRung)) {
+                m_neutralRung = 5; // Default value;
+            }
 
 			Initialize();
 			Position = sp.Position;

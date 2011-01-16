@@ -332,7 +332,7 @@ namespace Squared.Tiled {
 												case XmlNodeType.Element:
 													if (st.Name == "property")
 													{
-														st.Read();
+														//st.Read();
 														if (st.GetAttribute("name") != null)
 														{
 															result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
@@ -499,7 +499,7 @@ namespace Squared.Tiled {
 												case XmlNodeType.Element:
 													if (st.Name == "property")
 													{
-														st.Read();
+														//st.Read();
 														if (st.GetAttribute("name") != null)
 														{
 															result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
@@ -564,7 +564,7 @@ namespace Squared.Tiled {
 										case XmlNodeType.Element:
 											if (st.Name == "property")
 											{
-												st.Read();
+												//st.Read();
 												if (st.GetAttribute("name") != null)
 												{
 													result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
@@ -671,7 +671,7 @@ namespace Squared.Tiled {
 														case XmlNodeType.Element:
 															if (st.Name == "property")
 															{
-																st.Read();
+																//st.Read();
 																if (st.GetAttribute("name") != null)
 																{
 																	result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
