@@ -84,34 +84,7 @@ namespace Sputnik.Menus
             m_background.Registration = new Vector2(m_background.Texture.Width, m_background.Texture.Height) * 0.5f;
             AddChild(m_background);
 
-            // Logo.
-          //  m_logo = new Widget(this);
-        //    m_logo.LoadTexture(contentManager, "logo_sputnik");
-        //  m_logo.PositionPercent = new Vector2(0.5f, 0.3f);
-        //    m_logo.Position = new Vector2(-75.0f, 0.0f);
-        //    m_logo.Zindex = 0.8f;
-       //     m_logo.Registration = new Vector2(375.0f, 230.0f);
-       //     m_mainMenu.Add(m_logo);
-      //      AddChild(m_logo);
-
-            // Logo text.
-      //      m_logoText = new Widget(this);
-    //        m_logoText.LoadTexture(contentManager, "logo");
-   //         m_logoText.PositionPercent = new Vector2(0.5f, 0.3f);
-   //         m_logoText.Position = new Vector2(-75.0f, 25.0f);
-   //         m_logoText.Registration = new Vector2(375.0f, 230.0f);
-  //          m_logoText.Zindex = 0.7f;
-  //          m_mainMenu.Add(m_logoText);
-  //          AddChild(m_logoText);
-
-            // TeamQ badge.
-    //        m_mainTeamQ = CreateSprite("teamq"); 
-  //          m_mainTeamQ.PositionPercent = new Vector2(0.0f, 1.0f);
-  //          m_mainTeamQ.Position = new Vector2(50.0f, -50.0f);
- //           m_mainMenu.Add(m_mainTeamQ);
-//            AddChild(m_mainTeamQ);
-
-            ////
+        
 
 			Widget credit_picture = new Widget(this);
 			credit_picture.LoadTexture(contentManager, "credits_image");

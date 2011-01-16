@@ -154,8 +154,8 @@ namespace Sputnik {
 				case "plane":
 					Entity = new AirPlane(SpawnController.Environment, this);
 					break;
-                case "star":
-                    Entity = new Entity();  // Star behavior here.
+				case "star":
+					Entity = new Star(SpawnController.Environment, this);
                     break;
                 //check for each of the different types of tutorial pop-ups
                 case "HighPressure":

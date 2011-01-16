@@ -138,6 +138,7 @@
     <Compile Include="Game\Moon.cs" />
     <Compile Include="Game\PopUpTrigger.cs" />
     <Compile Include="Game\RepeatingBackground.cs" />
+    <Compile Include="Game\Star.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
     <Compile Include="Menus\GamePauseMenu.cs" />

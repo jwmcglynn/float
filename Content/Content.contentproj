@@ -154,6 +154,7 @@
     <None Include="Level1.tmx">
       <Name>Level1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="LevelDesignOne.tmx">
       <Name>LevelDesignOne</Name>
@@ -355,6 +356,30 @@
     </Compile>
     <Compile Include="buttons\LowTemperature.png">
       <Name>LowTemperature</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StarNormal-1.png">
+      <Name>StarNormal-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="StarNormal-2.png">
+      <Name>StarNormal-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="StarNormal-3.png">
+      <Name>StarNormal-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="star_imagefalling.png">
+      <Name>star_imagefalling</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
