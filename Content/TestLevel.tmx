@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="75" height="16" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
-  <image source="tileset.png"/>
- </tileset>
+ <tileset firstgid="1" source="tilesheet.tsx"/>
  <layer name="Tile BG" width="75" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3USwrAMAgEUFO8/5lLIYsgbWP8BYMDs9Y8bAEqs2BvRFrQHK8gxHk1yO2FEOd1itXV6+nWILcXtfL0OtHKyyuz05Oy4ufLippZJbNXWfEzs7L20ljtNuZYedyXJBIry//uqtUuL+k9Wu4rsXprRLLcFTXjfqt/7+POHKt5p3a2dVfto/ax3OkGq45Y2MASAAA=
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQ0PoAAAAADg1wAW4j6/wBIAAA==
   </data>
  </layer>
  <layer name="Tile FG" width="75" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UQQoAIAhEUQ3vf+aWSYuMJDL4D2S2s1BFAAAAACBHXxdYaFMiZq8LFGRBYjA34jJ7gyq1f82JH/bKNue2DjBJjjTAEgAA
+   H4sIAAAAAAAAC+3VSwqAMAwE0KCL6iKg97+sLVKopZ/R/ixkYDYiJD6LEkkkkpFRuuvoJSYJ6+4kXkiYxAsNk3ihYRIvNL6VeMUTsprRa6H7n37ono1mxKz+4KWcpmKcNnru3cIsZTXai4F7fCd/95pmOauRXmZ26lylnFqYIVZ2ngq0h2HofKFOyDPk6u5RUn8+Yme/w2g5cO2tU0lrWX15dz2fs6bVBb6mD8rAEgAA
   </data>
  </layer>
  <objectgroup name="Objects" width="75" height="16">

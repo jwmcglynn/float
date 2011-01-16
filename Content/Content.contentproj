@@ -164,6 +164,10 @@
       <Name>TestLevel</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="tilesheet.tsx">
+      <Name>tilesheet</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="tileset.png">
@@ -415,6 +419,13 @@
   <ItemGroup>
     <Compile Include="buttons\TopButton.png">
       <Name>TopButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tilesheet.png">
+      <Name>tilesheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

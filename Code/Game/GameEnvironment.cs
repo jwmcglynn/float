@@ -130,18 +130,15 @@ namespace Sputnik {
 			Camera.WindowSizeChanged();
 		}
 
-		byte[,] k_collision = {
-			{0, 1, 1, 1,  0, 1, 0, 0},
-			{0, 0, 0, 0,  0, 1, 1, 0},
-			{0, 0, 0, 0,  0, 1, 1, 0},
-			{0, 0, 0, 0,  0, 1, 1, 1}
-		};
 
-		const int k_colWidth = 8;
-		const int k_colHeight = 4;
+		private Tiled.Tileset.TilePropertyList GetTileProperties(int tileId) {
+			foreach (Tiled.Tileset t in m_map.Tilesets.Values) {
+				Tiled.Tileset.TilePropertyList props = t.GetTileProperties(tileId);
+				if (props != null) return props;
+			}
 
-
-
+			return null;
+		}
 
 		/// <summary>
 		/// Load a map from file and create collision objects for it.
@@ -161,6 +158,9 @@ namespace Sputnik {
 
 			float defaultZVal = 0.96f;
 
+			// 2 = collision. 1 = no collision. 0 = unknown.
+			List<byte> collision = new List<byte>();
+
 			foreach (KeyValuePair<string, Tiled.Layer> layer in m_map.Layers) {
 				defaultZVal -= 0.001f;
 
@@ -169,11 +169,20 @@ namespace Sputnik {
 					int tileId = layer.Value.GetTile(x, y) - 1;
 					if (tileId < 0) continue;
 
-					int row = tileId / k_colWidth;
-					int col = tileId - row * k_colWidth;
-					if (row >= 11 || col >= 15) continue;
+					if (tileId >= collision.Count || collision[tileId] == 0) {
+						Tiled.Tileset.TilePropertyList props = GetTileProperties(tileId);
+						
+						// The only way to add new elements at arbitrary indices is to fill up the rest of the array.  Do so.
+						for (int i = collision.Count; i < tileId + 1; ++i) collision.Add(0);
 
-					levelCollision[x, y] |= (k_collision[row, col] != 0);
+						if (props != null && props.ContainsKey("collision")) {
+							collision[tileId] = (byte) (props["collision"].Equals("true", StringComparison.OrdinalIgnoreCase) ? 2 : 1);
+						} else {
+							collision[tileId] = 1;
+						}
+					}
+
+					levelCollision[x, y] |= (collision[tileId] != 1);
 				}
 
 				float z = defaultZVal;

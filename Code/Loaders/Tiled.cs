@@ -72,9 +72,48 @@ namespace Squared.Tiled {
 
 		internal static Tileset Load (XmlReader reader) {
 			var result = new Tileset();
-
-			result.Name = reader.GetAttribute("name");
 			result.FirstTileID = int.Parse(reader.GetAttribute("firstgid"));
+
+			if (reader.GetAttribute("source") != null) {
+				string filename = Path.Combine("Content", reader["source"]);
+
+				XmlReaderSettings settings = new XmlReaderSettings();
+				settings.DtdProcessing = DtdProcessing.Ignore;
+
+				using (var stream = System.IO.File.OpenText(filename))
+				using (var subReader = XmlReader.Create(stream, settings)) {
+					while (subReader.Read()) {
+						var name = subReader.Name;
+
+						switch (subReader.NodeType) {
+							case XmlNodeType.DocumentType:
+								if (name != "tileset")
+									throw new Exception("Invalid tileset format");
+								break;
+							case XmlNodeType.Element:
+								if (name == "tileset") {
+									using (var st = subReader.ReadSubtree()) {
+										st.Read();
+										return ReadTileset(subReader, result);
+									}
+								}
+								break;
+							case XmlNodeType.EndElement:
+								break;
+							case XmlNodeType.Whitespace:
+								break;
+						}
+					}
+
+					throw new Exception("Tileset load error");
+				}
+			} else {
+				return ReadTileset(reader, result);
+			}
+		}
+
+		private static Tileset ReadTileset(XmlReader reader, Tileset result) {
+			result.Name = reader.GetAttribute("name");
 			result.TileWidth = int.Parse(reader.GetAttribute("tilewidth"));
 			result.TileHeight = int.Parse(reader.GetAttribute("tileheight"));
 
@@ -608,93 +647,93 @@ namespace Squared.Tiled {
 
 		public static Map Load (string filename, ContentManager content) {
 			var result = new Map();
-				XmlReaderSettings settings = new XmlReaderSettings();
-				settings.DtdProcessing = DtdProcessing.Ignore;
+			XmlReaderSettings settings = new XmlReaderSettings();
+			settings.DtdProcessing = DtdProcessing.Ignore;
 
-				using (var stream = System.IO.File.OpenText(filename))
-				using (var reader = XmlReader.Create(stream, settings))
-					while (reader.Read())
+			using (var stream = System.IO.File.OpenText(filename))
+			using (var reader = XmlReader.Create(stream, settings)) {
+				while (reader.Read()) {
+					var name = reader.Name;
+
+					switch (reader.NodeType)
 					{
-						var name = reader.Name;
-
-						switch (reader.NodeType)
-						{
-							case XmlNodeType.DocumentType:
-								if (name != "map")
-									throw new Exception("Invalid map format");
-								break;
-							case XmlNodeType.Element:
-								switch (name)
-								{
-									case "map":
+						case XmlNodeType.DocumentType:
+							if (name != "map")
+								throw new Exception("Invalid map format");
+							break;
+						case XmlNodeType.Element:
+							switch (name)
+							{
+								case "map":
+									{
+										result.Width = int.Parse(reader.GetAttribute("width"));
+										result.Height = int.Parse(reader.GetAttribute("height"));
+										result.TileWidth = int.Parse(reader.GetAttribute("tilewidth"));
+										result.TileHeight = int.Parse(reader.GetAttribute("tileheight"));
+									} break;
+								case "tileset":
+									{
+										using (var st = reader.ReadSubtree())
 										{
-											result.Width = int.Parse(reader.GetAttribute("width"));
-											result.Height = int.Parse(reader.GetAttribute("height"));
-											result.TileWidth = int.Parse(reader.GetAttribute("tilewidth"));
-											result.TileHeight = int.Parse(reader.GetAttribute("tileheight"));
-										} break;
-									case "tileset":
+											st.Read();
+											var tileset = Tileset.Load(st);
+											result.Tilesets.Add(tileset.Name, tileset);
+										}
+									} break;
+								case "layer":
+									{
+										using (var st = reader.ReadSubtree())
 										{
-											using (var st = reader.ReadSubtree())
+											st.Read();
+											var layer = Layer.Load(st);
+											result.Layers.Add(layer.Name, layer);
+										}
+									} break;
+								case "objectgroup":
+									{
+										using (var st = reader.ReadSubtree())
+										{
+											st.Read();
+											var objectgroup = ObjectGroup.Load(st);
+											result.ObjectGroups.Add(objectgroup.Name, objectgroup);
+										}
+									} break;
+								case "properties":
+									{
+										using (var st = reader.ReadSubtree())
+										{
+											while (!st.EOF)
 											{
-												st.Read();
-												var tileset = Tileset.Load(st);
-												result.Tilesets.Add(tileset.Name, tileset);
-											}
-										} break;
-									case "layer":
-										{
-											using (var st = reader.ReadSubtree())
-											{
-												st.Read();
-												var layer = Layer.Load(st);
-												result.Layers.Add(layer.Name, layer);
-											}
-										} break;
-									case "objectgroup":
-										{
-											using (var st = reader.ReadSubtree())
-											{
-												st.Read();
-												var objectgroup = ObjectGroup.Load(st);
-												result.ObjectGroups.Add(objectgroup.Name, objectgroup);
-											}
-										} break;
-									case "properties":
-										{
-											using (var st = reader.ReadSubtree())
-											{
-												while (!st.EOF)
+												switch (st.NodeType)
 												{
-													switch (st.NodeType)
-													{
-														case XmlNodeType.Element:
-															if (st.Name == "property")
+													case XmlNodeType.Element:
+														if (st.Name == "property")
+														{
+															//st.Read();
+															if (st.GetAttribute("name") != null)
 															{
-																//st.Read();
-																if (st.GetAttribute("name") != null)
-																{
-																	result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
-																}
+																result.Properties.Add(st.GetAttribute("name"), st.GetAttribute("value"));
 															}
+														}
 
-															break;
-														case XmlNodeType.EndElement:
-															break;
-													}
-
-													st.Read();
+														break;
+													case XmlNodeType.EndElement:
+														break;
 												}
+
+												st.Read();
 											}
-										} break;
-								}
-								break;
-							case XmlNodeType.EndElement:
-								break;
-							case XmlNodeType.Whitespace:
-								break;
-						}
+										}
+									} break;
+							}
+							break;
+						case XmlNodeType.EndElement:
+							break;
+						case XmlNodeType.Whitespace:
+							break;
 					}
+				}
+			}
 
 			foreach (var tileset in result.Tilesets.Values)
 			{
