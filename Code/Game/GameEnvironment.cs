@@ -54,6 +54,9 @@ namespace Sputnik {
 		// HUD.
 		public Menus.HUD HUD;
 
+		// Screen effects.
+		private Effect m_tintEffect;
+
 		// Atmosphere.
 		public float Pressure { get; private set; }
 		public float Temperature { get; private set; }
@@ -96,6 +99,9 @@ namespace Sputnik {
 
 			// HUD.
 			HUD = new Menus.HUD(this);
+
+			// Effects.
+			m_tintEffect = contentManager.Load<Effect>("TintEffect");
 
 			// Farseer freaks out unless we call Update here when changing Environments.  FIXME: Why?
 			Update(0.0f);
@@ -352,7 +358,13 @@ namespace Sputnik {
 			Matrix tform = Camera.Transform;
 
 			// Draw entities.
-			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
+			/*if (false) {
+				// TODO: Draw effect.
+				m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.5f, 5.0f, 1.0f).ToVector3());
+				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, m_tintEffect, tform);
+			} else {*/
+				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
+			//}
 			Draw(m_spriteBatch);
 			m_spriteBatch.End();
 
