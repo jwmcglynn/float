@@ -57,26 +57,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="arrow.png">
-      <Name>arrow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="astroid_1.png">
-      <Name>astroid_1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="astroid_2.png">
-      <Name>astroid_2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="astroid_3.png">
-      <Name>astroid_3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="redball.png">
       <Name>redball</Name>
       <Importer>TextureImporter</Importer>
@@ -318,11 +298,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="cloud\NormCloud.png">
-      <Name>NormCloud</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="cloud\Rain.png">
       <Name>Rain</Name>
       <Importer>TextureImporter</Importer>
@@ -335,16 +310,6 @@
     </Compile>
     <Compile Include="cloud\Rain3.png">
       <Name>Rain3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\RainCloud.png">
-      <Name>RainCloud</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\StormCloud.png">
-      <Name>StormCloud</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
