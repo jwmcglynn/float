@@ -90,6 +90,10 @@
   <object name="cloudR" type="cloud" x="18438" y="260" width="184" height="120"/>
   <object name="bird" type="bird" x="18756" y="128" width="128" height="64"/>
   <object name="plane" type="plane" x="2748" y="514" width="188" height="56"/>
+  <object name="tutorial" type="LowPressure" x="2472" y="40" width="230" height="842"/>
+  <object name="tutorial" type="HighPressure" x="4114" y="-2" width="236" height="888"/>
+  <object name="tutorial" type="TempUp" x="5320" y="0" width="236" height="888"/>
+  <object name="tutorial" type="TempDown" x="5882" y="0" width="236" height="888"/>
  </objectgroup>
  <objectgroup name="Instructions" width="500" height="16"/>
 </map>

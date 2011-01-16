@@ -157,6 +157,19 @@ namespace Sputnik {
                 case "star":
                     Entity = new Entity();  // Star behavior here.
                     break;
+                //check for each of the different types of tutorial pop-ups
+                case "HighPressure":
+                    Entity = new PopUpTrigger(SpawnController.Environment, this, "HighPressure");    
+                    break;
+                case "LowPressure":
+                    Entity = new PopUpTrigger(SpawnController.Environment, this, "LowPressure");
+                    break;
+                case "TempUp":
+                    Entity = new PopUpTrigger(SpawnController.Environment, this, "TempUp");
+                    break;
+                case "TempDown":
+                    Entity = new PopUpTrigger(SpawnController.Environment, this, "TempDown");
+                    break;
 				default:
 					throw new InvalidOperationException("Invalid entity type.");
 			}

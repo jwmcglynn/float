@@ -274,7 +274,7 @@ namespace Sputnik.Game
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			// TODO: Explode!
-			if (!(entB is Cloud)) { // Let cloud tell us what to do.
+			if (!(entB is Cloud || entB is PopUpTrigger)) { // Let cloud tell us what to do.
 				Kill();
 			}
 

@@ -136,6 +136,7 @@
     <Compile Include="Game\GymEnvironment.cs" />
     <Compile Include="Game\Level1Environment.cs" />
     <Compile Include="Game\Moon.cs" />
+    <Compile Include="Game\PopUpTrigger.cs" />
     <Compile Include="Game\RepeatingBackground.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\PopUp.cs" />
     <Compile Include="Menus\TextWidget.cs" />
+    <Compile Include="Menus\TutorialPopUp.cs" />
     <Compile Include="Menus\Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

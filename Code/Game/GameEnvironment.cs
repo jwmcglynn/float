@@ -269,11 +269,13 @@ namespace Sputnik {
         public void pause(PopUp popup)
         {
             m_paused = true;
+            Camera.MoveSpeed = new Vector2(0, 0);
             m_popUp = popup;
         }
         public void unPause()
         {
             m_popUp = null;
+            Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
             m_paused = false;
         }
 
@@ -288,10 +290,10 @@ namespace Sputnik {
 				else m_debugView = new Physics.DebugViewXNA(CollisionWorld);
 			}
             
-            //Pause with Enter
-            if (!m_paused)
+            //Pause with Escape
+            if (!m_paused && !Keyboard.GetState().IsKeyDown(Keys.RightAlt) && !Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape))
                     pause(new GamePauseMenu(Controller, this));
             }
 
@@ -301,7 +303,7 @@ namespace Sputnik {
 			}
 
 			// Exit game.
-			if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape)) {
+			if (Keyboard.GetState().IsKeyDown(Keys.F5) && !OldKeyboard.GetState().IsKeyDown(Keys.F5)) {
 				Controller.Exit();
 			}
 
@@ -324,6 +326,7 @@ namespace Sputnik {
             }
             else
             {
+                Camera.Update(elapsedTime);
                 m_popUp.Update(elapsedTime);
             }
 

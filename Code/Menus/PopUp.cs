@@ -15,20 +15,21 @@ namespace Sputnik.Menus
     {
         protected GameEnvironment m_game;
         private bool m_justPaused;
+        protected Keys quitKey;
         public PopUp(Controller cntl, GameEnvironment game)
             : base(cntl)
         {
             Controller.IsMouseVisible = true;
             m_game = game;
             m_justPaused = true;
-
+            quitKey = Keys.Enter;
 		}
 
         public override void Update(float elapsedTime)
         {
             if (!m_justPaused)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
                     m_game.unPause();
             }
             m_justPaused = false;

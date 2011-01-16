@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sputnik.Game;
 
 namespace Sputnik.Menus
 {
@@ -25,10 +26,17 @@ namespace Sputnik.Menus
         public GamePauseMenu(Controller cntl, GameEnvironment game)
             :base(cntl, game)
         {
-            Texture = contentManager.Load<Texture2D>("buttons\\pause_menu");
 
             float halfButtonTextureHeight;
             float halfButtonTextureWidth;
+
+            MenuButton letterBackground = new MenuButton(this, "buttons\\pause_menu");
+            halfButtonTextureHeight = letterBackground.Texture.Height / 2;
+            halfButtonTextureWidth = letterBackground.Texture.Width / 2;
+            letterBackground.Registration = letterBackground.Size / 2;
+            letterBackground.PositionPercent = new Vector2(0.5f, 0.45f);
+            letterBackground.Zindex = 0.6f;
+            AddChild(letterBackground);
 
             //TODO make the buttons.
             MenuButton resumeGameButton = new MenuButton(this, "buttons\\back_to_game");
@@ -39,8 +47,7 @@ namespace Sputnik.Menus
             halfButtonTextureHeight = resumeGameButton.Texture.Height/2;
             halfButtonTextureWidth = resumeGameButton.Texture.Width/2;
 			resumeGameButton.PositionPercent = new Vector2(0.5f,0.28f);
-            resumeGameButton.Position = new Vector2(-halfButtonTextureWidth,
-                -halfButtonTextureHeight);
+            resumeGameButton.Registration = resumeGameButton.Size / 2;
             resumeGameButton.CreateButton(new Rectangle(0, 0, 
                 (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
             resumeGameButton.Zindex = 0.4f;
@@ -53,8 +60,7 @@ namespace Sputnik.Menus
             halfButtonTextureHeight = checkpointButton.Texture.Height / 2;
             halfButtonTextureWidth = checkpointButton.Texture.Width / 2;
             checkpointButton.PositionPercent = new Vector2(0.5f, 0.58f);
-            checkpointButton.Position = new Vector2(-halfButtonTextureWidth,
-                -halfButtonTextureHeight);
+            checkpointButton.Registration = checkpointButton.Size / 2;
             checkpointButton.CreateButton(new Rectangle(0, 0,
                 (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
             checkpointButton.Zindex = 0.5f;
@@ -67,8 +73,7 @@ namespace Sputnik.Menus
             halfButtonTextureHeight = startButton.Texture.Height / 2;
             halfButtonTextureWidth = startButton.Texture.Width / 2;
             startButton.PositionPercent = new Vector2(0.5f, 0.38f);
-            startButton.Position = new Vector2(-halfButtonTextureWidth,
-                -halfButtonTextureHeight);
+            startButton.Registration = startButton.Size / 2;
             startButton.CreateButton(new Rectangle(0, 0,
                  (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
             startButton.Zindex = 0.5f;
@@ -81,8 +86,7 @@ namespace Sputnik.Menus
             halfButtonTextureHeight = titleButton.Texture.Height / 2;
             halfButtonTextureWidth = titleButton.Texture.Width / 2;
             titleButton.PositionPercent = new Vector2(0.5f, 0.48f);
-            titleButton.Position = new Vector2(-halfButtonTextureWidth,
-                -halfButtonTextureHeight);
+            titleButton.Registration = titleButton.Size / 2;
             titleButton.CreateButton(new Rectangle(0, 0,
                  (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
             titleButton.Zindex = 0.5f;
@@ -107,7 +111,7 @@ namespace Sputnik.Menus
         void onPressBackToStart()
         {
             m_game.unPause();
-            //Controller.ChangeEnvironment(new GameEnvironment(Controller));
+            Controller.ChangeEnvironment(new Level1Environment(Controller));
         }
 
         void onPressTitle()
