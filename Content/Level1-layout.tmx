@@ -18,7 +18,7 @@
   <object name="bird" type="bird" x="3910" y="708" width="126" height="54"/>
   <object name="InstructionalCloud" type="cloud" x="3528" y="530" width="188" height="116">
    <properties>
-    <property name="neutral" value="0"/>
+    <property name="neutral" value="1"/>
    </properties>
   </object>
   <object name="ShootingStar" type="star" x="4864" y="-8" width="64" height="72"/>
@@ -28,7 +28,7 @@
   <object name="star" type="star" x="5120" y="-4" width="64" height="64"/>
   <object name="SpeedCloud" type="cloud" x="2876" y="72" width="192" height="124">
    <properties>
-    <property name="neutral" value="10"/>
+    <property name="neutral" value="9"/>
    </properties>
   </object>
   <object name="bird" type="bird" x="5568" y="380" width="124" height="64"/>
