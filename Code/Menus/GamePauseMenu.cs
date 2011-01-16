@@ -15,9 +15,9 @@ namespace Sputnik.Menus
             : base(menu)
         {
             Texture = menu.contentManager.Load<Texture2D>(textureName);
-            OnMouseOver += () => { VertexColor = Color.Aquamarine; };
+            OnMouseOver += () => { VertexColor = Color.LightGreen; };
             OnMouseOut += () => { VertexColor = Color.White; };
-            OnMouseDown += () => { VertexColor = Color.Blue; };
+            OnMouseDown += () => { VertexColor = Color.Green; };
         }
     }
 
@@ -27,42 +27,38 @@ namespace Sputnik.Menus
             :base(cntl, game)
         {
 
-            float halfButtonTextureHeight;
-            float halfButtonTextureWidth;
-
             MenuButton letterBackground = new MenuButton(this, "buttons\\pause_menu");
-            halfButtonTextureHeight = letterBackground.Texture.Height / 2;
-            halfButtonTextureWidth = letterBackground.Texture.Width / 2;
             letterBackground.Registration = letterBackground.Size / 2;
             letterBackground.PositionPercent = new Vector2(0.5f, 0.45f);
             letterBackground.Zindex = 0.6f;
             AddChild(letterBackground);
 
-            //TODO make the buttons.
+            //The buttons:
             MenuButton resumeGameButton = new MenuButton(this, "buttons\\back_to_game");
             MenuButton checkpointButton = new MenuButton(this, "buttons\\back_to_checkpoint");
             MenuButton startButton = new MenuButton(this, "buttons\\back_to_start");
             MenuButton titleButton = new MenuButton(this, "buttons\\back_to_title");
 
-            halfButtonTextureHeight = resumeGameButton.Texture.Height/2;
-            halfButtonTextureWidth = resumeGameButton.Texture.Width/2;
-			resumeGameButton.PositionPercent = new Vector2(0.5f,0.28f);
+            float distanceBetweenButtons = 65.0f;
+            float prevButton = -100.0f;
+
+            resumeGameButton.PositionPercent = new Vector2(0.5f, 0.45f);
             resumeGameButton.Registration = resumeGameButton.Size / 2;
-            resumeGameButton.CreateButton(new Rectangle(0, 0, 
-                (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
+            resumeGameButton.Position = (new Vector2(0.0f, prevButton)); 
+            resumeGameButton.CreateButton(new Rectangle(0, 0,
+                 (int)resumeGameButton.Size.X / 2, (int)resumeGameButton.Size.Y / 2));
             resumeGameButton.Zindex = 0.4f;
             resumeGameButton.OnActivate += () => {
                 onPressResume();
             };
 			AddChild(resumeGameButton);
 
-
-            halfButtonTextureHeight = checkpointButton.Texture.Height / 2;
-            halfButtonTextureWidth = checkpointButton.Texture.Width / 2;
-            checkpointButton.PositionPercent = new Vector2(0.5f, 0.58f);
+            checkpointButton.PositionPercent = new Vector2(0.5f, 0.45f);
             checkpointButton.Registration = checkpointButton.Size / 2;
+            prevButton += distanceBetweenButtons;
+            checkpointButton.Position = (new Vector2(15.0f, prevButton)); 
             checkpointButton.CreateButton(new Rectangle(0, 0,
-                (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
+                 (int)checkpointButton.Size.X / 2, (int)checkpointButton.Size.Y / 2));
             checkpointButton.Zindex = 0.5f;
             checkpointButton.OnActivate += () =>
             {
@@ -70,12 +66,12 @@ namespace Sputnik.Menus
             };
             AddChild(checkpointButton);
 
-            halfButtonTextureHeight = startButton.Texture.Height / 2;
-            halfButtonTextureWidth = startButton.Texture.Width / 2;
-            startButton.PositionPercent = new Vector2(0.5f, 0.38f);
+            startButton.PositionPercent = new Vector2(0.5f, 0.45f);
             startButton.Registration = startButton.Size / 2;
+            prevButton += distanceBetweenButtons;
+            startButton.Position = (new Vector2(0.0f, prevButton)); 
             startButton.CreateButton(new Rectangle(0, 0,
-                 (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
+                 (int)startButton.Size.X / 2, (int)startButton.Size.Y / 2));
             startButton.Zindex = 0.5f;
             startButton.OnActivate += () =>
             {
@@ -83,12 +79,12 @@ namespace Sputnik.Menus
             };
             AddChild(startButton);
 
-            halfButtonTextureHeight = titleButton.Texture.Height / 2;
-            halfButtonTextureWidth = titleButton.Texture.Width / 2;
-            titleButton.PositionPercent = new Vector2(0.5f, 0.48f);
+            titleButton.PositionPercent = new Vector2(0.5f, 0.45f);
             titleButton.Registration = titleButton.Size / 2;
+            prevButton += distanceBetweenButtons;
+            titleButton.Position = (new Vector2(0.0f, prevButton)); 
             titleButton.CreateButton(new Rectangle(0, 0,
-                 (int)halfButtonTextureWidth * 2, (int)halfButtonTextureHeight * 2));
+                 (int)titleButton.Size.X / 2, (int)titleButton.Size.Y / 2));
             titleButton.Zindex = 0.5f;
             titleButton.OnActivate += () =>
             {
