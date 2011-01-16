@@ -12,6 +12,7 @@ namespace Sputnik.Game
     class AirPlane : GameEntity
     {
         public static float k_defaultVelX = -150.0f;
+		private ParticleEntity m_smokeTrail;
 
         /***************************************************************************/
 
@@ -30,8 +31,12 @@ namespace Sputnik.Game
 			Position = sp.Position;
         }
 
-        private void Initialize()
-        {
+        private void Initialize() {
+			// TODO: PROPER Particles?
+			m_smokeTrail = new ParticleEntity(Environment, "MagicTrail");
+			m_smokeTrail.Zindex = 0.9f;
+			AddChild(m_smokeTrail);
+
             LoadTexture(Environment.contentManager, "plane");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
@@ -41,13 +46,15 @@ namespace Sputnik.Game
             AddCollisionCircle(50.0f, Vector2.Zero);
             DesiredVelocity = new Vector2(k_defaultVelX, 0.0f);
 			SnapToRung();
+
+			Zindex = 0.7f;
         }
 
         /***************************************************************************/
 
         public override void Update(float elapsedTime)
         {
-			// TODO: Particles?
+			m_smokeTrail.Effect.Trigger(Position + new Vector2(110.0f, -5.0f));
             base.Update(elapsedTime);
         }
 

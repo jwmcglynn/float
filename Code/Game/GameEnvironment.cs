@@ -36,7 +36,7 @@ namespace Sputnik {
 
 		// Particles.
 		public SpriteBatchRenderer ParticleRenderer;
-		private List<ParticleEffect> Effects = new List<ParticleEffect>();
+		public List<ParticleEntity> ParticleKeepalive = new List<ParticleEntity>();
 
 		// Physics.
 		private Physics.DebugViewXNA m_debugView;
@@ -87,11 +87,6 @@ namespace Sputnik {
 			};
 
 			ParticleRenderer.LoadContent(contentManager);
-
-			foreach (var e in Effects) {
-				e.Initialise();
-				e.LoadContent(contentManager);
-			}
 
 			// Create collision notification callbacks.
 			CollisionWorld.ContactManager.PreSolve += PreSolve;
@@ -329,8 +324,16 @@ namespace Sputnik {
                     Camera.Update(elapsedTime);
                     base.Update(elapsedTime);
 					
-                    // Particles.
-                    foreach (var effect in Effects) effect.Update(elapsedTime);
+                    // Particle keepalive.  Update remaining and try to remove if they are done.
+                    ParticleKeepalive.RemoveAll(ent => {
+						ent.Update(elapsedTime);
+						if (ent.Effect.ActiveParticlesCount == 0) {
+							ent.Remove();
+							return true;
+						} else {
+							return false;
+						}
+					});
                 }
             }
             else
@@ -352,11 +355,6 @@ namespace Sputnik {
 			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
 			Draw(m_spriteBatch);
 			m_spriteBatch.End();
-
-			// Draw particles on top.  CASESENSITIVE_TODO: Do we want this?
-			foreach (var effect in Effects) {
-				ParticleRenderer.RenderEffect(effect, ref tform);
-			}
 
 			if (m_debugView != null) {
 				// Debug drawing.
