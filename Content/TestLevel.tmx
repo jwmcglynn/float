@@ -31,13 +31,13 @@
    </properties>
   </object>
   <object name="cloudN" type="cloud" x="2496" y="312" width="196" height="128"/>
-  <object name="cloudR" type="cloud" x="2300" y="320" width="196" height="128">
+  <object name="cloudR" type="cloud" x="1286" y="130" width="196" height="128">
    <properties>
-    <property name="neutral" value="3"/>
+    <property name="neutral" value="2"/>
    </properties>
   </object>
-  <object name="bird" type="bird" x="1538" y="134" width="116" height="60"/>
-  <object name="plane" type="plane" x="1538" y="574" width="184" height="64"/>
+  <object name="bird" type="bird" x="2126" y="18" width="116" height="60"/>
+  <object name="plane" type="plane" x="2256" y="730" width="184" height="64"/>
   <object name="star" type="star" x="3458" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3586" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3522" y="-8" width="64" height="68"/>

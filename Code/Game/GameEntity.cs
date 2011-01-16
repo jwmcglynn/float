@@ -16,6 +16,10 @@ namespace Sputnik.Game {
 		public const float BOTTOM_POSITION_BUFFER = -150;
 
 		public const int NUMBER_OF_RUNGS = 12;
+		public const float RUNG_HEIGHT = (1024
+									- TOP_POSITION_BUFFER
+									- BOTTOM_POSITION_BUFFER)
+									/ (1 + NUMBER_OF_RUNGS);
 		
 		static protected float[] tracks;
 
@@ -23,15 +27,10 @@ namespace Sputnik.Game {
 		{
 
 			tracks = new float[NUMBER_OF_RUNGS];
-			float screenVirtualSizeY = 1024;
-			float incrementalHeight = (screenVirtualSizeY
-									- TOP_POSITION_BUFFER
-									- BOTTOM_POSITION_BUFFER)
-									/ (1 + NUMBER_OF_RUNGS);
 
 			for (int i = 0; i < tracks.Length; i++)
 			{
-				tracks[i] = TOP_POSITION_BUFFER + i * incrementalHeight;
+				tracks[i] = TOP_POSITION_BUFFER + i * RUNG_HEIGHT;
 			}
 		}
 
@@ -74,9 +73,9 @@ namespace Sputnik.Game {
 			Position = new Vector2(Position.X, tracks[closestRung]);
 		}
 
-		public int CurrentRung() {
+		public int PositionToRung(float pos) {
 			for (int i = 0; i < tracks.Length; i++) {
-				if (tracks[i] >= Position.Y) return i;
+				if (tracks[i] >= pos - 10.0f) return i;
 			}
 
 			return tracks.Length;

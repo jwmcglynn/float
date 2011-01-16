@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Sputnik.Game {
-	class Level1Environment : GameEnvironment{
-		public Level1Environment(Controller ctrl)
-				: base(ctrl) {
+	class TestLevelEnvironment : GameEnvironment {
+		public TestLevelEnvironment(Controller ctrl)
+			: base(ctrl) {
 
 			LoadMap("TestLevel.tmx");
 

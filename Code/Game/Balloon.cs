@@ -48,6 +48,21 @@ namespace Sputnik.Game
 
 		private Vector2 previousPosition;
 
+
+		private float m_distortedPosition = 0.0f;
+		private float m_distortedVel = 0.0f;
+		private const float k_distortAmount = 1.5f * RUNG_HEIGHT;
+		private const float k_distortedResetVel = -MOVE_VEL / 6.0f;
+		private const float k_distortedFallVel = MOVE_VEL / 2;
+
+		enum DistortState {
+			NONE,
+			FALLING,
+			RISING
+		}
+
+		private DistortState m_distortState = DistortState.NONE, m_lastDistortState = DistortState.NONE;
+
 		private bool m_dead;
 
 		private int m_lastRung = -1;
@@ -205,6 +220,8 @@ namespace Sputnik.Game
 			Vector2 vel = DesiredVelocity;
 			Vector2 pos = Position;
 
+			pos.Y -= m_distortedPosition;
+
 			if (dirY == 0)
 			{
 				for (int i = 0; i < tracks.Length; i++)
@@ -242,20 +259,68 @@ namespace Sputnik.Game
 				vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
 			}
 
-			previousPosition = pos;
+			// Distorted position.
+			UpdateDistortion(elapsedTime);
+
+			// Trigger OnTempChange.
+			if (PositionToRung(pos.Y) != m_lastRung) {
+				int last = m_lastRung;
+				m_lastRung = PositionToRung(pos.Y);
+				Environment.OnTempChange(m_lastRung);
+			}
+
+			previousPosition = pos; // previousPosition always reflects the real un-distorted position.
+			pos.Y += m_distortedPosition;
+
 			Position = pos;
 			DesiredVelocity = vel;
 
 			lastDirX = dirX;
 			lastDirY = dirY;
 
-			if (CurrentRung() != m_lastRung) {
-				m_lastRung = CurrentRung();
-				Environment.OnTempChange(m_lastRung);
-			}
-
 			base.Update(elapsedTime);
 		}
+
+		private void UpdateDistortion(float elapsedTime) {
+			bool init = (m_lastDistortState != m_distortState);
+			m_lastDistortState = m_distortState;
+
+			m_distortedPosition += m_distortedVel * elapsedTime;
+
+			switch (m_distortState) {
+				case DistortState.NONE:
+					if (init) {
+						m_distortedVel = 0.0f;
+						m_distortedPosition = 0.0f;
+					}
+
+					break;
+				case DistortState.FALLING:
+					if (init) {
+						m_distortedVel = k_distortedFallVel;
+					}
+
+					if (m_distortedPosition >= k_distortAmount) {
+						m_distortedPosition = k_distortAmount;
+						m_distortState = DistortState.RISING;
+					}
+
+					break;
+				case DistortState.RISING:
+					if (init) {
+						m_distortedVel = k_distortedResetVel;
+					}
+
+					if (m_distortedPosition < 0.0f) {
+						m_distortState = DistortState.NONE;
+						m_distortedPosition = 0.0f;
+					}
+					break;
+			}
+
+			VertexColor = Color.Lerp(Color.White, Color.CornflowerBlue, MathUtils.Clamp(m_distortedPosition / k_distortAmount, 0.0f, 1.0f));
+		}
+
 		public override bool ShouldCull()
 		{
 			return m_dead;
@@ -268,7 +333,9 @@ namespace Sputnik.Game
 		}
 
 		public void HitByRain() {
-			// TODO.
+			if (m_distortState == DistortState.NONE) {
+				m_distortState = DistortState.FALLING;
+			}
 		}
 
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)

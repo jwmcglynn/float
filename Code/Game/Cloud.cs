@@ -84,8 +84,6 @@ namespace Sputnik.Game
 			if (diff > 2) diff = 2;
 			diff += 2; // Change from -2 -> 2 to 0 -> 4.
 
-			Console.WriteLine("temp = " + temp + ", D = " + d + " ... STATE = " + diff);
-
 
             switch (diff) {
                 case 0:
@@ -112,7 +110,7 @@ namespace Sputnik.Game
         }
         private void Initialize()
         {
-			float frameDelay = 0.2f;
+			float frameDelay = 0.1f;
 
 			// Hail.
 			m_hail = new Sequence(Environment.contentManager);
