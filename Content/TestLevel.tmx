@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="75" height="16" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png"/>
+ </tileset>
+ <layer name="Tile BG" width="75" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3USwrAMAgEUFO8/5lLIYsgbWP8BYMDs9Y8bAEqs2BvRFrQHK8gxHk1yO2FEOd1itXV6+nWILcXtfL0OtHKyyuz05Oy4ufLippZJbNXWfEzs7L20ljtNuZYedyXJBIry//uqtUuL+k9Wu4rsXprRLLcFTXjfqt/7+POHKt5p3a2dVfto/ax3OkGq45Y2MASAAA=
+  </data>
+ </layer>
+ <layer name="Tile FG" width="75" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UQQoAIAhEUQ3vf+aWSYuMJDL4D2S2s1BFAAAAACBHXxdYaFMiZq8LFGRBYjA34jJ7gyq1f82JH/bKNue2DjBJjjTAEgAA
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="75" height="16">
+  <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
+  <object name="cloudH" type="cloud" x="2108" y="320" width="196" height="128"/>
+  <object name="cloudL" type="cloud" x="2880" y="328" width="196" height="128"/>
+  <object name="cloudT" type="cloud" x="2688" y="320" width="196" height="128"/>
+  <object name="cloudN" type="cloud" x="2496" y="312" width="196" height="128"/>
+  <object name="cloudR" type="cloud" x="2300" y="320" width="196" height="128"/>
+  <object name="bird" type="bird" x="1538" y="134" width="116" height="60"/>
+  <object name="plane" type="plane" x="1538" y="574" width="184" height="64"/>
+  <object name="star" type="star" x="3458" y="-8" width="64" height="68"/>
+  <object name="star" type="star" x="3586" y="-8" width="64" height="68"/>
+  <object name="star" type="star" x="3522" y="-8" width="64" height="68"/>
+  <object name="bird" type="bird" x="4032" y="188" width="128" height="64"/>
+  <object name="bird" type="bird" x="4032" y="328" width="128" height="52"/>
+  <object name="bird" type="bird" x="4028" y="448" width="128" height="60"/>
+  <object name="bird" type="bird" x="4036" y="576" width="124" height="60"/>
+  <object name="bird" type="bird" x="4356" y="260" width="128" height="60"/>
+  <object name="bird" type="bird" x="4356" y="380" width="124" height="60"/>
+  <object name="bird" type="bird" x="4356" y="508" width="128" height="60"/>
+ </objectgroup>
+ <objectgroup name="Instructions" width="75" height="16"/>
+</map>
