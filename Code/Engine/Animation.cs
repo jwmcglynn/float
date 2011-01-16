@@ -17,6 +17,12 @@ namespace Sputnik
 		// Change to a new sequence.
 		public void PlaySequence(Sequence sequence)
 		{
+			if (m_currentSequence != sequence) {
+				PlayOrRestartSequence(sequence);
+			}
+		}
+
+		public void PlayOrRestartSequence(Sequence sequence) {
 			Done = false;
 			m_currentSequence = sequence;
 			currentframe = 0;
@@ -40,7 +46,7 @@ namespace Sputnik
 						// go back to first frame 
 						currentframe = 0;
 					} else {
-						currentframe--;
+						currentframe = m_currentSequence.Count - 1;
 						Done = true;
 					}
 				}

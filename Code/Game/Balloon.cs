@@ -50,6 +50,8 @@ namespace Sputnik.Game
 
 		private bool m_dead;
 
+		private int m_lastRung = -1;
+
 		public Balloon(GameEnvironment env)
 			: base(env)
 		{
@@ -148,25 +150,8 @@ namespace Sputnik.Game
 			int dirX = 0;
 			int dirY = 0;
 
-            //POMI: I realize this should be in Environment, but I'm throwing in cloud controls here
-            //      for testing purposes. This part can and will be moved.
-
-			if (keyState.IsKeyDown(Keys.Up))
-            {
-                if (!OldKeyboard.GetState().IsKeyDown(Keys.Up))
-                {
-                    Environment.OnTempChange(-1);
-                }
-                --dirY;
-            }
-            if (keyState.IsKeyDown(Keys.Down))
-            {
-                if (!OldKeyboard.GetState().IsKeyDown(Keys.Down))
-                {
-                    Environment.OnTempChange(1);
-                }
-                ++dirY;
-            }
+			if (keyState.IsKeyDown(Keys.Up)) --dirY;
+			if (keyState.IsKeyDown(Keys.Down)) ++dirY;
 
 			if (keyState.IsKeyDown(Keys.Left)) --dirX;
 			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
@@ -257,30 +242,17 @@ namespace Sputnik.Game
 				vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
 			}
 
-			//Calls the OnTemperatureChange method.
-			for (int i = 0; i < tracks.Length; i++)
-			{
-				//If the balloon has crossed a track
-				if (Math.Sign(Position.Y - tracks[i]) != Math.Sign(previousPosition.Y - tracks[i]))
-				{
-					//check if position.Y is lower (greater Y) than before, and if it is, know that
-					//you have moved down, and thus it is 1 lower temperature
-					if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(1))
-					{
-						Environment.OnTempChange(-1.0f);
-					}
-					else if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(-1))
-					{
-						Environment.OnTempChange(1.0f);
-					}
-				}
-			}
 			previousPosition = pos;
 			Position = pos;
 			DesiredVelocity = vel;
 
 			lastDirX = dirX;
 			lastDirY = dirY;
+
+			if (CurrentRung() != m_lastRung) {
+				m_lastRung = CurrentRung();
+				Environment.OnTempChange(m_lastRung);
+			}
 
 			base.Update(elapsedTime);
 		}

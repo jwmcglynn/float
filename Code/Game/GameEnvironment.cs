@@ -54,8 +54,9 @@ namespace Sputnik {
 		// HUD.
 		public Menus.HUD HUD;
 
-		// Pressure.
+		// Atmosphere.
 		public float Pressure { get; private set; }
+		public float Temperature { get; private set; }
 
 		public GameEnvironment(Controller ctrl)
 				: base(ctrl) {
@@ -68,7 +69,7 @@ namespace Sputnik {
 			Camera = new Camera2D(this);
 			Camera.Position = new Vector2(1280.0f, k_idealScreenSize.Y * 0.5f);
 			Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
-			Camera.ResetEffectScale(1.1f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
+			Camera.ResetEffectScale(1.0f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
 
 			// Window.
 			Controller.Window.ClientSizeChanged += WindowSizeChanged;
@@ -426,6 +427,8 @@ namespace Sputnik {
 		// Wind/pressure reaction.
 
 		public virtual void OnTempChange(float amount) {
+			Temperature = amount;
+
 			// Call for children.
 			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnTempChange(amount); });
 		}

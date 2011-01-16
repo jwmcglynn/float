@@ -15,7 +15,7 @@ namespace Sputnik.Game {
 		public const float TOP_POSITION_BUFFER = 50;
 		public const float BOTTOM_POSITION_BUFFER = -150;
 
-		public const int NUMBER_OF_RUNGS = 11;
+		public const int NUMBER_OF_RUNGS = 12;
 		
 		static protected float[] tracks;
 
@@ -59,7 +59,7 @@ namespace Sputnik.Game {
 			base.Dispose();
 		}
 
-		public virtual void SnapToRung()
+		public void SnapToRung()
 		{
 			int closestRung = -1;
 			float closestDistance = float.PositiveInfinity;
@@ -73,6 +73,15 @@ namespace Sputnik.Game {
 			}
 			Position = new Vector2(Position.X, tracks[closestRung]);
 		}
+
+		public int CurrentRung() {
+			for (int i = 0; i < tracks.Length; i++) {
+				if (tracks[i] >= Position.Y) return i;
+			}
+
+			return tracks.Length;
+		}
+
 		/*********************************************************************/
 		// Wind/pressure reaction.
 

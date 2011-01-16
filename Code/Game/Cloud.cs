@@ -3,6 +3,7 @@ using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,76 +44,118 @@ namespace Sputnik.Game
         public const float MAX_SPEED = 0.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
 
         private CLOUD_STATE currentState;
-        private int cloudState;
-        public static Vector2 RIGHT = new Vector2(1, 0);
-		public static Vector2 UP = new Vector2(0, -1);
 
-		private Fixture m_rain;
+		private Fixture m_rainFixture;
 
+		private int m_neutralRung = 5;
 
-       	public Cloud(GameEnvironment env) : base(env) {
-            
-            Initialize();
+		private Animation m_anim = new Animation();
+
+		Sequence m_hail;
+		Sequence m_rain;
+		Sequence m_norm;
+		Sequence m_thunder;
+		Sequence m_lightning;
+
+		public Cloud(GameEnvironment env) : base(env) {
+			Initialize();
 		}
 
 		public Cloud(GameEnvironment env, SpawnPoint sp) : base(env, sp) {
-            Initialize();
+			if (!sp.Properties.ContainsKey("neutral") || !int.TryParse(sp.Properties["neutral"], out m_neutralRung)) {
+				m_neutralRung = 5; // Default value;
+			}
+
+			Initialize();
 			Position = sp.Position;
 		}
-        public override void OnTempChange(float amount)
-        {
-            /*
-			 * Going up -> amount > 0 -> cloudState dec
-			 * Going down -> amount < 0 -> cloudState inc
-			 */
-            if (amount > 0 && cloudState < 2)
-            {
-                cloudState++;
-            }
-            else if (amount < 0 && cloudState > -2)
-            {
-                cloudState--;
-            }
+		
+		public override void OnTempChange(float amount) {
+			UpdateState((int) amount);
+			base.OnTempChange(amount);
+		}
 
-            switch (cloudState)
-            {
-                case 2: LoadTexture(Environment.contentManager, "cloud\\Lighting1");
+		public void UpdateState(int temp) {
+			// temp is 0 to 10.
+
+			double d = (temp - m_neutralRung) / 2.0f;
+
+			int diff = (int) Math.Ceiling((temp - m_neutralRung) / 2.0f); // Two temperatures per state.
+			if (diff < -2) diff = -2;
+			if (diff > 2) diff = 2;
+			diff += 2; // Change from -2 -> 2 to 0 -> 4.
+
+			Console.WriteLine("temp = " + temp + ", D = " + d + " ... STATE = " + diff);
+
+
+            switch (diff) {
+                case 0:
+					m_anim.PlaySequence(m_lightning);
                     currentState = CLOUD_STATE.LIGHTNING;
                     break;
-                case 1: LoadTexture(Environment.contentManager, "cloud\\thunder1");
+                case 1:
+					m_anim.PlaySequence(m_thunder);
                     currentState = CLOUD_STATE.THUNDER;
                     break;
-                case 0: LoadTexture(Environment.contentManager, "cloud\\CloudX1");
+                case 2:
+					m_anim.PlaySequence(m_norm);
                     currentState = CLOUD_STATE.NORM;
                     break;
-                case -1: LoadTexture(Environment.contentManager, "cloud\\Rain");
+                case 3:
+					m_anim.PlaySequence(m_rain);
                     currentState = CLOUD_STATE.RAIN;
                     break;
-                case -2: LoadTexture(Environment.contentManager, "cloud\\Hail1");
+                case 4:
+					m_anim.PlaySequence(m_hail);
                     currentState = CLOUD_STATE.HAIL;
                     break;
             }
-            base.OnPressureChange(amount);
-            /**this is where the main portion of the environment interaction will occur. */
-            base.OnTempChange(amount);
         }
         private void Initialize()
         {
-            cloudState = 0;
-            currentState = CLOUD_STATE.NORM;
-            LoadTexture(Environment.contentManager, "cloud\\CloudX1");
-            Registration = new Vector2(295.0f, 236.0f);
+			float frameDelay = 0.2f;
 
-			Scale = 1.0f;
+			// Hail.
+			m_hail = new Sequence(Environment.contentManager);
+			m_hail.AddFrame("cloud\\Hail1", frameDelay);
+			m_hail.AddFrame("cloud\\Hail2", frameDelay);
+			m_hail.AddFrame("cloud\\Hail3", frameDelay);
+			m_hail.Loop = true;
+
+			// Rain.
+			m_rain = new Sequence(Environment.contentManager);
+			m_rain.AddFrame("cloud\\Rain", frameDelay);
+			m_rain.AddFrame("cloud\\Rain2", frameDelay);
+			m_rain.AddFrame("cloud\\Rain3", frameDelay);
+			m_rain.Loop = true;
+
+			// Normal.
+			m_norm = new Sequence(Environment.contentManager);
+			m_norm.AddFrame("cloud\\CloudX1", float.PositiveInfinity);
+
+			// Thunder.
+			m_thunder = new Sequence(Environment.contentManager);
+			m_thunder.AddFrame("cloud\\thunder1", frameDelay);
+			m_thunder.AddFrame("cloud\\thunder2", frameDelay);
+			m_thunder.AddFrame("cloud\\thunder3", frameDelay);
+			m_thunder.Loop = true;
+
+			// Lightning.
+			m_lightning = new Sequence(Environment.contentManager);
+			m_lightning.AddFrame("cloud\\Lighting1", frameDelay);
+			m_lightning.AddFrame("cloud\\Lighting2", frameDelay);
+			m_lightning.AddFrame("cloud\\Lighting3", frameDelay);
+			m_lightning.Loop = true;
+			
+			UpdateState((int) Environment.Temperature);
+
+            Registration = new Vector2(295.0f, 236.0f);
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
-            Console.WriteLine(Environment.ScreenVirtualSize.Y);
-            Console.WriteLine(Position.Y);
-
 			Vector2 topleft = new Vector2(168.0f, 290.0f) - Registration;
 			Vector2 bottomright = new Vector2(431.0f, 1016.0f) - Registration;
-            m_rain = AddCollisionRectangle((bottomright - topleft) * 0.5f, (topleft + bottomright) * 0.5f); 
+            m_rainFixture = AddCollisionRectangle((bottomright - topleft) * 0.5f, (topleft + bottomright) * 0.5f); 
 
             SnapToRung();
             //300 x 240
@@ -131,21 +174,13 @@ namespace Sputnik.Game
             }
         }
 
-        
-        public override void Update(float elapsedTime)
-        {
-            /*
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !OldKeyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                OnPressureChange(-1);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                OnPressureChange(1);
-            }
-            */ // KEYBOARD input is handled in Balloon.cs for now.
-            base.Update(elapsedTime);
-        }
+		public override void Update(float elapsedTime)
+		{
+			m_anim.Update(elapsedTime);
+			Texture = m_anim.CurrentFrame;
+
+			base.Update(elapsedTime);
+		}
 
 		public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture) {
 			return (entB is Balloon);
@@ -157,7 +192,7 @@ namespace Sputnik.Game
             {
 				Balloon b = (Balloon) entB;
 
-				bool hitRain = (contact.FixtureA == m_rain || contact.FixtureB == m_rain);
+				bool hitRain = (contact.FixtureA == m_rainFixture || contact.FixtureB == m_rainFixture);
 
                 switch(stateOfCloud) {
 					case CLOUD_STATE.LIGHTNING:
