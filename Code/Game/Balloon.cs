@@ -260,13 +260,16 @@ namespace Sputnik.Game
 			//Calls the OnTemperatureChange method.
 			for (int i = 0; i < tracks.Length; i++)
 			{
+				//If the balloon has crossed a track
 				if (Math.Sign(Position.Y - tracks[i]) != Math.Sign(previousPosition.Y - tracks[i]))
 				{
+					//check if position.Y is lower (greater Y) than before, and if it is, know that
+					//you have moved down, and thus it is 1 lower temperature
 					if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(1))
 					{
 						Environment.OnTempChange(-1.0f);
 					}
-					else
+					else if (Math.Sign(Position.Y - previousPosition.Y) == Math.Sign(-1))
 					{
 						Environment.OnTempChange(1.0f);
 					}
