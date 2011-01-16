@@ -45,7 +45,10 @@ namespace Sputnik.Game
         private CLOUD_STATE currentState;
         private int cloudState;
         public static Vector2 RIGHT = new Vector2(1, 0);
-        public static Vector2 UP = new Vector2(0, -1);
+		public static Vector2 UP = new Vector2(0, -1);
+
+		private Fixture m_rain;
+
 
        	public Cloud(GameEnvironment env) : base(env) {
             
@@ -75,22 +78,18 @@ namespace Sputnik.Game
             {
                 case 2: LoadTexture(Environment.contentManager, "cloud\\Lighting1");
                     currentState = CLOUD_STATE.LIGHTNING;
-                    CollisionBody.Active = true;
                     break;
                 case 1: LoadTexture(Environment.contentManager, "cloud\\thunder1");
                     currentState = CLOUD_STATE.THUNDER;
-                    CollisionBody.Active = false;
                     break;
                 case 0: LoadTexture(Environment.contentManager, "cloud\\CloudX1");
                     currentState = CLOUD_STATE.NORM;
                     break;
                 case -1: LoadTexture(Environment.contentManager, "cloud\\Rain");
                     currentState = CLOUD_STATE.RAIN;
-                    CollisionBody.Active = false;
                     break;
                 case -2: LoadTexture(Environment.contentManager, "cloud\\Hail1");
                     currentState = CLOUD_STATE.HAIL;
-                    CollisionBody.Active = true;
                     break;
             }
             base.OnPressureChange(amount);
@@ -102,17 +101,22 @@ namespace Sputnik.Game
             cloudState = 0;
             currentState = CLOUD_STATE.NORM;
             LoadTexture(Environment.contentManager, "cloud\\CloudX1");
-            Registration = new Vector2(Texture.Width, Texture.Height) / 2;
+            Registration = new Vector2(295.0f, 236.0f);
+
+			Scale = 1.0f;
 
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
             Console.WriteLine(Environment.ScreenVirtualSize.Y);
             Console.WriteLine(Position.Y);
-            AddCollisionRectangle(new Vector2(300, Texture.Height) / 2, new Vector2(0, 200), 0.0f, 1.0f); 
+
+			Vector2 topleft = new Vector2(168.0f, 290.0f) - Registration;
+			Vector2 bottomright = new Vector2(431.0f, 1016.0f) - Registration;
+            m_rain = AddCollisionRectangle((bottomright - topleft) * 0.5f, (topleft + bottomright) * 0.5f); 
+
             SnapToRung();
             //300 x 240
-            CollisionBody.Active = false;
-            AddCollisionCircle(220, new Vector2(0, -280));
+            AddCollisionCircle(200.0f, Vector2.Zero);
         }
 
         public CLOUD_STATE stateOfCloud
@@ -143,33 +147,33 @@ namespace Sputnik.Game
             base.Update(elapsedTime);
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-        public override bool ShouldCull()
-        {
-            return false;
-        }
-
 		public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture) {
 			return (entB is Balloon);
 		}
 
         public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            base.OnCollide(entB, contact);
-            if (entB.Equals(typeof (Game.Balloon)))
+            if (entB is Balloon)
             {
-                switch(stateOfCloud)
-                {
-                    case CLOUD_STATE.HAIL: entB.Dispose(); break;
-                    case CLOUD_STATE.LIGHTNING: entB.Dispose(); break;
-                    case CLOUD_STATE.NORM: ; break;
-                    case CLOUD_STATE.RAIN: entB.SetPhysicsVelocityOnce(new Vector2(0, 300)); break;
-                    case CLOUD_STATE.THUNDER: ; break;
+				Balloon b = (Balloon) entB;
+
+				bool hitRain = (contact.FixtureA == m_rain || contact.FixtureB == m_rain);
+
+                switch(stateOfCloud) {
+					case CLOUD_STATE.LIGHTNING:
+						if (!hitRain) OnNextUpdate += () => b.Kill();
+						break;
+                    case CLOUD_STATE.HAIL:
+						if (hitRain) OnNextUpdate += () => b.Kill();
+						break;
+                    case CLOUD_STATE.RAIN:
+						if (hitRain) OnNextUpdate += () => b.HitByRain();
+						break;
                 }
-            }
+			}
+
+			contact.Enabled = false;
+			base.OnCollide(entB, contact);
         }
     }
 }

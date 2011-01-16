@@ -288,14 +288,26 @@ namespace Sputnik.Game
 		{
 			return m_dead;
 		}
+
+		public void Kill() {
+			m_dead = true;
+			Sound.StopAll();
+			Sound.PlayCue("pop");
+		}
+
+		public void HitByRain() {
+			// TODO.
+		}
+
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			// TODO: Explode!
-			m_dead = true;
+			if (!(entB is Cloud)) { // Let cloud tell us what to do.
+				Kill();
+			}
+
 			contact.Enabled = false;
 			base.OnCollide(entB, contact);
-            Sound.StopAll();
-            Sound.PlayCue("pop");
 		}
 	}
 }
