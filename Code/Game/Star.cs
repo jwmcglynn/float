@@ -27,10 +27,11 @@ namespace Sputnik.Game
 
 		// Regular constructor.
 		public Star(GameEnvironment env, SpawnPoint sp)
-			: base(env, sp)
-		{
-			Initialize();
+				: base(env, sp) {
+
 			Position = sp.Position;
+			Initialize();
+
 			if (sp.Properties.ContainsKey("delay"))
 			{
 				string delay = sp.Properties["delay"];
@@ -96,13 +97,13 @@ namespace Sputnik.Game
 					{
 						m_curState = State.Falling;
 						CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
-						AddCollisionCircle(14, Vector2.Zero);
+						AddCollisionRectangle(new Vector2(14.0f, 80.0f), new Vector2(0.0f, -80.0f));
 						
 						
 						LoadTexture(Environment.contentManager, "star_imagefalling");
 						Scale = 1.0f;
 
-						DesiredVelocity = new Vector2(0.0f, 200f);
+						DesiredVelocity = new Vector2(0.0f, 450.0f);
 					}
 
 					break;

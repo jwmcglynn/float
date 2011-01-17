@@ -65,8 +65,8 @@ namespace Sputnik.Game
                 m_neutralRung = 5; // Default value;
             }
 
-			Initialize();
 			Position = sp.Position;
+			Initialize();
 		}
 		
 		public override void OnTempChange(float amount) {
@@ -158,7 +158,9 @@ namespace Sputnik.Game
 
             SnapToRung();
             //300 x 240
-            AddCollisionCircle(200.0f, Vector2.Zero);
+			AddCollisionCircle(130.0f, new Vector2(80.0f, 0.0f));
+			AddCollisionCircle(130.0f, new Vector2(0.0f, 0.0f));
+			AddCollisionCircle(130.0f, new Vector2(-80.0f, 0.0f));
         }
 
         public CLOUD_STATE stateOfCloud

@@ -116,13 +116,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bird.png">
-      <Name>bird</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Moon.png">
       <Name>Moon</Name>
       <Importer>TextureImporter</Importer>

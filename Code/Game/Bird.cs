@@ -24,11 +24,13 @@ namespace Sputnik.Game {
 		// Regular constructor.
 		public Bird(GameEnvironment env, SpawnPoint sp)
 				: base(env, sp) {
-			Initialize();
 			Position = sp.Position;
+			Initialize();
 		}
 
 		private void Initialize() {
+			SnapToRung();
+
 			Sequence seq = new Sequence(Environment.contentManager);
 			seq.AddFrame("bird\\Bird1", 0.33f);
 			seq.AddFrame("bird\\Bird2", 0.33f);
@@ -38,13 +40,12 @@ namespace Sputnik.Game {
 			Texture = m_anim.CurrentFrame;
 			Scale = 0.20f;
 
-			Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
+			Registration = new Vector2(221.0f, 331.0f);
 
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
+			AddCollisionCircle(100.0f * Scale, Vector2.Zero);
 
-			AddCollisionCircle(100.0f * Scale, new Vector2(0.0f, 10.0f));
-
-			SetBirdVel(Environment.Pressure); SnapToRung();
+			SetBirdVel(Environment.Pressure);
 		}
 
 		/***************************************************************************/

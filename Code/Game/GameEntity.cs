@@ -50,8 +50,6 @@ namespace Sputnik.Game {
 
 		public override void Dispose() {
 			if (SpawnPoint != null) {
-				// FIXME: Do we want to update the spawnpoint position when entities are culled?
-				// SpawnPoint.Position = Position;
 				OnCull();
 			}
 

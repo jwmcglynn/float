@@ -25,10 +25,9 @@ namespace Sputnik.Game
 
         // Regular constructor.
         public AirPlane(GameEnvironment env, SpawnPoint sp)
-            : base(env, sp)
-        {
-            Initialize();
+				: base(env, sp) {
 			Position = sp.Position;
+            Initialize();
         }
 
         private void Initialize() {
@@ -40,10 +39,12 @@ namespace Sputnik.Game
             LoadTexture(Environment.contentManager, "plane");
             Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
 
-            Scale = 0.5f;           
+            Scale = 0.5f;
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
 
-            AddCollisionCircle(50.0f, Vector2.Zero);
+			AddCollisionCircle(50.0f, new Vector2(-50.0f, 0.0f));
+			AddCollisionCircle(50.0f, Vector2.Zero);
+			AddCollisionCircle(50.0f, new Vector2(50.0f, 0.0f));
             DesiredVelocity = new Vector2(k_defaultVelX, 0.0f);
 			SnapToRung();
 

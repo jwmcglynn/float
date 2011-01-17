@@ -103,7 +103,7 @@ namespace Sputnik.Game
 		private void Initialize()
 		{
 			Scale = 0.5f;
-            m_dead = false;
+			m_dead = false;
 
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
@@ -114,7 +114,7 @@ namespace Sputnik.Game
 			//Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0 + track*TRACK_DISTANCE);
 			//Position = Vector2.Zero;
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
-			AddCollisionCircle(90.0f * Scale, Vector2.Zero);
+			AddCollisionCircle(30.0f, Vector2.Zero);
 
 
 			animations = new Sequence[NUMBER_OF_ANIMATION_STATES];
@@ -208,20 +208,7 @@ namespace Sputnik.Game
 			}
 		}
 
-        public virtual bool isCloseTo(float x, float y) {
-            return Math.Abs(x - y) < CLOSE_TO_EPSILON;
-        }
-
-		public virtual int onTrack()
-		{
-			for(int i = 0; i < tracks.Length; i++)
-                if( isCloseTo (Position.Y,tracks[i]) )
-                    return i;
-
-            return -1;
-		}
-
-        Cue downSound, upSound, leftSound, rightSound;
+		Cue downSound, upSound, leftSound, rightSound;
 
 		int lastDirX = 0;
 		int lastDirY = 0;
