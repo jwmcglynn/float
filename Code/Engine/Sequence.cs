@@ -14,6 +14,7 @@ namespace Sputnik
 		public struct Frame {
 			public Texture2D Texture;
 			public float Time;
+			public Vector2 Offset;
 		}
 
 		private List<Frame> m_frames = new List<Frame>();
@@ -29,11 +30,13 @@ namespace Sputnik
 			m_contentManager = manager;
 		}
 
-		public void AddFrame(string filename, float duration)
+		public void AddFrame(string filename, float duration, Vector2? offset = null)
 		{
 			Frame f;
 			f.Texture = m_contentManager.Load<Texture2D>(filename);
 			f.Time = duration;
+
+			f.Offset = offset == null ? Vector2.Zero: (Vector2)offset;
 
 			m_frames.Add(f);
 		}

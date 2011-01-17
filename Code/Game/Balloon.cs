@@ -53,12 +53,14 @@ namespace Sputnik.Game
 
 		private Vector2 previousPosition;
 
+		private Vector2 originalRegistration;
 
 		private float m_distortedPosition = 0.0f;
 		private float m_distortedVel = 0.0f;
 		private const float k_distortAmount = 1.5f * RUNG_HEIGHT;
 		private const float k_distortedResetVel = -MOVE_VEL / 6.0f;
 		private const float k_distortedFallVel = MOVE_VEL / 2;
+
 
 		enum DistortState {
 			NONE,
@@ -103,8 +105,9 @@ namespace Sputnik.Game
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 			DesiredVelocity = DEFAULT_SPEED;
+			originalRegistration = new Vector2(285.0f, 165.0f);
+			Registration = originalRegistration;
 
-			Registration = new Vector2(285.0f, 165.0f);
 			//Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0 + track*TRACK_DISTANCE);
 			//Position = Vector2.Zero;
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
@@ -119,7 +122,7 @@ namespace Sputnik.Game
 			Sequence seq = new Sequence(Environment.contentManager);
 			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
 			seq.AddFrame("balloon\\BalloonPop1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonPop2", 0.5f);
+			seq.AddFrame("balloon\\BalloonPop2", 0.5f, new Vector2(80, 65));
 			seq.Loop = false;
 			animations[DEAD_ANIM_INDEX] = seq;
 
@@ -153,8 +156,8 @@ namespace Sputnik.Game
 
 			//LOADING FORWARD ANIMATION
 			seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonForward1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonForward2", defaultDuration);
+			seq.AddFrame("balloon\\BalloonForward1", defaultDuration, new Vector2(50, 20));
+			seq.AddFrame("balloon\\BalloonForward2", defaultDuration, new Vector2(50, 20));
 			seq.Loop = true;
 			animations[FORWARD_ANIM_INDEX] = seq;
 
@@ -393,6 +396,7 @@ namespace Sputnik.Game
 			}
 			anim.Update(elapsedTime);
 			Texture = anim.CurrentFrame;
+			Registration = originalRegistration + anim.CurrentOffset;
 
 			/*
 			//Applying animations once everything is set:
@@ -509,6 +513,9 @@ namespace Sputnik.Game
 				Sound.PlayCue("pop");
 
 				anim.PlaySequence(animations[DEAD_ANIM_INDEX]);
+
+				Environment.Camera.MoveSpeed = Vector2.Zero;
+
 			}
 		}
 
