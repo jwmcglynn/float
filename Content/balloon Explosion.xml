@@ -84,7 +84,7 @@
         <Variation>0</Variation>
       </ReleaseRotation>
       <ReleaseImpulse>0 0</ReleaseImpulse>
-      <ParticleTextureAssetName>Particle005</ParticleTextureAssetName>
+      <ParticleTextureAssetName>Particle004</ParticleTextureAssetName>
       <Modifiers>
         <Item Type="ProjectMercury.Modifiers.OpacityModifier">
           <Initial>1</Initial>
@@ -97,6 +97,51 @@
       <BlendMode>Add</BlendMode>
       <TriggerOffset>0 0</TriggerOffset>
       <MinimumTriggerPeriod>0.25</MinimumTriggerPeriod>
+    </Item>
+    <Item Type="ProjectMercury.Emitters.RectEmitter">
+      <Name>Betrayed Note</Name>
+      <Budget>5</Budget>
+      <Term>5</Term>
+      <ReleaseQuantity>1</ReleaseQuantity>
+      <Enabled>True</Enabled>
+      <ReleaseSpeed>
+        <Value>0</Value>
+        <Variation>25</Variation>
+      </ReleaseSpeed>
+      <ReleaseColour>
+        <Value>1 1 1</Value>
+        <Variation>0 0 0</Variation>
+      </ReleaseColour>
+      <ReleaseOpacity>
+        <Value>1</Value>
+        <Variation>0</Variation>
+      </ReleaseOpacity>
+      <ReleaseScale>
+        <Value>50</Value>
+        <Variation>0</Variation>
+      </ReleaseScale>
+      <ReleaseRotation>
+        <Value>0.5</Value>
+        <Variation>0</Variation>
+      </ReleaseRotation>
+      <ReleaseImpulse>0 100</ReleaseImpulse>
+      <ParticleTextureAssetName>letter</ParticleTextureAssetName>
+      <Modifiers>
+        <Item Type="ProjectMercury.Modifiers.RotationRateModifier">
+          <InitialRate>0.5</InitialRate>
+          <FinalRate>-40</FinalRate>
+        </Item>
+        <Item Type="ProjectMercury.Modifiers.LinearGravityModifier">
+          <Gravity>0 500</Gravity>
+        </Item>
+      </Modifiers>
+      <BlendMode>Add</BlendMode>
+      <TriggerOffset>-32 100</TriggerOffset>
+      <MinimumTriggerPeriod>0.1</MinimumTriggerPeriod>
+      <Width>100</Width>
+      <Height>100</Height>
+      <Rotation>0</Rotation>
+      <Frame>false</Frame>
     </Item>
     <Name>Basic Explosion</Name>
     <Author>Matt Davey</Author>

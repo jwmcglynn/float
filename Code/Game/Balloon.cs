@@ -148,10 +148,9 @@ namespace Sputnik.Game
 
 			//LOADING DEAD ANIMATION
 			Sequence seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonNorm2", 0.2f);
 			seq.AddFrame("balloon\\BalloonPop1", 0.2f);
 			seq.AddFrame("balloon\\BalloonPop2", 0.4f, new Vector2(291 - 279, 215 - 171));
-			seq.AddFrame(null, 1.0f, new Vector2(291 - 279, 215 - 171));
+			seq.AddFrame(null, 2.0f, new Vector2(291 - 279, 215 - 171));
 			animations[DEAD_ANIM_INDEX] = seq;
 
 			//LOADING ALIVE ANIMATION
