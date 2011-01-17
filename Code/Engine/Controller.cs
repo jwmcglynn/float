@@ -100,7 +100,7 @@ namespace Sputnik {
 			FarseerPhysics.DebugViewXNA.LoadContent(GraphicsDevice, Content);
 
 			// Create first environment.
-
+			
 			#if DEBUG
 				m_env = new TestLevelEnvironment(this);
 			#else

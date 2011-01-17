@@ -25,9 +25,10 @@ namespace Sputnik.Menus
 			Height = height;
 			FullWidth = width;
 			fading = false;
+			Zindex = 0.1f;
 
 			Texture2D dummyTexture = new Texture2D(env.Controller.GraphicsDevice, 1, 1);
-			dummyTexture.SetData(new Color[] { Color.Black });
+			dummyTexture.SetData(new Color[] { Color.White });
 
 			Texture = dummyTexture;
 		}
@@ -44,9 +45,11 @@ namespace Sputnik.Menus
 			if (fading)
 			{
 				Alpha += elapsedTime * fadePerSecond;
-				/*if(Alpha >= 1.0f)
-					if(environment is GameEnvironment)
-						((GameEnvironment)environment).pause(new endPopUp())*/
+				GameEnvironment game = ((GameEnvironment)environment);
+				if (Alpha > 1.0f && !game.paused)
+				{	
+					game.pause(new EndPopUp(game.Controller,game));
+				}
 			}
 		}
 

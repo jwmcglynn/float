@@ -60,7 +60,7 @@ namespace Sputnik {
 		public float m_updateAccum; // How much time has passed relative to the physics world.
 
         //Pausing
-        private bool m_paused;
+        public bool paused;
         PopUp m_popUp;
 
 		// HUD.
@@ -306,7 +306,7 @@ namespace Sputnik {
 
         public void pause(PopUp popup)
         {
-            m_paused = true;
+            paused = true;
             Camera.MoveSpeed = new Vector2(0, 0);
             m_popUp = popup;
         }
@@ -314,7 +314,7 @@ namespace Sputnik {
         {
             m_popUp = null;
 			Camera.MoveSpeed = defaultCameraMoveSpeed;
-            m_paused = false;
+            paused = false;
         }
 
 		/// <summary>
@@ -329,7 +329,7 @@ namespace Sputnik {
 			}
             
             //Pause with Escape
-            if (!m_paused)
+            if (!paused)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape)
                     || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start) && !OldGamePad.GetState().IsButtonDown(Buttons.Start))
@@ -347,7 +347,7 @@ namespace Sputnik {
 				Controller.Exit();
 			}
 
-            if (!m_paused)
+            if (!paused)
             {
                 HUD.enabled = true;
                 if (elapsedTime > 0.0f)
@@ -426,17 +426,16 @@ namespace Sputnik {
 			// Draw HUD.
 			HUD.Draw();
 
-            //Draw popup
-            if (m_popUp != null)
-                m_popUp.Draw();
-
 			if(fade)
 			{
 				FadeOut.fadeOut(0.3f);
-				//fade = false;
 			}
 			FadeOut.Draw(m_spriteBatch);
-		}
+
+			//Draw popup
+			if (m_popUp != null)
+				m_popUp.Draw();
+			}
 
 		/// <summary>
 		/// Farseer Physics callback.  Called when a contact point is created.

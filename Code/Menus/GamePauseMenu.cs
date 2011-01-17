@@ -198,6 +198,7 @@ namespace Sputnik.Menus
 
         internal void selectButton(MenuButton button)
         {
+			
             button.isSelected = true;
             currentButton = button;
         }
