@@ -292,15 +292,11 @@ namespace Sputnik.Game
 							}
 						}
 					}
-					else
-					{
-						if ((dirY < 0 && pos.Y < tracks.First()) || (dirY > 0 && pos.Y > tracks.Last()))
-						{
+					else {
+						if ((dirY < 0 && pos.Y + m_distortedPosition < tracks.First()) || (dirY > 0 && pos.Y + m_distortedPosition > tracks.Last())) {
 							vel.Y = DEFAULT_SPEED.Y;
-							pos.Y = MathUtils.Clamp(pos.Y, tracks.First(), tracks.Last());
-						}
-						else
-						{
+							pos.Y = MathUtils.Clamp(pos.Y + m_distortedPosition, tracks.First(), tracks.Last()) - m_distortedPosition;
+						} else {
 							if(endingDescent)
 								vel.Y = MOVE_VEL/2 * dirY;
 							else

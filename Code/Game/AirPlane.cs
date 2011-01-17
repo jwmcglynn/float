@@ -14,6 +14,8 @@ namespace Sputnik.Game
         public static float k_defaultVelX = -150.0f;
 		private ParticleEntity m_smokeTrail;
 
+		private Animation m_anim = new Animation();
+
         /***************************************************************************/
 
         // Debug constructor.
@@ -36,8 +38,16 @@ namespace Sputnik.Game
 			m_smokeTrail.Zindex = ZSettings.Plane + 0.01f; // Just behind plane.
 			AddChild(m_smokeTrail);
 
-            LoadTexture(Environment.contentManager, "plane");
-            Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
+			Sequence seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("Plan", 0.3f);
+			seq.AddFrame("Plan2", 0.2f);
+			seq.AddFrame("Plan4", 0.1f);
+			seq.AddFrame("Plan2", 0.2f);
+			seq.Loop = true;
+
+			m_anim.PlaySequence(seq);
+
+            Registration = new Vector2(250.0f, 250.0f);
 
             Scale = 0.5f;
             CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
@@ -55,6 +65,9 @@ namespace Sputnik.Game
 
         public override void Update(float elapsedTime)
         {
+			m_anim.Update(elapsedTime);
+			Texture = m_anim.CurrentFrame;
+
 			m_smokeTrail.Effect.Trigger(Position + new Vector2(110.0f, -5.0f));
             base.Update(elapsedTime);
         }

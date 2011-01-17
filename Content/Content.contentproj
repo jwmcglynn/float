@@ -208,13 +208,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="plane.png">
-      <Name>plane</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MenuInstructions.PNG">
       <Name>MenuInstructions</Name>
       <Importer>TextureImporter</Importer>
@@ -300,21 +293,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="cloud\Hail1.png">
-      <Name>Hail1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\Hail2.png">
-      <Name>Hail2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\Hail3.png">
-      <Name>Hail3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="cloud\Lighting1.png">
       <Name>Lighting1</Name>
       <Importer>TextureImporter</Importer>
@@ -327,21 +305,6 @@
     </Compile>
     <Compile Include="cloud\Lighting3.png">
       <Name>Lighting3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\Rain.png">
-      <Name>Rain</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\Rain2.png">
-      <Name>Rain2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\Rain3.png">
-      <Name>Rain3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -615,16 +578,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cloud\Cloud2.5.png">
-      <Name>Cloud2.5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\CloudX1.5.png">
-      <Name>CloudX1.5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="cloud\CloudX2.png">
       <Name>CloudX2</Name>
       <Importer>TextureImporter</Importer>
@@ -632,26 +585,6 @@
     </Compile>
     <Compile Include="cloud\CloudX3.png">
       <Name>CloudX3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\hailParticle.png">
-      <Name>hailParticle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\hailParticle2.png">
-      <Name>hailParticle2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\hailparticle3.png">
-      <Name>hailparticle3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="cloud\hailparticle4.png">
-      <Name>hailparticle4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -745,6 +678,52 @@
   <ItemGroup>
     <Compile Include="Letterforsanta.png">
       <Name>Letterforsanta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Hail.xml">
+      <Name>Hail</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="hailParticle.png">
+      <Name>hailParticle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="hailParticle2.png">
+      <Name>hailParticle2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="hailparticle3.png">
+      <Name>hailparticle3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="hailparticle4.png">
+      <Name>hailparticle4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Plan.png">
+      <Name>Plan</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Plan2.png">
+      <Name>Plan2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Plan4.png">
+      <Name>Plan4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
