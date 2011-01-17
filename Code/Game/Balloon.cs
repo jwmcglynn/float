@@ -317,7 +317,7 @@ namespace Sputnik.Game
 					bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
 					bool atRight = Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER <= Position.X;
 
-					if (atLeft || atRight)
+					if ((atLeft && vel.X < DEFAULT_SPEED.X) || (atRight && vel.X > DEFAULT_SPEED.X))
 					{
 						vel.X = DEFAULT_SPEED.X;
 						pos.X = MathUtils.Clamp(pos.X, Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER, Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER);

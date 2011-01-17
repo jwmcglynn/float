@@ -310,7 +310,7 @@ namespace Sputnik {
         public void unPause()
         {
             m_popUp = null;
-            Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
+			Camera.MoveSpeed = defaultCameraMoveSpeed;
             m_paused = false;
         }
 
