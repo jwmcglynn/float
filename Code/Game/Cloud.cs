@@ -12,7 +12,7 @@ using System.Text;
 namespace Sputnik.Game
 {
     enum CLOUD_STATE {
-        NORM, THUNDER, RAIN, HAIL, LIGHTNING
+        NORM, THUNDER, RAIN, HAIL, LIGHTNING, TRANSITION
     }
 
     class Cloud : GameEntity
@@ -43,7 +43,8 @@ namespace Sputnik.Game
 
         public const float MAX_SPEED = 0.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
         private CLOUD_STATE currentState;
-
+		private CLOUD_STATE transitionState;
+		private CLOUD_STATE transitionTarget;
 		private Fixture m_rainFixture;
 
 		private int m_neutralRung = 5;
@@ -56,6 +57,18 @@ namespace Sputnik.Game
 		Sequence m_thunder;
 		Sequence m_lightning;
 
+
+		Sequence m_h2r;
+		Sequence m_r2n;
+		Sequence m_n2t;
+		Sequence m_t2l;
+
+		Sequence m_r2h;
+		Sequence m_n2r;
+		Sequence m_t2n;
+		Sequence m_l2t;
+	
+		
 		public Cloud(GameEnvironment env) : base(env) {
 			Initialize();
 		}
@@ -71,6 +84,7 @@ namespace Sputnik.Game
 		
 		public override void OnTempChange(float amount) {
 			UpdateState((int) amount);
+
 			base.OnTempChange(amount);
 		}
 
@@ -84,33 +98,34 @@ namespace Sputnik.Game
 			if (diff > 2) diff = 2;
 			diff += 2; // Change from -2 -> 2 to 0 -> 4.
 
+			transitionState = CLOUD_STATE.TRANSITION;
 
             switch (diff) {
                 case 0:
 					m_anim.PlaySequence(m_lightning);
-                    currentState = CLOUD_STATE.LIGHTNING;
+                    transitionTarget = CLOUD_STATE.LIGHTNING;
                     break;
                 case 1:
 					m_anim.PlaySequence(m_thunder);
-                    currentState = CLOUD_STATE.THUNDER;
+                    transitionTarget = CLOUD_STATE.THUNDER;
                     break;
                 case 2:
 					m_anim.PlaySequence(m_norm);
-                    currentState = CLOUD_STATE.NORM;
+                    transitionTarget = CLOUD_STATE.NORM;
                     break;
                 case 3:
 					m_anim.PlaySequence(m_rain);
-                    currentState = CLOUD_STATE.RAIN;
+                    transitionTarget = CLOUD_STATE.RAIN;
                     break;
                 case 4:
 					m_anim.PlaySequence(m_hail);
-                    currentState = CLOUD_STATE.HAIL;
+                    transitionTarget = CLOUD_STATE.HAIL;
                     break;
             }
         }
         private void Initialize()
         {
-			float frameDelay = 0.1f;
+			float frameDelay = 0.5f;
 
 			// Hail.
 			m_hail = new Sequence(Environment.contentManager);
@@ -143,7 +158,70 @@ namespace Sputnik.Game
 			m_lightning.AddFrame("cloud\\Lighting2", frameDelay);
 			m_lightning.AddFrame("cloud\\Lighting3", frameDelay);
 			m_lightning.Loop = true;
+
+			/* TODO: INITIALIZE */
+			m_h2r = new Sequence(Environment.contentManager);
+			m_h2r.AddFrame("cloud\\SemiToBad3", frameDelay);
+			m_h2r.AddFrame("cloud\\SemiToBad2", frameDelay);
+			m_h2r.AddFrame("cloud\\SemiToBad1", frameDelay);
+			m_h2r.Loop = false;
+
+
+			m_r2n = new Sequence(Environment.contentManager);
+			m_r2n.AddFrame("cloud\\NormSemi3", frameDelay);
+			m_r2n.AddFrame("cloud\\NormSemi2", frameDelay);
+			m_r2n.AddFrame("cloud\\NormSemi1", frameDelay);
+			m_r2n.Loop = false;
+
+
+			m_n2t = new Sequence(Environment.contentManager);
+			m_n2t.AddFrame("cloud\\NormSemi1", frameDelay);
+			m_n2t.AddFrame("cloud\\NormSemi2", frameDelay);
+			m_n2t.AddFrame("cloud\\NormSemi3", frameDelay);
+			m_n2t.Loop = false;
+
+
+			m_t2l = new Sequence(Environment.contentManager);
+			m_t2l.AddFrame("cloud\\SemiToBad1", frameDelay);
+			m_t2l.AddFrame("cloud\\SemiToBad2", frameDelay);
+			m_t2l.AddFrame("cloud\\SemiToBad3", frameDelay);
+			m_t2l.Loop = false;
+
+
+
+
+			m_r2h = new Sequence(Environment.contentManager);
 			
+			m_r2h.AddFrame("cloud\\SemiToBad1", frameDelay);
+			m_r2h.AddFrame("cloud\\SemiToBad2", frameDelay);
+			m_r2h.AddFrame("cloud\\SemiToBad3", frameDelay);
+			m_r2h.Loop = false;
+
+
+			m_n2r = new Sequence(Environment.contentManager);
+			m_n2r.AddFrame("cloud\\NormSemi1", frameDelay);
+			m_n2r.AddFrame("cloud\\NormSemi2", frameDelay);
+			m_n2r.AddFrame("cloud\\NormSemi3", frameDelay);
+			m_n2r.Loop = false;
+
+
+			m_t2n = new Sequence(Environment.contentManager);
+			m_t2n.AddFrame("cloud\\NormSemi3", frameDelay);
+			m_t2n.AddFrame("cloud\\NormSemi2", frameDelay);
+			m_t2n.AddFrame("cloud\\NormSemi1", frameDelay);
+			m_t2n.Loop = false;
+
+
+			m_l2t = new Sequence(Environment.contentManager);
+			m_l2t.AddFrame("cloud\\SemiToBad3", frameDelay);
+			m_l2t.AddFrame("cloud\\SemiToBad2", frameDelay);
+			m_l2t.AddFrame("cloud\\SemiToBad1", frameDelay);
+			m_l2t.Loop = false;
+			
+
+
+
+
 			UpdateState((int) Environment.Temperature);
 
             Registration = new Vector2(295.0f, 236.0f);
@@ -156,6 +234,10 @@ namespace Sputnik.Game
 
 			Zindex = ZSettings.Cloud;
 
+			
+			transitionState = CLOUD_STATE.NORM;
+			transitionTarget = CLOUD_STATE.NORM;
+
             SnapToRung();
             //300 x 240
 			AddCollisionCircle(130.0f, new Vector2(80.0f, 0.0f));
@@ -163,7 +245,7 @@ namespace Sputnik.Game
 			AddCollisionCircle(130.0f, new Vector2(-80.0f, 0.0f));
         }
 
-        public CLOUD_STATE stateOfCloud
+        public CLOUD_STATE StateOfCloud
         {
             get
             {
@@ -177,6 +259,74 @@ namespace Sputnik.Game
 
 		public override void Update(float elapsedTime)
 		{
+
+			if (transitionState == CLOUD_STATE.TRANSITION)
+			{
+				switch (currentState)
+				{
+					case CLOUD_STATE.HAIL:
+						m_anim.PlaySequence(m_h2r);
+						break;
+					case CLOUD_STATE.RAIN:
+						if (transitionTarget == CLOUD_STATE.HAIL)
+						{
+							m_anim.PlaySequence(m_r2h);
+						}
+						else //transitionTarget == CLOUD_STATE.NORM
+						{
+							m_anim.PlaySequence(m_r2n);
+						}
+						break;
+					case CLOUD_STATE.NORM:
+						if (transitionTarget == CLOUD_STATE.RAIN)
+						{
+							m_anim.PlaySequence(m_n2r);
+						}
+						else //transitionTarget == CLOUD_STATE.NORM
+						{
+							m_anim.PlaySequence(m_n2t);
+						}
+						break;
+					case CLOUD_STATE.THUNDER:
+						if (transitionTarget == CLOUD_STATE.NORM)
+						{
+							m_anim.PlaySequence(m_t2n);
+						}
+						else //transitionTarget == CLOUD_STATE.NORM
+						{
+							m_anim.PlaySequence(m_t2l);
+						}
+						break;
+					case CLOUD_STATE.LIGHTNING:
+						m_anim.PlaySequence(m_l2t);
+						break;
+				}
+			}
+
+			if (m_anim.Done)
+			{
+				transitionState = transitionTarget;
+				currentState = transitionTarget;
+				switch (currentState)
+				{
+					case CLOUD_STATE.LIGHTNING:
+						m_anim.PlaySequence(m_lightning);
+						break;
+					case CLOUD_STATE.THUNDER:
+						m_anim.PlaySequence(m_thunder);
+						break;
+					case CLOUD_STATE.NORM:
+						m_anim.PlaySequence(m_norm);
+						break;
+					case CLOUD_STATE.RAIN:
+						m_anim.PlaySequence(m_rain);
+						break;
+					case CLOUD_STATE.HAIL:
+						m_anim.PlaySequence(m_hail);
+						break;
+				}
+			}
+
 			m_anim.Update(elapsedTime);
 			Texture = m_anim.CurrentFrame;
 
@@ -195,7 +345,7 @@ namespace Sputnik.Game
 
 				bool hitRain = (contact.FixtureA == m_rainFixture || contact.FixtureB == m_rainFixture);
 
-                switch(stateOfCloud) {
+                switch(currentState) {
 					case CLOUD_STATE.LIGHTNING:
 						if (!hitRain) OnNextUpdate += () => b.Kill();
                         Sound.PlayCue("thunder");
