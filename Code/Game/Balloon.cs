@@ -51,7 +51,7 @@ namespace Sputnik.Game
 		private BALLOON_STATE currentState;
 		private float currentSpecialStateRemainingTime;
 
-		private Vector2 previousPosition;
+		public Vector2 PreviousPosition;
 
 		private Vector2 originalRegistration;
 
@@ -203,7 +203,7 @@ namespace Sputnik.Game
 
 			anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
 			Texture = anim.CurrentFrame;
-			previousPosition = Position;
+			PreviousPosition = Position;
 			SnapToRung();
 		}
 
@@ -212,7 +212,7 @@ namespace Sputnik.Game
 		/// </summary>
 		public void WarpPosition(Vector2 newPos)
 		{
-			previousPosition = Position;
+			PreviousPosition = Position;
 			Position = newPos;
             Environment.Camera.Position = new Vector2(newPos.X, GameEnvironment.k_idealScreenSize.Y * 0.5f);
 		}
@@ -293,7 +293,7 @@ namespace Sputnik.Game
 					{
 						for (int i = 0; i < tracks.Length; i++)
 						{
-							if (Math.Sign(tracks[i] - pos.Y) != Math.Sign(tracks[i] - previousPosition.Y))
+							if (Math.Sign(tracks[i] - pos.Y) != Math.Sign(tracks[i] - PreviousPosition.Y))
 							{
 								vel.Y = DEFAULT_SPEED.Y;
 								pos.Y = tracks[i];
@@ -342,7 +342,7 @@ namespace Sputnik.Game
 						Environment.OnTempChange(m_lastRung);
 					}
 
-					previousPosition = pos; // previousPosition always reflects the real un-distorted position.
+					PreviousPosition = pos; // previousPosition always reflects the real un-distorted position.
 					pos.Y += m_distortedPosition;
 
 					Position = pos;

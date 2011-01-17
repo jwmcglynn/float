@@ -26,13 +26,11 @@ namespace Sputnik.Game
 			game = env;
 		}
 
-		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
-		{
-			base.OnCollide(entB, contact);
+		public override void OnTrigger(Balloon balloon) {
 			if (spawnPoint.Properties.ContainsKey("delay"))
 				float.TryParse(spawnPoint.Properties["delay"], out delay);
 			else delay = 0.0f;
-			((Balloon)entB).goToEndSequence(delay);
+			balloon.goToEndSequence(delay);
 			activated = true;
 		}
 		public override void Update(float elapsedTime)

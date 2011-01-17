@@ -23,21 +23,16 @@ namespace Sputnik.Game
             TutorialType = tutorialType;
 		}
 
-        public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
-        {
-            base.OnCollide(entB, contact);
-            if (entB is Balloon) 
-            {
-                if (TutorialType == "HighPressure")
-                    game.pause(new TutorialPopUp(game.Controller, game, Keys.Left));
-                if (TutorialType == "LowPressure")
-                    game.pause(new TutorialPopUp(game.Controller, game, Keys.Right));
-                if (TutorialType == "TempUp")
-                    game.pause(new TutorialPopUp(game.Controller, game, Keys.Up));
-                if (TutorialType == "TempDown")
-                    game.pause(new TutorialPopUp(game.Controller, game, Keys.Down));
-                CollisionBody.Active = false;
-            }
-        }
+		public override void OnTrigger(Balloon balloon) {
+			if (TutorialType == "HighPressure")
+				game.pause(new TutorialPopUp(game.Controller, game, Keys.Left));
+			if (TutorialType == "LowPressure")
+				game.pause(new TutorialPopUp(game.Controller, game, Keys.Right));
+			if (TutorialType == "TempUp")
+				game.pause(new TutorialPopUp(game.Controller, game, Keys.Up));
+			if (TutorialType == "TempDown")
+				game.pause(new TutorialPopUp(game.Controller, game, Keys.Down));
+			CollisionBody.Active = false;
+		}
     }
 }

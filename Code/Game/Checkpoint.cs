@@ -14,12 +14,10 @@ namespace Sputnik.Game
         {
         }
 
-        public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
-        {
-            base.OnCollide(entB, contact);
-			{
-				((Balloon)entB).SpawnPoint.Position = entB.Position;
+		public override void OnTrigger(Balloon balloon) {
+			if (balloon.stateOfBalloon == Balloon.BALLOON_STATE.ALIVE) {
+				balloon.SpawnPoint.Position = balloon.PreviousPosition;
 			}
-        }
+		}
     }
 }

@@ -15,7 +15,7 @@ namespace Sputnik.Game
     /// Triggers collide only with the Balloon, and they're collision box is determined
     /// through the editer
     /// </summary>
-    class Trigger : GameEntity
+    abstract class Trigger : GameEntity
     {
 		protected bool passed;
         private Rectangle shape;
@@ -36,12 +36,19 @@ namespace Sputnik.Game
 
         public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture)
         {
-			if (passed == false)
-			{
-				passed = true;
-				return (entB is Balloon);
-			}
-			return false;
+			return !passed && (entB is Balloon);
         }
+
+		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact) {
+			if (!passed) {
+				passed = true;
+				OnTrigger((Balloon) entB);
+			}
+
+			base.OnCollide(entB, contact);
+		}
+
+		// Implement this.
+		public abstract void OnTrigger(Balloon balloon);
     }
 }
