@@ -52,12 +52,12 @@
     <property name="neutral" value="3"/>
    </properties>
   </object>
-  <object name="cloudh" type="cloud" x="4378" y="242" width="196" height="124">
+  <object name="cloudH" type="cloud" x="4378" y="242" width="196" height="124">
    <properties>
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudH" type="cloud" x="7738" y="122" width="196" height="124">
+  <object name="cloudH" type="cloud" x="7754" y="70" width="196" height="124">
    <properties>
     <property name="neutral" value="1"/>
    </properties>
@@ -76,12 +76,12 @@
     <property name="neutral" value="3"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="6506" y="130" width="196" height="124">
+  <object name="cloudT" type="cloud" x="6506" y="58" width="196" height="124">
    <properties>
     <property name="neutral" value="7"/>
    </properties>
   </object>
-  <object name="cloudN" type="cloud" x="8626" y="146" width="196" height="124">
+  <object name="cloudN" type="cloud" x="8618" y="70" width="196" height="124">
    <properties>
     <property name="neutral" value="5"/>
    </properties>
@@ -149,7 +149,7 @@
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="12154" y="154" width="196" height="124">
+  <object name="cloudL" type="cloud" x="12146" y="70" width="196" height="124">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
@@ -162,6 +162,8 @@
   <object name="plane" type="plane" x="12466" y="290" width="180" height="68"/>
   <object name="star" type="star" x="10226" y="426" width="60" height="64"/>
   <object name="star" type="star" x="12562" y="114" width="60" height="64"/>
+  <object name="checkpoint" type="checkpoint" x="6028" y="56" width="112" height="816"/>
+  <object name="checkpoint" type="checkpoint" x="9500" y="48" width="128" height="824"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>
