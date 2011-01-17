@@ -24,7 +24,7 @@
   <object name="plane" type="plane" x="3290" y="666" width="180" height="68"/>
   <object name="bird" type="bird" x="2234" y="290" width="136" height="60"/>
   <object name="star" type="star" x="3842" y="618" width="60" height="64"/>
-  <object name="cloudN" type="cloud" x="4982" y="158" width="196" height="124">
+  <object name="cloudN" type="cloud" x="4982" y="78" width="196" height="124">
    <properties>
     <property name="neutral" value="5"/>
    </properties>
@@ -108,7 +108,7 @@
     <property name="neutral" value="7"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="10894" y="170" width="196" height="124">
+  <object name="cloudL" type="cloud" x="10870" y="58" width="196" height="124">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
@@ -119,7 +119,7 @@
   <object name="bird" type="bird" x="8642" y="714" width="136" height="60"/>
   <object name="bird" type="bird" x="9346" y="378" width="136" height="60"/>
   <object name="bird" type="bird" x="10514" y="730" width="136" height="60"/>
-  <object name="cloudT" type="cloud" x="9874" y="250" width="196" height="124">
+  <object name="cloudT" type="cloud" x="9874" y="74" width="196" height="124">
    <properties>
     <property name="neutral" value="7"/>
    </properties>
@@ -127,7 +127,7 @@
   <object name="bird" type="bird" x="10746" y="594" width="136" height="60"/>
   <object name="bird" type="bird" x="11138" y="706" width="136" height="60"/>
   <object name="plane" type="plane" x="11290" y="490" width="180" height="68"/>
-  <object name="cloudR" type="cloud" x="11282" y="74" width="196" height="124">
+  <object name="cloudR" type="cloud" x="11274" y="138" width="196" height="124">
    <properties>
     <property name="neutral" value="3"/>
    </properties>
@@ -139,9 +139,9 @@
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="11682" y="370" width="196" height="124">
+  <object name="cloudN" type="cloud" x="11682" y="370" width="196" height="124">
    <properties>
-    <property name="neutral" value="7"/>
+    <property name="neutral" value="5"/>
    </properties>
   </object>
   <object name="cloudH" type="cloud" x="12426" y="390" width="196" height="124">

@@ -214,6 +214,9 @@
   <object name="star" type="star" x="2020" y="248" width="68" height="64"/>
   <object name="star" type="star" x="1472" y="96" width="68" height="64"/>
   <object name="star" type="star" x="1080" y="44" width="68" height="64"/>
+  <object name="checkpoint" type="checkpoint" x="578" y="6" width="64" height="508"/>
+  <object name="checkpoint" type="checkpoint" x="5184" y="6" width="64" height="880"/>
+  <object name="checkpoint" type="checkpoint" x="9728" y="2" width="68" height="884"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>

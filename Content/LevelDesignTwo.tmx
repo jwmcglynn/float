@@ -230,6 +230,7 @@
   <object name="bird" type="bird" x="4366" y="602" width="124" height="60"/>
   <object name="bird" type="bird" x="4990" y="690" width="132" height="64"/>
   <object name="cloudL" type="cloud" x="4284" y="598" width="196" height="120"/>
+  <object name="checkpoint" type="checkpoint" x="252" y="8" width="64" height="376"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>

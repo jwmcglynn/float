@@ -448,6 +448,8 @@
   <object name="plane" type="plane" x="12032" y="666" width="192" height="64"/>
   <object name="plane" type="plane" x="11640" y="422" width="192" height="64"/>
   <object name="plane" type="plane" x="11568" y="694" width="192" height="64"/>
+  <object name="checkpoint" type="checkpoint" x="412" y="-8" width="80" height="408"/>
+  <object name="" x="1204" y="1488"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>

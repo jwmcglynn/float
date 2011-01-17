@@ -142,9 +142,9 @@
     <property name="neutral" value="5"/>
    </properties>
   </object>
-  <object name="cloudH" type="cloud" x="11786" y="250" width="188" height="128">
+  <object name="cloudR" type="cloud" x="11786" y="250" width="188" height="128">
    <properties>
-    <property name="neutral" value="1"/>
+    <property name="neutral" value="3"/>
    </properties>
   </object>
   <object name="cloudN" type="cloud" x="11170" y="498" width="188" height="128">
@@ -223,6 +223,7 @@
   <object name="star" type="star" x="11436" y="492" width="72" height="72"/>
   <object name="star" type="star" x="12592" y="360" width="72" height="72"/>
   <object name="plane" type="plane" x="11020" y="708" width="184" height="72"/>
+  <object name="checkpoint" type="checkpoint" x="324" y="12" width="64" height="368"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>
