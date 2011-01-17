@@ -21,7 +21,7 @@ namespace Sputnik
 
             // Load up the banks
             m_soundBank = new SoundBank(m_audioEngine, @"Content\Sound Bank.xsb");
-            //m_waveBank.Add(new WaveBank(m_audioEngine, @"Content\Music.xwb", 0, 16));
+            m_waveBank.Add(new WaveBank(m_audioEngine, @"Content\Music.xwb"/*, 0, 16*/));
             m_waveBank.Add(new WaveBank(m_audioEngine, @"Content\SFX.xwb"));
             //m_waveBank.Add(new WaveBank(m_audioEngine, @"Content\Looping SFX.xwb"));
 

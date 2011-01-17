@@ -72,8 +72,8 @@ namespace Sputnik.Menus
             : base(ctrl)
         {
 
-         //   Sound.StopAll(true);
-         //   Sound.PlayCue("main_theme");
+            Sound.StopAll(true);
+            Sound.PlayCue("music_title");
             Controller.IsMouseVisible = true;
 
             // Background.    

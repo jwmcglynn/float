@@ -507,8 +507,28 @@ namespace Sputnik.Game
 		public void Kill() {
 			if (currentState != BALLOON_STATE.DEAD)
 			{
-				currentState = BALLOON_STATE.DEAD;
-				Sound.StopAll();
+                currentState = BALLOON_STATE.DEAD;
+                if (downSound != null)
+                {
+                    downSound.Stop(AudioStopOptions.AsAuthored);
+                    downSound = null;
+                }
+                if (upSound != null)
+                {
+                    upSound.Stop(AudioStopOptions.AsAuthored);
+                    upSound = null;
+                }
+                if (leftSound != null)
+                {
+                    leftSound.Stop(AudioStopOptions.AsAuthored);
+                    leftSound = null;
+
+                }
+                if (rightSound != null)
+                {
+                    rightSound.Stop(AudioStopOptions.AsAuthored);
+                    rightSound = null;
+                }
 				Sound.PlayCue("pop");
 
 				anim.PlaySequence(animations[DEAD_ANIM_INDEX]);
