@@ -264,6 +264,10 @@ namespace Sputnik.Game
 			m_rainParticle.Zindex = ZSettings.Rain;
 			AddChild(m_rainParticle);
 
+			m_hailParticle = new ParticleEntity(Environment, "Hail");
+			m_hailParticle.Zindex = ZSettings.Rain;
+			AddChild(m_hailParticle);
+
 
 
 			UpdateState((int) Environment.Temperature, true);
@@ -322,18 +326,26 @@ namespace Sputnik.Game
 
 		public override void Update(float elapsedTime)
 		{
-			switch (currentState) {
-				case CLOUD_STATE.TRANSITION:
-					if (m_anim.Done) {
-						currentState = transitionTarget;
-						PlayAnim();
-					}
-					break;
+			CLOUD_STATE emitterState = currentState;
 
+			if (currentState == CLOUD_STATE.TRANSITION) {
+				if (m_anim.Done) {
+					currentState = transitionTarget;
+					PlayAnim();
+				}
+
+				emitterState = transitionTarget;
+			}
+
+			switch (emitterState) {
 				case CLOUD_STATE.RAIN:
 					m_rainParticle.Effect.Trigger(Position);
 					break;
+				case CLOUD_STATE.HAIL:
+					m_hailParticle.Effect.Trigger(Position);
+					break;
 			}
+			
 
 			m_anim.Update(elapsedTime);
 			Texture = m_anim.CurrentFrame;
