@@ -15,7 +15,7 @@ namespace Sputnik.Game
         }
 
 		public override void OnTrigger(Balloon balloon) {
-			if (balloon.stateOfBalloon == Balloon.BALLOON_STATE.ALIVE) {
+			if (balloon.isBalloonAlive) {
 				balloon.SpawnPoint.Position = balloon.PreviousPosition;
 			}
 		}

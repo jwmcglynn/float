@@ -99,10 +99,6 @@ namespace Sputnik {
 			Name = obj.Name;
 			Properties = obj.Properties;
 			EntityType = obj.Type;
-
-			if (EntityType == "bird") {
-				Console.WriteLine("Create bird at " + Position);
-			}
 		}
 
 		internal void Update(float elapsedTime, Rectangle spawnRect) {

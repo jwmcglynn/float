@@ -66,6 +66,9 @@ namespace Sputnik.Game
 		Sequence m_n2r;
 		Sequence m_t2n;
 		Sequence m_l2t;
+
+		ParticleEntity m_rainParticle;
+		ParticleEntity m_hailParticle;
 	
 		
 		public Cloud(GameEnvironment env) : base(env) {
@@ -257,6 +260,9 @@ namespace Sputnik.Game
 			m_l2t.Loop = false;
 			
 
+			m_rainParticle = new ParticleEntity(Environment, "Rain");
+			m_rainParticle.Zindex = ZSettings.Rain;
+			AddChild(m_rainParticle);
 
 
 
@@ -316,10 +322,17 @@ namespace Sputnik.Game
 
 		public override void Update(float elapsedTime)
 		{
-			if (currentState == CLOUD_STATE.TRANSITION && m_anim.Done)
-			{
-				currentState = transitionTarget;
-                PlayAnim();
+			switch (currentState) {
+				case CLOUD_STATE.TRANSITION:
+					if (m_anim.Done) {
+						currentState = transitionTarget;
+						PlayAnim();
+					}
+					break;
+
+				case CLOUD_STATE.RAIN:
+					m_rainParticle.Effect.Trigger(Position);
+					break;
 			}
 
 			m_anim.Update(elapsedTime);

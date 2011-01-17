@@ -33,7 +33,7 @@ namespace Sputnik.Game
 
         //DEFAULT POSITION CONSTANTS
 		
-		public const float INVULNERABILITY_TIME = 2f;
+		public const float INVULNERABILITY_TIME = 1.5f;
 
 		public const float SPEED_UP = 2.0f;
 
@@ -130,6 +130,7 @@ namespace Sputnik.Game
 
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
+
 			DesiredVelocity = DEFAULT_SPEED;
 			originalRegistration = new Vector2(285.0f, 165.0f);
 			Registration = originalRegistration;
@@ -217,18 +218,6 @@ namespace Sputnik.Game
             Environment.Camera.Position = new Vector2(newPos.X, GameEnvironment.k_idealScreenSize.Y * 0.5f);
 		}
 
-		public BALLOON_STATE stateOfBalloon
-		{
-			get
-			{
-				return currentState;
-			}
-			set
-			{
-				currentState = value;
-			}
-		}
-
 		public bool isBalloonAlive
 		{
 			get
@@ -270,11 +259,14 @@ namespace Sputnik.Game
 					goto case BALLOON_STATE.ALIVE;
 
 				case BALLOON_STATE.INVULNERABLE:
-					if (currentSpecialStateRemainingTime > 0)
-						currentSpecialStateRemainingTime -= elapsedTime;
+					currentSpecialStateRemainingTime -= elapsedTime;
 			
-					if (currentSpecialStateRemainingTime <= 0)
+					if (currentSpecialStateRemainingTime <= 0) {
 						currentState = BALLOON_STATE.ALIVE;
+						Visible = true;
+					} else {
+						Visible = !Visible;
+					}
 
 					goto case BALLOON_STATE.ALIVE;
 					
@@ -545,7 +537,9 @@ namespace Sputnik.Game
 		
 
 		public void Kill() {
-			if (currentState != BALLOON_STATE.DYING)
+			if (currentState == BALLOON_STATE.INVULNERABLE) return;
+
+			if (isBalloonAlive)
 			{
                 currentState = BALLOON_STATE.DYING;
                 if (downSound != null)

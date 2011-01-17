@@ -18,7 +18,7 @@ namespace Sputnik {
 		public ParticleEntity(GameEnvironment env, string effectName) {
 			Environment = env;
 
-			Effect = Environment.contentManager.Load<ParticleEffect>(effectName);
+			Effect = Environment.contentManager.Load<ParticleEffect>(effectName).DeepCopy();
 			Effect.Initialise();
 			Effect.LoadContent(Environment.contentManager);
 		}

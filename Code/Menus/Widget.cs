@@ -12,8 +12,6 @@ namespace Sputnik.Menus {
 		private bool m_hasButton = false;
 		private Rectangle m_buttonRect; // In pixel-space relative to position.
 
-		public bool Visible = true;
-
 		/// <summary>
 		/// Current position in "percent" from 0 to 1.  Added to Position to determine draw
 		/// position.

@@ -26,6 +26,8 @@ namespace Sputnik {
 		public Color VertexColor = Color.White;
 		public float Alpha = 1.0f;
 
+		public bool Visible = true;
+
 		// Entity tree.
 		public Entity Parent;
 		public List<Entity> Children = new List<Entity>();
@@ -374,7 +376,7 @@ namespace Sputnik {
 		/// </summary>
 		/// <param name="spriteBatch">SpriteBatch to render to.</param>
 		public virtual void Draw(SpriteBatch spriteBatch) {
-			if (Texture != null) {
+			if (Visible && Texture != null) {
 				spriteBatch.Draw(Texture, Position, null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
 			}
 		}
