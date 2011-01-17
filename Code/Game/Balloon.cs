@@ -24,7 +24,7 @@ namespace Sputnik.Game
 		 *
 		 */
 		public enum BALLOON_STATE {
-			DEAD, ALIVE, INVULNERABLE, SUPER_GUST, INSTANT_DEAD
+			DEAD, ALIVE, INVULNERABLE, SUPER_GUST, INSTANT_DEAD, ENDING_SEQUENCE
 		}
 
 		//DEFAULT SPEED CONSTANTS
@@ -86,7 +86,8 @@ namespace Sputnik.Game
 		public bool enableDown;
 		public bool enableRight;
 		public bool enableLeft;
-		public bool endingDescent;
+		private bool endingDescent;
+		private float descentDelay;
 
 		public Balloon(GameEnvironment env)
 			: base(env)
@@ -259,6 +260,21 @@ namespace Sputnik.Game
 					currentState = BALLOON_STATE.ALIVE;
 			}
 
+			if(currentState == BALLOON_STATE.ENDING_SEQUENCE)
+			{
+				enableDown = false;
+				enableUp = false;
+				enableLeft = false;
+				enableRight = false;
+
+				descentDelay -= elapsedTime;
+				if(descentDelay <= 0.0f)
+				{
+					endingDescent = true;
+				}
+				
+			}
+
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldKeyState = OldKeyboard.GetState();
             GamePadState padState = GamePad.GetState(PlayerIndex.One);
@@ -281,10 +297,11 @@ namespace Sputnik.Game
                 || padState.IsButtonDown(Buttons.DPadLeft)
                 || padState.IsButtonDown(Buttons.LeftThumbstickLeft))
                 && enableLeft) --dirX;
-			if ((keyState.IsKeyDown(Keys.Right)
+			if (((keyState.IsKeyDown(Keys.Right)
                 || padState.IsButtonDown(Buttons.DPadRight)
                 || padState.IsButtonDown(Buttons.LeftThumbstickRight))
-                && enableRight) ++dirX;
+                && enableRight)
+				|| endingDescent) ++dirX;
 
 			if (dirY == -1 && dirY != lastDirY)
 			{
@@ -591,6 +608,12 @@ namespace Sputnik.Game
                 Sound.StopAll();
             }
         }
+
+		public void goToEndSequence(float delay)
+		{
+			descentDelay = delay;
+			currentState = BALLOON_STATE.ENDING_SEQUENCE;
+		}
 
 		public void HitByRain() {
 			if (m_distortState == DistortState.NONE) {

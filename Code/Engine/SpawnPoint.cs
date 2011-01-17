@@ -143,9 +143,14 @@ namespace Sputnik {
 				case "star":
 					Entity = new Star(SpawnController.Environment, this);
                     break;
+				
+					//checkpoints and endgame
                 case "checkpoint":
                     Entity = new Checkpoint(SpawnController.Environment, this);
                     break;
+				case "end":
+					Entity = new EndGameTrigger(SpawnController.Environment, this);
+					break;
                 //check for each of the different types of tutorial pop-ups
                 case "HighPressure":
                     Entity = new PopUpTrigger(SpawnController.Environment, this, "HighPressure");    

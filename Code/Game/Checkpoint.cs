@@ -16,9 +16,6 @@ namespace Sputnik.Game
         public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
             base.OnCollide(entB, contact);
-             FarseerPhysics.Collision.WorldManifold manifold;
-			 contact.GetWorldManifold(out manifold);
-			 Vector2 posOfCollision = manifold.Points[0]*GameEnvironment.k_invPhysicsScale;
              ((Balloon)entB).SpawnPoint.Position = entB.Position;
         }
     }
