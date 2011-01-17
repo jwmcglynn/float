@@ -188,8 +188,7 @@ namespace Sputnik {
 
 				for (int x = 0; x < layer.Value.Width; ++x)
 				for (int y = 0; y < layer.Value.Height; ++y) {
-					int tileId = layer.Value.GetTile(x, y) - 1;
-					if (tileId < 0) continue;
+					int tileId = layer.Value.GetTile(x, y);
 
 					if (tileId >= collision.Count || collision[tileId] == 0) {
 						Tiled.Tileset.TilePropertyList props = GetTileProperties(map, tileId);
@@ -204,7 +203,7 @@ namespace Sputnik {
 						}
 					}
 
-					levelCollision[x, y] |= (collision[tileId] != 1);
+					levelCollision[x, y] |= (collision[tileId] > 1);
 				}
 
 				float z = defaultZVal;
@@ -218,7 +217,6 @@ namespace Sputnik {
 				MapLayer ml = new MapLayer(this, map, layer.Key, z);
 				ml.Position = new Vector2(m_mapStart, 0.0f);
 				AddChild(ml);
-				// TODO: Make .Position do something in MapLayer
 			}
 
 			// Go through collision and try to create large horizontal collision shapes.
