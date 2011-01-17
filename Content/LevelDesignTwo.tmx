@@ -202,7 +202,7 @@
   <object name="bird" type="bird" x="11840" y="702" width="136" height="64"/>
   <object name="bird" type="bird" x="11652" y="262" width="136" height="60"/>
   <object name="bird" type="bird" x="11072" y="770" width="136" height="64"/>
-  <object name="bird" type="bird" x="11132" y="514" width="136" height="64"/>
+  <object name="bird" type="bird" x="11268" y="538" width="136" height="64"/>
   <object name="bird" type="bird" x="11124" y="122" width="136" height="64"/>
   <object name="star" type="star" x="10978" y="482" width="68" height="64"/>
   <object name="star" type="star" x="11850" y="62" width="68" height="64"/>
@@ -223,6 +223,7 @@
   <object name="plane" type="plane" x="5796" y="670" width="196" height="68"/>
   <object name="plane" type="plane" x="5796" y="738" width="196" height="68"/>
   <object name="plane" type="plane" x="5788" y="810" width="196" height="68"/>
+  <object name="bird" type="bird" x="11260" y="730" width="136" height="64"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>
