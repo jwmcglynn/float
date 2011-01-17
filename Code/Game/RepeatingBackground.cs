@@ -28,7 +28,7 @@ namespace Sputnik.Game {
 				m_width += m_strides[i];
 			}
 
-			Zindex = 1.0f; // Very back.
+			Zindex = ZSettings.BG;
 		}
 
 		public override bool ShouldCull() {

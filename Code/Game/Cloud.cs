@@ -154,7 +154,7 @@ namespace Sputnik.Game
 			Vector2 bottomright = new Vector2(431.0f, 1016.0f) - Registration;
             m_rainFixture = AddCollisionRectangle((bottomright - topleft) * 0.5f, (topleft + bottomright) * 0.5f); 
 
-			Zindex = 0.4f;
+			Zindex = ZSettings.Cloud;
 
             SnapToRung();
             //300 x 240

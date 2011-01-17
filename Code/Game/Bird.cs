@@ -39,6 +39,7 @@ namespace Sputnik.Game {
 
 			Texture = m_anim.CurrentFrame;
 			Scale = 0.20f;
+			Zindex = ZSettings.Bird;
 
 			Registration = new Vector2(221.0f, 331.0f);
 

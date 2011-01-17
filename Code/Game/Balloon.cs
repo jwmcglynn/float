@@ -115,6 +115,7 @@ namespace Sputnik.Game
 		}
 		private void Initialize()
 		{
+			Zindex = ZSettings.Balloon;
 			Scale = 0.5f;
 			m_dead = false;
 
@@ -136,7 +137,7 @@ namespace Sputnik.Game
 			AddCollisionCircle(30.0f, Vector2.Zero);
 
 			drippingWet = new ParticleEntity(Environment, "DrippingWet");
-			drippingWet.Zindex = 0.9f;
+			drippingWet.Zindex = ZSettings.Balloon - 0.01f; // Just in front of balloon.
 			AddChild(drippingWet);
 
 			animations = new Sequence[NUMBER_OF_ANIMATION_STATES];

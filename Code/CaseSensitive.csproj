@@ -120,6 +120,7 @@
     <Compile Include="Engine\MapLayer.cs" />
     <Compile Include="Engine\ParticleEntity.cs" />
     <Compile Include="Engine\Sequence.cs" />
+    <Compile Include="Game\AtmosphereEffects.cs" />
     <Compile Include="Game\Balloon.cs" />
     <Compile Include="Game\AirPlane.cs" />
     <Compile Include="Game\Checkpoint.cs" />

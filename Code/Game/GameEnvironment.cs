@@ -19,7 +19,7 @@ using Sputnik.Menus;
 namespace Sputnik {
 	public class GameEnvironment : Environment {
 		// Spawning/culling.
-		public const float k_cullRadius = 300.0f; // Must be greater than spawn radius.
+		public const float k_cullRadius = 100.0f; // Must be greater than spawn radius.
 		public const float k_spawnRadius = 100.0f; // Must be less than cull radius.
 		public SpawnController SpawnController { get; private set; }
 

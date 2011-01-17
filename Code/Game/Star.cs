@@ -61,6 +61,8 @@ namespace Sputnik.Game
 
 			Registration = new Vector2(198, 230);
 			Scale = 0.25f; // Reduce scale for temp art which is HUGE.
+
+			Zindex = ZSettings.SkyStar;
 		}
 
 		/***************************************************************************/
@@ -102,6 +104,7 @@ namespace Sputnik.Game
 						
 						LoadTexture(Environment.contentManager, "star_imagefalling");
 						Scale = 1.0f;
+						Zindex = ZSettings.FallingStar;
 
 						DesiredVelocity = new Vector2(0.0f, 450.0f);
 					}

@@ -33,7 +33,7 @@ namespace Sputnik.Game
         private void Initialize() {
 			// TODO: PROPER Particles?
 			m_smokeTrail = new ParticleEntity(Environment, "MagicTrail");
-			m_smokeTrail.Zindex = 0.9f;
+			m_smokeTrail.Zindex = ZSettings.Plane + 0.01f; // Just behind plane.
 			AddChild(m_smokeTrail);
 
             LoadTexture(Environment.contentManager, "plane");
@@ -48,7 +48,7 @@ namespace Sputnik.Game
             DesiredVelocity = new Vector2(k_defaultVelX, 0.0f);
 			SnapToRung();
 
-			Zindex = 0.7f;
+			Zindex = ZSettings.Plane;
         }
 
         /***************************************************************************/
