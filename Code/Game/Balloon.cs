@@ -244,7 +244,7 @@ namespace Sputnik.Game
 
 				anim.Update(elapsedTime);
 				Texture = anim.CurrentFrame;
-
+				Environment.restartEntities();
 				base.Update(elapsedTime);
 				return;
 			}
@@ -252,6 +252,7 @@ namespace Sputnik.Game
             {
                 DesiredVelocity = Vector2.Zero;
                 m_dead = true;
+				Environment.restartEntities();
                 base.Update(elapsedTime);
                 return;
             }
@@ -573,6 +574,7 @@ namespace Sputnik.Game
 			return m_dead;
 		}
 
+
 		public void Kill() {
 			if (currentState != BALLOON_STATE.DEAD)
 			{
@@ -606,7 +608,10 @@ namespace Sputnik.Game
 
 			}
 		}
-
+		/// <summary>
+		/// Kill Balloon with no animation or sound effect to restart
+		/// from a checkpoint.
+		/// </summary>
         public void FastKill()
         {
             if (currentState != BALLOON_STATE.DEAD)

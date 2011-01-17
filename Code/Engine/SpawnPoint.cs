@@ -111,7 +111,6 @@ namespace Sputnik {
 
 		internal void Update(float elapsedTime, Rectangle spawnRect) {
 			m_currentCooldown += elapsedTime;
-
 			if (!HasBeenOffscreen) {
 				HasBeenOffscreen = !spawnRect.Intersects(Rect);
 			}

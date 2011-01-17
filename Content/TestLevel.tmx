@@ -13,22 +13,22 @@
  </layer>
  <objectgroup name="Objects" width="75" height="16">
   <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
-  <object name="cloudH" type="cloud" x="2108" y="320" width="196" height="128">
+  <object name="cloudH" type="cloud" x="1888" y="64" width="196" height="128">
    <properties>
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="2880" y="328" width="196" height="128">
+  <object name="cloudL" type="cloud" x="2724" y="60" width="196" height="128">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="2688" y="320" width="196" height="128">
+  <object name="cloudT" type="cloud" x="2416" y="76" width="196" height="128">
    <properties>
     <property name="neutral" value="7"/>
    </properties>
   </object>
-  <object name="cloudN" type="cloud" x="2496" y="312" width="196" height="128"/>
+  <object name="cloudN" type="cloud" x="2116" y="100" width="196" height="128"/>
   <object name="cloudR" type="cloud" x="1286" y="130" width="196" height="128">
    <properties>
     <property name="neutral" value="2"/>
@@ -39,15 +39,15 @@
   <object name="star" type="star" x="3458" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3586" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3522" y="-8" width="64" height="68"/>
-  <object name="bird" type="bird" x="4032" y="188" width="128" height="64"/>
-  <object name="bird" type="bird" x="4032" y="328" width="128" height="52"/>
-  <object name="bird" type="bird" x="4028" y="448" width="128" height="60"/>
-  <object name="bird" type="bird" x="4036" y="576" width="124" height="60"/>
-  <object name="bird" type="bird" x="4356" y="260" width="128" height="60"/>
-  <object name="bird" type="bird" x="4356" y="380" width="124" height="60"/>
-  <object name="bird" type="bird" x="4356" y="508" width="128" height="60"/>
+  <object name="bird" type="bird" x="4156" y="52" width="128" height="64"/>
+  <object name="bird" type="bird" x="4164" y="180" width="128" height="52"/>
+  <object name="bird" type="bird" x="4176" y="404" width="128" height="60"/>
+  <object name="bird" type="bird" x="4176" y="508" width="124" height="60"/>
+  <object name="bird" type="bird" x="4540" y="140" width="128" height="60"/>
+  <object name="bird" type="bird" x="4544" y="252" width="124" height="60"/>
+  <object name="bird" type="bird" x="4528" y="392" width="128" height="60"/>
   <object name="star" type="star" x="1726" y="-6" width="70" height="66"/>
-  <object name="check1" type="checkpoint" x="3220" y="4" width="140" height="1020"/>
+  <object name="check1" type="checkpoint" x="2948" y="40" width="140" height="1020"/>
   <object name="theEnd" type="end" x="4624" y="20" width="164" height="1008"/>
  </objectgroup>
  <objectgroup name="Instructions" width="75" height="16"/>

@@ -482,5 +482,20 @@ namespace Sputnik {
 			// Call for children.
 			Children.ForEach((Entity ent) => { if (ent is GameEntity) ((GameEntity) ent).OnPressureChange(amount); });
 		}
+
+		//Trick entities into restarting
+		public void restartEntities()
+		{
+			Entity[] copyOfChildren = new Entity[Children.Count];
+			Children.CopyTo(copyOfChildren);
+			foreach (Entity ent in copyOfChildren)
+			{
+				if (!((ent is Moon) || (ent is RepeatingBackground) || (ent is MapLayer)))
+					ent.Dispose();
+			}
+			foreach (SpawnPoint sp in SpawnController.SpawnPoints)
+				sp.HasBeenOffscreen = true;
+		}
+
 	}
 }

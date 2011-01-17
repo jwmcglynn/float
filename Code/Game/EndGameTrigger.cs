@@ -15,16 +15,22 @@ namespace Sputnik.Game
 	class EndGameTrigger : Trigger
 	{
 		private GameEnvironment game;
+		private SpawnPoint spawnPoint;
 		public EndGameTrigger(GameEnvironment env, SpawnPoint sp)
 			:base(env, sp)
 		{
+			spawnPoint = sp;
 			game = env;
 		}
 
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			base.OnCollide(entB, contact);
-			((Balloon)entB).goToEndSequence(1.0f);
+			float delay;
+			if (spawnPoint.Properties.ContainsKey("delay"))
+				float.TryParse(spawnPoint.Properties["delay"], out delay);
+			else delay = 0.0f;
+			((Balloon)entB).goToEndSequence(delay);
 		}
 	}
 
