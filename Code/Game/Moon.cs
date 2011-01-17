@@ -26,5 +26,13 @@ namespace Sputnik.Game {
 			Position = Environment.Camera.Position + k_posOffset;
 			base.Update(elapsedTime);
 		}
+		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+		{
+			Environment.SpriteBatchPop();
+			Environment.SpriteBatchPush(false);
+			base.Draw(spriteBatch);
+			Environment.SpriteBatchPop();
+			Environment.SpriteBatchPush();
+		}
 	}
 }

@@ -65,6 +65,7 @@ namespace Sputnik {
 
 		// Screen effects.
 		private Effect m_tintEffect;
+		private float heatMultiplier;
 
 		// Atmosphere.
 		public float Pressure { get; private set; }
@@ -377,17 +378,24 @@ namespace Sputnik {
             }
 
             HUD.Update(elapsedTime);
+
+			if (Balloon != null)
+				heatMultiplier = (this.ScreenVirtualSize.Y/2 - Balloon.Position.Y)* 0.0007f;
+			else heatMultiplier = 0;
 		}
 
 
-		public void SpriteBatchPush() {
-			/*if (false) {
+		public void SpriteBatchPush(bool effect = true) {
+			if (effect && heatMultiplier != 0) {
 				// TODO: Draw effect.
-				m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.5f, 5.0f, 1.0f).ToVector3());
-				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, m_tintEffect, tform);
-			} else {*/
+				if(heatMultiplier > 0)
+					m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.0f, 1.0f * (1 - heatMultiplier), 1.0f * (1 - heatMultiplier)).ToVector3());
+				else
+					m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.0f * (1 + heatMultiplier), 1.0f * (1 + heatMultiplier), 1.0f).ToVector3());
+				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, m_tintEffect, Camera.Transform);
+			} else {
 			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, Camera.Transform);
-			//}
+			}
 		}
 
 		public void SpriteBatchPop() {

@@ -64,6 +64,7 @@ namespace Sputnik.Game
 		private const float k_distortedResetVel = -MOVE_VEL / 6.0f;
 		private const float k_distortedFallVel = MOVE_VEL / 2;
 
+		private float zoomAmount = 0.025f;
 
 		private ParticleEntity m_endExplosion; 
 
@@ -415,14 +416,24 @@ namespace Sputnik.Game
 
 			if ((keyState.IsKeyDown(Keys.Left)
 				|| padState.IsButtonDown(Buttons.DPadLeft)
-                || padState.ThumbSticks.Left.X < -threshold)
-				&& enableLeft) --dirX;
+				|| padState.ThumbSticks.Left.X < -threshold)
+				&& enableLeft)
+			{
+				Environment.Camera.EffectScale = 1.0f;
+				--dirX;
+			} 
+
 			if (((keyState.IsKeyDown(Keys.Right)
 				|| padState.IsButtonDown(Buttons.DPadRight)
-                || padState.ThumbSticks.Left.X > threshold)
+				|| padState.ThumbSticks.Left.X > threshold)
 				&& enableRight)
-				|| endingDescent) ++dirX;
-
+				|| endingDescent)
+			{
+				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
+				++dirX;
+			}
+			if(!keyState.IsKeyDown(Keys.Right) && !keyState.IsKeyDown(Keys.Left))
+				Environment.Camera.EffectScale = 1.0f + zoomAmount;
 			if (dirY == -1 && dirY != lastDirY)
 			{
 				upSound = Sound.PlayCue("up");
