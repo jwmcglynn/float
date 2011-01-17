@@ -138,17 +138,17 @@ namespace Sputnik.Menus
 
 		void onPressPlay()
 		{
-			
+			Controller.ChangeEnvironment(new Level1Environment(Controller));
 		}
 
 		void onPressInstructions()
 		{
-			
+			//need intructions;
 		}
 
 		void onPressCredits()
 		{
-			
+			//need credits
 		}
 
 		void onPressQuit()
