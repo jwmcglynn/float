@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Sputnik.Game
 {
-	class Balloon : GameEntity
+	public class Balloon : GameEntity
 	{
 		///DEFAULT CONSTANTS FOR BALLOON
 		/**
@@ -24,7 +24,7 @@ namespace Sputnik.Game
 		 *
 		 */
 		public enum BALLOON_STATE {
-			DEAD, ALIVE, INVULNERABLE, SUPER_GUST
+			DEAD, ALIVE, INVULNERABLE, SUPER_GUST, INSTANT_DEAD
 		}
 
 		//DEFAULT SPEED CONSTANTS
@@ -87,7 +87,10 @@ namespace Sputnik.Game
 		public Balloon(GameEnvironment env, SpawnPoint sp)
 			: base(env, sp)
 		{
+            env.Balloon = this;
 			Position = sp.Position;
+            Environment.Camera.MoveSpeed = Environment.defaultCameraMoveSpeed;
+            Environment.Camera.Position = new Vector2(Position.X + 350, GameEnvironment.k_idealScreenSize.Y * 0.5f);
 			Initialize();
 		}
 		private void up()
@@ -116,7 +119,7 @@ namespace Sputnik.Game
 
 			animations = new Sequence[NUMBER_OF_ANIMATION_STATES];
 
-			float defaultDuration = 0.2f;
+			float defaultDuration = 0.1f;
 
 			//LOADING DEAD ANIMATION
 			Sequence seq = new Sequence(Environment.contentManager);
@@ -181,6 +184,7 @@ namespace Sputnik.Game
 		{
 			previousPosition = Position;
 			Position = newPos;
+            Environment.Camera.Position = new Vector2(newPos.X, GameEnvironment.k_idealScreenSize.Y * 0.5f);
 		}
 
 		public BALLOON_STATE stateOfBalloon
@@ -200,6 +204,7 @@ namespace Sputnik.Game
 			get
 			{
 				return currentState != BALLOON_STATE.DEAD;
+                return currentState != BALLOON_STATE.DEAD && currentState != BALLOON_STATE.INSTANT_DEAD;
 			}
 		}
 
@@ -234,6 +239,13 @@ namespace Sputnik.Game
 				base.Update(elapsedTime);
 				return;
 			}
+            if (currentState == BALLOON_STATE.INSTANT_DEAD)
+            {
+                DesiredVelocity = Vector2.Zero;
+                m_dead = true;
+                base.Update(elapsedTime);
+                return;
+            }
 
 			if (currentState == BALLOON_STATE.INVULNERABLE)
 			{
@@ -519,6 +531,15 @@ namespace Sputnik.Game
 			}
 		}
 
+        public void FastKill()
+        {
+            if (currentState != BALLOON_STATE.DEAD)
+            {
+                currentState = BALLOON_STATE.INSTANT_DEAD;
+                Sound.StopAll();
+            }
+        }
+
 		public void HitByRain() {
 			if (m_distortState == DistortState.NONE) {
 				m_distortState = DistortState.FALLING;
@@ -528,7 +549,7 @@ namespace Sputnik.Game
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			// TODO: Explode!
-			if (!(entB is Cloud || entB is PopUpTrigger)) { // Let cloud tell us what to do.
+			if (!(entB is Cloud || entB is Trigger)) { // Let cloud tell us what to do.
 				Kill();
 			}
 

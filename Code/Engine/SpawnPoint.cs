@@ -14,7 +14,7 @@ namespace Sputnik {
 
 		// Position.
 		public Vector2 Position;
-		private Vector2 OriginalPosition;
+        private Vector2 OriginalPosition;
 
 		// Size.
 		public Vector2 Size;
@@ -22,10 +22,6 @@ namespace Sputnik {
 		public Vector2 TopLeft {
 			get {
 				return Position - Size / 2;
-			}
-			set
-			{
-				Position = value + (Size / 2);
 			}
 		}
 
@@ -35,10 +31,6 @@ namespace Sputnik {
 			{
 				return Position + new Vector2(-Size.X,Size.Y)/2;
 			}
-			set
-			{
-				Position = value - (new Vector2(-Size.X, Size.Y) / 2);
-			}
 		}
 
 		public Vector2 TopRight
@@ -47,19 +39,11 @@ namespace Sputnik {
 			{
 				return Position + new Vector2(Size.X, -Size.Y)/2;
 			}
-			set
-			{
-				Position = value - (new Vector2(Size.X, -Size.Y) / 2);
-			}
 		}
 
 		public Vector2 BottomRight {
 			get {
 				return Position + Size / 2;
-			}
-			set
-			{
-				Position = value - (Size / 2);
 			}
 		}
 
@@ -130,7 +114,9 @@ namespace Sputnik {
 
 			if (!HasBeenOffscreen) {
 				HasBeenOffscreen = !spawnRect.Intersects(Rect);
-			} else if (AlwaysSpawned || (m_currentCooldown >= RespawnCooldown && spawnRect.Intersects(Rect))) {
+			}
+            
+            if (AlwaysSpawned || (HasBeenOffscreen && m_currentCooldown >= RespawnCooldown && spawnRect.Intersects(Rect))) {
 				Spawn();
 			}
 		}
@@ -157,6 +143,9 @@ namespace Sputnik {
 				case "star":
 					Entity = new Star(SpawnController.Environment, this);
                     break;
+                case "checkpoint":
+                    Entity = new Checkpoint(SpawnController.Environment, this);
+                    break;
                 //check for each of the different types of tutorial pop-ups
                 case "HighPressure":
                     Entity = new PopUpTrigger(SpawnController.Environment, this, "HighPressure");    
@@ -181,7 +170,6 @@ namespace Sputnik {
 
 		public void Reset() {
 			if (AllowRespawn) {
-				Position = OriginalPosition;
 				m_currentCooldown = 0.0f;
 				SpawnController.SpawnPoints.Add(this);
 			}

@@ -11,35 +11,17 @@ using Sputnik.Menus;
 
 namespace Sputnik.Game
 {
-    class PopUpTrigger : GameEntity
+    class PopUpTrigger : Trigger
     {
-        private Rectangle shape;
         private GameEnvironment game;
         private SpawnPoint spawnPoint;
         private string TutorialType;
         public PopUpTrigger(GameEnvironment env, SpawnPoint sp, string tutorialType)
 				: base(env, sp) {
-            shape = sp.Rect;
-			Initialize();
             game = env;
-			Position = sp.Position;
             spawnPoint = sp;
             TutorialType = tutorialType;
 		}
-
-		private void Initialize() {
-
-			//Registration = new Vector2(Texture.Width, Texture.Height) / 2; // temp.
-
-			CreateCollisionBody(Environment.CollisionWorld, BodyType.Kinematic, CollisionFlags.FixedRotation);
-
-            AddCollisionRectangle(new Vector2(shape.Width/2, shape.Height/2), Position);
-		}
-
-        public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture)
-        {
-            return (entB is Balloon);
-        }
 
         public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {

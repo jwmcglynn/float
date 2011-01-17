@@ -27,6 +27,12 @@ namespace Sputnik {
 		public static Vector2 k_idealScreenSize { get { return new Vector2(1680, 1024); } }
 		public Vector2 ScreenVirtualSize = new Vector2(1680, 1050);
 		public Camera2D Camera;
+        public Vector2 defaultCameraMoveSpeed = new Vector2(100.0f, 0.0f);
+
+        /// <summary>
+        /// The player. May be null if the player is not spawned at the moment.
+        /// </summary>
+        public Balloon Balloon;
 
 		// Drawing.
 		private SpriteBatch m_spriteBatch;
@@ -70,8 +76,8 @@ namespace Sputnik {
 
 			// Camera.
 			Camera = new Camera2D(this);
-			Camera.Position = new Vector2(1280.0f, k_idealScreenSize.Y * 0.5f);
-			Camera.MoveSpeed = new Vector2(100.0f, 0.0f);
+			//Camera.Position = new Vector2(1280.0f, k_idealScreenSize.Y * 0.5f);
+            Camera.MoveSpeed = defaultCameraMoveSpeed;
 			Camera.ResetEffectScale(1.0f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
 
 			// Window.

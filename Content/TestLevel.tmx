@@ -47,6 +47,7 @@
   <object name="bird" type="bird" x="4356" y="380" width="124" height="60"/>
   <object name="bird" type="bird" x="4356" y="508" width="128" height="60"/>
   <object name="star" type="star" x="1726" y="-6" width="70" height="66"/>
+  <object name="check1" type="checkpoint" x="3220" y="4" width="140" height="1020"/>
  </objectgroup>
  <objectgroup name="Instructions" width="75" height="16"/>
 </map>

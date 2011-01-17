@@ -52,10 +52,12 @@ namespace Sputnik.Menus
     public class GamePauseMenu : PopUp
     {
         MenuButton currentButton;
-        
+        GameEnvironment currentGame;
+
         public GamePauseMenu(Controller cntl, GameEnvironment game)
             :base(cntl, game)
         {
+            currentGame = game;
 
             MenuButton letterBackground = new MenuButton(this, "buttons\\pause_menu");
             letterBackground.Registration = letterBackground.Size / 2;
@@ -138,14 +140,17 @@ namespace Sputnik.Menus
 
         void onPressCheckpoint()
         {
-            m_game.unPause(); 
-            //TODO: make this go restart from last checkpoint
+            currentGame.Balloon.FastKill(); // :)
+            m_game.unPause();
         }
 
         void onPressBackToStart()
         {
             m_game.unPause();
-            Controller.ChangeEnvironment(new Level1Environment(Controller));
+            if(currentGame is TestLevelEnvironment)
+                Controller.ChangeEnvironment(new TestLevelEnvironment(Controller));
+            else
+                Controller.ChangeEnvironment(new TestLevelEnvironment(Controller));
         }
 
         void onPressTitle()
