@@ -6,6 +6,12 @@ using Microsoft.Xna.Framework;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
+using ProjectMercury;
+
+
+
+using Microsoft.Xna.Framework.Graphics;
+
 
 namespace Sputnik.Game
 {
@@ -15,6 +21,10 @@ namespace Sputnik.Game
 		public float dropPostition;
 		private Animation m_anim = new Animation();
 		private Sequence m_blinking;
+		private ParticleEntity m_magic_Trail;
+
+
+		
 
 		/***************************************************************************/
 
@@ -32,6 +42,8 @@ namespace Sputnik.Game
 			Position = sp.Position;
 			Initialize();
 
+			//Stardust = contentManager.Load<ParticleEffect>("ExplosionEffect");
+
 			if (sp.Properties.ContainsKey("delay"))
 			{
 				string delay = sp.Properties["delay"];
@@ -42,25 +54,29 @@ namespace Sputnik.Game
 			else
 				dropPostition = 15;
 
-			
+			//EffectsAboveStar.("star");
+
 		}
 
 		private void Initialize()
 		{
+			m_magic_Trail = new ParticleEntity(Environment, "starRainbowTrail");
+			m_magic_Trail.Zindex = 0.9f;
+			AddChild(m_magic_Trail);
+
 			originalCameraPos = Environment.Camera.Position.X; 
 			float blinkOffTime = 1.0f;
 			float blinkOnTime = 0.25f;
 
 			m_blinking = new Sequence(Environment.contentManager);
-			m_blinking.AddFrame("StarNormal-1", blinkOffTime);
-			m_blinking.AddFrame("StarNormal-2", blinkOnTime);
-			m_blinking.AddFrame("StarNormal-1", blinkOffTime);
-			m_blinking.AddFrame("StarNormal-2", blinkOnTime);
-			m_blinking.AddFrame("StarNormal-1", blinkOffTime);
-			m_blinking.AddFrame("StarNormal-3", blinkOnTime);
+			m_blinking.AddFrame("Star\\NStar1", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar2", blinkOnTime);
+			m_blinking.AddFrame("Star\\NStar3", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar4", blinkOnTime);
+			m_blinking.AddFrame("Star\\NStar5", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar6", blinkOnTime);
 
-			Registration = new Vector2(198, 230);
-			Scale = 0.25f; // Reduce scale for temp art which is HUGE.
+			Registration = new Vector2(75, 75);
 
 			Zindex = ZSettings.SkyStar;
 		}
@@ -74,7 +90,11 @@ namespace Sputnik.Game
 		};
 
 		State m_curState = State.Wait;
-		
+
+		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+		{
+			base.Draw(spriteBatch);
+		}
 
 		public override void Update(float elapsedTime)
 		{
@@ -105,6 +125,7 @@ namespace Sputnik.Game
 						LoadTexture(Environment.contentManager, "star_imagefalling");
 						Scale = 1.0f;
 						Zindex = ZSettings.FallingStar;
+						Registration = new Vector2(198, 230);
 
 						DesiredVelocity = new Vector2(0.0f, 450.0f);
 					}
@@ -112,8 +133,9 @@ namespace Sputnik.Game
 					break;
 
 				case State.Falling:
-					// TODO: Jeremy, emit particle effect here.
-					break;
+				//	m_magic_Trail.Effect.Trigger(Position);//; + new Vector2(110.0f, -5.0f));// particle effects postion
+					m_magic_Trail.Effect.Trigger( new Vector2(Position.X, Position.Y-38));// particle effects postion	
+				break;
 				}
 
 
