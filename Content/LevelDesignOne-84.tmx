@@ -87,6 +87,8 @@
   <object name="cloudR" type="cloud" x="12108" y="450" width="176" height="124"/>
   <object name="cloudH" type="cloud" x="12100" y="638" width="184" height="132"/>
   <object name="cloudN" type="cloud" x="12352" y="386" width="188" height="128"/>
+  <object name="checkpoint" type="checkpoint" x="5954" y="-58" width="124" height="1092"/>
+  <object name="checkpoint" type="checkpoint" x="9020" y="-10" width="128" height="1028"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>

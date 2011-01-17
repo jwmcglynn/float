@@ -149,6 +149,10 @@
       <Name>LevelDesignOne-84</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LevelDesignThree.tmx">
+      <Name>LevelDesignThree</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="LevelDesignTwo.tmx">
       <Name>LevelDesignTwo</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

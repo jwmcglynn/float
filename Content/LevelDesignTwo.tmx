@@ -159,7 +159,7 @@
   <object name="star" type="star" x="9014" y="2" width="68" height="64"/>
   <object name="star" type="star" x="9090" y="378" width="68" height="64"/>
   <object name="star" type="star" x="8890" y="578" width="68" height="64"/>
-  <object name="star" type="star" x="9210" y="698" width="68" height="64"/>
+  <object name="star" type="star" x="9434" y="370" width="68" height="64"/>
   <object name="star" type="star" x="8826" y="50" width="68" height="64"/>
   <object name="cloudL" type="cloud" x="10492" y="778" width="184" height="116">
    <properties>
@@ -188,7 +188,7 @@
   </object>
   <object name="star" type="star" x="10270" y="290" width="68" height="64"/>
   <object name="star" type="star" x="10226" y="666" width="68" height="64"/>
-  <object name="star" type="star" x="10666" y="90" width="68" height="64"/>
+  <object name="star" type="star" x="10738" y="250" width="68" height="64"/>
   <object name="star" type="star" x="10146" y="18" width="68" height="64"/>
   <object name="star" type="star" x="10062" y="574" width="68" height="64"/>
   <object name="star" type="star" x="12066" y="434" width="68" height="64"/>
