@@ -84,7 +84,7 @@ namespace Sputnik.Menus {
 		public override void Draw() {
 			// Draw entities.
 			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-			Draw(m_spriteBatch);
+			DrawChildren(m_spriteBatch);
 			m_spriteBatch.End();
 		}
 	}

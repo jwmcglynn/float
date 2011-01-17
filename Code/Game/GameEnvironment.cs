@@ -378,28 +378,15 @@ namespace Sputnik {
 			m_spriteBatch.End();
 		}
 
-		private void GetDrawList(List<Entity> list, Entity ent) {
-			list.Add(ent);
-			foreach (Entity c in ent.Children) {
-				GetDrawList(list, c);
-			}
-		}
-
 		/// <summary>
 		/// Draw the world.
 		/// </summary>
 		public override void Draw() {
 			Matrix tform = Camera.Transform;
 
-			List<Entity> list = new List<Entity>();
-			GetDrawList(list, this);
 			// Draw entities.
 			SpriteBatchPush();
-
-			foreach (Entity ent in list.OrderByDescending((ent) => ent.Zindex)) {
-				ent.Draw(m_spriteBatch);
-			}
-
+			DrawChildren(m_spriteBatch);
 			SpriteBatchPop();
 
 			if (m_debugView != null) {
