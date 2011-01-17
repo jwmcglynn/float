@@ -159,6 +159,7 @@
     <None Include="LevelDesignTwo.tmx">
       <Name>LevelDesignTwo</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="TestLevel.tmx">
       <Name>TestLevel</Name>
