@@ -80,6 +80,8 @@ namespace Sputnik.Menus {
 
 		}
 
+        const float threshold = 0.4f;
+
 		public override void Update(float elapsedTime) {
 
             if (enabled)
@@ -89,28 +91,28 @@ namespace Sputnik.Menus {
                 GamePadState oldpadState = OldGamePad.GetState();
                 if (keyState.IsKeyDown(Keys.Up)
                     || padState.IsButtonDown(Input.Buttons.DPadUp)
-                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickUp))
+                    || padState.ThumbSticks.Left.Y > threshold)
                     up.highlight();
                 else
                     up.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Down)
                     || padState.IsButtonDown(Input.Buttons.DPadDown)
-                    || (padState.IsButtonDown(Input.Buttons.LeftThumbstickDown) && padState.ThumbSticks.Left.X<0.9))
+                    || (padState.ThumbSticks.Left.Y < -threshold))
                     down.highlight();
                 else
                     down.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Left)
                     || padState.IsButtonDown(Input.Buttons.DPadLeft)
-                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickLeft))
+                    || padState.ThumbSticks.Left.X < -threshold)
                     left.highlight();
                 else
                     left.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Right)
                     || padState.IsButtonDown(Input.Buttons.DPadRight)
-                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickRight))
+                    || padState.ThumbSticks.Left.X > threshold)
                     right.highlight();
                 else
                     right.deHighlight();

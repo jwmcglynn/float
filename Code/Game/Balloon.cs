@@ -386,6 +386,8 @@ namespace Sputnik.Game
 			base.Update(elapsedTime);
 		}
 
+        const float threshold = 0.4f;
+
 		private void ProcessControls(out int dirX, out int dirY) {
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldKeyState = OldKeyboard.GetState();
@@ -396,22 +398,22 @@ namespace Sputnik.Game
 			dirY = 0;
 
 			if (((keyState.IsKeyDown(Keys.Up))
-				|| padState.IsButtonDown(Buttons.DPadUp) 
-				|| padState.IsButtonDown(Buttons.LeftThumbstickUp)) 
+				|| padState.IsButtonDown(Buttons.DPadUp)
+                || padState.ThumbSticks.Left.Y > threshold) 
 				&& enableUp) --dirY;
-			if ((((keyState.IsKeyDown(Keys.Down) 
-  				|| (padState.IsButtonDown(Buttons.LeftThumbstickDown) && padState.ThumbSticks.Left.X<0.9))) 
+			if ((keyState.IsKeyDown(Keys.Down) 
 				|| padState.IsButtonDown(Buttons.DPadDown) 
+                || (padState.ThumbSticks.Left.Y < -threshold)
 				&& enableDown) 
 				|| endingDescent ) ++dirY;
 
 			if ((keyState.IsKeyDown(Keys.Left)
 				|| padState.IsButtonDown(Buttons.DPadLeft)
-				|| padState.IsButtonDown(Buttons.LeftThumbstickLeft))
+                || padState.ThumbSticks.Left.X < -threshold)
 				&& enableLeft) --dirX;
 			if (((keyState.IsKeyDown(Keys.Right)
 				|| padState.IsButtonDown(Buttons.DPadRight)
-				|| padState.IsButtonDown(Buttons.LeftThumbstickRight))
+                || padState.ThumbSticks.Left.X > threshold)
 				&& enableRight)
 				|| endingDescent) ++dirX;
 
