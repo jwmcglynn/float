@@ -16,8 +16,8 @@ Global Settings
     Header File = CaseSensitiveSound.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 992209094;
-    Last Modified High = 30127661;
+    Last Modified Low = 1367765062;
+    Last Modified High = 30127678;
 
     Category
     {
@@ -226,6 +226,19 @@ Global Settings
         Loop = 0;
         PC Format Tag = 0;
     }
+
+    Compression Preset
+    {
+        Name = adpcm;
+        Xbox Format Tag = 357;
+        Target Sample Rate = 48000;
+        XMA Quality = 60;
+        Find Best Quality = 0;
+        High Freq Cut = 0;
+        Loop = 0;
+        PC Format Tag = 2;
+        Samples Per Block = 128;
+    }
 }
 
 Wave Bank
@@ -239,17 +252,17 @@ Wave Bank
     Compression Preset Name = Compression Preset;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 70366798;
-    PC Bank Last Modified High = 30127662;
-    Bank Last Revised Low = 31148048;
-    Bank Last Revised High = 30127662;
+    PC Bank Last Modified Low = 1839171312;
+    PC Bank Last Modified High = 30127678;
+    Bank Last Revised Low = 1386046312;
+    Bank Last Revised High = 30127678;
 
     Wave
     {
         Name = up-wind13_cut;
         File = sfx\up-wind13_cut.wav;
-        Build Settings Last Modified Low = 3687213748;
-        Build Settings Last Modified High = 30127212;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
         Compression Preset Name = <none>;
 
         Cache
@@ -272,8 +285,8 @@ Wave Bank
     {
         Name = high-wind05_cut;
         File = sfx\high-wind05_cut.wav;
-        Build Settings Last Modified Low = 3687213748;
-        Build Settings Last Modified High = 30127212;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -295,8 +308,8 @@ Wave Bank
     {
         Name = low-wind11_cut;
         File = sfx\low-wind11_cut.wav;
-        Build Settings Last Modified Low = 3687213748;
-        Build Settings Last Modified High = 30127212;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -318,8 +331,8 @@ Wave Bank
     {
         Name = cold-wind12_cut;
         File = sfx\cold-wind12_cut.wav;
-        Build Settings Last Modified Low = 3687213748;
-        Build Settings Last Modified High = 30127212;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -341,8 +354,8 @@ Wave Bank
     {
         Name = cold-wind12-loop;
         File = sfx\cold-wind12-loop.wav;
-        Build Settings Last Modified Low = 1774902702;
-        Build Settings Last Modified High = 30127213;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -364,8 +377,8 @@ Wave Bank
     {
         Name = wind03_cut;
         File = sfx\wind03_cut.wav;
-        Build Settings Last Modified Low = 3020327854;
-        Build Settings Last Modified High = 30127226;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -387,8 +400,8 @@ Wave Bank
     {
         Name = pop;
         File = sfx\pop.wav;
-        Build Settings Last Modified Low = 27209094;
-        Build Settings Last Modified High = 30127661;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -410,8 +423,8 @@ Wave Bank
     {
         Name = rain;
         File = sfx\rain.wav;
-        Build Settings Last Modified Low = 7085548;
-        Build Settings Last Modified High = 30127662;
+        Build Settings Last Modified Low = 689015062;
+        Build Settings Last Modified High = 30127678;
 
         Cache
         {
@@ -426,6 +439,30 @@ Wave Bank
             File Type = 1;
             Last Modified Low = 3440025344;
             Last Modified High = 30127661;
+        }
+    }
+
+    Wave
+    {
+        Name = thunder;
+        File = sfx\thunder.wav;
+        Build Settings Last Modified Low = 1386046312;
+        Build Settings Last Modified High = 30127678;
+        Compression Preset Name = adpcm;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 611236;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 2040548608;
+            Last Modified High = 30127677;
         }
     }
 }
@@ -502,8 +539,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 627398048;
-    Bank Last Modified High = 30127662;
+    Bank Last Modified Low = 1841983812;
+    Bank Last Modified High = 30127678;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1097,6 +1134,53 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = thunder;
+        Volume = -1670;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = SFX;
+                    Bank Index = 0;
+                    Entry Name = thunder;
+                    Entry Index = 8;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = up;
@@ -1344,6 +1428,39 @@ Sound Bank
         {
             Name = rain;
             Index = 9;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+
+        Instance Limit
+        {
+            Max Instances = 1;
+            Behavior = 0;
+
+            Crossfade
+            {
+                Fade In = 0;
+                Fade Out = 0;
+                Crossfade Type = 0;
+            }
+        }
+    }
+
+    Cue
+    {
+        Name = thunder;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = thunder;
+            Index = 10;
             Weight Min = 0;
             Weight Max = 255;
         }

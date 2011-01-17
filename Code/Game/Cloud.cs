@@ -198,6 +198,7 @@ namespace Sputnik.Game
                 switch(stateOfCloud) {
 					case CLOUD_STATE.LIGHTNING:
 						if (!hitRain) OnNextUpdate += () => b.Kill();
+                        Sound.PlayCue("thunder");
 						break;
                     case CLOUD_STATE.HAIL:
 						if (hitRain) OnNextUpdate += () => b.Kill();
