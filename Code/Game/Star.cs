@@ -22,7 +22,6 @@ namespace Sputnik.Game
 		private Animation m_anim = new Animation();
 		private Sequence m_blinking;
 		private ParticleEntity m_magic_Trail;
-		private bool strobedTwice;
 
 
 		
@@ -116,7 +115,6 @@ namespace Sputnik.Game
 					{ // TODO: Condition for next statetswitch here.
 						m_curState = State.Strobing;
 						m_anim.PlaySequence(m_blinking);
-						strobedTwice = false;
 					}
 					break;
 

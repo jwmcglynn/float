@@ -17,12 +17,14 @@ namespace Sputnik.Game
     /// </summary>
     class Trigger : GameEntity
     {
+		protected bool passed;
         private Rectangle shape;
         public Trigger(GameEnvironment env, SpawnPoint sp)
 				: base(env, sp) {
             shape = sp.Rect;
 			Initialize();
 			Position = sp.Position;
+			passed = false;
 		}
 
 		private void Initialize() {
@@ -34,7 +36,12 @@ namespace Sputnik.Game
 
         public override bool ShouldCollide(Entity entB, Fixture fixture, Fixture entBFixture)
         {
-            return (entB is Balloon);
+			if (passed == false)
+			{
+				passed = true;
+				return (entB is Balloon);
+			}
+			return false;
         }
     }
 }
