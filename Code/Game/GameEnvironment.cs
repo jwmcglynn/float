@@ -301,7 +301,7 @@ namespace Sputnik {
 			}
             
             //Pause with Escape
-            if (!m_paused && !Keyboard.GetState().IsKeyDown(Keys.RightAlt) && !Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
+            if (!m_paused)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape))
                     pause(new GamePauseMenu(Controller, this));
@@ -319,6 +319,7 @@ namespace Sputnik {
 
             if (!m_paused)
             {
+                HUD.enabled = true;
                 if (elapsedTime > 0.0f)
                 {
                     // Update physics.
@@ -346,6 +347,7 @@ namespace Sputnik {
             {
                 Camera.Update(elapsedTime);
                 m_popUp.Update(elapsedTime);
+                HUD.enabled = false;
             }
 
             HUD.Update(elapsedTime);

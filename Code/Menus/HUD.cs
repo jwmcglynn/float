@@ -52,11 +52,13 @@ namespace Sputnik.Menus {
         private HUDButton right;
         private HUDButton hudB;
 
+        public bool enabled;
+
 		public HUD(GameEnvironment env)
 				: base(env.Controller) {
 
 			Environment = env;
-
+            enabled = true;
             hudB = new HUDButton(this, "buttons\\HUDOutline");
             hudB.Zindex = 0.7f;
             AddChild(hudB);
@@ -77,28 +79,38 @@ namespace Sputnik.Menus {
 
 		public override void Update(float elapsedTime) {
 
-            KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.Up))
-                up.highlight();
+            if (enabled)
+            {
+                KeyboardState keyState = Keyboard.GetState();
+                if (keyState.IsKeyDown(Keys.Up))
+                    up.highlight();
+                else
+                    up.deHighlight();
+
+                if (keyState.IsKeyDown(Keys.Down))
+                    down.highlight();
+                else
+                    down.deHighlight();
+
+                if (keyState.IsKeyDown(Keys.Left))
+                    left.highlight();
+                else
+                    left.deHighlight();
+
+                if (keyState.IsKeyDown(Keys.Right))
+                    right.highlight();
+                else
+                    right.deHighlight();
+            }
             else
+            {
                 up.deHighlight();
-
-            if (keyState.IsKeyDown(Keys.Down))
-                down.highlight();
-            else
                 down.deHighlight();
-
-            if (keyState.IsKeyDown(Keys.Left))
-                left.highlight();
-            else
                 left.deHighlight();
-
-            if (keyState.IsKeyDown(Keys.Right))
-                right.highlight();
-            else
                 right.deHighlight();
+            }
             
-			base.Update(elapsedTime);
+			    base.Update(elapsedTime);
 		}
 	}
 }

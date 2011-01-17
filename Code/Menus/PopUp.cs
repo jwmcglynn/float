@@ -22,7 +22,7 @@ namespace Sputnik.Menus
             Controller.IsMouseVisible = true;
             m_game = game;
             m_justPaused = true;
-            quitKey = Keys.Enter;
+            quitKey = Keys.Escape;
 		}
 
         public override void Update(float elapsedTime)

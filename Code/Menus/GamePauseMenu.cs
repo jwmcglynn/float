@@ -9,20 +9,50 @@ using Sputnik.Game;
 
 namespace Sputnik.Menus
 {
-    class MenuButton : Widget
+    internal class MenuButton : Widget
     {
-        public MenuButton(Menu menu, string textureName)
+        public MenuButton prevButton { get; set; }
+        private MenuButton nButton;
+        public MenuButton nextButton
+        {
+            get{ return nButton; }
+            set
+            {
+                nButton = value;
+                value.prevButton = this;
+            }
+        }
+        public bool isSelected;
+        public bool isPressed;
+        public MenuButton(GamePauseMenu menu, string textureName)
             : base(menu)
         {
+            isSelected = false;
+            isPressed = false;
+            prevButton = this;
+            nextButton = this;
             Texture = menu.contentManager.Load<Texture2D>(textureName);
-            OnMouseOver += () => { VertexColor = Color.LightGreen; };
-            OnMouseOut += () => { VertexColor = Color.White; };
-            OnMouseDown += () => { VertexColor = Color.Green; };
+            OnMouseOver += () => {
+                menu.unSelectCurrentButton();
+                menu.selectButton(this);
+            };
+            OnMouseDown += () => { isPressed = true; };
+        }
+        public override void Update(float elapsedTime)
+        {
+            if (isSelected)
+                VertexColor = Color.LightGreen;
+            else VertexColor = Color.White;
+            if(isPressed)
+                VertexColor = Color.Green;
+            base.Update(elapsedTime);
         }
     }
 
     public class GamePauseMenu : PopUp
     {
+        MenuButton currentButton;
+        
         public GamePauseMenu(Controller cntl, GameEnvironment game)
             :base(cntl, game)
         {
@@ -39,6 +69,11 @@ namespace Sputnik.Menus
             MenuButton startButton = new MenuButton(this, "buttons\\back_to_start");
             MenuButton titleButton = new MenuButton(this, "buttons\\back_to_title");
 
+            resumeGameButton.nextButton = checkpointButton;
+            checkpointButton.nextButton = startButton;
+            startButton.nextButton = titleButton;
+            titleButton.nextButton = resumeGameButton;
+
             float distanceBetweenButtons = 65.0f;
             float prevButton = -100.0f;
 
@@ -46,11 +81,12 @@ namespace Sputnik.Menus
             resumeGameButton.Registration = resumeGameButton.Size / 2;
             resumeGameButton.Position = (new Vector2(0.0f, prevButton)); 
             resumeGameButton.CreateButton(new Rectangle(0, 0,
-                 (int)resumeGameButton.Size.X / 2, (int)resumeGameButton.Size.Y / 2));
+                (int)resumeGameButton.Size.X , (int)resumeGameButton.Size.Y ));
             resumeGameButton.Zindex = 0.4f;
             resumeGameButton.OnActivate += () => {
                 onPressResume();
             };
+            
 			AddChild(resumeGameButton);
 
             checkpointButton.PositionPercent = new Vector2(0.5f, 0.45f);
@@ -58,7 +94,7 @@ namespace Sputnik.Menus
             prevButton += distanceBetweenButtons;
             checkpointButton.Position = (new Vector2(15.0f, prevButton)); 
             checkpointButton.CreateButton(new Rectangle(0, 0,
-                 (int)checkpointButton.Size.X / 2, (int)checkpointButton.Size.Y / 2));
+                 (int)checkpointButton.Size.X, (int)checkpointButton.Size.Y ));
             checkpointButton.Zindex = 0.5f;
             checkpointButton.OnActivate += () =>
             {
@@ -71,7 +107,7 @@ namespace Sputnik.Menus
             prevButton += distanceBetweenButtons;
             startButton.Position = (new Vector2(0.0f, prevButton)); 
             startButton.CreateButton(new Rectangle(0, 0,
-                 (int)startButton.Size.X / 2, (int)startButton.Size.Y / 2));
+                 (int)startButton.Size.X, (int)startButton.Size.Y));
             startButton.Zindex = 0.5f;
             startButton.OnActivate += () =>
             {
@@ -84,13 +120,15 @@ namespace Sputnik.Menus
             prevButton += distanceBetweenButtons;
             titleButton.Position = (new Vector2(0.0f, prevButton)); 
             titleButton.CreateButton(new Rectangle(0, 0,
-                 (int)titleButton.Size.X / 2, (int)titleButton.Size.Y / 2));
+                 (int)titleButton.Size.X, (int)titleButton.Size.Y));
             titleButton.Zindex = 0.5f;
             titleButton.OnActivate += () =>
             {
                 onPressTitle();
             };
             AddChild(titleButton);
+
+            selectButton(resumeGameButton);
         }
 
         void onPressResume()
@@ -114,6 +152,47 @@ namespace Sputnik.Menus
         {
             m_game.unPause();
             //TODO: go back to the main menu.
+        }
+
+        public override void Update(float elapsedTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                unSelectCurrentButton();
+                selectButton(currentButton.nextButton);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !OldKeyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                unSelectCurrentButton();
+                selectButton(currentButton.prevButton);
+            }
+
+            if(!( Keyboard.GetState().IsKeyDown(Keys.RightAlt) || Keyboard.GetState().IsKeyDown(Keys.LeftAlt) ))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    currentButton.isPressed = true;
+                }
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && !OldKeyboard.GetState().IsKeyUp(Keys.Enter))
+                {
+                    if (currentButton.isPressed)
+                        currentButton.DispatchOnMouseUp(true);
+                }
+            }
+
+            base.Update(elapsedTime);
+        }
+
+        internal void selectButton(MenuButton button)
+        {
+            button.isSelected = true;
+            currentButton = button;
+        }
+
+        //This is to be called by a button, when the mouse hovers over a different button.
+        internal void unSelectCurrentButton()
+        {
+            currentButton.isSelected = false;
         }
 
     }
