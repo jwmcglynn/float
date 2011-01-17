@@ -79,6 +79,12 @@ namespace Sputnik.Game
 
 		private float[] animationTimes;
 
+		//Enabling and disabling controls
+		public bool enableUp;
+		public bool enableDown;
+		public bool enableRight;
+		public bool enableLeft;
+
 		public Balloon(GameEnvironment env)
 			: base(env)
 		{
@@ -203,7 +209,6 @@ namespace Sputnik.Game
 		{
 			get
 			{
-				return currentState != BALLOON_STATE.DEAD;
                 return currentState != BALLOON_STATE.DEAD && currentState != BALLOON_STATE.INSTANT_DEAD;
 			}
 		}
@@ -249,11 +254,11 @@ namespace Sputnik.Game
 			int dirX = 0;
 			int dirY = 0;
 
-			if (keyState.IsKeyDown(Keys.Up)) --dirY;
-			if (keyState.IsKeyDown(Keys.Down)) ++dirY;
+			if (keyState.IsKeyDown(Keys.Up) && enableUp) --dirY;
+			if (keyState.IsKeyDown(Keys.Down) && enableDown) ++dirY;
 
-			if (keyState.IsKeyDown(Keys.Left)) --dirX;
-			if (keyState.IsKeyDown(Keys.Right)) ++dirX;
+			if (keyState.IsKeyDown(Keys.Left) && enableLeft) --dirX;
+			if (keyState.IsKeyDown(Keys.Right) && enableRight) ++dirX;
 
 			if (dirY == -1 && dirY != lastDirY)
 			{

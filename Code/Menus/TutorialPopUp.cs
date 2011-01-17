@@ -5,14 +5,17 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Sputnik.Game;
 namespace Sputnik.Menus
 {
     public class TutorialPopUp : PopUp
     {
+		GameEnvironment Game;
         Widget thePopUp;
         public TutorialPopUp(Controller cntl, GameEnvironment game, Keys key)
             : base(cntl, game)
         {
+			Game = game;
             quitKey = key;
             thePopUp = new Widget(this);
             switch (key)
@@ -37,5 +40,27 @@ namespace Sputnik.Menus
             AddChild(thePopUp);
            
         }
+
+		protected override void  unPause()
+		{
+			switch (quitKey)
+			{
+				case Keys.Up:
+					Game.Balloon.enableUp = true;
+					break;
+				case Keys.Down:
+					Game.Balloon.enableDown = true;
+					break;
+				case Keys.Right:
+					Game.Balloon.enableRight = true;
+					break;
+				case Keys.Left:
+					Game.Balloon.enableLeft = true;
+					break;
+			}
+			base.unPause();
+		}
+
     }
+
 }

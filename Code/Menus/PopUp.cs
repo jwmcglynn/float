@@ -29,12 +29,17 @@ namespace Sputnik.Menus
         {
             if (!m_justPaused)
             {
-                if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
-                    m_game.unPause();
+				if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
+					unPause();
             }
             m_justPaused = false;
             base.Update(elapsedTime);
         }
+
+		protected virtual void unPause()
+		{
+			m_game.unPause();
+		}
 
 		public override void Dispose() {
 			Controller.IsMouseVisible = false;

@@ -13,7 +13,11 @@ namespace Sputnik.Game {
 
 			AddChild(new RepeatingBackground(this));
 			AddChild(new Moon(this));
-            Sound.PlayCue("music_dreaming");
+
+			Balloon.enableUp = false;
+			Balloon.enableDown = false;
+			Balloon.enableRight = false;
+			Balloon.enableLeft = false;
 		}
 	}
 }
