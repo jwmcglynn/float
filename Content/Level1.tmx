@@ -3,14 +3,15 @@
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png"/>
  </tileset>
+ <tileset firstgid="33" source="tilesheet.tsx"/>
  <layer name="Tile BG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c23LDIAwFSZs+9v9/t9MHpkTFCIEAE3ZnNPUNG8vHOiFOHQIAAIzicREAtUTNfBRilqbQLgCcxpWP4+lgJfXzz/Dq43H+d/1zYl8AAE4BLwdP0vH5Z/jv7dHPR3s6+gWA08jVPfwcWol+/gyv4/M4/xDLRnk7GgaA02F8Dr3kfDwdn8v1IzwdDQPAnVjhrfg59KL9Hk4uG+Hp6BcA7sAdnmdTD6EV6dEx8HMAOA38HHbGOj6Xvu4FGgaA1eDnsDO5sXkM/BwATmK2n8uam/YB9uEu1yz9DZyc1t434+npPflYncevxccHAB9mennpWSfsw53eHdDj5yPG6S2s9vPvxccHAB9G+7lWR/Hz8eTyX6KkgZJeVviS5f/VNB2uYPXnoVasmoJ6Ss+QTqmZue9xwYa3n2v1s0WbnnWktv3OtUvzs4j27r6aKDHqM6Onn+diBrv5+a73wio0TVn0KDXeeswVpH2W51F77vJcZA7Q5R+y/uWozXntddJ8RqLV55b2LfsvtV9FS9+j72mhbWvJU/Qvj1zlNGbxc9leWy/PodSnVg310KqBmX1O28tpuayH2v7XHittV1sHa7zJ+5rk7oeUqxocMu21PFztN5233H+W7yYs+5T9y237TrTk1XK9auvmiJrjuV3PPq5yXtrOs3+lsPiy1cc9r2XITEddpX9jP72OPVu3BDE6Rmm61R96vcUzF+/Aan0RhDXkvZ/O//r5D5pEgWwAfQAA
+   H4sIAAAAAAAAC+3c3Y7CIBCGYVzXw73/292jSRDpQPmbQd4nIWpSW6wTvmJrQwAAzPK4aEAtqZkfpa2qKWoXwGmucpxMx11xnj/De47L65V5Tu0COAlZjpHi+fkzfGY7eQ4Ac+TGPfIcrSTPf8P7/Fxer85zahjAqZifo1cux63m59QwAA8sspU8Ry8v18NRvwCseTifzXiIVjIvTxt5DuA05Dl25mF+HgI1DMAH8hy7ys3NpVHDAE7ziB5n53k65sbbxT68fGfxNXDpcw/9q2Hdz5fx9gGMk8vzGbRzndiHp3sHfEOeW/uz7gCA4WaMz1fnNsnzdXL7X6PVgHZuxiI/PfxfrYf18RCA7zVyfCnleEue382mmnWt3OZq2vVi8eeouRdvz/39Zs3pd89zAJillFna9UdpRmsZnluuJi9L+dTy/pb1a++30tJ3yb1SKy17Zz9Jzo7YV1e/95DnAE5Xm9c1mazNz1uzpyVrRy7Xs45U7fHBqP7VZPrd/F/1Pcb7JX0udRU/Sj8B4FQrx2carbelx5Xp/9X+AUpXG1cAfQAA
   </data>
  </layer>
- <layer name="Tile FG" width="500" height="16">
+ <layer name="Tile FG" width="500" height="16" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YyW6DMBQF0CSiw6bDpm02Hf7/K+tNJGQxxGBshnOkK6QqcV4IvEd9OgEAAAAAAAAAAAAAAAAAAABLegh5DHkKea5cCwAwzUvIa8hbyHvlWtgez4PAnpxrFzBgrMd+hHyGfIVcly9nMnNjneY+D67ld11LHXA0l+i4Z3P7zFiP/Q75CfkN+Zuw/j1y9MrUuaE/98t5buY+D65lf2gtdcBRNbULKKB0n2mi5JDjO6TODf25X85zM/d5sMb+0LkjW9mngq1rRo57VqrPxHN8ykzve22O75A6N/Tnfms6NyX2h9rXcntPrz3P4zpufy/pEgX2KJ4tt+Pca77GPZtq6X43NMdT53rfe0r07FiNz9yKI5ybrmsxnpdxxl43tl7qPXNPLbA3W/j/PNdMnLN+bkuuDUsbm98ps7xrZqfM+6H1S9/XUNM/qVOQmgB9AAA=
+   H4sIAAAAAAAAC+3ZMQoAIQwEwFgIV97/X2tr5R2oRGGmSpFi2S4kAgAAAAAAAAAAAAAAAAAAANipdvOTlgIAAADmlewAA25uAMhXv1eG3iUp7jPbGwAAAAAA/5U4+/cNAAAAJ2lzcMGVAH0AAA==
   </data>
  </layer>
  <objectgroup name="Objects" width="500" height="16">
@@ -96,4 +97,9 @@
   <object name="tutorial" type="TempDown" x="5882" y="0" width="236" height="888"/>
  </objectgroup>
  <objectgroup name="Instructions" width="500" height="16"/>
+ <layer name="Tile Layer 3" width="500" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3bOwoCMRiF0dmKWIjFdD72vzMzYCGj6GQQknDPgdv/3UeKTBPA+C5l17Jb2b3xLQDAPnoOAOPTc9IdWx8A8Ad6Trpz2ek5bQdGpeekm1+2tH1p+qHpRQD19Jx08/TedO91YDR6Trp1zz+91wF6p+ek+9ZzTQdGoeek+9VzTQdGoOek29JzTQd6p+ek29pzTQd6puekq+m5pgO90nPS1fbcP3WgR3pOuj09X/9TNzNrPT0n3d6em5n1ND0n3QNqRStkAH0AAA==
+  </data>
+ </layer>
 </map>

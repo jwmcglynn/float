@@ -5,11 +5,17 @@
  </tileset>
  <tileset firstgid="33" source="tilesheet.tsx"/>
  <layer name="Tile BG" width="200" height="16">
+  <properties>
+   <property name="zindex" value="0.9"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3WwQkAIAwDwDqK+y/pp76sPxGRO8gIIYkAgDe1DFDTD1j1DFCbHbEhAADn+FYA3GZ7YE8/AAAA+N0ASxKhmAAyAAA=
   </data>
  </layer>
  <layer name="Tile FG" width="200" height="16">
+  <properties>
+   <property name="zindex" value="0.6"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3XQQrCMBBG4bgQ3HiIUEVcuOr972akhobBtJOCTNp5H/xLaVw82gwBgHRLu6c90wbjswC9yX28wtxIND0R0I+yDxoBZp8GZB80AkxqfdAIMKn1IRuhE3i01AfvEXi31kfZCOCNpg8agVfaPqwbORk9V+NifYA/OOJ/2qKlD819ZOkun5/Vm7P1ATpxtT5Ah2QfMbQ1InvYYx/ejRt/56Gnso8ottbI4zvZCn3sy6iYV7XvK8175FcrjB1prfcPxjwt9/EGxDmrOwAyAAA=
   </data>
@@ -111,12 +117,12 @@
     <property name="neutral" value="3"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="10810" y="146" width="188" height="128">
+  <object name="cloudT" type="cloud" x="10826" y="66" width="188" height="128">
    <properties>
     <property name="neutral" value="7"/>
    </properties>
   </object>
-  <object name="cloudR" type="cloud" x="9634" y="546" width="188" height="128">
+  <object name="cloudR" type="cloud" x="9734" y="578" width="188" height="128">
    <properties>
     <property name="neutral" value="3"/>
    </properties>
