@@ -111,6 +111,11 @@ namespace Sputnik.Game
 			Scale = 0.5f;
 			m_dead = false;
 
+			enableUp = true;
+			enableDown = true;
+			enableRight = true;
+			enableLeft = true;
+
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 			DesiredVelocity = DEFAULT_SPEED;
