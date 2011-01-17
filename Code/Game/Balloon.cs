@@ -24,7 +24,7 @@ namespace Sputnik.Game
 		 *
 		 */
 		public enum BALLOON_STATE {
-			DEAD, ALIVE, INVULNERABLE
+			DEAD, ALIVE, INVULNERABLE, SUPER_GUST
 		}
 
 		//DEFAULT SPEED CONSTANTS
@@ -33,11 +33,16 @@ namespace Sputnik.Game
 
         //DEFAULT POSITION CONSTANTS
 		
-		public const float INVULNERABILITY_TIME = 0.5f;
+		public const float INVULNERABILITY_TIME = 2f;
 
 		public const float SPEED_UP = 2.0f;
 
 		public const float CLOSE_TO_EPSILON = 5.0f;
+
+		public const int NUMBER_OF_ANIMATION_STATES = 7;
+		public const int DEAD_ANIM_INDEX = 0, ALIVE_ANIM_INDEX = 1, INVULNERABLE_ANIM_INDEX = 2,
+						 UP_ANIM_INDEX = 3, DOWN_ANIM_INDEX = 4, FORWARD_ANIM_INDEX = 5,
+						 BACK_ANIM_INDEX = 6;
 
 		/// <summary>
 		/// Instance variables for Balloon:
@@ -65,7 +70,12 @@ namespace Sputnik.Game
 
 		private bool m_dead;
 
+
 		private int m_lastRung = -1;
+		private Animation anim = new Animation();
+		private Sequence [] animations;
+
+		private float[] animationTimes;
 
 		public Balloon(GameEnvironment env)
 			: base(env)
@@ -94,13 +104,69 @@ namespace Sputnik.Game
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 			DesiredVelocity = DEFAULT_SPEED;
 
-			LoadTexture(Environment.contentManager, "Balloon\\BalloonNorm1");
 			Registration = new Vector2(285.0f, 165.0f);
 			//Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0 + track*TRACK_DISTANCE);
 			//Position = Vector2.Zero;
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 			AddCollisionCircle(90.0f * Scale, Vector2.Zero);
 
+
+			animations = new Sequence[NUMBER_OF_ANIMATION_STATES];
+
+			float defaultDuration = 0.2f;
+
+			//LOADING DEAD ANIMATION
+			Sequence seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
+			seq.AddFrame("balloon\\BalloonPop1", defaultDuration);
+			seq.AddFrame("balloon\\BalloonPop2", 0.5f);
+			seq.Loop = false;
+			animations[DEAD_ANIM_INDEX] = seq;
+
+			//LOADING ALIVE ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonNorm1", defaultDuration);
+			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
+			seq.Loop = true;
+			animations[ALIVE_ANIM_INDEX] = seq;
+
+	
+			//LOADING INVULNERABLE ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
+
+			seq.Loop = false;
+			animations[INVULNERABLE_ANIM_INDEX] = seq;
+
+
+			//LOADING UP ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonUp", float.PositiveInfinity);
+			seq.Loop = true;
+			animations[UP_ANIM_INDEX] = seq;
+			
+			//LOADING DOWN ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonFall", float.PositiveInfinity);
+			seq.Loop = true;
+			animations[DOWN_ANIM_INDEX] = seq;
+
+			//LOADING FORWARD ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonForward1", defaultDuration);
+			seq.AddFrame("balloon\\BalloonForward2", defaultDuration);
+			seq.Loop = true;
+			animations[FORWARD_ANIM_INDEX] = seq;
+
+			//LOADING BACK ANIMATION
+			seq = new Sequence(Environment.contentManager);
+			seq.AddFrame("balloon\\BalloonBack1", defaultDuration);
+			seq.AddFrame("balloon\\BalloonBack2", defaultDuration);
+			seq.Loop = true;
+			animations[BACK_ANIM_INDEX] = seq;
+
+			anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
+			Texture = anim.CurrentFrame;
 			previousPosition = Position;
 			SnapToRung();
 		}
@@ -151,13 +217,29 @@ namespace Sputnik.Game
 
 		int lastDirX = 0;
 		int lastDirY = 0;
-		/**
-			* I will be editing this very  soon but I will be back in 2 hours.
-			*/
+
 		public override void Update(float elapsedTime)
 		{
-			if (currentSpecialStateRemainingTime > 0)
-				currentSpecialStateRemainingTime -= elapsedTime;
+			if (currentState == BALLOON_STATE.DEAD)
+			{
+				DesiredVelocity = Vector2.Zero;
+				m_dead = anim.Done;
+
+				anim.Update(elapsedTime);
+				Texture = anim.CurrentFrame;
+
+				base.Update(elapsedTime);
+				return;
+			}
+
+			if (currentState == BALLOON_STATE.INVULNERABLE)
+			{
+				if (currentSpecialStateRemainingTime > 0)
+					currentSpecialStateRemainingTime -= elapsedTime;
+
+				if (currentSpecialStateRemainingTime <= 0)
+					currentState = BALLOON_STATE.ALIVE;
+			}
 
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldKeyState = OldKeyboard.GetState();
@@ -217,6 +299,7 @@ namespace Sputnik.Game
 
 			//DEFAULT ACTION
 
+			Vector2 origVel = DesiredVelocity;
 			Vector2 vel = DesiredVelocity;
 			Vector2 pos = Position;
 
@@ -249,7 +332,7 @@ namespace Sputnik.Game
 			bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
 			bool atRight = Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER <= Position.X;
 
-			if ((dirX < 0 && atLeft) || (dirX > 0 && atRight))
+			if (atLeft || atRight)
 			{
 				vel.X = DEFAULT_SPEED.X;
 				pos.X = MathUtils.Clamp(pos.X, Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER, Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER);
@@ -275,6 +358,98 @@ namespace Sputnik.Game
 			Position = pos;
 			DesiredVelocity = vel;
 
+			Vector2 cameraRelativeVelocity = origVel - DEFAULT_SPEED;
+			
+			if (cameraRelativeVelocity.Y > CLOSE_TO_EPSILON)
+			{
+				if (tracks.Last() > Position.Y)
+				{
+					anim.PlaySequence(animations[DOWN_ANIM_INDEX]);
+				}
+			} else if (cameraRelativeVelocity.Y < -CLOSE_TO_EPSILON)
+			{
+				if (tracks.First() < Position.Y)
+				{
+					anim.PlaySequence(animations[UP_ANIM_INDEX]);
+				}
+			}
+			else if (cameraRelativeVelocity.X < -CLOSE_TO_EPSILON)
+			{
+				if (!atLeft)
+				{
+					anim.PlaySequence(animations[BACK_ANIM_INDEX]);
+				}
+			}
+			else if (cameraRelativeVelocity.X > CLOSE_TO_EPSILON)
+			{
+				if (!atRight)
+				{
+					anim.PlaySequence(animations[FORWARD_ANIM_INDEX]);
+				}
+			}
+			else
+			{
+				anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
+			}
+			anim.Update(elapsedTime);
+			Texture = anim.CurrentFrame;
+
+			/*
+			//Applying animations once everything is set:
+			if (cameraRelativeVelocity.X == 0 || cameraRelativeVelocity.Y == 0)
+			{
+				if (cameraRelativeVelocity.X > 0)
+				{
+					animations[DOWN_ANIM_INDEX].Update(elapsedTime);
+					Texture = animations[FORWARD_ANIM_INDEX].CurrentFrame;
+				}
+				else if (cameraRelativeVelocity.Y > 0)
+				{
+					animations[DOWN_ANIM_INDEX].Update(elapsedTime);
+					Texture = animations[DOWN_ANIM_INDEX].CurrentFrame;
+				}
+				else if (cameraRelativeVelocity.X < 0)
+				{
+					animations[BACK_ANIM_INDEX].Update(elapsedTime);
+					Texture = animations[BACK_ANIM_INDEX].CurrentFrame;
+				}
+				else if (cameraRelativeVelocity.Y < 0)
+				{
+					animations[UP_ANIM_INDEX].Update(elapsedTime);
+					Texture = animations[UP_ANIM_INDEX].CurrentFrame;
+				}
+				else
+				{
+					animations[ALIVE_ANIM_INDEX].Update(elapsedTime);
+					Texture = animations[ALIVE_ANIM_INDEX].CurrentFrame;
+				}
+			}
+			else if (cameraRelativeVelocity.Y > 0 && !isCloseTo(cameraRelativeVelocity.Y, 0))
+			{
+				animations[DOWN_ANIM_INDEX].Update(elapsedTime);
+				Texture = animations[DOWN_ANIM_INDEX].CurrentFrame;
+			}
+			else if (cameraRelativeVelocity.Y < 0 && !isCloseTo(cameraRelativeVelocity.Y, 0))
+			{
+				animations[UP_ANIM_INDEX].Update(elapsedTime);
+				Texture = animations[UP_ANIM_INDEX].CurrentFrame;
+			}
+			else if (cameraRelativeVelocity.X > 0 && !isCloseTo(cameraRelativeVelocity.X, 0))
+			{
+				animations[DOWN_ANIM_INDEX].Update(elapsedTime);
+				Texture = animations[FORWARD_ANIM_INDEX].CurrentFrame;
+			}
+			else if (cameraRelativeVelocity.X < 0 && !isCloseTo(cameraRelativeVelocity.X, 0))
+			{
+				animations[BACK_ANIM_INDEX].Update(elapsedTime);
+				Texture = animations[BACK_ANIM_INDEX].CurrentFrame;
+			}
+			else if (cameraRelativeVelocity == Vector2.Zero)
+			{
+				animations[ALIVE_ANIM_INDEX].Update(elapsedTime);
+				Texture = animations[ALIVE_ANIM_INDEX].CurrentFrame;
+			}
+			 */
 			lastDirX = dirX;
 			lastDirY = dirY;
 
@@ -327,9 +502,14 @@ namespace Sputnik.Game
 		}
 
 		public void Kill() {
-			m_dead = true;
-			Sound.StopAll();
-			Sound.PlayCue("pop");
+			if (currentState != BALLOON_STATE.DEAD)
+			{
+				currentState = BALLOON_STATE.DEAD;
+				Sound.StopAll();
+				Sound.PlayCue("pop");
+
+				anim.PlaySequence(animations[DEAD_ANIM_INDEX]);
+			}
 		}
 
 		public void HitByRain() {
