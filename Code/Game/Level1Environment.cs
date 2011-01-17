@@ -9,15 +9,15 @@ namespace Sputnik.Game {
 		public Level1Environment(Controller ctrl)
 				: base(ctrl) {
 
-			LoadMap("Level1.tmx");
+			LoadMap("LevelDesignOne-84.tmx");
 
 			AddChild(new RepeatingBackground(this));
 			AddChild(new Moon(this));
 
-			Balloon.enableUp = false;
-			Balloon.enableDown = false;
-			Balloon.enableRight = false;
-			Balloon.enableLeft = false;
+            //Balloon.enableUp = false;
+            //Balloon.enableDown = false;
+            //Balloon.enableRight = false;
+            //Balloon.enableLeft = false;
 		}
 	}
 }

@@ -145,8 +145,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="LevelDesignOne.tmx">
-      <Name>LevelDesignOne</Name>
+    <None Include="LevelDesignOne-84.tmx">
+      <Name>LevelDesignOne-84</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="LevelDesignTwo.tmx">
