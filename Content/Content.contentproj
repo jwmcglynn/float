@@ -147,10 +147,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Level1-layout.tmx">
-      <Name>Level1-layout</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Level1.tmx">
       <Name>Level1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -158,6 +154,10 @@
     </None>
     <None Include="LevelDesignOne.tmx">
       <Name>LevelDesignOne</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LevelDesignTwo.tmx">
+      <Name>LevelDesignTwo</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestLevel.tmx">
