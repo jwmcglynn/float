@@ -229,7 +229,7 @@ namespace Sputnik.Game
 			}
 		}
 
-		Cue downSound, upSound, leftSound, rightSound;
+		Cue downSound, upSound, leftSound, rightSound, rainSound;
 
 		int lastDirX = 0;
 		int lastDirY = 0;
@@ -400,6 +400,10 @@ namespace Sputnik.Game
 				|| padState.IsButtonDown(Buttons.LeftThumbstickUp)) 
 				&& enableUp) --dirY;
 			if ((((keyState.IsKeyDown(Keys.Down) 
+                || padState.IsButtonDown(Buttons.DPadDown)
+                || (padState.IsButtonDown(Buttons.LeftThumbstickDown) && padState.ThumbSticks.Left.X<0.9))) 
+                && enableDown) 
+                || endingDescent ) ++dirY;
 				|| padState.IsButtonDown(Buttons.DPadDown) 
 				|| padState.IsButtonDown(Buttons.LeftThumbstickDown))) 
 				&& enableDown) 
@@ -562,7 +566,7 @@ namespace Sputnik.Game
             if (currentState != BALLOON_STATE.DYING)
             {
                 currentState = BALLOON_STATE.DEAD;
-                Sound.StopAll();
+                //Sound.StopAll();
             }
         }
 

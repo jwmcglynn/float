@@ -96,7 +96,7 @@ namespace Sputnik.Menus {
 
                 if (keyState.IsKeyDown(Keys.Down)
                     || padState.IsButtonDown(Input.Buttons.DPadDown)
-                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickDown))
+                    || (padState.IsButtonDown(Input.Buttons.LeftThumbstickDown) && padState.ThumbSticks.Left.X<0.9))
                     down.highlight();
                 else
                     down.deHighlight();
