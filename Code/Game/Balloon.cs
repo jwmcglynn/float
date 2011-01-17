@@ -64,7 +64,7 @@ namespace Sputnik.Game
 		private const float k_distortedResetVel = -MOVE_VEL / 6.0f;
 		private const float k_distortedFallVel = MOVE_VEL / 2;
 
-		private float zoomAmount = 0.025f;
+		private float zoomAmount = 0.0125f;
 
 		private ParticleEntity m_endExplosion; 
 
@@ -246,10 +246,9 @@ namespace Sputnik.Game
 			switch (currentState) {
 				case BALLOON_STATE.DYING:
 					DesiredVelocity = Vector2.Zero;
-					m_dead = anim.Done;
 					anim.Update(elapsedTime);
 					Texture = anim.CurrentFrame;
-					if (m_dead) currentState = BALLOON_STATE.DEAD;
+					if (anim.Done) currentState = BALLOON_STATE.DEAD;
 					break;
 					
 				case BALLOON_STATE.DEAD:
@@ -268,7 +267,7 @@ namespace Sputnik.Game
 					if (descentDelay <= 0.0f) {
 						endingDescent = true;
 					}
-					break;
+					goto case BALLOON_STATE.ALIVE;
 
 				case BALLOON_STATE.INVULNERABLE:
 					if (currentSpecialStateRemainingTime > 0)
@@ -310,7 +309,10 @@ namespace Sputnik.Game
 						}
 						else
 						{
-							vel.Y = MOVE_VEL * dirY;
+							if(endingDescent)
+								vel.Y = MOVE_VEL/2 * dirY;
+							else
+								vel.Y = MOVE_VEL * dirY;
 						}
 					}
 
@@ -324,7 +326,10 @@ namespace Sputnik.Game
 					}
 					else
 					{
-						vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
+						if(endingDescent)
+							vel.X = DEFAULT_SPEED.X  * dirX;
+						else
+							vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
 					}
 
 					// Distorted position.
@@ -419,7 +424,7 @@ namespace Sputnik.Game
 				|| padState.ThumbSticks.Left.X < -threshold)
 				&& enableLeft)
 			{
-				Environment.Camera.EffectScale = 1.0f;
+				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
 				--dirX;
 			} 
 
@@ -429,7 +434,7 @@ namespace Sputnik.Game
 				&& enableRight)
 				|| endingDescent)
 			{
-				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
+				Environment.Camera.EffectScale = 1.0f;
 				++dirX;
 			}
 			if(!keyState.IsKeyDown(Keys.Right) && !keyState.IsKeyDown(Keys.Left))

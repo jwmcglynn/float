@@ -43,6 +43,9 @@ namespace Sputnik {
 
 		private Matrix m_projection;
 
+		FaderOuter FadeOut;
+		public bool fade = false;
+
 		// Particles.
 		public SpriteBatchRenderer ParticleRenderer;
 		public List<ParticleEntity> ParticleKeepalive = new List<ParticleEntity>();
@@ -112,6 +115,8 @@ namespace Sputnik {
 
 			// Effects.
 			m_tintEffect = contentManager.Load<Effect>("TintEffect");
+
+			FadeOut = new FaderOuter(this, ScreenVirtualSize.X, ScreenVirtualSize.Y);
 
 			SpawnController = new SpawnController(this);
 
@@ -376,6 +381,7 @@ namespace Sputnik {
             }
 
             HUD.Update(elapsedTime);
+			FadeOut.Update(elapsedTime);
 
 			if (Balloon != null)
 				heatMultiplier = (this.ScreenVirtualSize.Y/2 - Balloon.Position.Y)* 0.0007f;
@@ -423,6 +429,13 @@ namespace Sputnik {
             //Draw popup
             if (m_popUp != null)
                 m_popUp.Draw();
+
+			if(fade)
+			{
+				FadeOut.fadeOut(0.3f);
+				//fade = false;
+			}
+			FadeOut.Draw(m_spriteBatch);
 		}
 
 		/// <summary>

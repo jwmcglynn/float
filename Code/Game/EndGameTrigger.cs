@@ -16,6 +16,9 @@ namespace Sputnik.Game
 	{
 		private GameEnvironment game;
 		private SpawnPoint spawnPoint;
+		private bool activated;
+		float delay;
+
 		public EndGameTrigger(GameEnvironment env, SpawnPoint sp)
 			:base(env, sp)
 		{
@@ -26,11 +29,19 @@ namespace Sputnik.Game
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)
 		{
 			base.OnCollide(entB, contact);
-			float delay;
 			if (spawnPoint.Properties.ContainsKey("delay"))
 				float.TryParse(spawnPoint.Properties["delay"], out delay);
 			else delay = 0.0f;
 			((Balloon)entB).goToEndSequence(delay);
+			activated = true;
+		}
+		public override void Update(float elapsedTime)
+		{
+			base.Update(elapsedTime);
+			if (activated)
+			{
+				Environment.fade = true;
+			}
 		}
 	}
 

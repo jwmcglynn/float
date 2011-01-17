@@ -54,10 +54,7 @@
    </properties>
   </object>
   <object name="star" type="star" x="1862" y="58" width="70" height="66"/>
-  <object name="" type="TempUp" x="982" y="26" width="90" height="868"/>
-  <object name="" type="TempDown" x="1140" y="8" width="90" height="868"/>
-  <object name="" type="HighPressure" x="1340" y="-24" width="90" height="868"/>
-  <object name="" type="LowPressure" x="1562" y="24" width="90" height="868"/>
+  <object name="theEnd" type="end" x="2812" y="-16" width="118" height="814"/>
  </objectgroup>
  <objectgroup name="Instructions" width="73" height="16"/>
 </map>

@@ -44,7 +44,7 @@ namespace Sputnik {
 		public Vector2 MoveSpeed;
 		public float Scale;
 
-		public float ScaleSpeed = 3.0f;
+		public float ScaleSpeed = 6.0f;
 
 		public float EffectScale = 1.0f;
 		private float m_actualEffectScale = 1.0f;
