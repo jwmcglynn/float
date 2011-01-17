@@ -166,7 +166,7 @@ namespace Sputnik.Game
 			
 			//LOADING DOWN ANIMATION
 			seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonFall", float.PositiveInfinity);
+			seq.AddFrame("balloon\\BalloonFall", float.PositiveInfinity, new Vector2(0.0f, -10.0f));
 			seq.Loop = true;
 			animations[DOWN_ANIM_INDEX] = seq;
 
