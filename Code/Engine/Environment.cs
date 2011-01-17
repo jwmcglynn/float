@@ -10,6 +10,8 @@ namespace Sputnik {
 	public abstract class Environment : Entity {
 		public Controller Controller { get; private set; }
 
+		public Camera2D Camera;
+
 		public Environment(Controller ctrl) {
 			Controller = ctrl;
 		}

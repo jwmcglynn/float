@@ -29,7 +29,10 @@ namespace Sputnik {
 		}
 
 		public override void Draw(SpriteBatch spriteBatch) {
-			Environment.ParticleRenderer.RenderEffect(Effect, spriteBatch);
+			Environment.SpriteBatchPop();
+			Matrix tform = Environment.Camera.Transform;
+			Environment.ParticleRenderer.RenderEffect(Effect, ref tform);
+			Environment.SpriteBatchPush();
 			base.Draw(spriteBatch);
 		}
 

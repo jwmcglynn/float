@@ -377,10 +377,6 @@ namespace Sputnik {
 			if (Texture != null) {
 				spriteBatch.Draw(Texture, Position, null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
 			}
-
-			foreach (Entity ent in Children) {
-				ent.Draw(spriteBatch);
-			}
 		}
 	}
 }

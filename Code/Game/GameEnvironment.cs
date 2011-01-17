@@ -29,7 +29,6 @@ namespace Sputnik {
 		// Camera.
 		public static Vector2 k_idealScreenSize { get { return new Vector2(1680, 1024); } }
 		public Vector2 ScreenVirtualSize = new Vector2(1680, 1050);
-		public Camera2D Camera;
         public Vector2 defaultCameraMoveSpeed = new Vector2(k_scrollSpeed, 0.0f);
 
         /// <summary>
@@ -362,22 +361,44 @@ namespace Sputnik {
             HUD.Update(elapsedTime);
 		}
 
+
+		public void SpriteBatchPush() {
+			/*if (false) {
+				// TODO: Draw effect.
+				m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.5f, 5.0f, 1.0f).ToVector3());
+				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, m_tintEffect, tform);
+			} else {*/
+			m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, Camera.Transform);
+			//}
+		}
+
+		public void SpriteBatchPop() {
+			m_spriteBatch.End();
+		}
+
+		private void GetDrawList(List<Entity> list, Entity ent) {
+			list.Add(ent);
+			foreach (Entity c in ent.Children) {
+				GetDrawList(list, c);
+			}
+		}
+
 		/// <summary>
 		/// Draw the world.
 		/// </summary>
 		public override void Draw() {
 			Matrix tform = Camera.Transform;
 
+			List<Entity> list = new List<Entity>();
+			GetDrawList(list, this);
 			// Draw entities.
-			/*if (false) {
-				// TODO: Draw effect.
-				m_tintEffect.Parameters["TintColor"].SetValue(new Color(1.5f, 5.0f, 1.0f).ToVector3());
-				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, m_tintEffect, tform);
-			} else {*/
-				m_spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, tform);
-			//}
-			Draw(m_spriteBatch);
-			m_spriteBatch.End();
+			SpriteBatchPush();
+
+			foreach (Entity ent in list.OrderByDescending((ent) => ent.Zindex)) {
+				ent.Draw(m_spriteBatch);
+			}
+
+			SpriteBatchPop();
 
 			if (m_debugView != null) {
 				// Debug drawing.
