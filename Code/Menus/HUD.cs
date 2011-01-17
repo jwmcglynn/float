@@ -17,12 +17,12 @@ namespace Sputnik.Menus {
 			: base(env) {
      
             Texture = env.contentManager.Load<Texture2D>(asset);
-			Registration = Size / 2;
+			Registration = new Vector2(169.0f, 152.0f);
             PositionPercent = new Vector2(0.9f, 0.85f);
             Zindex = 0.5f;
             Scale = 0.65f;
             VertexColor = fillColor;
-            Alpha = 0.7f;
+            Alpha = 0.8f;
             
             /* Are we going to implement controls here? -Reza
             OnMouseOver += () => { Alpha = 1.0f; };
@@ -35,11 +35,13 @@ namespace Sputnik.Menus {
         {
             VertexColor = highlightColor;
             Alpha = 1.0f;
+			Scale = 0.69f;
         }
         public void deHighlight()
         {
             VertexColor = fillColor;
             Alpha = 0.7f;
+			Scale = 0.65f;
         }
 	}
 

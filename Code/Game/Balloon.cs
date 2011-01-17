@@ -86,6 +86,7 @@ namespace Sputnik.Game
 		public bool enableDown;
 		public bool enableRight;
 		public bool enableLeft;
+		public bool endingDescent;
 
 		public Balloon(GameEnvironment env)
 			: base(env)
@@ -117,6 +118,7 @@ namespace Sputnik.Game
 			enableDown = true;
 			enableRight = true;
 			enableLeft = true;
+			endingDescent = false;
 
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
@@ -262,7 +264,7 @@ namespace Sputnik.Game
 			int dirY = 0;
 
 			if (keyState.IsKeyDown(Keys.Up) && enableUp) --dirY;
-			if (keyState.IsKeyDown(Keys.Down) && enableDown) ++dirY;
+			if ( (keyState.IsKeyDown(Keys.Down) && enableDown) || endingDescent ) ++dirY;
 
 			if (keyState.IsKeyDown(Keys.Left) && enableLeft) --dirX;
 			if (keyState.IsKeyDown(Keys.Right) && enableRight) ++dirX;
