@@ -1,33 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="128" height="16" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="500" height="16" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png"/>
  </tileset>
- <layer name="Tile BG" width="128" height="16">
+ <layer name="Tile BG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2SSQqAMBRDW8Fh47Bx2Djc/5RmqUWhIvS3/XnwoAjS0MQYQu5Y6QBEFGu4Ac2wf91Yww1ohv3rht3rhv0TbkA37F83KfdfwgrWsBHOQsLTwg72cBDOkhvFg7ExwgnOcBHOkhtP/ce2gRVucIeHbJSkeevaxxgyhMp8/d89u9/+4Jv/y10h35fG5wm+gGtPACAAAA==
+   H4sIAAAAAAAAC+2c23LDIAwFSZs+9v9/t9MHpkTFCIEAE3ZnNPUNG8vHOiFOHQIAAIzicREAtUTNfBRilqbQLgCcxpWP4+lgJfXzz/Dq43H+d/1zYl8AAE4BLwdP0vH5Z/jv7dHPR3s6+gWA08jVPfwcWol+/gyv4/M4/xDLRnk7GgaA02F8Dr3kfDwdn8v1IzwdDQPAnVjhrfg59KL9Hk4uG+Hp6BcA7sAdnmdTD6EV6dEx8HMAOA38HHbGOj6Xvu4FGgaA1eDnsDO5sXkM/BwATmK2n8uam/YB9uEu1yz9DZyc1t434+npPflYncevxccHAB9mennpWSfsw53eHdDj5yPG6S2s9vPvxccHAB9G+7lWR/Hz8eTyX6KkgZJeVviS5f/VNB2uYPXnoVasmoJ6Ss+QTqmZue9xwYa3n2v1s0WbnnWktv3OtUvzs4j27r6aKDHqM6Onn+diBrv5+a73wio0TVn0KDXeeswVpH2W51F77vJcZA7Q5R+y/uWozXntddJ8RqLV55b2LfsvtV9FS9+j72mhbWvJU/Qvj1zlNGbxc9leWy/PodSnVg310KqBmX1O28tpuayH2v7XHittV1sHa7zJ+5rk7oeUqxocMu21PFztN5233H+W7yYs+5T9y237TrTk1XK9auvmiJrjuV3PPq5yXtrOs3+lsPiy1cc9r2XITEddpX9jP72OPVu3BDE6Rmm61R96vcUzF+/Aan0RhDXkvZ/O//r5D5pEgWwAfQAA
   </data>
  </layer>
- <layer name="Tile FG" width="128" height="16">
+ <layer name="Tile FG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3Tuw6CQBCFYQpFG8XGS+Pl/Z+S05GQrO4OByYm/5ecDpYZZrbrAAAAAAAAAGCyV3rloByTa/nln2qtld3TSTkrg3LZ8LuRvrNqLXHMrrUn975clZtyVx6G82pFZrmk1t0sDo59bO3JfQeeykt5Kx/DebUis4zUOp97ZAdKzzruTmtPWffVbe29+zb31j0ovZNxd7b+pusfLjnfbc2zM40TpqBIACAAAA==
+   H4sIAAAAAAAAC+3YyW6DMBQF0CSiw6bDpm02Hf7/K+tNJGQxxGBshnOkK6QqcV4IvEd9OgEAAAAAAAAAAAAAAAAAAABLegh5DHkKea5cCwAwzUvIa8hbyHvlWtgez4PAnpxrFzBgrMd+hHyGfIVcly9nMnNjneY+D67ld11LHXA0l+i4Z3P7zFiP/Q75CfkN+Zuw/j1y9MrUuaE/98t5buY+D65lf2gtdcBRNbULKKB0n2mi5JDjO6TODf25X85zM/d5sMb+0LkjW9mngq1rRo57VqrPxHN8ykzve22O75A6N/Tnfms6NyX2h9rXcntPrz3P4zpufy/pEgX2KJ4tt+Pca77GPZtq6X43NMdT53rfe0r07FiNz9yKI5ybrmsxnpdxxl43tl7qPXNPLbA3W/j/PNdMnLN+bkuuDUsbm98ps7xrZqfM+6H1S9/XUNM/qVOQmgB9AAA=
   </data>
  </layer>
- <objectgroup name="Objects" width="128" height="16">
-  <object name="spawn" type="spawn" x="144" y="354" width="82" height="78"/>
-  <object name="cloud" type="cloud" x="812" y="114" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="2296" y="248" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="2298" y="400" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="2940" y="292" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="2760" y="596" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="3176" y="384" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="4104" y="38" width="196" height="74"/>
-  <object name="cloud" type="cloud" x="4960" y="110" width="196" height="74"/>
-  <object name="bird" type="bird" x="1726" y="156" width="150" height="54"/>
-  <object name="bird" type="bird" x="1374" y="380" width="150" height="54"/>
-  <object name="plane" type="plane" x="2516" y="78" width="188" height="86"/>
-  <object name="plane" type="plane" x="2848" y="444" width="188" height="86"/>
-  <object name="" x="1136" y="1108" width="234"/>
-  <object name="tutorial" type="speedUp" x="454" y="72" width="132" height="782"/>
+ <objectgroup name="Objects" width="500" height="16">
+  <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
+  <object name="bird" type="bird" x="3910" y="708" width="126" height="54"/>
+  <object name="InstructionalCloud" type="cloud" x="3528" y="530" width="188" height="116">
+   <properties>
+    <property name="neutral" value="1"/>
+   </properties>
+  </object>
+  <object name="ShootingStar" type="star" x="4864" y="-8" width="64" height="72"/>
+  <object name="star" type="star" x="4932" y="-12" width="56" height="72"/>
+  <object name="star" type="star" x="4988" y="-4" width="64" height="64"/>
+  <object name="star" type="star" x="5056" y="-4" width="64" height="64"/>
+  <object name="star" type="star" x="5120" y="-4" width="64" height="64"/>
+  <object name="SpeedCloud" type="cloud" x="2876" y="72" width="192" height="124">
+   <properties>
+    <property name="neutral" value="9"/>
+   </properties>
+  </object>
+  <object name="bird" type="bird" x="5568" y="380" width="124" height="64"/>
+  <object name="bird" type="bird" x="6148" y="134" width="128" height="60"/>
+  <object name="bird" type="bird" x="6980" y="512" width="120" height="64"/>
+  <object name="bird" type="bird" x="7100" y="324" width="132" height="56"/>
+  <object name="cloudT" type="cloud" x="7674" y="0" width="196" height="124"/>
+  <object name="star" type="star" x="8896" y="-3" width="68" height="68"/>
+  <object name="star" type="star" x="8957" y="-1" width="68" height="68"/>
+  <object name="star" type="star" x="9020" y="-4" width="68" height="68"/>
+  <object name="star" type="star" x="9092" y="-4" width="68" height="68"/>
+  <object name="bird" type="bird" x="7942" y="188" width="128" height="64"/>
+  <object name="plane" type="plane" x="8580" y="184" width="188" height="72"/>
+  <object name="plane" type="plane" x="8584" y="316" width="188" height="72"/>
+  <object name="plane" type="plane" x="8584" y="440" width="188" height="72"/>
+  <object name="bird" type="bird" x="2756" y="628" width="124" height="68"/>
+  <object name="cloudR" type="cloud" x="5724" y="0" width="192" height="128"/>
+  <object name="cloudL" type="cloud" x="6404" y="-8" width="192" height="128"/>
+  <object name="cloudH" type="cloud" x="9597" y="251" width="200" height="128"/>
+  <object name="star" type="star" x="4352" y="0" width="64" height="64"/>
+  <object name="star" type="star" x="4424" y="0" width="64" height="64"/>
+  <object name="cloudL" type="cloud" x="10248" y="0" width="192" height="128"/>
+  <object name="plane" type="plane" x="10558" y="190" width="196" height="64"/>
+  <object name="cloudH" type="cloud" x="11006" y="190" width="196" height="132"/>
+  <object name="cloudL" type="cloud" x="11458" y="-2" width="200" height="128"/>
+  <object name="cloudH" type="cloud" x="11840" y="194" width="196" height="128"/>
+  <object name="star" type="star" x="12606" y="-2" width="64" height="64"/>
+  <object name="star" type="star" x="12670" y="-2" width="64" height="64"/>
+  <object name="star" type="star" x="12734" y="-6" width="64" height="64"/>
+  <object name="plane" type="plane" x="12802" y="252" width="188" height="64"/>
+  <object name="bird" type="bird" x="12802" y="382" width="124" height="68"/>
+  <object name="bird" type="bird" x="12802" y="510" width="124" height="68"/>
+  <object name="plane" type="plane" x="13634" y="128" width="192" height="60"/>
+  <object name="plane" type="plane" x="13630" y="252" width="200" height="64"/>
+  <object name="bird" type="bird" x="13634" y="384" width="116" height="60"/>
+  <object name="bird" type="bird" x="13634" y="516" width="128" height="56"/>
+  <object name="bird" type="bird" x="13630" y="636" width="128" height="60"/>
+  <object name="cloudT" type="cloud" x="13446" y="4" width="184" height="120"/>
+  <object name="cloudT" type="cloud" x="14406" y="378" width="192" height="124"/>
+  <object name="cloudH" type="cloud" x="14598" y="380" width="192" height="124"/>
+  <object name="bird" type="bird" x="15364" y="60" width="132" height="68"/>
+  <object name="bird" type="bird" x="15360" y="192" width="124" height="60"/>
+  <object name="bird" type="bird" x="15360" y="316" width="128" height="68"/>
+  <object name="plane" type="plane" x="16188" y="320" width="188" height="64"/>
+  <object name="plane" type="plane" x="16184" y="572" width="196" height="68"/>
+  <object name="plane" type="plane" x="16196" y="448" width="188" height="64"/>
+  <object name="bird" type="bird" x="16060" y="188" width="124" height="64"/>
+  <object name="bird" type="bird" x="16064" y="64" width="132" height="64"/>
+  <object name="cloudR" type="cloud" x="17092" y="262" width="192" height="124"/>
+  <object name="cloudR" type="cloud" x="17412" y="514" width="188" height="128"/>
+  <object name="bird" type="bird" x="17730" y="642" width="124" height="60"/>
+  <object name="bird" type="bird" x="17726" y="778" width="124" height="60"/>
+  <object name="bird" type="bird" x="17850" y="710" width="124" height="60"/>
+  <object name="cloudL" type="cloud" x="16766" y="2" width="200" height="124"/>
+  <object name="plane" type="plane" x="17726" y="448" width="196" height="60"/>
+  <object name="plane" type="plane" x="17738" y="196" width="180" height="56"/>
+  <object name="cloudT" type="cloud" x="18046" y="128" width="196" height="124"/>
+  <object name="plane" type="plane" x="17730" y="324" width="180" height="56"/>
+  <object name="cloudR" type="cloud" x="18438" y="260" width="184" height="120"/>
+  <object name="bird" type="bird" x="18756" y="128" width="128" height="64"/>
+  <object name="plane" type="plane" x="2748" y="514" width="188" height="56"/>
+  <object name="tutorial" type="LowPressure" x="2472" y="40" width="230" height="842"/>
+  <object name="tutorial" type="HighPressure" x="4114" y="-2" width="236" height="888"/>
+  <object name="tutorial" type="TempUp" x="5320" y="0" width="236" height="888"/>
+  <object name="tutorial" type="TempDown" x="5882" y="0" width="236" height="888"/>
  </objectgroup>
+ <objectgroup name="Instructions" width="500" height="16"/>
 </map>
