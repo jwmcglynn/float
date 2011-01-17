@@ -88,7 +88,7 @@ namespace Sputnik.Game
 			base.OnTempChange(amount);
 		}
 
-		public void UpdateState(int temp) {
+		public void UpdateState(int temp, bool immediate = false) {
 			// temp is 0 to 10.
 
 			double d = (temp - m_neutralRung) / 2.0f;
@@ -116,7 +116,13 @@ namespace Sputnik.Game
                     break;
             }
 
-			if (transitionTarget == currentState) { return; }
+            if (immediate || transitionTarget == currentState)
+            {
+                currentState = transitionTarget;
+                PlayAnim();
+                return;
+            }
+
 			CLOUD_STATE lastState = currentState;
 			currentState = CLOUD_STATE.TRANSITION;
 			switch (lastState)
@@ -255,7 +261,7 @@ namespace Sputnik.Game
 
 
 
-			UpdateState((int) Environment.Temperature);
+			UpdateState((int) Environment.Temperature, true);
 
             Registration = new Vector2(295.0f, 236.0f);
 
@@ -266,9 +272,6 @@ namespace Sputnik.Game
             m_rainFixture = AddCollisionRectangle((bottomright - topleft) * 0.5f, (topleft + bottomright) * 0.5f); 
 
 			Zindex = ZSettings.Cloud;
-
-			
-			transitionState = CLOUD_STATE.NORM;
 			transitionTarget = CLOUD_STATE.NORM;
 
             SnapToRung();
@@ -290,29 +293,34 @@ namespace Sputnik.Game
             }
         }
 
+        private void PlayAnim()
+        {
+            switch (currentState)
+            {
+                case CLOUD_STATE.LIGHTNING:
+                    m_anim.PlaySequence(m_lightning);
+                    break;
+                case CLOUD_STATE.THUNDER:
+                    m_anim.PlaySequence(m_thunder);
+                    break;
+                case CLOUD_STATE.NORM:
+                    m_anim.PlaySequence(m_norm);
+                    break;
+                case CLOUD_STATE.RAIN:
+                    m_anim.PlaySequence(m_rain);
+                    break;
+                case CLOUD_STATE.HAIL:
+                    m_anim.PlaySequence(m_hail);
+                    break;
+            }
+        }
+
 		public override void Update(float elapsedTime)
 		{
 			if (currentState == CLOUD_STATE.TRANSITION && m_anim.Done)
 			{
 				currentState = transitionTarget;
-				switch (currentState)
-				{
-					case CLOUD_STATE.LIGHTNING:
-						m_anim.PlaySequence(m_lightning);
-						break;
-					case CLOUD_STATE.THUNDER:
-						m_anim.PlaySequence(m_thunder);
-						break;
-					case CLOUD_STATE.NORM:
-						m_anim.PlaySequence(m_norm);
-						break;
-					case CLOUD_STATE.RAIN:
-						m_anim.PlaySequence(m_rain);
-						break;
-					case CLOUD_STATE.HAIL:
-						m_anim.PlaySequence(m_hail);
-						break;
-				}
+                PlayAnim();
 			}
 
 			m_anim.Update(elapsedTime);
