@@ -23,11 +23,14 @@ namespace Sputnik {
 		public const float k_spawnRadius = 100.0f; // Must be less than cull radius.
 		public SpawnController SpawnController { get; private set; }
 
+		public const float k_scrollSpeed = 150.0f;
+
+
 		// Camera.
 		public static Vector2 k_idealScreenSize { get { return new Vector2(1680, 1024); } }
 		public Vector2 ScreenVirtualSize = new Vector2(1680, 1050);
 		public Camera2D Camera;
-        public Vector2 defaultCameraMoveSpeed = new Vector2(100.0f, 0.0f);
+        public Vector2 defaultCameraMoveSpeed = new Vector2(k_scrollSpeed, 0.0f);
 
         /// <summary>
         /// The player. May be null if the player is not spawned at the moment.
@@ -77,7 +80,7 @@ namespace Sputnik {
 			// Camera.
 			Camera = new Camera2D(this);
 			//Camera.Position = new Vector2(1280.0f, k_idealScreenSize.Y * 0.5f);
-            Camera.MoveSpeed = defaultCameraMoveSpeed;
+			Camera.MoveSpeed = defaultCameraMoveSpeed;
 			Camera.ResetEffectScale(1.0f); // Set at slightly higher than 1.0 so we can do a zoom out pressure effect.
 
 			// Window.

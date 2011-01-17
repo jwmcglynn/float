@@ -28,7 +28,7 @@ namespace Sputnik.Game
 		}
 
 		//DEFAULT SPEED CONSTANTS
-		private static Vector2 DEFAULT_SPEED = new Vector2(100.0f, 0.0f);
+		private static Vector2 DEFAULT_SPEED = new Vector2(GameEnvironment.k_scrollSpeed, 0.0f);
 		public const float MOVE_VEL = 250.0f;
 
         //DEFAULT POSITION CONSTANTS
