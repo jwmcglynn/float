@@ -4,7 +4,7 @@
     <Item Type="ProjectMercury.Emitters.ConeEmitter">
       <Name>Smoke 1</Name>
       <Budget>350</Budget>
-      <Term>2</Term>
+      <Term>1</Term>
       <ReleaseQuantity>1</ReleaseQuantity>
       <Enabled>True</Enabled>
       <ReleaseSpeed>
@@ -12,7 +12,7 @@
         <Variation>0</Variation>
       </ReleaseSpeed>
       <ReleaseColour>
-        <Value>0.8784314 0.8784314 0.8784314</Value>
+        <Value>1 1 1</Value>
         <Variation>0 0 0</Variation>
       </ReleaseColour>
       <ReleaseOpacity>
@@ -28,14 +28,14 @@
         <Variation>3.14</Variation>
       </ReleaseRotation>
       <ReleaseImpulse>0 0</ReleaseImpulse>
-      <ParticleTextureAssetName>Cloud001</ParticleTextureAssetName>
+      <ParticleTextureAssetName>Cloud003</ParticleTextureAssetName>
       <Modifiers>
         <Item Type="ProjectMercury.Modifiers.DampingModifier">
           <DampingCoefficient>0.95</DampingCoefficient>
         </Item>
         <Item Type="ProjectMercury.Modifiers.ScaleModifier">
           <InitialScale>30</InitialScale>
-          <UltimateScale>80</UltimateScale>
+          <UltimateScale>60</UltimateScale>
         </Item>
         <Item Type="ProjectMercury.Modifiers.RotationRateModifier">
           <InitialRate>1.57079637</InitialRate>
@@ -46,9 +46,9 @@
           <Ultimate>0</Ultimate>
         </Item>
       </Modifiers>
-      <BlendMode>Alpha</BlendMode>
+      <BlendMode>Add</BlendMode>
       <TriggerOffset>0 0</TriggerOffset>
-      <MinimumTriggerPeriod>0.01</MinimumTriggerPeriod>
+      <MinimumTriggerPeriod>0</MinimumTriggerPeriod>
       <Direction>-1.57</Direction>
       <ConeAngle>0.6</ConeAngle>
     </Item>

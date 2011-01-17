@@ -60,7 +60,7 @@ namespace Sputnik.Game
 
 		private void Initialize()
 		{
-			m_magic_Trail = new ParticleEntity(Environment, "starRainbowTrail");
+			m_magic_Trail = new ParticleEntity(Environment, "starTrail");
 			m_magic_Trail.Zindex = 0.9f;
 			AddChild(m_magic_Trail);
 
