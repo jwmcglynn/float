@@ -152,7 +152,7 @@ namespace Sputnik.Menus
             if(currentGame is TestLevelEnvironment)
                 Controller.ChangeEnvironment(new TestLevelEnvironment(Controller));
             else
-                Controller.ChangeEnvironment(new TestLevelEnvironment(Controller));
+                Controller.ChangeEnvironment(new Level1Environment(Controller));
         }
 
         void onPressTitle()
