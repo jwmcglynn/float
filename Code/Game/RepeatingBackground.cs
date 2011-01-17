@@ -3,59 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Sputnik.Game {
 	class RepeatingBackground : GameEntity {
 		private List<Entity> m_bg = new List<Entity>();
 		private float m_width = 0.0f;
 
-		private string[] k_bgNames = {"sky1", "sky2", "sky3", "sky1", "sky2", "sky3", "sky1", "sky2", "sky3"};
+		private string[] k_bgNames = {"sky1", "sky2", "sky3"};
+
+		private Texture2D[] m_textures;
+		private int[] m_strides;
 
 		public RepeatingBackground(GameEnvironment env)
 				: base(env) {
-			
-			for (int i = 0; i < k_bgNames.Length; ++i) {
-				Entity bg = new Entity();
-				bg.LoadTexture(Environment.contentManager, k_bgNames[i]);
-				bg.Zindex = 1.0f; // Lowest.
-				bg.Position = new Vector2(m_width, 0.0f);
-				AddChild(bg);
 
-				m_width += bg.Size.X;
-				m_bg.Add(bg);
+			m_textures = new Texture2D[k_bgNames.Length];
+			m_strides = new int[k_bgNames.Length];
+
+			for (int i = 0; i < k_bgNames.Length; ++i) {
+				m_textures[i] = Environment.contentManager.Load<Texture2D>(k_bgNames[i]);
+				m_strides[i] = m_textures[i].Width;
+
+				m_width += m_strides[i];
 			}
 
-			// Update positioning.
-			Update(0.0f);
+			Zindex = 1.0f; // Very back.
 		}
 
 		public override bool ShouldCull() {
 			return false;
 		}
 
-		public override void Update(float elapsedTime) {
-			while (m_bg.First().VisibleRect.Right < Environment.Camera.Rect.Left) {
-				// Push to back of array.
-				Entity first = m_bg.First();
-				m_bg.Remove(first);
-				m_bg.Add(first);
+		public override void Draw(SpriteBatch spriteBatch) {
+			float left = Environment.Camera.Rect.Left;
+			float right = Environment.Camera.Rect.Right;
 
-				// Move to the right.
-				first.Position = first.Position + new Vector2(m_width, 0.0f);
+			float pos = 0.0f;
+			float origPos = pos;
+
+			int tex = 0;
+			while (pos < right) {
+				// Draw if visible.
+				if (pos + m_strides[tex] > left) {
+					spriteBatch.Draw(m_textures[tex], new Vector2(pos, 0.0f), null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
+				}
+
+				pos += m_strides[tex];
+				++tex;
+				if (tex == m_textures.Length) tex = 0; // Wrap around.
 			}
 
-			// Make sure leftmost part of screen has texture.  If this happens the window must have been resized or the texture is too small.
-			while (m_bg.First().VisibleRect.Left > Environment.Camera.Rect.Left) {
-				// Push to back of array.
-				Entity last = m_bg.Last();
-				m_bg.Remove(last);
-				m_bg.Insert(0, last);
-
-				// Move to the left.
-				last.Position = last.Position - new Vector2(m_width, 0.0f);
-			}
-
-			base.Update(elapsedTime);
+			base.Draw(spriteBatch);
 		}
 	}
 }

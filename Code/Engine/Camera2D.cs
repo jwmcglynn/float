@@ -72,7 +72,7 @@ namespace Sputnik {
 			// Create the Transform used by any
 			// spritebatch process
 			Matrix tform = Matrix.CreateTranslation(-Position.X + CenterOffset.X, -Position.Y + CenterOffset.Y, 0)
-							* Matrix.CreateScale(Scale);
+							* Matrix.CreateScale(Scale * m_actualEffectScale, Scale * m_actualEffectScale, 1.0f);
 			Transform = tform;
 			m_inverseIsValid = false;
 
