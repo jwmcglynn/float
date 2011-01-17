@@ -24,7 +24,7 @@ namespace Sputnik.Game
 		 *
 		 */
 		public enum BALLOON_STATE {
-			DEAD, ALIVE, INVULNERABLE, SUPER_GUST, INSTANT_DEAD, ENDING_SEQUENCE
+			DYING, ALIVE, INVULNERABLE, SUPER_GUST, DEAD, ENDING_SEQUENCE
 		}
 
 		//DEFAULT SPEED CONSTANTS
@@ -148,8 +148,7 @@ namespace Sputnik.Game
 			Sequence seq = new Sequence(Environment.contentManager);
 			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
 			seq.AddFrame("balloon\\BalloonPop1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonPop2", 0.5f, new Vector2(80, 65));
-			seq.Loop = false;
+			seq.AddFrame("balloon\\BalloonPop2", 0.2f, new Vector2(291 - 279, 215 - 171));
 			animations[DEAD_ANIM_INDEX] = seq;
 
 			//LOADING ALIVE ANIMATION
@@ -226,7 +225,7 @@ namespace Sputnik.Game
 		{
 			get
 			{
-                return currentState != BALLOON_STATE.DEAD && currentState != BALLOON_STATE.INSTANT_DEAD;
+                return currentState != BALLOON_STATE.DYING && currentState != BALLOON_STATE.DEAD;
 			}
 		}
 
@@ -235,78 +234,185 @@ namespace Sputnik.Game
 		int lastDirX = 0;
 		int lastDirY = 0;
 
-		public override void Update(float elapsedTime)
-		{
-			if (currentState == BALLOON_STATE.DEAD)
-			{
-				DesiredVelocity = Vector2.Zero;
-				m_dead = anim.Done;
+		public override void Update(float elapsedTime) {
+			switch (currentState) {
+				case BALLOON_STATE.DYING:
+					DesiredVelocity = Vector2.Zero;
+					m_dead = anim.Done;
 
-				anim.Update(elapsedTime);
-				Texture = anim.CurrentFrame;
-				Environment.restartEntities();
-				base.Update(elapsedTime);
-				return;
-			}
-            if (currentState == BALLOON_STATE.INSTANT_DEAD)
-            {
-                DesiredVelocity = Vector2.Zero;
-                m_dead = true;
-				Environment.restartEntities();
-                base.Update(elapsedTime);
-                return;
-            }
+					anim.Update(elapsedTime);
+					Texture = anim.CurrentFrame;
+					if (m_dead) currentState = BALLOON_STATE.DEAD;
+					break;
+					
+				case BALLOON_STATE.DEAD:
+					DesiredVelocity = Vector2.Zero;
+					m_dead = true;
+					Environment.restartEntities();
+					break;
 
-			if (currentState == BALLOON_STATE.INVULNERABLE)
-			{
-				if (currentSpecialStateRemainingTime > 0)
-					currentSpecialStateRemainingTime -= elapsedTime;
+				case BALLOON_STATE.ENDING_SEQUENCE:
+					enableDown = false;
+					enableUp = false;
+					enableLeft = false;
+					enableRight = false;
 
-				if (currentSpecialStateRemainingTime <= 0)
-					currentState = BALLOON_STATE.ALIVE;
-			}
+					descentDelay -= elapsedTime;
+					if (descentDelay <= 0.0f) {
+						endingDescent = true;
+					}
+					break;
 
-			if(currentState == BALLOON_STATE.ENDING_SEQUENCE)
-			{
-				enableDown = false;
-				enableUp = false;
-				enableLeft = false;
-				enableRight = false;
+				case BALLOON_STATE.INVULNERABLE:
+					if (currentSpecialStateRemainingTime > 0)
+						currentSpecialStateRemainingTime -= elapsedTime;
 
-				descentDelay -= elapsedTime;
-				if(descentDelay <= 0.0f)
-				{
-					endingDescent = true;
-				}
+					if (currentSpecialStateRemainingTime <= 0)
+						currentState = BALLOON_STATE.ALIVE;
+
+					goto case BALLOON_STATE.ALIVE;
+					
+				case BALLOON_STATE.ALIVE: {
+					int dirX, dirY;
+					ProcessControls(out dirX, out dirY);
+
+					//DEFAULT ACTION
+					Vector2 origVel = DesiredVelocity;
+					Vector2 vel = DesiredVelocity;
+					Vector2 pos = Position;
+
+					pos.Y -= m_distortedPosition;
+
+					if (dirY == 0)
+					{
+						for (int i = 0; i < tracks.Length; i++)
+						{
+							if (Math.Sign(tracks[i] - pos.Y) != Math.Sign(tracks[i] - previousPosition.Y))
+							{
+								vel.Y = DEFAULT_SPEED.Y;
+								pos.Y = tracks[i];
+							}
+						}
+					}
+					else
+					{
+						if ((dirY < 0 && pos.Y < tracks.First()) || (dirY > 0 && pos.Y > tracks.Last()))
+						{
+							vel.Y = DEFAULT_SPEED.Y;
+							pos.Y = MathUtils.Clamp(pos.Y, tracks.First(), tracks.Last());
+						}
+						else
+						{
+							vel.Y = MOVE_VEL * dirY;
+						}
+					}
+
+					bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
+					bool atRight = Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER <= Position.X;
+
+					if (atLeft || atRight)
+					{
+						vel.X = DEFAULT_SPEED.X;
+						pos.X = MathUtils.Clamp(pos.X, Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER, Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER);
+					}
+					else
+					{
+						vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
+					}
+
+					// Distorted position.
+					UpdateDistortion(elapsedTime);
+
+					// Trigger OnTempChange.
+					if (PositionToRung(pos.Y) != m_lastRung) {
+						int last = m_lastRung;
+						m_lastRung = PositionToRung(pos.Y);
+						Environment.OnTempChange(m_lastRung);
+					}
+
+					previousPosition = pos; // previousPosition always reflects the real un-distorted position.
+					pos.Y += m_distortedPosition;
+
+					Position = pos;
+					DesiredVelocity = vel;
+
+					Vector2 cameraRelativeVelocity = origVel - DEFAULT_SPEED;
+			
+					if (cameraRelativeVelocity.Y > CLOSE_TO_EPSILON)
+					{
+						if (tracks.Last() > Position.Y)
+						{
+							anim.PlaySequence(animations[DOWN_ANIM_INDEX]);
+						}
+					} else if (cameraRelativeVelocity.Y < -CLOSE_TO_EPSILON)
+					{
+						if (tracks.First() < Position.Y)
+						{
+							anim.PlaySequence(animations[UP_ANIM_INDEX]);
+						}
+					}
+					else if (cameraRelativeVelocity.X < -CLOSE_TO_EPSILON)
+					{
+						if (!atLeft)
+						{
+							anim.PlaySequence(animations[BACK_ANIM_INDEX]);
+						}
+					}
+					else if (cameraRelativeVelocity.X > CLOSE_TO_EPSILON)
+					{
+						if (!atRight)
+						{
+							anim.PlaySequence(animations[FORWARD_ANIM_INDEX]);
+						}
+					}
+					else
+					{
+						anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
+					}
+
+					lastDirX = dirX;
+					lastDirY = dirY;
+
+					if (m_distortState != DistortState.NONE)
+						drippingWet.Effect.Trigger(Position);
+				} break;
 				
 			}
 
+			anim.Update(elapsedTime);
+			Registration = originalRegistration + anim.CurrentOffset;
+			Texture = anim.CurrentFrame;
+
+			base.Update(elapsedTime);
+		}
+
+		private void ProcessControls(out int dirX, out int dirY) {
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldKeyState = OldKeyboard.GetState();
-            GamePadState padState = GamePad.GetState(PlayerIndex.One);
-            GamePadState oldpadState = OldGamePad.GetState();
+			GamePadState padState = GamePad.GetState(PlayerIndex.One);
+			GamePadState oldpadState = OldGamePad.GetState();
 
-			int dirX = 0;
-			int dirY = 0;
+			dirX = 0;
+			dirY = 0;
 
-            if (((keyState.IsKeyDown(Keys.Up))
-                || padState.IsButtonDown(Buttons.DPadUp) 
-                || padState.IsButtonDown(Buttons.LeftThumbstickUp)) 
-                && enableUp) --dirY;
+			if (((keyState.IsKeyDown(Keys.Up))
+				|| padState.IsButtonDown(Buttons.DPadUp) 
+				|| padState.IsButtonDown(Buttons.LeftThumbstickUp)) 
+				&& enableUp) --dirY;
 			if ((((keyState.IsKeyDown(Keys.Down) 
-                || padState.IsButtonDown(Buttons.DPadDown) 
-                || padState.IsButtonDown(Buttons.LeftThumbstickDown))) 
-                && enableDown) 
-                || endingDescent ) ++dirY;
+				|| padState.IsButtonDown(Buttons.DPadDown) 
+				|| padState.IsButtonDown(Buttons.LeftThumbstickDown))) 
+				&& enableDown) 
+				|| endingDescent ) ++dirY;
 
 			if ((keyState.IsKeyDown(Keys.Left)
-                || padState.IsButtonDown(Buttons.DPadLeft)
-                || padState.IsButtonDown(Buttons.LeftThumbstickLeft))
-                && enableLeft) --dirX;
+				|| padState.IsButtonDown(Buttons.DPadLeft)
+				|| padState.IsButtonDown(Buttons.LeftThumbstickLeft))
+				&& enableLeft) --dirX;
 			if (((keyState.IsKeyDown(Keys.Right)
-                || padState.IsButtonDown(Buttons.DPadRight)
-                || padState.IsButtonDown(Buttons.LeftThumbstickRight))
-                && enableRight)
+				|| padState.IsButtonDown(Buttons.DPadRight)
+				|| padState.IsButtonDown(Buttons.LeftThumbstickRight))
+				&& enableRight)
 				|| endingDescent) ++dirX;
 
 			if (dirY == -1 && dirY != lastDirY)
@@ -352,167 +458,6 @@ namespace Sputnik.Game
 				rightSound = null;
 				Environment.OnPressureChange(0.0f);
 			}
-
-			//DEFAULT ACTION
-
-			Vector2 origVel = DesiredVelocity;
-			Vector2 vel = DesiredVelocity;
-			Vector2 pos = Position;
-
-			pos.Y -= m_distortedPosition;
-
-			if (dirY == 0)
-			{
-				for (int i = 0; i < tracks.Length; i++)
-				{
-					if (Math.Sign(tracks[i] - pos.Y) != Math.Sign(tracks[i] - previousPosition.Y))
-					{
-						vel.Y = DEFAULT_SPEED.Y;
-						pos.Y = tracks[i];
-					}
-				}
-			}
-			else
-			{
-				if ((dirY < 0 && pos.Y < tracks.First()) || (dirY > 0 && pos.Y > tracks.Last()))
-				{
-					vel.Y = DEFAULT_SPEED.Y;
-					pos.Y = MathUtils.Clamp(pos.Y, tracks.First(), tracks.Last());
-				}
-				else
-				{
-					vel.Y = MOVE_VEL * dirY;
-				}
-			}
-
-			bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
-			bool atRight = Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER <= Position.X;
-
-			if (atLeft || atRight)
-			{
-				vel.X = DEFAULT_SPEED.X;
-				pos.X = MathUtils.Clamp(pos.X, Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER, Environment.Camera.Rect.Right - RIGHT_POSITION_BUFFER);
-			}
-			else
-			{
-				vel.X = DEFAULT_SPEED.X + MOVE_VEL * dirX;
-			}
-
-			// Distorted position.
-			UpdateDistortion(elapsedTime);
-
-			// Trigger OnTempChange.
-			if (PositionToRung(pos.Y) != m_lastRung) {
-				int last = m_lastRung;
-				m_lastRung = PositionToRung(pos.Y);
-				Environment.OnTempChange(m_lastRung);
-			}
-
-			previousPosition = pos; // previousPosition always reflects the real un-distorted position.
-			pos.Y += m_distortedPosition;
-
-			Position = pos;
-			DesiredVelocity = vel;
-
-			Vector2 cameraRelativeVelocity = origVel - DEFAULT_SPEED;
-			
-			if (cameraRelativeVelocity.Y > CLOSE_TO_EPSILON)
-			{
-				if (tracks.Last() > Position.Y)
-				{
-					anim.PlaySequence(animations[DOWN_ANIM_INDEX]);
-				}
-			} else if (cameraRelativeVelocity.Y < -CLOSE_TO_EPSILON)
-			{
-				if (tracks.First() < Position.Y)
-				{
-					anim.PlaySequence(animations[UP_ANIM_INDEX]);
-				}
-			}
-			else if (cameraRelativeVelocity.X < -CLOSE_TO_EPSILON)
-			{
-				if (!atLeft)
-				{
-					anim.PlaySequence(animations[BACK_ANIM_INDEX]);
-				}
-			}
-			else if (cameraRelativeVelocity.X > CLOSE_TO_EPSILON)
-			{
-				if (!atRight)
-				{
-					anim.PlaySequence(animations[FORWARD_ANIM_INDEX]);
-				}
-			}
-			else
-			{
-				anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
-			}
-			anim.Update(elapsedTime);
-			Texture = anim.CurrentFrame;
-			Registration = originalRegistration + anim.CurrentOffset;
-
-			/*
-			//Applying animations once everything is set:
-			if (cameraRelativeVelocity.X == 0 || cameraRelativeVelocity.Y == 0)
-			{
-				if (cameraRelativeVelocity.X > 0)
-				{
-					animations[DOWN_ANIM_INDEX].Update(elapsedTime);
-					Texture = animations[FORWARD_ANIM_INDEX].CurrentFrame;
-				}
-				else if (cameraRelativeVelocity.Y > 0)
-				{
-					animations[DOWN_ANIM_INDEX].Update(elapsedTime);
-					Texture = animations[DOWN_ANIM_INDEX].CurrentFrame;
-				}
-				else if (cameraRelativeVelocity.X < 0)
-				{
-					animations[BACK_ANIM_INDEX].Update(elapsedTime);
-					Texture = animations[BACK_ANIM_INDEX].CurrentFrame;
-				}
-				else if (cameraRelativeVelocity.Y < 0)
-				{
-					animations[UP_ANIM_INDEX].Update(elapsedTime);
-					Texture = animations[UP_ANIM_INDEX].CurrentFrame;
-				}
-				else
-				{
-					animations[ALIVE_ANIM_INDEX].Update(elapsedTime);
-					Texture = animations[ALIVE_ANIM_INDEX].CurrentFrame;
-				}
-			}
-			else if (cameraRelativeVelocity.Y > 0 && !isCloseTo(cameraRelativeVelocity.Y, 0))
-			{
-				animations[DOWN_ANIM_INDEX].Update(elapsedTime);
-				Texture = animations[DOWN_ANIM_INDEX].CurrentFrame;
-			}
-			else if (cameraRelativeVelocity.Y < 0 && !isCloseTo(cameraRelativeVelocity.Y, 0))
-			{
-				animations[UP_ANIM_INDEX].Update(elapsedTime);
-				Texture = animations[UP_ANIM_INDEX].CurrentFrame;
-			}
-			else if (cameraRelativeVelocity.X > 0 && !isCloseTo(cameraRelativeVelocity.X, 0))
-			{
-				animations[DOWN_ANIM_INDEX].Update(elapsedTime);
-				Texture = animations[FORWARD_ANIM_INDEX].CurrentFrame;
-			}
-			else if (cameraRelativeVelocity.X < 0 && !isCloseTo(cameraRelativeVelocity.X, 0))
-			{
-				animations[BACK_ANIM_INDEX].Update(elapsedTime);
-				Texture = animations[BACK_ANIM_INDEX].CurrentFrame;
-			}
-			else if (cameraRelativeVelocity == Vector2.Zero)
-			{
-				animations[ALIVE_ANIM_INDEX].Update(elapsedTime);
-				Texture = animations[ALIVE_ANIM_INDEX].CurrentFrame;
-			}
-			 */
-			lastDirX = dirX;
-			lastDirY = dirY;
-			if (m_distortState != DistortState.NONE)
-				drippingWet.Effect.Trigger(Position);
-
-			base.Update(elapsedTime);
 		}
 
 		private void UpdateDistortion(float elapsedTime) {
@@ -576,9 +521,9 @@ namespace Sputnik.Game
 
 
 		public void Kill() {
-			if (currentState != BALLOON_STATE.DEAD)
+			if (currentState != BALLOON_STATE.DYING)
 			{
-                currentState = BALLOON_STATE.DEAD;
+                currentState = BALLOON_STATE.DYING;
                 if (downSound != null)
                 {
                     downSound.Stop(AudioStopOptions.AsAuthored);
@@ -614,9 +559,9 @@ namespace Sputnik.Game
 		/// </summary>
         public void FastKill()
         {
-            if (currentState != BALLOON_STATE.DEAD)
+            if (currentState != BALLOON_STATE.DYING)
             {
-                currentState = BALLOON_STATE.INSTANT_DEAD;
+                currentState = BALLOON_STATE.DEAD;
                 Sound.StopAll();
             }
         }
