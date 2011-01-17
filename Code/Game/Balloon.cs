@@ -57,6 +57,9 @@ namespace Sputnik.Game
 
 		private float m_distortedPosition = 0.0f;
 		private float m_distortedVel = 0.0f;
+
+		private const float k_rainRestoreDelay = 0.5f;
+		private float m_distortRestoreDelay = 0.5f;
 		private const float k_distortAmount = 1.5f * RUNG_HEIGHT;
 		private const float k_distortedResetVel = -MOVE_VEL / 6.0f;
 		private const float k_distortedFallVel = MOVE_VEL / 2;
@@ -65,6 +68,7 @@ namespace Sputnik.Game
 		enum DistortState {
 			NONE,
 			FALLING,
+			FALLEN,
 			RISING
 		}
 
@@ -76,8 +80,6 @@ namespace Sputnik.Game
 		private int m_lastRung = -1;
 		private Animation anim = new Animation();
 		private Sequence [] animations;
-
-		private float[] animationTimes;
 
 		//Enabling and disabling controls
 		public bool enableUp;
@@ -142,8 +144,8 @@ namespace Sputnik.Game
 
 			//LOADING ALIVE ANIMATION
 			seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonNorm1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
+			seq.AddFrame("balloon\\BalloonNorm1", 0.3f);
+			seq.AddFrame("balloon\\BalloonNorm2", 0.3f);
 			seq.Loop = true;
 			animations[ALIVE_ANIM_INDEX] = seq;
 
@@ -170,15 +172,15 @@ namespace Sputnik.Game
 
 			//LOADING FORWARD ANIMATION
 			seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonForward1", defaultDuration, new Vector2(50, 20));
-			seq.AddFrame("balloon\\BalloonForward2", defaultDuration, new Vector2(50, 20));
+			seq.AddFrame("balloon\\BalloonForward1", 0.15f, new Vector2(50, 20));
+			seq.AddFrame("balloon\\BalloonForward2", 0.15f, new Vector2(50, 20));
 			seq.Loop = true;
 			animations[FORWARD_ANIM_INDEX] = seq;
 
 			//LOADING BACK ANIMATION
 			seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonBack1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonBack2", defaultDuration);
+			seq.AddFrame("balloon\\BalloonBack1", 0.3f);
+			seq.AddFrame("balloon\\BalloonBack2", 0.3f);
 			seq.Loop = true;
 			animations[BACK_ANIM_INDEX] = seq;
 
@@ -490,10 +492,24 @@ namespace Sputnik.Game
 
 					if (m_distortedPosition >= k_distortAmount) {
 						m_distortedPosition = k_distortAmount;
+						m_distortState = DistortState.FALLEN;
+					}
+
+					break;
+
+				case DistortState.FALLEN:
+					if (init) {
+						m_distortRestoreDelay = k_rainRestoreDelay;
+						m_distortedVel = 0.0f;
+					}
+					
+					m_distortRestoreDelay -= elapsedTime;
+					if (m_distortRestoreDelay <= 0.0f) {
 						m_distortState = DistortState.RISING;
 					}
 
 					break;
+
 				case DistortState.RISING:
 					if (init) {
 						m_distortedVel = k_distortedResetVel;
@@ -560,6 +576,8 @@ namespace Sputnik.Game
 		public void HitByRain() {
 			if (m_distortState == DistortState.NONE) {
 				m_distortState = DistortState.FALLING;
+			} else {
+				m_distortRestoreDelay = k_rainRestoreDelay;
 			}
 		}
 
