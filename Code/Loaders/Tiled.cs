@@ -433,7 +433,7 @@ namespace Squared.Tiled {
 			_TileInfoCache = cache.ToArray();
 		}
 
-		public void Draw(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, int tileWidth, int tileHeight, float zindex = 0.95f)
+		public void Draw(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, int tileWidth, int tileHeight, Vector2 drawOffset, float zindex = 0.95f)
 		{
 			int minX = (int) Math.Floor((float) rectangle.Left / tileWidth);
 			int minY = (int) Math.Floor((float) rectangle.Top / tileHeight);
@@ -466,7 +466,7 @@ namespace Squared.Tiled {
 					if ((index >= 0) && (index < _TileInfoCache.Length))
 					{
 						info = _TileInfoCache[index];
-						batch.Draw(info.Texture, destPos, null, new Color(1.0f, 1.0f, 1.0f, this.Opacity), 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, zindex);
+						batch.Draw(info.Texture, destPos + drawOffset, null, new Color(1.0f, 1.0f, 1.0f, this.Opacity), 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, zindex);
 					}
 
 					destPos.X += tileWidth;
@@ -749,10 +749,10 @@ namespace Squared.Tiled {
 
 		public delegate void BeginSpriteBatch();
 
-		public void Draw (SpriteBatch batch, Rectangle rectangle, BeginSpriteBatch begin) {
+		public void Draw (SpriteBatch batch, Rectangle rectangle, BeginSpriteBatch begin, Vector2 drawOffset) {
 			foreach (Layer layers in Layers.Values) {
 				begin();
-				layers.Draw(batch, Tilesets.Values, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height), TileWidth, TileHeight);
+				layers.Draw(batch, Tilesets.Values, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height), TileWidth, TileHeight, drawOffset);
 				batch.End();
 			}
 		}

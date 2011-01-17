@@ -52,7 +52,6 @@ namespace Sputnik.Game {
 		/***************************************************************************/
 
 		public override void Update(float elapsedTime) {
-			// TODO: Update animation.
 			m_anim.Update(elapsedTime);
 			Texture = m_anim.CurrentFrame;
 			base.Update(elapsedTime);

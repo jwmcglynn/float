@@ -9,24 +9,40 @@ namespace Sputnik {
 		internal GameEnvironment Environment;
 		public List<SpawnPoint> SpawnPoints = new List<SpawnPoint>();
 
-		public SpawnController(GameEnvironment env, IList<Squared.Tiled.ObjectGroup> objectGroupList) {
+		public SpawnController(GameEnvironment env) {
 			Environment = env;
-
+		}
+		
+		public void CreateSpawnPoints(IList<Squared.Tiled.ObjectGroup> objectGroupList, Vector2? offset = null, bool createPlayerSpawn = false) {
 			bool spawnedPlayer = false;
+			Vector2 realOffset = offset == null ? Vector2.Zero : (Vector2) offset;
 			
 			// Load spawn points.
 			foreach (Squared.Tiled.ObjectGroup objGroup in objectGroupList) {
 				foreach (List<Squared.Tiled.Object> objList in objGroup.Objects.Values) {
 					foreach (Squared.Tiled.Object obj in objList) {
+						obj.X += (int) realOffset.X;
+						obj.Y += (int) realOffset.Y;
 						SpawnPoint sp = new SpawnPoint(this, obj);
-						if (sp.Entity == null) SpawnPoints.Add(sp);
 
-						if (sp.EntityType == "spawn") spawnedPlayer = true;
+						// Immediately spawn some entities.
+						switch (sp.EntityType) {
+							case "spawn":
+								if (createPlayerSpawn) {
+									spawnedPlayer = true;
+									sp.AlwaysSpawned = true;
+									sp.Spawn();
+								}
+								break;
+							default:
+								SpawnPoints.Add(sp);
+								break;
+						}
 					}
 				}
 			}
 
-			if (!spawnedPlayer) throw new InvalidOperationException("Level loaded does not contain player spawn point.");
+			if (!spawnedPlayer && createPlayerSpawn) throw new InvalidOperationException("Level loaded does not contain player spawn point.");
 		}
 
 		public void Update(float elapsedTime) {

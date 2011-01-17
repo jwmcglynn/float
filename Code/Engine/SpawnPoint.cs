@@ -66,7 +66,7 @@ namespace Sputnik {
 		public bool AllowRespawn = true;
 
 		// Time in seconds until SpawnPoint can trigger again.
-		public float RespawnCooldown;
+		public float RespawnCooldown = 0.0f;
 
 		// Arbitrary data added by level editor to initialize object.
 		public SortedList<string, string> Properties = new SortedList<string, string>();
@@ -100,12 +100,8 @@ namespace Sputnik {
 			Properties = obj.Properties;
 			EntityType = obj.Type;
 
-			// Immediately spawn some entities.
-			switch (EntityType) {
-				case "spawn":
-					AlwaysSpawned = true;
-					Spawn();
-					break;
+			if (EntityType == "bird") {
+				Console.WriteLine("Create bird at " + Position);
 			}
 		}
 

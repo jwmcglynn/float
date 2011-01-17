@@ -21,9 +21,10 @@ namespace Sputnik {
 
 		public override void Draw(SpriteBatch spriteBatch) {
 			Rectangle rectangle = Environment.Camera.Rect;
+			rectangle.Location = new Point(rectangle.Location.X - (int) Position.X, rectangle.Location.Y - (int) Position.Y);
 
 			// Draw map.
-			m_map.Layers[m_layer].Draw(spriteBatch, m_map.Tilesets.Values, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height), m_map.TileWidth, m_map.TileHeight, Zindex);
+			m_map.Layers[m_layer].Draw(spriteBatch, m_map.Tilesets.Values, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height), m_map.TileWidth, m_map.TileHeight, Position, Zindex);
 		}
 	}
 }

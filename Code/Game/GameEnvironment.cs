@@ -19,12 +19,14 @@ using Sputnik.Menus;
 namespace Sputnik {
 	public class GameEnvironment : Environment {
 		// Spawning/culling.
-		public const float k_cullRadius = 100.0f; // Must be greater than spawn radius.
+		public const float k_cullRadius = 300.0f; // Must be greater than spawn radius.
 		public const float k_spawnRadius = 100.0f; // Must be less than cull radius.
 		public SpawnController SpawnController { get; private set; }
 
 		public const float k_scrollSpeed = 150.0f;
 
+		// Map.
+		private float m_mapStart = 0.0f;
 
 		// Camera.
 		public static Vector2 k_idealScreenSize { get { return new Vector2(1680, 1024); } }
@@ -38,7 +40,6 @@ namespace Sputnik {
 
 		// Drawing.
 		private SpriteBatch m_spriteBatch;
-		private Tiled.Map m_map;
 
 		private Matrix m_projection;
 
@@ -111,6 +112,8 @@ namespace Sputnik {
 			// Effects.
 			m_tintEffect = contentManager.Load<Effect>("TintEffect");
 
+			SpawnController = new SpawnController(this);
+
 			// Farseer freaks out unless we call Update here when changing Environments.  FIXME: Why?
 			Update(0.0f);
 		}
@@ -140,8 +143,8 @@ namespace Sputnik {
 		}
 
 
-		private Tiled.Tileset.TilePropertyList GetTileProperties(int tileId) {
-			foreach (Tiled.Tileset t in m_map.Tilesets.Values) {
+		private Tiled.Tileset.TilePropertyList GetTileProperties(Tiled.Map map, int tileId) {
+			foreach (Tiled.Tileset t in map.Tilesets.Values) {
 				Tiled.Tileset.TilePropertyList props = t.GetTileProperties(tileId);
 				if (props != null) return props;
 			}
@@ -154,23 +157,32 @@ namespace Sputnik {
 		/// </summary>
 		/// <param name="filename">File to load map from.</param>
 		public void LoadMap(string filename) {
-			m_map = Tiled.Map.Load(Path.Combine(Controller.Content.RootDirectory, filename), Controller.Content);
+			m_mapStart = 0.0f;
+			DestroyCollisionBody();
+			LoadOrExtendMap(filename, true);
+		}
+
+		/// <summary>
+		/// Load a map from file and create collision objects for it.  Appends map horizontally if one exists.
+		/// </summary>
+		/// <param name="filename">File to load map from.</param>
+		public void LoadOrExtendMap(string filename, bool spawnPlayer = false) {
+			Tiled.Map map = Tiled.Map.Load(Path.Combine(Controller.Content.RootDirectory, filename), Controller.Content);
 
 			// Destroy and re-create collision body for map.
-			DestroyCollisionBody();
-			CreateCollisionBody(CollisionWorld, Physics.Dynamics.BodyType.Static);
+			if (CollisionBody == null) CreateCollisionBody(CollisionWorld, Physics.Dynamics.BodyType.Static);
 
-			Vector2 tileHalfSize = new Vector2(m_map.TileWidth, m_map.TileHeight) / 2;
-			Vector2 tileSize = new Vector2(m_map.TileWidth, m_map.TileHeight);
+			Vector2 tileHalfSize = new Vector2(map.TileWidth, map.TileHeight) / 2;
+			Vector2 tileSize = new Vector2(map.TileWidth, map.TileHeight);
 
-			bool[,] levelCollision = new bool[m_map.Width, m_map.Height];
+			bool[,] levelCollision = new bool[map.Width, map.Height];
 
-			float defaultZVal = 0.96f;
+			float defaultZVal = ZSettings.Ground;
 
 			// 2 = collision. 1 = no collision. 0 = unknown.
 			List<byte> collision = new List<byte>();
 
-			foreach (KeyValuePair<string, Tiled.Layer> layer in m_map.Layers) {
+			foreach (KeyValuePair<string, Tiled.Layer> layer in map.Layers) {
 				defaultZVal -= 0.001f;
 
 				for (int x = 0; x < layer.Value.Width; ++x)
@@ -179,7 +191,7 @@ namespace Sputnik {
 					if (tileId < 0) continue;
 
 					if (tileId >= collision.Count || collision[tileId] == 0) {
-						Tiled.Tileset.TilePropertyList props = GetTileProperties(tileId);
+						Tiled.Tileset.TilePropertyList props = GetTileProperties(map, tileId);
 						
 						// The only way to add new elements at arbitrary indices is to fill up the rest of the array.  Do so.
 						for (int i = collision.Count; i < tileId + 1; ++i) collision.Add(0);
@@ -202,15 +214,18 @@ namespace Sputnik {
 					}
 				}
 
-				AddChild(new MapLayer(this, m_map, layer.Key, z));
+				MapLayer ml = new MapLayer(this, map, layer.Key, z);
+				ml.Position = new Vector2(m_mapStart, 0.0f);
+				AddChild(ml);
+				// TODO: Make .Position do something in MapLayer
 			}
 
 			// Go through collision and try to create large horizontal collision shapes.
-			for (int y = 0; y < m_map.Height; ++y) {
+			for (int y = 0; y < map.Height; ++y) {
 				int firstX = 0;
 				bool hasCollision = false;
 
-				for (int x = 0; x < m_map.Width; ++x) {
+				for (int x = 0; x < map.Width; ++x) {
 					if (levelCollision[x, y]) {
 						if (hasCollision) continue;
 						else {
@@ -227,7 +242,7 @@ namespace Sputnik {
 
 							AddCollisionRectangle(
 								tileHalfSize * new Vector2(tilesWide, 1.0f)
-								, new Vector2(tileSize.X * (x - (float) tilesWide / 2), tileSize.Y * (y + 0.5f))
+								, new Vector2(tileSize.X * (x - (float) tilesWide / 2) + m_mapStart, tileSize.Y * (y + 0.5f))
 							);
 						}
 					}
@@ -235,22 +250,22 @@ namespace Sputnik {
 
 				// Create final collision.
 				if (hasCollision) {
-					for (int i = firstX; i < m_map.Width; ++i) levelCollision[i, y] = false;
+					for (int i = firstX; i < map.Width; ++i) levelCollision[i, y] = false;
 
-					int tilesWide = m_map.Width - firstX;
+					int tilesWide = map.Width - firstX;
 					AddCollisionRectangle(
 						tileHalfSize * new Vector2(tilesWide, 1.0f)
-						, new Vector2(tileSize.X * (m_map.Width - (float) tilesWide / 2), tileSize.Y * (y + 0.5f))
+						, new Vector2(tileSize.X * (map.Width - (float) tilesWide / 2) + m_mapStart, tileSize.Y * (y + 0.5f))
 					);
 				}
 			}
 
 			// Go through collision and try to create large vertical collision shapes.
-			for (int x = 0; x < m_map.Width; ++x) {
+			for (int x = 0; x < map.Width; ++x) {
 				int firstY = 0;
 				bool hasCollision = false;
 
-				for (int y = 0; y < m_map.Height; ++y) {
+				for (int y = 0; y < map.Height; ++y) {
 					if (levelCollision[x, y]) {
 						if (hasCollision) continue;
 						else {
@@ -272,15 +287,16 @@ namespace Sputnik {
 
 				// Create final collision.
 				if (hasCollision) {
-					int tilesTall = m_map.Height - firstY;
+					int tilesTall = map.Height - firstY;
 					AddCollisionRectangle(
 						tileHalfSize * new Vector2(1.0f, tilesTall)
-						, new Vector2(tileSize.X * (x + 0.5f), tileSize.Y * (m_map.Height - (float) tilesTall / 2))
+						, new Vector2(tileSize.X * (x + 0.5f), tileSize.Y * (map.Height - (float) tilesTall / 2))
 					);
 				}
 			}
 
-			SpawnController = new SpawnController(this, m_map.ObjectGroups.Values);
+			SpawnController.CreateSpawnPoints(map.ObjectGroups.Values, new Vector2(m_mapStart, 0.0f), spawnPlayer);
+			m_mapStart += map.Width * map.TileWidth;
 		}
 
 

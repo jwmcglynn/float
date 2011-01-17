@@ -43,7 +43,6 @@ namespace Sputnik.Game
 
         public const float MAX_SPEED = 0.0f, SPECIAL_STATE_DURATION_IN_SECONDS = 5.0f;
         private CLOUD_STATE currentState;
-		private CLOUD_STATE transitionState;
 		private CLOUD_STATE transitionTarget;
 		private Fixture m_rainFixture;
 
