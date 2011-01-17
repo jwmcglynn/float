@@ -311,7 +311,9 @@ namespace Sputnik {
             //Pause with Escape
             if (!m_paused)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape))
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape)
+                    || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start) && !OldGamePad.GetState().IsButtonDown(Buttons.Start))
+                )
                     pause(new GamePauseMenu(Controller, this));
             }
 

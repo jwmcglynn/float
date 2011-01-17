@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Input = Microsoft.Xna.Framework.Input;
 using Sputnik.Game;
 
 namespace Sputnik.Menus {
@@ -84,22 +85,32 @@ namespace Sputnik.Menus {
             if (enabled)
             {
                 KeyboardState keyState = Keyboard.GetState();
-                if (keyState.IsKeyDown(Keys.Up))
+                GamePadState padState = GamePad.GetState(PlayerIndex.One);
+                GamePadState oldpadState = OldGamePad.GetState();
+                if (keyState.IsKeyDown(Keys.Up)
+                    || padState.IsButtonDown(Input.Buttons.DPadUp)
+                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickUp))
                     up.highlight();
                 else
                     up.deHighlight();
 
-                if (keyState.IsKeyDown(Keys.Down))
+                if (keyState.IsKeyDown(Keys.Down)
+                    || padState.IsButtonDown(Input.Buttons.DPadDown)
+                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickDown))
                     down.highlight();
                 else
                     down.deHighlight();
 
-                if (keyState.IsKeyDown(Keys.Left))
+                if (keyState.IsKeyDown(Keys.Left)
+                    || padState.IsButtonDown(Input.Buttons.DPadLeft)
+                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickLeft))
                     left.highlight();
                 else
                     left.deHighlight();
 
-                if (keyState.IsKeyDown(Keys.Right))
+                if (keyState.IsKeyDown(Keys.Right)
+                    || padState.IsButtonDown(Input.Buttons.DPadRight)
+                    || padState.IsButtonDown(Input.Buttons.LeftThumbstickRight))
                     right.highlight();
                 else
                     right.deHighlight();

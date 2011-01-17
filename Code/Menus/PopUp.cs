@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Input = Microsoft.Xna.Framework.Input;
 using Sputnik.Game;
 
 namespace Sputnik.Menus
@@ -29,7 +30,8 @@ namespace Sputnik.Menus
         {
             if (!m_justPaused)
             {
-				if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
+				if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey)
+                    || GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.Start) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.Start))
 					unPause();
             }
             m_justPaused = false;

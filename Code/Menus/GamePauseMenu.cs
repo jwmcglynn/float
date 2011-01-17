@@ -5,7 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Input = Microsoft.Xna.Framework.Input;
 using Sputnik.Game;
+using Sputnik.Menus;
 
 namespace Sputnik.Menus
 {
@@ -161,12 +163,16 @@ namespace Sputnik.Menus
 
         public override void Update(float elapsedTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
+            if ((Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
+                || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.DPadDown))
+                || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickDown)))
             {
                 unSelectCurrentButton();
                 selectButton(currentButton.nextButton);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !OldKeyboard.GetState().IsKeyDown(Keys.Up))
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !OldKeyboard.GetState().IsKeyDown(Keys.Up)
+                || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.DPadUp))
+                || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickUp)))
             {
                 unSelectCurrentButton();
                 selectButton(currentButton.prevButton);
@@ -174,11 +180,13 @@ namespace Sputnik.Menus
 
             if(!( Keyboard.GetState().IsKeyDown(Keys.RightAlt) || Keyboard.GetState().IsKeyDown(Keys.LeftAlt) ))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter))
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !OldKeyboard.GetState().IsKeyDown(Keys.Enter)
+                    || GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.A) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.A))
                 {
                     currentButton.isPressed = true;
                 }
-                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && !OldKeyboard.GetState().IsKeyUp(Keys.Enter))
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && !OldKeyboard.GetState().IsKeyUp(Keys.Enter)
+                    || GamePad.GetState(PlayerIndex.One).IsButtonUp(Input.Buttons.A) && !OldGamePad.GetState().IsButtonUp(Input.Buttons.A))
                 {
                     if (currentButton.isPressed)
                         currentButton.DispatchOnMouseUp(true);
