@@ -33,7 +33,8 @@ namespace Sputnik
 		public void AddFrame(string filename, float duration, Vector2? offset = null)
 		{
 			Frame f;
-			f.Texture = m_contentManager.Load<Texture2D>(filename);
+			if (filename != null) f.Texture = m_contentManager.Load<Texture2D>(filename);
+			else f.Texture = null;
 			f.Time = duration;
 
 			f.Offset = offset == null ? Vector2.Zero: (Vector2)offset;

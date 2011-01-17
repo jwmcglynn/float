@@ -31,7 +31,7 @@ namespace Sputnik.Game
         }
 
         private void Initialize() {
-			// TODO: PROPER Particles?
+
 			m_smokeTrail = new ParticleEntity(Environment, "smokeTrail");
 			m_smokeTrail.Zindex = ZSettings.Plane + 0.01f; // Just behind plane.
 			AddChild(m_smokeTrail);

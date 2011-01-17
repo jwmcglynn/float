@@ -65,6 +65,8 @@ namespace Sputnik.Game
 		private const float k_distortedFallVel = MOVE_VEL / 2;
 
 
+		private ParticleEntity m_endExplosion; 
+
 		enum DistortState {
 			NONE,
 			FALLING,
@@ -146,9 +148,10 @@ namespace Sputnik.Game
 
 			//LOADING DEAD ANIMATION
 			Sequence seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("balloon\\BalloonNorm2", defaultDuration);
-			seq.AddFrame("balloon\\BalloonPop1", defaultDuration);
-			seq.AddFrame("balloon\\BalloonPop2", 0.2f, new Vector2(291 - 279, 215 - 171));
+			seq.AddFrame("balloon\\BalloonNorm2", 0.2f);
+			seq.AddFrame("balloon\\BalloonPop1", 0.2f);
+			seq.AddFrame("balloon\\BalloonPop2", 0.4f, new Vector2(291 - 279, 215 - 171));
+			seq.AddFrame(null, 1.0f, new Vector2(291 - 279, 215 - 171));
 			animations[DEAD_ANIM_INDEX] = seq;
 
 			//LOADING ALIVE ANIMATION
@@ -192,6 +195,11 @@ namespace Sputnik.Game
 			seq.AddFrame("balloon\\BalloonBack2", 0.3f);
 			seq.Loop = true;
 			animations[BACK_ANIM_INDEX] = seq;
+
+			//particle effect
+			m_endExplosion = new ParticleEntity(Environment, "balloon Explosion"); // here is where i add the particel effect
+			m_endExplosion.Zindex = ZSettings.Balloon - 0.01f;
+			AddChild(m_endExplosion);
 
 			anim.PlaySequence(animations[ALIVE_ANIM_INDEX]);
 			Texture = anim.CurrentFrame;
@@ -239,7 +247,6 @@ namespace Sputnik.Game
 				case BALLOON_STATE.DYING:
 					DesiredVelocity = Vector2.Zero;
 					m_dead = anim.Done;
-
 					anim.Update(elapsedTime);
 					Texture = anim.CurrentFrame;
 					if (m_dead) currentState = BALLOON_STATE.DEAD;
@@ -266,7 +273,7 @@ namespace Sputnik.Game
 				case BALLOON_STATE.INVULNERABLE:
 					if (currentSpecialStateRemainingTime > 0)
 						currentSpecialStateRemainingTime -= elapsedTime;
-
+			
 					if (currentSpecialStateRemainingTime <= 0)
 						currentState = BALLOON_STATE.ALIVE;
 
@@ -520,7 +527,7 @@ namespace Sputnik.Game
 		{
 			return m_dead;
 		}
-
+		
 
 		public void Kill() {
 			if (currentState != BALLOON_STATE.DYING)
@@ -548,9 +555,8 @@ namespace Sputnik.Game
                     rightSound = null;
                 }
 				Sound.PlayCue("pop");
-
+				m_endExplosion.Effect.Trigger(Position);//same 
 				anim.PlaySequence(animations[DEAD_ANIM_INDEX]);
-
 				Environment.Camera.MoveSpeed = Vector2.Zero;
 
 			}
