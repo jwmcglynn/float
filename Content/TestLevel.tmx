@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="73" height="16" tilewidth="64" tileheight="64">
  <tileset firstgid="1" source="tilesheet.tsx"/>
- <layer name="Tile BG" width="73" height="16" visible="0">
+ <tileset firstgid="37" source="mountain.tsx"/>
+ <layer name="Tile BG" width="73" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BgQAAAADDoPlTn+AGVQEAAADAN7MBavdAEgAA
+   H4sIAAAAAAAAC+3SKw6DQBRGYTZTigFqoJgCpg/ThwFqoN3/Kjhi1IgZB0P4T/KJO7mCkBtFSimllFLhdcUNdzwcewfEOCJZ4LtC6okX3vg49lJkyHFa4LtCqkOPAV/HXoESZ1Tmzb4t37zVRkz44e/Yu6BGg9a82bflm/eYfVu+eY/Zt+Wblf6JWqcZi6v/RUASAAA=
   </data>
  </layer>
  <layer name="Tile FG" width="73" height="16">
