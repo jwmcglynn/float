@@ -11,7 +11,7 @@
  </layer>
  <layer name="Tile FG" width="200" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YsQrCMBRG4TgILj6ERCkOTn3/dzNQQ9PQpmkl3CT3fPAvQkscDrVaAyD2dHu5vd2s8FmA2vg+PmZu5CF6IqAeYR80AizFfdAIMFvrg0aAyVYfcSN0Ao1SffAcgXZ7fYSNANrk9JHTiL8P0JPcPvYaKd3HpeC9/3WTPkABPX6nM470kXofafn5cZU+QCXu0geo0FofxuQ34tdyH9qNJ6/T0FPcRyzVyPCbDe7Df8HtGTOmVer3ldn4PNUKYz3t6PsHY5rm+/gCtha9AwAyAAA=
+   H4sIAAAAAAAAC+3aSwrCMBRG4d+B4MRFSCvioKPuf28KNTQUTdJKyOOeDy6OWuLg0CZ0lHQXAN+opQv3C2BFF8B+t9ILACpHI0AYjQDrPmTy5vmeQUsjdAKLtudXk343AlgT68NvBLAmpY+URjgnRo9S+4g1kruPU8Z7/+tSegEZ9PifjtjTR2g/0vLz41x6AZW4ll5Ahb71IaU34qblPqybD15noafY91ehRh6fGbzrOQtuz5wwVoXer6T4+9a2FYbpafbuPxjG0rguXpoIevoAMgAA
   </data>
  </layer>
  <objectgroup name="Objects" width="200" height="16">

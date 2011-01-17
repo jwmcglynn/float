@@ -17,7 +17,7 @@
    <property name="zindex" value="0.6"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3XQQrCMBBG4bgQ3HiIUEVcuOr972akhobBtJOCTNp5H/xLaVw82gwBgHRLu6c90wbjswC9yX28wtxIND0R0I+yDxoBZp8GZB80AkxqfdAIMKn1IRuhE3i01AfvEXi31kfZCOCNpg8agVfaPqwbORk9V+NifYA/OOJ/2qKlD819ZOkun5/Vm7P1ATpxtT5Ah2QfMbQ1InvYYx/ejRt/56Gnso8ottbI4zvZCn3sy6iYV7XvK8175FcrjB1prfcPxjwt9/EGxDmrOwAyAAA=
+   H4sIAAAAAAAAC+3ZwaqDMBBG4emi4KYPUapIF658/3erosEQtE4EmeicD37uqjQXemjT1iLSCIBYLVMX4S+ABV0AAHK9rQ8AFIw+AJ1wD+mifYd9ZOqIluBR+v1VJ9uNAN7s9RE3Anij6YNG4JW2D+tGHkbPq1FZH+AEd/yfjsjpQ3Mf+XeXL/W3yKf1AQrxsj5AgdI+xtd2TiNpD1fsw7v+4OM89LTWR9heI+28tBX6uJZeMa+2Pl9p3kfWWmHsTsu9fzDmaaGLHzomq1AAMgAA
   </data>
  </layer>
  <objectgroup name="Objects" width="200" height="16">
