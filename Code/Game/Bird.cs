@@ -9,7 +9,7 @@ using FarseerPhysics.Dynamics;
 
 namespace Sputnik.Game {
 	class Bird : GameEntity {
-		public static float[] k_horizVels = {-200.0f, -100.0f, 0.0f};
+		public static float[] k_horizVels = {-200.0f, -100.0f, -50.0f};
 		
 		private Animation m_anim = new Animation();
 
