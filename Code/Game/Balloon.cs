@@ -108,6 +108,8 @@ namespace Sputnik.Game
 			// Update controls.
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldkeyState = OldKeyboard.GetState();
+            GamePadState padState = GamePad.GetState(PlayerIndex.One);
+            GamePadState oldpadState = OldGamePad.GetState();
 		}
 		private void Initialize()
 		{
@@ -259,15 +261,30 @@ namespace Sputnik.Game
 
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldKeyState = OldKeyboard.GetState();
+            GamePadState padState = GamePad.GetState(PlayerIndex.One);
+            GamePadState oldpadState = OldGamePad.GetState();
 
 			int dirX = 0;
 			int dirY = 0;
 
-			if (keyState.IsKeyDown(Keys.Up) && enableUp) --dirY;
-			if ( (keyState.IsKeyDown(Keys.Down) && enableDown) || endingDescent ) ++dirY;
+            if (((keyState.IsKeyDown(Keys.Up))
+                || padState.IsButtonDown(Buttons.DPadUp) 
+                || padState.IsButtonDown(Buttons.LeftThumbstickUp)) 
+                && enableUp) --dirY;
+			if ((((keyState.IsKeyDown(Keys.Down) 
+                || padState.IsButtonDown(Buttons.DPadDown) 
+                || padState.IsButtonDown(Buttons.LeftThumbstickDown))) 
+                && enableDown) 
+                || endingDescent ) ++dirY;
 
-			if (keyState.IsKeyDown(Keys.Left) && enableLeft) --dirX;
-			if (keyState.IsKeyDown(Keys.Right) && enableRight) ++dirX;
+			if ((keyState.IsKeyDown(Keys.Left)
+                || padState.IsButtonDown(Buttons.DPadLeft)
+                || padState.IsButtonDown(Buttons.LeftThumbstickLeft))
+                && enableLeft) --dirX;
+			if ((keyState.IsKeyDown(Keys.Right)
+                || padState.IsButtonDown(Buttons.DPadRight)
+                || padState.IsButtonDown(Buttons.LeftThumbstickRight))
+                && enableRight) ++dirX;
 
 			if (dirY == -1 && dirY != lastDirY)
 			{
