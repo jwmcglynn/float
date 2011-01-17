@@ -389,13 +389,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="star_imagefalling.png">
-      <Name>star_imagefalling</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="buttons\HUDOutline.png">
       <Name>HUDOutline</Name>
       <Importer>TextureImporter</Importer>
@@ -705,6 +698,13 @@
   <ItemGroup>
     <Compile Include="letter.png">
       <Name>letter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="star_imagefalling2.png">
+      <Name>star_imagefalling2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

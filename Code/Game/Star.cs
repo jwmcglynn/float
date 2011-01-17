@@ -128,7 +128,7 @@ namespace Sputnik.Game
 						AddCollisionRectangle(new Vector2(14.0f, 80.0f), new Vector2(0.0f, -80.0f));
 
 
-						LoadTexture(Environment.contentManager, "star_imagefalling");
+						LoadTexture(Environment.contentManager, "star_imagefalling2"); 
 						Scale = 1.0f;
 						Zindex = ZSettings.FallingStar;
 						Registration = new Vector2(198, 230);
