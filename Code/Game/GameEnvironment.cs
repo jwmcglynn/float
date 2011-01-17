@@ -493,6 +493,9 @@ namespace Sputnik {
 				if (!((ent is Moon) || (ent is RepeatingBackground) || (ent is MapLayer)))
 					ent.Dispose();
 			}
+
+			ParticleKeepalive.RemoveAll((p) => { p.Dispose(); return true; });
+
 			foreach (SpawnPoint sp in SpawnController.SpawnPoints)
 				sp.HasBeenOffscreen = true;
 		}
