@@ -22,6 +22,7 @@ namespace Sputnik.Game
 		private Animation m_anim = new Animation();
 		private Sequence m_blinking;
 		private ParticleEntity m_magic_Trail;
+		private bool strobedTwice;
 
 
 		
@@ -65,10 +66,17 @@ namespace Sputnik.Game
 			AddChild(m_magic_Trail);
 
 			originalCameraPos = Environment.Camera.Position.X; 
-			float blinkOffTime = 1.0f;
+			float blinkOffTime = 0.5f;
 			float blinkOnTime = 0.25f;
 
 			m_blinking = new Sequence(Environment.contentManager);
+			m_blinking.AddFrame("Star\\NStar1", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar2", blinkOnTime);
+			m_blinking.AddFrame("Star\\NStar3", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar4", blinkOnTime);
+			m_blinking.AddFrame("Star\\NStar5", blinkOffTime);
+			m_blinking.AddFrame("Star\\NStar6", blinkOnTime);
+			//Again
 			m_blinking.AddFrame("Star\\NStar1", blinkOffTime);
 			m_blinking.AddFrame("Star\\NStar2", blinkOnTime);
 			m_blinking.AddFrame("Star\\NStar3", blinkOffTime);
@@ -108,27 +116,28 @@ namespace Sputnik.Game
 					{ // TODO: Condition for next statetswitch here.
 						m_curState = State.Strobing;
 						m_anim.PlaySequence(m_blinking);
+						strobedTwice = false;
 					}
 					break;
 
 				case State.Strobing:
 					m_anim.Update(elapsedTime);
 					Texture = m_anim.CurrentFrame;
-
 					if (m_anim.Done)
 					{
 						m_curState = State.Falling;
 						CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 						AddCollisionRectangle(new Vector2(14.0f, 80.0f), new Vector2(0.0f, -80.0f));
-						
-						
+
+
 						LoadTexture(Environment.contentManager, "star_imagefalling");
 						Scale = 1.0f;
 						Zindex = ZSettings.FallingStar;
 						Registration = new Vector2(198, 230);
 
 						DesiredVelocity = new Vector2(0.0f, 450.0f);
-					}
+					}	
+					
 
 					break;
 
