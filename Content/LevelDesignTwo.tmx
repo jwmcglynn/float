@@ -6,7 +6,7 @@
  <tileset firstgid="33" source="tilesheet.tsx"/>
  <layer name="Tile BG" width="200" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WsQ3AMAwDQalwmf3XzQRyZYNBcLcA1TygKiCp0wfAh3VpBCb6gFmXRmCiDwCA8/xXMNMH3JHuaoX3YSfdxxPeBwAA4P9eN7dGmwAyAAA=
+   H4sIAAAAAAAAC+3WsQ2AMAxFQaegZAvYf0WygKlAP4I7ybXdPMlVQNJIHwALG6UR6OgDeqM0Ah19AAA8z38FPX3AO9JdbeH9cCfdxx7eD/AHx5wzfQQsSh/Q0wdfcgEPrN2GADIAAA==
   </data>
  </layer>
  <layer name="Tile FG" width="200" height="16">

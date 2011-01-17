@@ -6,7 +6,7 @@
  <tileset firstgid="33" source="tilesheet.tsx"/>
  <layer name="Tile BG" width="500" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3c3Y7CIBCGYVzXw73/292jSRDpQPmbQd4nIWpSW6wTvmJrQwAAzPK4aEAtqZkfpa2qKWoXwGmucpxMx11xnj/De47L65V5Tu0COAlZjpHi+fkzfGY7eQ4Ac+TGPfIcrSTPf8P7/Fxer85zahjAqZifo1cux63m59QwAA8sspU8Ry8v18NRvwCseTifzXiIVjIvTxt5DuA05Dl25mF+HgI1DMAH8hy7ys3NpVHDAE7ziB5n53k65sbbxT68fGfxNXDpcw/9q2Hdz5fx9gGMk8vzGbRzndiHp3sHfEOeW/uz7gCA4WaMz1fnNsnzdXL7X6PVgHZuxiI/PfxfrYf18RCA7zVyfCnleEue382mmnWt3OZq2vVi8eeouRdvz/39Zs3pd89zAJillFna9UdpRmsZnluuJi9L+dTy/pb1a++30tJ3yb1SKy17Zz9Jzo7YV1e/95DnAE5Xm9c1mazNz1uzpyVrRy7Xs45U7fHBqP7VZPrd/F/1Pcb7JX0udRU/Sj8B4FQrx2carbelx5Xp/9X+AUpXG1cAfQAA
+   H4sIAAAAAAAAC+3cYY7CIBCGYVzdn3se73+zzSaSINKBAjNDl/dJiJrUFuuEr9jaEAAAWm4HDWgVa+ZLaFY1Re0C2M1RjpPpOCvN83t4z/H42jLPqV0AOyHLMVM6P7+Hz2wnzwFAR2ncI8/RK+b5I7zPz+Nr6zynhgHsivk5RpVy3Gt+Tg0DWIFHtpLnGLXK9XDULwBvK5zPZjxErzgvzxt5DmA35DmubIX5eQjUMIA1kOe4qtLcPDZqGMBubsmjdp7nY266XVzHKt9Zeg1c/nxm/56vpsF7P347bx/APKU81yCd68R1rHTvAKs8/6OV595+vDsAYDqN8fno3CZ5bqe0/yVSDUjnZjxy3fL/ahp57n08BOD/mjm+1HK8J8/PZlPLuiy3aU26Xiz9HC334h25v5/WnN4qz59B9zd3AJitllnS9Ud5RksZXlquJS9r+dTz/p71S+/30tP3mHu1Vlv2zH6KOTtjXx393qMxPweAK2nN65ZMlubnvdnTk7UzlxtZR671+GBW/1oy/Wz+W32P6X7Jn8e6Sh9jPwFgV5bjM4022vLjyvz/ar+6m4P2AH0AAA==
   </data>
  </layer>
  <layer name="Tile FG" width="500" height="16" visible="0">

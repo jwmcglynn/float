@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="200" height="16" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png"/>
+ </tileset>
+ <tileset firstgid="33" source="tilesheet.tsx"/>
+ <layer name="Tile BG" width="200" height="16" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WMQoAIAwDwPb/n3ZxrIuUInIHeUJIIgDgTbkD1PQDgBs+FgBAL98KgGm2B870AwAAgN8tHmwoGAAyAAA=
+  </data>
+ </layer>
+ <layer name="Tile FG" width="200" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YQQrCMBBG4XEhuPEQpYq4yKr3v5uFKoaQSWNNSNp5H/xLZVw8Sh0FgOY5b2x9BNApJ99Ghsa3AL1xQiOAxgmNABonNAJowj7CRugElsX64DkCLLQ+/EYAq1J90AisW+tjSyO3efdC950KfU8Nl9YHVHDE3/SPnD5+fR8p2UdN59YHdOLa+oCO+Q0Mkt9I6r+tvfRh3bTxc5Z68tvwl2rk8V7YyqcX+tiHKWPWxRpYe47EWmHsiMt9/2DM4l71NYp2ADIAAA==
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="200" height="16">
+  <object name="spawn" type="spawn" x="896" y="386" width="62" height="62"/>
+ </objectgroup>
+ <objectgroup name="Instructions" width="200" height="16"/>
+</map>
