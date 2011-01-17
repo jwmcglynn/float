@@ -17,7 +17,7 @@ namespace Sputnik.Game {
 			LoadTexture(Environment.contentManager, "Moon");
 			Registration = Size * 0.5f; // Set registration before size is altered by Scale.
 			
-			Scale = 0.5f;
+			Scale = 1.0f;
 		}
 
 		/***************************************************************************/
