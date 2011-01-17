@@ -11,6 +11,7 @@ namespace Sputnik.Game {
 		public const float Bird = 0.4f;
 		public const float Plane = 0.5f;
 		public const float Ground = 0.6f;
+		public const float Cloud = 0.7f;
 		public const float SkyStar = 0.8f;
 		public const float BG = 1.0f;
 	}

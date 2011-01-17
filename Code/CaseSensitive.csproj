@@ -145,6 +145,7 @@
     <Compile Include="Game\Star.cs" />
     <Compile Include="Game\TestLevelEnvironment.cs" />
     <Compile Include="Game\Trigger.cs" />
+    <Compile Include="Game\ZSettings.cs" />
     <Compile Include="Loaders\Tiled.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
     <Compile Include="Menus\GamePauseMenu.cs" />
