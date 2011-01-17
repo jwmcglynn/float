@@ -76,6 +76,7 @@ namespace Sputnik.Game
 
 		private bool m_dead;
 
+		private ParticleEntity drippingWet;
 
 		private int m_lastRung = -1;
 		private Animation anim = new Animation();
@@ -134,6 +135,9 @@ namespace Sputnik.Game
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 			AddCollisionCircle(30.0f, Vector2.Zero);
 
+			drippingWet = new ParticleEntity(Environment, "DrippingWet");
+			drippingWet.Zindex = 0.9f;
+			AddChild(drippingWet);
 
 			animations = new Sequence[NUMBER_OF_ANIMATION_STATES];
 
@@ -503,6 +507,8 @@ namespace Sputnik.Game
 			 */
 			lastDirX = dirX;
 			lastDirY = dirY;
+			if (m_distortState != DistortState.NONE)
+				drippingWet.Effect.Trigger(Position);
 
 			base.Update(elapsedTime);
 		}
