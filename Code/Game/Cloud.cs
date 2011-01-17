@@ -98,9 +98,6 @@ namespace Sputnik.Game
 			if (diff > 2) diff = 2;
 			diff += 2; // Change from -2 -> 2 to 0 -> 4.
 
-			CLOUD_STATE lastState = currentState;
-			currentState = CLOUD_STATE.TRANSITION;
-
             switch (diff) {
                 case 0:
                     transitionTarget = CLOUD_STATE.LIGHTNING;
@@ -119,6 +116,9 @@ namespace Sputnik.Game
                     break;
             }
 
+			if (transitionTarget == currentState) { return; }
+			CLOUD_STATE lastState = currentState;
+			currentState = CLOUD_STATE.TRANSITION;
 			switch (lastState)
 			{
 				case CLOUD_STATE.HAIL:
