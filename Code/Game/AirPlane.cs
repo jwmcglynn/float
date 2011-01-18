@@ -39,10 +39,10 @@ namespace Sputnik.Game
 			AddChild(m_smokeTrail);
 
 			Sequence seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("Plan", 0.3f);
-			seq.AddFrame("Plan2", 0.2f);
-			seq.AddFrame("Plan4", 0.1f);
-			seq.AddFrame("Plan2", 0.2f);
+			seq.AddFrame("plane\\Plan1", 0.1f);
+			seq.AddFrame("plane\\Plan2", 0.1f);
+			seq.AddFrame("plane\\Plan3", 0.2f);
+			seq.AddFrame("plane\\Plan4", 0.1f);
 			seq.Loop = true;
 
 			m_anim.PlaySequence(seq);
