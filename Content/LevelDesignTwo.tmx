@@ -7,72 +7,31 @@
  <tileset firstgid="69" source="mountain.tsx"/>
  <layer name="Tile BG" width="180" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XORLCMAxF5YKSY+UoLE2AhqVhOTqioHEYWZHl2Hj+m1GFxv4Sz0WIAOibUDsAAI4EgtOgH+Az6IlAcBr0A3wGXoSMAqAVcjyG46BFWnIZ7wHkAp9Bryzl85Zrx7V3zl6TVaV7N1Rmn//Ihqb7WMLpA9eR6+Q3SnWf14qeEu6NNH+f2hxz8+bM57Gbkab7kDxNua/NdOG6ct2EnhL/vfVMryySe9Y7zqTbpzaHpU/bL81oeZcxA033Ifmccl+b6cH15HoJPR7zeZ3plUVyz3rHnXT71Oaw9Gn7pRkt7zLm43O8D8nnlPsemb54npV7plcWyb0S81pyWPq0/dKMlncZM5De5fDjztTvOXielXtmiSw17qhNqzOmvgFT32ZvcGBOxgAtAAA=
+   H4sIAAAAAAAAC+2TOxMCMQiESWHpzzy1ObXx0ej506W2IEDIw8x+MxSZ48huZiECYG5SbwEABJIImQbzgDyDmUiETIN5QJ5BFKmgABiFkhwj42BERsoy9gGUgjyDWWmV5wPXkesUrL0nu073LlTnPf+RRfhmza0lT2euC9fV8E+O3nneK3pqZG8l+3tqdVj1lvgbaS+tWbpzPbieQk8Nf96ZUVqk7HnvuJHuPbU6PH3afsmjZy9z81ud31wb10fQFuEvamaUFil73jtepHtPrQ5Pn7Zf8ujZy9z8VmcNEf6iZkZpkbJXw69Hh6dP2y959Oxlbn6rs4YIf1Eza2jpcUdvanv8nd/q/AXK1ZGTAC0AAA==
   </data>
  </layer>
  <layer name="Tile FG" width="180" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YSwrDMAxEfRVDsknSVX/3v1ljiGkQlixXrkvFPJhVzUiRxiE0BAD+n8shADyAPANPIM/AE+c8x182AkAHkGfgCXxvAE8gz8AL6fsCeQZeQJ6BJ5Bn4IkpIM/ABynLS3jn+bHr2cH3tuve0W8kLb1fFUqkOW+MZwy2/0jj4T8rzmrPjSLPJcvSG81y1hpsOaS+q7HPs2+v594EaXov5VbypZ7095nx5BRJveXky81mUp7jsGQvvyOkudDZaO8n56XJde09It0R6/ykTEg7rM2wptL+S/tp9eX2SJV3EEldrh7nVcpOvkccUl409yL3+8lspJlYZq7x1fi3+LT2qt2hReuXfFtq965b24mmnuQxek5UL3EXp8gALQAA
+   H4sIAAAAAAAAC+2YyW4CMRBE/SuW4MJyCoRvAnJJ4MJyScKH05bGitOyx+2FoLTqSSXZoqke2sUwwhgA/j/LQQBoAHkGmkCegSbCPNtnXggAHUCegSbwvAE0gTwDLbjnC+QZaAF5BtpAnoEmkGegCZ/nV9Kmg9+KtO7o95eUXPuLQI4JaZHwtKbtP1I7+E8FtdK6R7El7Uh70ltmX1sbrl2m56Yth25mM/PzHXF+PWboM7Fo9At9YpJceyy3Y77ck78+TXimZFm/WeCbms1EWJeCf76aM3gnfZAOpGNmX1sbrpfm99x5rnP3EZ7llkzz+Y1lYuwMx7IlUez8/T28xTfWIyZ/Bpb1TfVLefF6fyb+NyQ3v9j7S3N9Ip1JF9I1s6+tDdelsy7JSolPaT6kZ9ii+YN8S3r37ps7E0k/yXfR80n6In2Tbpl9bW24vgNnYJ/vAC0AAA==
   </data>
  </layer>
  <objectgroup name="Objects" width="180" height="16">
-  <object name="spawn" type="spawn" x="384" y="450" width="62" height="62"/>
-  <object name="star" type="star" x="976" y="146" width="64" height="64">
-   <properties>
-    <property name="delay" value="350"/>
-   </properties>
-  </object>
+  <object name="spawn" type="spawn" x="444" y="370" width="62" height="62"/>
   <object name="bird" type="bird" x="1224" y="194" width="128" height="60"/>
-  <object name="bird" type="bird" x="1152" y="318" width="128" height="64"/>
-  <object name="plane" type="plane" x="900" y="386" width="192" height="64"/>
   <object name="plane" type="plane" x="900" y="514" width="188" height="60"/>
   <object name="star" type="star" x="888" y="146" width="64" height="68">
    <properties>
     <property name="delay" value="450"/>
    </properties>
   </object>
-  <object name="bird" type="bird" x="1152" y="574" width="128" height="64"/>
-  <object name="bird" type="bird" x="1220" y="706" width="120" height="60"/>
-  <object name="plane" type="plane" x="772" y="450" width="192" height="64"/>
-  <object name="couldT" type="cloud" x="1216" y="66" width="192" height="124"/>
-  <object name="bird" type="bird" x="1774" y="310" width="120" height="56"/>
-  <object name="bird" type="bird" x="1702" y="442" width="124" height="60"/>
+  <object name="couldT" type="cloud" x="1584" y="130" width="192" height="124"/>
   <object name="bird" type="bird" x="1782" y="578" width="128" height="60"/>
-  <object name="bird" type="bird" x="1870" y="702" width="128" height="60"/>
-  <object name="bird" type="bird" x="1858" y="194" width="124" height="60"/>
   <object name="bird" type="bird" x="2654" y="490" width="132" height="64"/>
-  <object name="bird" type="bird" x="2758" y="398" width="124" height="60"/>
-  <object name="bird" type="bird" x="2930" y="322" width="124" height="64"/>
-  <object name="bird" type="bird" x="3198" y="482" width="128" height="68"/>
   <object name="cloudN" type="cloud" x="2436" y="94" width="188" height="128"/>
   <object name="cloudL" type="cloud" x="3176" y="42" width="196" height="120"/>
-  <object name="plane" type="plane" x="2420" y="494" width="196" height="60"/>
-  <object name="plane" type="plane" x="2136" y="186" width="196" height="68"/>
-  <object name="plane" type="plane" x="3404" y="502" width="196" height="68"/>
-  <object name="plane" type="plane" x="2920" y="778" width="196" height="68"/>
   <object name="cloudT" type="cloud" x="4276" y="70" width="192" height="132">
    <properties>
     <property name="neutral" value="7"/>
-   </properties>
-  </object>
-  <object name="cloudR" type="cloud" x="3610" y="124" width="196" height="124">
-   <properties>
-    <property name="neutral" value="3"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="3964" y="658" width="68" height="68">
-   <properties>
-    <property name="delay" value="750"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="3484" y="718" width="68" height="68">
-   <properties>
-    <property name="delay" value="650"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="3896" y="94" width="60" height="68">
-   <properties>
-    <property name="delay" value="550"/>
    </properties>
   </object>
   <object name="star" type="star" x="4080" y="330" width="68" height="64">
@@ -80,14 +39,7 @@
     <property name="delay" value="450"/>
    </properties>
   </object>
-  <object name="cloudLT" type="cloud" x="4494" y="260" width="176" height="120">
-   <properties>
-    <property name="neutral" value="7"/>
-   </properties>
-  </object>
   <object name="bird" type="bird" x="4200" y="256" width="136" height="60"/>
-  <object name="bird" type="bird" x="4188" y="588" width="128" height="56"/>
-  <object name="bird" type="bird" x="4204" y="372" width="112" height="64"/>
   <object name="bird" type="bird" x="4196" y="492" width="124" height="56"/>
   <object name="bird" type="bird" x="4774" y="256" width="124" height="76"/>
   <object name="cloudL" type="cloud" x="4548" y="584" width="184" height="128">
@@ -100,39 +52,9 @@
     <property name="delay" value="700"/>
    </properties>
   </object>
-  <object name="star" type="star" x="2080" y="794" width="60" height="68">
-   <properties>
-    <property name="delay" value="450"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="2292" y="154" width="60" height="68">
+  <object name="star" type="star" x="2124" y="242" width="60" height="68">
    <properties>
     <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="2096" y="234" width="60" height="68">
-   <properties>
-    <property name="delay" value="650"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1928" y="522" width="60" height="68">
-   <properties>
-    <property name="delay" value="400"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1728" y="130" width="60" height="68">
-   <properties>
-    <property name="delay" value="550"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1532" y="382" width="60" height="68">
-   <properties>
-    <property name="delay" value="250"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1932" y="62" width="60" height="68">
-   <properties>
-    <property name="delay" value="700"/>
    </properties>
   </object>
   <object name="star" type="star" x="2492" y="330" width="60" height="68">
@@ -145,34 +67,12 @@
     <property name="value" value="1"/>
    </properties>
   </object>
-  <object name="cloudR" type="cloud" x="5066" y="360" width="188" height="132">
-   <properties>
-    <property name="neutral" value="3"/>
-   </properties>
-  </object>
-  <object name="cloudN" type="cloud" x="5066" y="608" width="176" height="120">
-   <properties>
-    <property name="neutral" value="1"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1670" y="730" width="68" height="68">
-   <properties>
-    <property name="delay" value="650"/>
-   </properties>
-  </object>
   <object name="star" type="star" x="3442" y="282" width="68" height="60">
    <properties>
     <property name="delay" value="650"/>
    </properties>
   </object>
-  <object name="star" type="star" x="3750" y="446" width="68" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="plane" type="plane" x="6276" y="412" width="180" height="68"/>
   <object name="plane" type="plane" x="6264" y="240" width="160" height="72"/>
-  <object name="bird" type="bird" x="6228" y="324" width="128" height="64"/>
   <object name="cloudT" type="cloud" x="5388" y="214" width="196" height="124">
    <properties>
     <property name="neutral" value="7"/>
@@ -184,9 +84,8 @@
    </properties>
   </object>
   <object name="cloudN" type="cloud" x="6036" y="510" width="196" height="120"/>
-  <object name="plane" type="plane" x="6850" y="622" width="184" height="68"/>
   <object name="plane" type="plane" x="6846" y="738" width="184" height="68"/>
-  <object name="plane" type="plane" x="6850" y="502" width="184" height="68"/>
+  <object name="plane" type="plane" x="6850" y="574" width="184" height="68"/>
   <object name="cloudH" type="cloud" x="6526" y="38" width="204" height="128">
    <properties>
     <property name="neutral" value="1"/>
@@ -197,24 +96,14 @@
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="cloudH" type="cloud" x="7066" y="650" width="204" height="128">
+  <object name="cloudH" type="cloud" x="7170" y="642" width="204" height="128">
    <properties>
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="7086" y="434" width="204" height="128">
+  <object name="cloudT" type="cloud" x="7110" y="322" width="204" height="128">
    <properties>
     <property name="neutral" value="7"/>
-   </properties>
-  </object>
-  <object name="cloudN" type="cloud" x="7110" y="218" width="204" height="128">
-   <properties>
-    <property name="neutral" value="5"/>
-   </properties>
-  </object>
-  <object name="cloudR" type="cloud" x="6518" y="230" width="204" height="128">
-   <properties>
-    <property name="neutral" value="3"/>
    </properties>
   </object>
   <object name="cloudL" type="cloud" x="6506" y="670" width="204" height="128">
@@ -222,29 +111,9 @@
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="6514" y="438" width="204" height="128">
-   <properties>
-    <property name="neutral" value="9"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="6806" y="154" width="68" height="64">
-   <properties>
-    <property name="delay" value="400"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="7382" y="122" width="68" height="64">
-   <properties>
-    <property name="delay" value="450"/>
-   </properties>
-  </object>
   <object name="star" type="star" x="5794" y="554" width="68" height="64">
    <properties>
     <property name="delay" value="650"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="5490" y="446" width="68" height="64">
-   <properties>
-    <property name="delay" value="300"/>
    </properties>
   </object>
   <object name="star" type="star" x="5334" y="114" width="68" height="64">
@@ -257,44 +126,19 @@
     <property name="delay" value="500"/>
    </properties>
   </object>
-  <object name="star" type="star" x="5682" y="238" width="68" height="64">
-   <properties>
-    <property name="delay" value="550"/>
-   </properties>
-  </object>
   <object name="cloudL" type="cloud" x="7712" y="666" width="184" height="116">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="7712" y="510" width="184" height="116">
+  <object name="cloudL" type="cloud" x="7704" y="394" width="184" height="116">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="7712" y="346" width="184" height="116">
+  <object name="cloudL" type="cloud" x="7712" y="94" width="184" height="116">
    <properties>
     <property name="neutral" value="9"/>
-   </properties>
-  </object>
-  <object name="cloudL" type="cloud" x="7720" y="170" width="184" height="116">
-   <properties>
-    <property name="neutral" value="9"/>
-   </properties>
-  </object>
-  <object name="cloudL" type="cloud" x="7720" y="14" width="184" height="116">
-   <properties>
-    <property name="neutral" value="9"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="7538" y="558" width="68" height="64">
-   <properties>
-    <property name="delay" value="400"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="7350" y="642" width="68" height="64">
-   <properties>
-    <property name="delay" value="450"/>
    </properties>
   </object>
   <object name="star" type="star" x="8026" y="98" width="68" height="64">
@@ -302,12 +146,7 @@
     <property name="delay" value="350"/>
    </properties>
   </object>
-  <object name="star" type="star" x="7634" y="190" width="68" height="64">
-   <properties>
-    <property name="delay" value="600"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="7450" y="294" width="68" height="64">
+  <object name="star" type="star" x="7490" y="230" width="68" height="64">
    <properties>
     <property name="delay" value="650"/>
    </properties>
@@ -317,27 +156,12 @@
     <property name="delay" value="420"/>
    </properties>
   </object>
-  <object name="star" type="star" x="8198" y="246" width="68" height="64">
-   <properties>
-    <property name="delay" value="450"/>
-   </properties>
-  </object>
-  <object name="plane" type="plane" x="8220" y="450" width="192" height="68"/>
-  <object name="plane" type="plane" x="8256" y="330" width="184" height="60"/>
+  <object name="plane" type="plane" x="8376" y="426" width="184" height="60"/>
   <object name="plane" type="plane" x="8860" y="90" width="196" height="72"/>
-  <object name="plane" type="plane" x="8280" y="642" width="176" height="56"/>
   <object name="plane" type="plane" x="8816" y="762" width="200" height="60"/>
-  <object name="bird" type="bird" x="8780" y="618" width="120" height="64"/>
-  <object name="bird" type="bird" x="8924" y="518" width="136" height="64"/>
   <object name="bird" type="bird" x="8836" y="314" width="136" height="60"/>
   <object name="bird" type="bird" x="8280" y="722" width="136" height="64"/>
-  <object name="bird" type="bird" x="8256" y="562" width="136" height="64"/>
-  <object name="bird" type="bird" x="8184" y="234" width="136" height="64"/>
-  <object name="star" type="star" x="8038" y="454" width="68" height="64">
-   <properties>
-    <property name="delay" value="600"/>
-   </properties>
-  </object>
+  <object name="bird" type="bird" x="8272" y="122" width="136" height="64"/>
   <object name="star" type="star" x="9254" y="318" width="68" height="64">
    <properties>
     <property name="delay" value="480"/>
@@ -358,22 +182,16 @@
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="8544" y="698" width="184" height="120">
+  <object name="cloudL" type="cloud" x="8560" y="682" width="184" height="120">
    <properties>
     <property name="neutral" value="9"/>
    </properties>
   </object>
   <object name="checkone" type="checkpoint" x="2361" y="-7" width="73" height="907"/>
   <object name="checkpoint2" type="checkpoint" x="4930" y="0" width="64" height="892"/>
-  <object name="plane" type="plane" x="1988" y="442" width="196" height="68"/>
   <object name="plane" type="plane" x="2144" y="726" width="196" height="68"/>
   <object name="plane" type="plane" x="2884" y="186" width="196" height="68"/>
-  <object name="bird" type="bird" x="8284" y="794" width="136" height="64"/>
-  <object name="bird" type="bird" x="3114" y="398" width="124" height="60"/>
-  <object name="bird" type="bird" x="2790" y="586" width="128" height="68"/>
   <object name="bird" type="bird" x="3106" y="582" width="124" height="64"/>
-  <object name="bird" type="bird" x="2954" y="666" width="124" height="60"/>
-  <object name="bird" type="bird" x="2906" y="46" width="132" height="64"/>
   <object name="cloudL" type="cloud" x="3696" y="578" width="196" height="120"/>
   <object name="checkpoint" type="checkpoint" x="260" y="8" width="64" height="952"/>
   <object name="end" type="end" x="9604" y="4" width="128" height="836"/>

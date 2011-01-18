@@ -9,21 +9,25 @@ namespace Sputnik.Game {
 		public Level1Environment(Controller ctrl)
 				: base(ctrl) {
 
-                    LoadMap("LevelDesignSix.tmx");
-                    LoadOrExtendMap("LevelDesignFour.tmx");
-                    LoadOrExtendMap("LevelDesignOne.tmx");
-                    LoadOrExtendMap("LevelDesignThree.tmx");
-                    LoadOrExtendMap("LevelDesignTwo.tmx");
+                    //LoadMap("LevelDesignSix.tmx");
+                    //LoadOrExtendMap("LevelDesignFour.tmx");
+                    //LoadOrExtendMap("LevelDesignOne.tmx");
+                    //LoadOrExtendMap("LevelDesignThree.tmx");
+                    //LoadOrExtendMap("LevelDesignTwo.tmx");
+
+                    LoadMap("LevelDesignTwo.tmx");
+                    //LoadOrExtendMap("LevelDesignThree.tmx");
+
             //LoadMap("LevelDesignTwo.tmx");
 
 			AddChild(new RepeatingBackground(this));
 			AddChild(new Moon(this));
             Sound.PlayCue("music_dreaming");
 
-            Balloon.enableUp = false;
-            Balloon.enableDown = false;
-            Balloon.enableRight = false;
-            Balloon.enableLeft = false;
+            //Balloon.enableUp = false;
+            //Balloon.enableDown = false;
+            //Balloon.enableRight = false;
+            //Balloon.enableLeft = false;
 		}
 	}
 }
