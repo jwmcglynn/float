@@ -295,13 +295,20 @@ namespace Sputnik.Game
 					else {
 						if ((dirY < 0 && pos.Y + m_distortedPosition < tracks.First()) || (dirY > 0 && pos.Y + m_distortedPosition > tracks.Last())) {
 							vel.Y = DEFAULT_SPEED.Y;
-							pos.Y = MathUtils.Clamp(pos.Y + m_distortedPosition, tracks.First(), tracks.Last()) - m_distortedPosition;
+							pos.Y = Math.Min(MathUtils.Clamp(pos.Y + m_distortedPosition, tracks.First(), tracks.Last()) - m_distortedPosition, TOP_POSITION_BUFFER) ;
 						} else {
 							if(endingDescent)
 								vel.Y = MOVE_VEL/2 * dirY;
 							else
 								vel.Y = MOVE_VEL * dirY;
 						}
+
+						if (CLOSE_TO_EPSILON > Math.Abs(TOP_POSITION_BUFFER - pos.Y) && vel.Y < 0)
+						{
+							vel.Y = DEFAULT_SPEED.Y;
+						}
+
+
 					}
 
 					bool atLeft = Environment.Camera.Rect.Left + LEFT_POSITION_BUFFER >= Position.X;
