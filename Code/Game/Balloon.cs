@@ -423,6 +423,7 @@ namespace Sputnik.Game
 				|| padState.IsButtonDown(Buttons.DPadLeft)
 				|| padState.ThumbSticks.Left.X < -threshold
 				|| padState.ThumbSticks.Right.X < -threshold
+				|| padState.IsButtonDown(Buttons.LeftShoulder)
 				))
 			{
 				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
@@ -433,6 +434,7 @@ namespace Sputnik.Game
 				|| padState.IsButtonDown(Buttons.DPadRight)
 				|| padState.ThumbSticks.Left.X > threshold
 				|| padState.ThumbSticks.Right.X > threshold
+				|| padState.IsButtonDown(Buttons.RightShoulder)
 				)) || endingDescent)
 			{
 				Environment.Camera.EffectScale = 1.0f;
