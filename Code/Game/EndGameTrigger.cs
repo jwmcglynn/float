@@ -17,6 +17,8 @@ namespace Sputnik.Game
 		private GameEnvironment game;
 		private SpawnPoint spawnPoint;
 		float delay;
+		float delayAfterFade = 2.0f;
+		bool changedMusic = false;
 
 		public EndGameTrigger(GameEnvironment env, SpawnPoint sp)
 			:base(env, sp)
@@ -36,11 +38,22 @@ namespace Sputnik.Game
 		public override void Update(float elapsedTime)
 		{
 			base.Update(elapsedTime);
-			if (game.FadeOut.fadedOut)
+			if (game.FadeOut.doneFading)
 			{
-				game.pause(new EndPopUp(game.Controller, game));
-				Sound.PlayCue("scroll");
-				Sound.StopAllExceptMusic();
+				if (!changedMusic)
+				{
+					Sound.StopAllExceptMusic();
+					Sound.PlayCue("music_title");
+				}
+				else
+				{ changedMusic = true; }
+
+				if (delayAfterFade <= 0.0f)
+				{
+					game.pause(new EndPopUp(game.Controller, game));
+					Sound.PlayCue("scroll");
+				}
+				else delayAfterFade -= elapsedTime;
 			}
 		}
 	}
