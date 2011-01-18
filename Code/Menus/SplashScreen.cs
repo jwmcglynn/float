@@ -39,10 +39,10 @@ namespace Sputnik.Menus {
 			switch (m_state) {
 				case State.Waiting:
 					if (m_timer <= 0.0f
-							|| kb.IsKeyDown(Keys.Enter)
 							|| kb.IsKeyDown(Keys.Escape)
 							|| kb.IsKeyDown(Keys.Space)
-							|| ms.LeftButton == ButtonState.Pressed
+							|| (ms.LeftButton == ButtonState.Pressed &&
+									ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y)
 							|| gp.Buttons.Start == ButtonState.Pressed
 							|| gp.Buttons.A == ButtonState.Pressed
 							|| gp.Buttons.B == ButtonState.Pressed) {
@@ -62,6 +62,8 @@ namespace Sputnik.Menus {
 			}
 			
 			m_timer -= elapsedTime;
+
+			base.Update(elapsedTime);
 		}
 	}
 }

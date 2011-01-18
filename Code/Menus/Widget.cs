@@ -80,7 +80,7 @@ namespace Sputnik.Menus {
 		/// <param name="spriteBatch">SpriteBatch to render to.</param>
 		public override void Draw(SpriteBatch spriteBatch) {
 			if (Visible && Texture != null) {
-				spriteBatch.Draw(Texture, AbsolutePosition, null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
+				spriteBatch.Draw(Texture, new Vector2((float) Math.Round(AbsolutePosition.X), (float) Math.Round(AbsolutePosition.Y)), null, VertexColor * Alpha, Rotation, Registration, Scale, SpriteEffects.None, Zindex);
 			}
 
 			foreach (Entity ent in Children) {

@@ -59,6 +59,11 @@ namespace Sputnik
             c.Stop(immediate ? AudioStopOptions.Immediate : AudioStopOptions.AsAuthored);
         }
 
+		public static void StopAllExceptMusic(bool immediate = false) {
+			AudioCategory c = m_audioEngine.GetCategory("Default");
+			c.Stop(immediate ? AudioStopOptions.Immediate : AudioStopOptions.AsAuthored);
+		}
+
         /// <summary>
         /// Play a sound.
         /// </summary>

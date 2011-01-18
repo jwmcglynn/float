@@ -147,6 +147,7 @@
     <Compile Include="Game\Trigger.cs" />
     <Compile Include="Game\ZSettings.cs" />
     <Compile Include="Loaders\Tiled.cs" />
+    <Compile Include="Menus\Credits.cs" />
     <Compile Include="Menus\DebugMenu.cs" />
     <Compile Include="Menus\EndPopUp.cs" />
     <Compile Include="Menus\GamePauseMenu.cs" />

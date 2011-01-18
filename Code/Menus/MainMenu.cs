@@ -170,7 +170,7 @@ namespace Sputnik.Menus
 
 		void onPressCredits()
 		{
-			//need credits
+			Controller.ChangeEnvironment(new Credits(Controller));
 		}
 
 		void onPressQuit()
