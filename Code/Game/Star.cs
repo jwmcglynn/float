@@ -125,7 +125,7 @@ namespace Sputnik.Game
 					{
 						m_curState = State.Falling;
 						CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
-						AddCollisionRectangle(new Vector2(14.0f, 80.0f), new Vector2(0.0f, -80.0f));
+						AddCollisionRectangle(new Vector2(14.0f, 80.0f), new Vector2(0.0f, -80.0f) + new Vector2(0.0f, 40.0f));
 
 
 						LoadTexture(Environment.contentManager, "star_imagefalling2"); 
