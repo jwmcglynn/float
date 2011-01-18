@@ -10,7 +10,7 @@ float4 main(float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
     float4 tex = tex2D(TextureSampler, texCoord);
     
     // Tint.
-    tex.rgb *= TintColor;
+    tex.rgb *= color * TintColor;
     
     return tex;
 }

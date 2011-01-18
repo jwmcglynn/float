@@ -72,8 +72,6 @@ namespace Sputnik.Game {
 			} else {
 				DesiredVelocity = new Vector2(k_horizVels[1], 0.0f);
 			}
-
-			Console.WriteLine("Bird vel = " + DesiredVelocity.X);
 		}
 
 		public override void OnPressureChange(float amount) {

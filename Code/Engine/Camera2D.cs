@@ -65,7 +65,7 @@ namespace Sputnik {
 
 		public void Update(float elapsedTime) {
 			m_actualEffectScale += (EffectScale - m_actualEffectScale) * ScaleSpeed * elapsedTime;
-			Console.WriteLine(m_actualEffectScale);
+
 			// Move the Camera to the position that it needs to go.
 			Position += MoveSpeed * elapsedTime;
 

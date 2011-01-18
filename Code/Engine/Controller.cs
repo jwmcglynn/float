@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Sputnik.Menus;
+using System.IO;
 
 using Sputnik.Game;
 
@@ -89,6 +90,32 @@ namespace Sputnik {
 			m_nextEnv = env;
 		}
 
+		private List<object> Preload(string RootDir) {
+			List<object> assets = new List<object>();
+
+			List<string> files = new List<string>();
+			RecursiveDirectories(files, RootDir);
+			foreach (string s in files) {
+				assets.Add(Content.Load<object>(s));
+			}
+
+			return assets;
+		}
+
+		private static void RecursiveDirectories(List<string> files, string dir) {
+			foreach (string s in Directory.GetDirectories(dir)) {
+				RecursiveDirectories(files, s);
+			}
+
+			foreach (string s in Directory.GetFiles(dir)) {
+				if (Path.GetExtension(s) == ".xnb") {
+					string fn = Path.Combine(Path.GetDirectoryName(s), Path.GetFileNameWithoutExtension(s)).Substring("Content\\".Length);
+					files.Add(fn);
+				}
+			}
+		}
+
+
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
@@ -98,6 +125,9 @@ namespace Sputnik {
 
 			// Prepare DebugView.
 			FarseerPhysics.DebugViewXNA.LoadContent(GraphicsDevice, Content);
+
+			// Preload content.
+			List<object> assets = Preload("Content");
 
 			// Create first environment.
 			
