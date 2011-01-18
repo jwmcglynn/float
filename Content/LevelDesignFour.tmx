@@ -16,7 +16,7 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="136" height="16">
-  <object name="spawn" type="spawn" x="636" y="382" width="62" height="62"/>
+  <object name="spawn" type="spawn" x="472" y="386" width="62" height="62"/>
   <object name="cloudL" type="cloud" x="898" y="66" width="196" height="124">
    <properties>
     <property name="neutral" value="9"/>
@@ -169,7 +169,17 @@
   </object>
   <object name="checkpoint" type="checkpoint" x="3372" y="40" width="112" height="816"/>
   <object name="checkpoint" type="checkpoint" x="5760" y="12" width="128" height="872"/>
-  <object name="checkpoint" type="checkpoint" x="444" y="2" width="128" height="892"/>
+  <object name="checkpoint" type="checkpoint" x="604" y="2" width="128" height="892"/>
+  <object name="star" type="star" x="122" y="74" width="60" height="64">
+   <properties>
+    <property name="delay" value="350"/>
+   </properties>
+  </object>
+  <object name="star" type="star" x="542" y="182" width="60" height="64">
+   <properties>
+    <property name="delay" value="450"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Instructions" width="136" height="16"/>
 </map>

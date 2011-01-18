@@ -86,9 +86,9 @@
     <property name="neutral" value="7"/>
    </properties>
   </object>
-  <object name="cloudL" type="cloud" x="5808" y="78" width="184" height="124">
+  <object name="cloudR" type="cloud" x="5740" y="70" width="184" height="124">
    <properties>
-    <property name="neutral" value="9"/>
+    <property name="neutral" value="3"/>
    </properties>
   </object>
   <object name="cloudN" type="cloud" x="6036" y="510" width="196" height="120"/>
@@ -119,7 +119,7 @@
     <property name="neutral" value="9"/>
    </properties>
   </object>
-  <object name="star" type="star" x="5794" y="554" width="68" height="64">
+  <object name="star" type="star" x="5114" y="326" width="68" height="64">
    <properties>
     <property name="delay" value="650"/>
    </properties>
@@ -159,7 +159,7 @@
     <property name="delay" value="650"/>
    </properties>
   </object>
-  <object name="star" type="star" x="9326" y="322" width="68" height="64">
+  <object name="star" type="star" x="9290" y="462" width="68" height="64">
    <properties>
     <property name="delay" value="420"/>
    </properties>
@@ -170,17 +170,17 @@
   <object name="bird" type="bird" x="8836" y="314" width="136" height="60"/>
   <object name="bird" type="bird" x="8280" y="722" width="136" height="64"/>
   <object name="bird" type="bird" x="8272" y="122" width="136" height="64"/>
-  <object name="star" type="star" x="9254" y="318" width="68" height="64">
+  <object name="star" type="star" x="9226" y="526" width="68" height="64">
    <properties>
     <property name="delay" value="480"/>
    </properties>
   </object>
-  <object name="star" type="star" x="9398" y="318" width="68" height="64">
+  <object name="star" type="star" x="9354" y="398" width="68" height="64">
    <properties>
     <property name="delay" value="360"/>
    </properties>
   </object>
-  <object name="star" type="star" x="9466" y="318" width="68" height="64">
+  <object name="star" type="star" x="9418" y="338" width="68" height="64">
    <properties>
     <property name="delay" value="300"/>
    </properties>
@@ -222,6 +222,18 @@
     <property name="delay" value="500"/>
    </properties>
   </object>
+  <object name="star" type="star" x="9478" y="278" width="68" height="64">
+   <properties>
+    <property name="delay" value="240"/>
+   </properties>
+  </object>
+  <object name="star" type="star" x="9158" y="590" width="68" height="64">
+   <properties>
+    <property name="delay" value="540"/>
+   </properties>
+  </object>
+  <object name="plane" type="plane" x="1240" y="2" width="188" height="60"/>
+  <object name="plane" type="plane" x="3996" y="2" width="188" height="60"/>
  </objectgroup>
  <objectgroup name="Instructions" width="180" height="16"/>
 </map>

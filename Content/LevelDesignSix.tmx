@@ -22,7 +22,7 @@
     <property name="neutral" value="1"/>
    </properties>
   </object>
-  <object name="cloudT" type="cloud" x="2242" y="68" width="196" height="128">
+  <object name="cloudT" type="cloud" x="2294" y="116" width="196" height="128">
    <properties>
     <property name="neutral" value="7"/>
    </properties>
@@ -77,12 +77,12 @@
     <property name="delay" value="510"/>
    </properties>
   </object>
-  <object name="bird" type="bird" x="1994" y="254" width="124" height="60"/>
-  <object name="bird" type="bird" x="1982" y="382" width="128" height="64"/>
-  <object name="bird" type="bird" x="1982" y="458" width="124" height="60"/>
-  <object name="bird" type="bird" x="2746" y="-2" width="124" height="60"/>
-  <object name="bird" type="bird" x="2754" y="194" width="124" height="60"/>
-  <object name="bird" type="bird" x="2754" y="126" width="124" height="60"/>
+  <object name="bird" type="bird" x="1990" y="334" width="124" height="60"/>
+  <object name="bird" type="bird" x="1982" y="442" width="128" height="64"/>
+  <object name="bird" type="bird" x="1986" y="514" width="124" height="60"/>
+  <object name="bird" type="bird" x="2758" y="66" width="124" height="60"/>
+  <object name="bird" type="bird" x="2754" y="246" width="124" height="60"/>
+  <object name="bird" type="bird" x="2754" y="182" width="124" height="60"/>
   <object name="plane" type="plane" x="5130" y="450" width="180" height="64"/>
   <object name="plane" type="plane" x="5134" y="362" width="180" height="64"/>
   <object name="plane" type="plane" x="5130" y="578" width="180" height="64"/>
@@ -157,9 +157,9 @@
    </properties>
   </object>
   <object name="bird" type="bird" x="10458" y="474" width="120" height="56"/>
-  <object name="plane" type="plane" x="10570" y="58" width="192" height="68"/>
+  <object name="plane" type="plane" x="10550" y="62" width="192" height="68"/>
   <object name="bird" type="bird" x="10938" y="650" width="120" height="56"/>
-  <object name="plane" type="plane" x="11278" y="674" width="192" height="68"/>
+  <object name="plane" type="plane" x="11542" y="526" width="192" height="68"/>
   <object name="star" type="star" x="12454" y="126" width="72" height="64">
    <properties>
     <property name="delay" value="500"/>
@@ -184,6 +184,13 @@
     <property name="neutral" value="3"/>
    </properties>
   </object>
+  <object name="star" type="star" x="10846" y="90" width="72" height="64">
+   <properties>
+    <property name="delay" value="500"/>
+   </properties>
+  </object>
+  <object name="bird" type="bird" x="11358" y="134" width="120" height="56"/>
+  <object name="bird" type="bird" x="12638" y="154" width="120" height="56"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>
