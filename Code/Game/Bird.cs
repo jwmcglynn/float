@@ -32,8 +32,10 @@ namespace Sputnik.Game {
 			SnapToRung();
 
 			Sequence seq = new Sequence(Environment.contentManager);
-			seq.AddFrame("bird\\Bird1", 0.33f);
-			seq.AddFrame("bird\\Bird2", 0.33f);
+			seq.AddFrame("bird\\Bird1", 0.15f);
+			seq.AddFrame("bird\\Bird2", 0.15f);
+			seq.AddFrame("bird\\Bird3", 0.15f);
+			seq.AddFrame("bird\\Bird2", 0.15f);
 			seq.Loop = true;
 			m_anim.PlaySequence(seq);
 

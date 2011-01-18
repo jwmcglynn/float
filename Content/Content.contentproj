@@ -749,6 +749,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bird\Bird3.png">
+      <Name>Bird3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="tutorial\controler_down.png">
       <Name>controler_down</Name>
       <Importer>TextureImporter</Importer>
