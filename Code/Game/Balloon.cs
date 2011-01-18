@@ -406,6 +406,7 @@ namespace Sputnik.Game
 			dirY = 0;
 
 			if (enableUp && (keyState.IsKeyDown(Keys.Up)
+				|| keyState.IsKeyDown(Keys.W)
 				|| padState.IsButtonDown(Buttons.DPadUp)
                 || padState.ThumbSticks.Left.Y > threshold
 				|| padState.ThumbSticks.Right.Y > threshold
@@ -413,6 +414,7 @@ namespace Sputnik.Game
 				)) --dirY;
 
 			if ((enableDown && (keyState.IsKeyDown(Keys.Down) 
+				|| keyState.IsKeyDown(Keys.S)
 				|| padState.IsButtonDown(Buttons.DPadDown) 
                 || padState.ThumbSticks.Left.Y < -threshold
 				|| padState.ThumbSticks.Right.Y < -threshold
@@ -420,6 +422,7 @@ namespace Sputnik.Game
 				)) || endingDescent ) ++dirY;
 
 			if (enableLeft && (keyState.IsKeyDown(Keys.Left)
+				|| keyState.IsKeyDown(Keys.A)
 				|| padState.IsButtonDown(Buttons.DPadLeft)
 				|| padState.ThumbSticks.Left.X < -threshold
 				|| padState.ThumbSticks.Right.X < -threshold
@@ -431,6 +434,7 @@ namespace Sputnik.Game
 			} 
 
 			if ((enableRight && (keyState.IsKeyDown(Keys.Right)
+				|| keyState.IsKeyDown(Keys.D)
 				|| padState.IsButtonDown(Buttons.DPadRight)
 				|| padState.ThumbSticks.Left.X > threshold
 				|| padState.ThumbSticks.Right.X > threshold
