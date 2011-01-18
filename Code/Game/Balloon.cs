@@ -14,15 +14,7 @@ namespace Sputnik.Game
 {
 	public class Balloon : GameEntity
 	{
-		///DEFAULT CONSTANTS FOR BALLOON
-		/**
-		 * Created: Tuesday Jan 11 2011 by student.kaushik@gmail.com
-		 * 
-		 * BALLOON_STATE enum stores the possible states the balloon could be.
-		 * It may become more useful in future editions of the game, where other factors of the balloon may come into play.
-		 * For now it indicates the play-state of the balloon (invulnerable, alive, or dead).
-		 *
-		 */
+
 		public enum BALLOON_STATE {
 			DYING, ALIVE, INVULNERABLE, SUPER_GUST, DEAD, ENDING_SEQUENCE
 		}
@@ -125,19 +117,20 @@ namespace Sputnik.Game
 		{
 			Zindex = ZSettings.Balloon;
 			Scale = 0.5f;
-			m_dead = false;
 
+
+			m_dead = false;
 			endingDescent = false;
 
+			//Setting states
 			currentState = BALLOON_STATE.INVULNERABLE;
 			currentSpecialStateRemainingTime = INVULNERABILITY_TIME;
 
+			
 			DesiredVelocity = DEFAULT_SPEED;
 			originalRegistration = new Vector2(285.0f, 165.0f);
 			Registration = originalRegistration;
 
-			//Position = new Vector2(DEFAULT_DISTANCE_FROM_LEFT_SCREEN, TRACK_0 + track*TRACK_DISTANCE);
-			//Position = Vector2.Zero;
 			CreateCollisionBody(Environment.CollisionWorld, BodyType.Dynamic, CollisionFlags.FixedRotation);
 			AddCollisionCircle(30.0f, Vector2.Zero);
 
