@@ -15,6 +15,7 @@ namespace Sputnik.Menus
 	{
 		public MainMenuButton prevButton { get; set; }
 		private MainMenuButton nButton;
+		private Menu theMenu;
 		public MainMenuButton nextButton
 		{
 			get { return nButton; }
@@ -29,6 +30,7 @@ namespace Sputnik.Menus
 		public MainMenuButton(MainMenu menu, string textureName)
 			: base(menu)
 		{
+			theMenu = menu;
 			isSelected = false;
 			isPressed = false;
 			prevButton = this;
@@ -48,6 +50,7 @@ namespace Sputnik.Menus
 			else VertexColor = Color.White;
 			if (isPressed)
 				VertexColor = Color.Green;
+
 			base.Update(elapsedTime);
 		}
 	}
@@ -55,35 +58,39 @@ namespace Sputnik.Menus
 	public class MainMenu : Menu
 	{
 		MainMenuButton currentButton;
-		GameEnvironment currentGame;
+		MainMenuButton menuBackground;
+		MainMenuButton playButton;
+		MainMenuButton instructionButton; 
+		MainMenuButton creditsButton;
+		MainMenuButton quitButton;
 
 		public MainMenu(Controller cntl)
 			: base(cntl)
 		{
-
-			MainMenuButton letterBackground = new MainMenuButton(this, "buttons\\pause_menu");
-			letterBackground.Registration = letterBackground.Size / 2;
-			letterBackground.PositionPercent = new Vector2(0.5f, 0.45f);
-			letterBackground.Zindex = 0.6f;
-			AddChild(letterBackground);
+			Controller.IsMouseVisible = true;
+			menuBackground = new MainMenuButton(this, "main-menu");
+			menuBackground.Registration = menuBackground.Size / 2;
+			menuBackground.PositionPercent = new Vector2(0.5f, 0.5f);
+			menuBackground.Zindex = 0.6f;
+			AddChild(menuBackground);
 
 			//The buttons:
-			MainMenuButton playButton = new MainMenuButton(this, "buttons\\back_to_game");
-			MainMenuButton instructionButton = new MainMenuButton(this, "buttons\\back_to_checkpoint");
-			MainMenuButton creditsButton = new MainMenuButton(this, "buttons\\back_to_start");
-			MainMenuButton quitButton = new MainMenuButton(this, "buttons\\back_to_title");
+			playButton = new MainMenuButton(this, "buttons\\introButton1");
+			instructionButton = new MainMenuButton(this, "buttons\\introButton2");
+			creditsButton = new MainMenuButton(this, "buttons\\introButton3");
+			quitButton = new MainMenuButton(this, "buttons\\introButton4");
 
 			playButton.nextButton = instructionButton;
 			instructionButton.nextButton = creditsButton;
 			creditsButton.nextButton = quitButton;
 			quitButton.nextButton = playButton;
 
-			float distanceBetweenButtons = 65.0f;
-			float prevButton = -100.0f;
+			float distanceBetweenButtons = 0.12f;
+			float prevButton = 0.4f;
+			float xPercentage = 0.52f;
 
-			playButton.PositionPercent = new Vector2(0.5f, 0.45f);
+			playButton.PositionPercent = new Vector2(xPercentage, prevButton);
 			playButton.Registration = playButton.Size / 2;
-			playButton.Position = (new Vector2(0.0f, prevButton));
 			playButton.CreateButton(new Rectangle(0, 0,
 				(int)playButton.Size.X, (int)playButton.Size.Y));
 			playButton.Zindex = 0.4f;
@@ -94,10 +101,9 @@ namespace Sputnik.Menus
 
 			AddChild(playButton);
 
-			instructionButton.PositionPercent = new Vector2(0.5f, 0.45f);
-			instructionButton.Registration = instructionButton.Size / 2;
 			prevButton += distanceBetweenButtons;
-			instructionButton.Position = (new Vector2(15.0f, prevButton));
+			instructionButton.PositionPercent = new Vector2(xPercentage, prevButton);
+			instructionButton.Registration = instructionButton.Size / 2;
 			instructionButton.CreateButton(new Rectangle(0, 0,
 				 (int)instructionButton.Size.X, (int)instructionButton.Size.Y));
 			instructionButton.Zindex = 0.5f;
@@ -107,10 +113,9 @@ namespace Sputnik.Menus
 			};
 			AddChild(instructionButton);
 
-			creditsButton.PositionPercent = new Vector2(0.5f, 0.45f);
-			creditsButton.Registration = creditsButton.Size / 2;
 			prevButton += distanceBetweenButtons;
-			creditsButton.Position = (new Vector2(0.0f, prevButton));
+			creditsButton.PositionPercent = new Vector2(xPercentage, prevButton);
+			creditsButton.Registration = creditsButton.Size / 2;
 			creditsButton.CreateButton(new Rectangle(0, 0,
 				 (int)creditsButton.Size.X, (int)creditsButton.Size.Y));
 			creditsButton.Zindex = 0.5f;
@@ -120,10 +125,9 @@ namespace Sputnik.Menus
 			};
 			AddChild(creditsButton);
 
-			quitButton.PositionPercent = new Vector2(0.5f, 0.45f);
-			quitButton.Registration = quitButton.Size / 2;
 			prevButton += distanceBetweenButtons;
-			quitButton.Position = (new Vector2(0.0f, prevButton));
+			quitButton.PositionPercent = new Vector2(xPercentage, prevButton);
+			quitButton.Registration = quitButton.Size / 2;
 			quitButton.CreateButton(new Rectangle(0, 0,
 				 (int)quitButton.Size.X, (int)quitButton.Size.Y));
 			quitButton.Zindex = 0.5f;
@@ -158,6 +162,14 @@ namespace Sputnik.Menus
 
 		public override void Update(float elapsedTime)
 		{
+			//Scaling
+			float scale = Math.Min(ScreenSize.X / menuBackground.Texture.Width, ScreenSize.Y / menuBackground.Texture.Height);
+			menuBackground.Scale = scale;
+			playButton.Scale = scale;
+			instructionButton.Scale = scale;
+			creditsButton.Scale = scale;
+			quitButton.Scale = scale;
+
 			if ((Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
 				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.DPadDown))
 				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickDown)))

@@ -200,7 +200,7 @@ namespace Sputnik {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.DarkMagenta);
+			GraphicsDevice.Clear(Color.Black);
 			m_env.Draw();
 			base.Draw(gameTime);
 		}

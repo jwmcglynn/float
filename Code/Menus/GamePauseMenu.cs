@@ -13,6 +13,8 @@ namespace Sputnik.Menus
 {
     internal class MenuButton : Widget
     {
+
+		private GamePauseMenu theMenu;
         public MenuButton prevButton { get; set; }
         private MenuButton nButton;
         public MenuButton nextButton
@@ -29,6 +31,7 @@ namespace Sputnik.Menus
         public MenuButton(GamePauseMenu menu, string textureName)
             : base(menu)
         {
+			theMenu = menu;
             isSelected = false;
             isPressed = false;
             prevButton = this;
@@ -38,7 +41,18 @@ namespace Sputnik.Menus
                 menu.unSelectCurrentButton();
                 menu.selectButton(this);
             };
-            OnMouseDown += () => { isPressed = true; };
+            OnMouseDown += () => { 
+				isPressed = true;
+				theMenu.buttonPressed = true;
+			};
+			OnMouseOut += () =>
+			{
+				if (isPressed)
+				{
+					isPressed = false;
+					isSelected = true;
+				}
+			};
         }
         public override void Update(float elapsedTime)
         {
@@ -55,6 +69,7 @@ namespace Sputnik.Menus
     {
         MenuButton currentButton;
         GameEnvironment currentGame;
+		public bool buttonPressed;
 
         public GamePauseMenu(Controller cntl, GameEnvironment game)
             :base(cntl, game)
@@ -157,8 +172,7 @@ namespace Sputnik.Menus
 
         void onPressTitle()
         {
-            m_game.unPause();
-            //TODO: go back to the main menu.
+			Controller.ChangeEnvironment(new MainMenu(Controller));
         }
 
         public override void Update(float elapsedTime)
@@ -184,6 +198,7 @@ namespace Sputnik.Menus
                     || GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.A) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.A))
                 {
                     currentButton.isPressed = true;
+					buttonPressed = true;
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && !OldKeyboard.GetState().IsKeyUp(Keys.Enter)
                     || GamePad.GetState(PlayerIndex.One).IsButtonUp(Input.Buttons.A) && !OldGamePad.GetState().IsButtonUp(Input.Buttons.A))
@@ -198,9 +213,11 @@ namespace Sputnik.Menus
 
         internal void selectButton(MenuButton button)
         {
-			
-            button.isSelected = true;
-            currentButton = button;
+			if (!buttonPressed)
+			{
+				button.isSelected = true;
+				currentButton = button;
+			}
         }
 
         //This is to be called by a button, when the mouse hovers over a different button.
