@@ -191,15 +191,21 @@ namespace Sputnik.Menus
 			quitButton.Scale = scale;
 
 			if ((Keyboard.GetState().IsKeyDown(Keys.Down) && !OldKeyboard.GetState().IsKeyDown(Keys.Down))
+				|| (Keyboard.GetState().IsKeyDown(Keys.S) && !OldKeyboard.GetState().IsKeyDown(Keys.S))
 				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.DPadDown))
-				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickDown)))
+				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickDown))
+				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.RightThumbstickDown) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.RightThumbstickDown))
+				)
 			{
 				unSelectCurrentButton();
 				selectButton(currentButton.nextButton);
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.Up) && !OldKeyboard.GetState().IsKeyDown(Keys.Up)
+				|| Keyboard.GetState().IsKeyDown(Keys.W) && !OldKeyboard.GetState().IsKeyDown(Keys.W)
 				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.DPadUp))
-				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickUp)))
+				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.LeftThumbstickUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.LeftThumbstickUp))
+				|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.RightThumbstickUp) && !OldGamePad.GetState().IsButtonDown(Input.Buttons.RightThumbstickUp))
+				)
 			{
 				unSelectCurrentButton();
 				selectButton(currentButton.prevButton);
