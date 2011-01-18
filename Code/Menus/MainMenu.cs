@@ -183,7 +183,18 @@ namespace Sputnik.Menus
 		public override void Update(float elapsedTime)
 		{
 			//Scaling
-			float scale = Math.Min(ScreenSize.X / menuBackground.Texture.Width, ScreenSize.Y / menuBackground.Texture.Height);
+			float scaleX = ScreenSize.X / menuBackground.Texture.Width;
+			float scaleY = ScreenSize.Y / menuBackground.Texture.Height;
+
+			if (scaleX < scaleY) {
+				ScreenScale = new Vector2(1.0f, scaleX / scaleY);
+				ScreenOffset = new Vector2(0.0f, (ScreenSize.Y - ScreenScale.Y * ScreenSize.Y) / 2);
+			} else {
+				ScreenScale = new Vector2(scaleY / scaleX, 1.0f);
+				ScreenOffset = new Vector2((ScreenSize.X - ScreenScale.X * ScreenSize.X) / 2, 1.0f);
+			}
+
+			float scale = Math.Min(scaleX, scaleY);
 			menuBackground.Scale = scale;
 			playButton.Scale = scale;
 			instructionButton.Scale = scale;

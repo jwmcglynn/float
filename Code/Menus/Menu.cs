@@ -12,6 +12,9 @@ namespace Sputnik.Menus {
 		internal List<Widget> Buttons = new List<Widget>();
 		public Vector2 ScreenSize { get; private set; }
 
+		public Vector2 ScreenOffset = Vector2.Zero;
+		public Vector2 ScreenScale = Vector2.One;
+
 		// Mouse tracking.
 		private Widget m_activeButton;
 		private bool m_mouseWasPressed = false;

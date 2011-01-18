@@ -23,7 +23,7 @@ namespace Sputnik.Menus {
 		/// </summary>
 		public Vector2 AbsolutePosition {
 			get {
-				return Menu.ScreenSize * PositionPercent + Position;
+				return Menu.ScreenSize * Menu.ScreenScale * PositionPercent + Position + Menu.ScreenOffset;
 			}
 		}
 
