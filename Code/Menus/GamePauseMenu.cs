@@ -38,8 +38,11 @@ namespace Sputnik.Menus
             nextButton = this;
             Texture = menu.contentManager.Load<Texture2D>(textureName);
             OnMouseOver += () => {
-                menu.unSelectCurrentButton();
-                menu.selectButton(this);
+				if (!isSelected)
+				{
+					menu.unSelectCurrentButton();
+					menu.selectButton(this);
+				}
             };
             OnMouseDown += () => { 
 				isPressed = true;
@@ -50,7 +53,8 @@ namespace Sputnik.Menus
 				if (isPressed)
 				{
 					isPressed = false;
-					isSelected = true;
+					menu.selectButton(this);
+					theMenu.buttonPressed = false;
 				}
 			};
         }

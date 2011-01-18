@@ -15,7 +15,7 @@ namespace Sputnik.Menus
 	{
 		public MainMenuButton prevButton { get; set; }
 		private MainMenuButton nButton;
-		private Menu theMenu;
+		private MainMenu theMenu;
 		public MainMenuButton nextButton
 		{
 			get { return nButton; }
@@ -38,10 +38,26 @@ namespace Sputnik.Menus
 			Texture = menu.contentManager.Load<Texture2D>(textureName);
 			OnMouseOver += () =>
 			{
-				menu.unSelectCurrentButton();
-				menu.selectButton(this);
+				if (!isSelected)
+				{
+					menu.unSelectCurrentButton();
+					menu.selectButton(this);
+				}
 			};
-			OnMouseDown += () => { isPressed = true; };
+			OnMouseDown += () =>
+			{
+				isPressed = true;
+				theMenu.buttonPressed = true;
+			};
+			OnMouseOut += () =>
+			{
+				if (isPressed)
+				{
+					isPressed = false;
+					menu.selectButton(this);
+					theMenu.buttonPressed = false;
+				}
+			};
 		}
 		public override void Update(float elapsedTime)
 		{
@@ -63,6 +79,8 @@ namespace Sputnik.Menus
 		MainMenuButton instructionButton; 
 		MainMenuButton creditsButton;
 		MainMenuButton quitButton;
+
+		public bool buttonPressed;
 
 		public MainMenu(Controller cntl)
 			: base(cntl)
@@ -205,9 +223,11 @@ namespace Sputnik.Menus
 
 		internal void selectButton(MainMenuButton button)
 		{
-
-			button.isSelected = true;
-			currentButton = button;
+			if (!buttonPressed)
+			{
+				button.isSelected = true;
+				currentButton = button;
+			}
 		}
 
 		//This is to be called by a button, when the mouse hovers over a different button.
