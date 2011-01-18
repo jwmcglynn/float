@@ -89,30 +89,44 @@ namespace Sputnik.Menus {
                 KeyboardState keyState = Keyboard.GetState();
                 GamePadState padState = GamePad.GetState(PlayerIndex.One);
                 GamePadState oldpadState = OldGamePad.GetState();
+
                 if (keyState.IsKeyDown(Keys.Up)
-                    || padState.IsButtonDown(Input.Buttons.DPadUp)
-                    || padState.ThumbSticks.Left.Y > threshold)
+					|| keyState.IsKeyDown(Keys.W)
+					|| padState.IsButtonDown(Input.Buttons.DPadUp)
+                    || padState.ThumbSticks.Left.Y > threshold
+					|| padState.ThumbSticks.Right.Y > threshold
+					)
                     up.highlight();
                 else
                     up.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Down)
+					|| keyState.IsKeyDown(Keys.S)
                     || padState.IsButtonDown(Input.Buttons.DPadDown)
-                    || (padState.ThumbSticks.Left.Y < -threshold))
+                    || (padState.ThumbSticks.Left.Y < -threshold)
+					|| (padState.ThumbSticks.Right.Y < -threshold)
+					)
                     down.highlight();
                 else
                     down.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Left)
+					|| keyState.IsKeyDown(Keys.D)
                     || padState.IsButtonDown(Input.Buttons.DPadLeft)
-                    || padState.ThumbSticks.Left.X < -threshold)
+                    || padState.ThumbSticks.Left.X < -threshold
+					|| padState.ThumbSticks.Right.X < -threshold
+					)
                     left.highlight();
                 else
                     left.deHighlight();
 
                 if (keyState.IsKeyDown(Keys.Right)
+					|| keyState.IsKeyDown(Keys.A)
                     || padState.IsButtonDown(Input.Buttons.DPadRight)
-                    || padState.ThumbSticks.Left.X > threshold)
+                    || padState.ThumbSticks.Left.X > threshold
+					|| padState.ThumbSticks.Right.X > threshold
+					)
+
                     right.highlight();
                 else
                     right.deHighlight();
