@@ -17,6 +17,7 @@ namespace Sputnik.Game
 		public override void OnTrigger(Balloon balloon) {
 			if (balloon.isBalloonAlive) {
 				balloon.SpawnPoint.Position = balloon.PreviousPosition;
+                Sound.PlayCue("checkpoint6");
 			}
 		}
     }
