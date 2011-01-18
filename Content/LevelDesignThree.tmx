@@ -4,12 +4,13 @@
   <image source="tileset.png"/>
  </tileset>
  <tileset firstgid="33" source="tilesheet.tsx"/>
+ <tileset firstgid="69" source="mountain.tsx"/>
  <layer name="Tile BG" width="115" height="16">
   <properties>
    <property name="zindex" value="0.9"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UwQkAIAwDwDqK+y/pp44g2HAHmSAkVcAEq0MGXc63O2S4fdomwBv+FbLYdA5dAgC/OoE877LAHAAA
+   H4sIAAAAAAAAC+2UyQrDMBBD00/px3W5dLl0uaTtp1eGFOZiYxmlwUEPdBtmRF6SYTDG9MBmilkHdtk/2ylmHfx8+ts0xph58P/VmGXZIXvkgBwF+/xN/4/oLnFCzsgFuWbmGMfRpfo9mWunktp+irnoLnFD7sgDeWbmomOG0o5WJ4pezG22Z20/xVx0lxiRF/JGPpm56JihtKPViaIXc5vtWdtPMRfdlcg5ZijtaHWi6MXcZnvW9lPPLcmSHZnbPTzLxBciv8RQwBwAAA==
   </data>
  </layer>
  <layer name="Tile FG" width="115" height="16">
@@ -17,7 +18,7 @@
    <property name="zindex" value="0.6"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WMQqAMBAF0bUQbLxFxMoq97+biKRZCKRIiH+dB4toIZEhxGRmh0FZsrdhuUIXDQEAaMe5qY//2DhoGQct4xjVcun4rt622QsY4PkmxX25zl7AR+zuXrHl3+XKc1rqyZXxLU9GdnzLi5Gd0vAGwl7SBcAcAAA=
+   H4sIAAAAAAAAC+2UTQqAIBBGp0XQpkMEtSldCXX/m6WUIPZDC81m+h68hS5k5KFEgDvdLuAPWsoBLeWAlnJASzmgpRzQUg5oKQe0lINvqaxDwnOrhGelpik9QAbcnXxLbZ0obc9c1KUH+AhttA5b+p6zdXl5LvAcc7Hf0/a/6kgub/SPmBNdx5GOHcOeCrLwriPk6woxA4aIwBwAAA==
   </data>
  </layer>
  <objectgroup name="Objects" width="115" height="16">

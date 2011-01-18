@@ -4,18 +4,19 @@
   <image source="tileset.png"/>
  </tileset>
  <tileset firstgid="33" source="tilesheet.tsx"/>
- <layer name="Tile BG" width="152" height="16">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VQQ7CIBBFh4VLL1E12gVq73852UyihKkwMk5L/kv+qgnQP4+WCIBtE7wPAIYmEBwDdsAvYEkgOAbsgF/AErgFJE4d1oBfQGImOAbsiNTHMfgFSkTq49gvfnl7eXDef2Qi9XNMi7dfR+f9RyaSr2N7/K/eUx4p1ywed3Pr5H6xY9zZM2UxPsOe/JpSbiT3Bsc+KfVU6o09O6dcqOyEdK+/pddMJsXerZHcqnVMOiP3+/5c20vtHHj92vvdMl+mxq/Sd03TvXbdXrP/V9beZ+2Mc/Zc20ttD63rt/TLvAAQbnc8ACYAAA==
-  </data>
- </layer>
+ <tileset firstgid="69" source="mountain.tsx"/>
  <layer name="Tile FG" width="152" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YQQqEMAxA0bgouBE8xLjz/udTcQrFRURiTJz5DwouXBT5La2ziMwC3Ouzjkn2tugLd6t9AQAA4Fmc7+GB+6NNaZ77sFnk1d4f6es6+tLxf8KmCI1psvTVRU9AoTUzfEc1Os/FImIdZOnLUzl/RZWhmYg2rN9t8w99/YK37JFH9AVP1r46yX12Qiz2L3iqfS0nRySbACYAAA==
+   H4sIAAAAAAAAC+2Wtw7CMBRFkyESCxKfBANloSyUhbJQFspCWSifzo1EJCuEENsvtkD3SEdCBD3fOO85BAEhhBBCCCGEEEII+UUi5XPFWwryr7C/slnCFVzDjecsv0wUsMey2MId3MOD5ywxoe8AOag9k57L6suEmsNcuricgyM8wTO8pK41YQu2YcdyHd1akueq1H2oPWM7l6aZdHtDYh+jD98XqX2FN3iHj9S1LuzBPhwYZjOtJXmuSt5HQt5clplJ94ws8/1kW3sIR3AMJ5ZZdGvZPj+btYuQN5e+MmUhuY/StadwBudw8eW3YfD+36kOGwa1Ymyfn4ru2i5wlUlyH13WJsSEJ2TjIacAJgAA
+  </data>
+ </layer>
+ <layer name="Tile BG" width="152" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Vyw6CMBBFh4VLP0I0UXwbdSFGgvr//+QYaSzYYkHqCN6TnIUhdsrtrRIB8NsE0hsAnSYgdAz4A/0CPgkIHQP+QL+AT9At4BP0C/gGHQM+Qb+ATz7pl3Qve8Lzu8aFvbJz6Y1kSPerLzy/S8TslF1kHtjjF+cPMhVt/F9N2TM7pkd+93uasEPBPUmzZUeU75YyYk9yW2tVv0J2Qq8Zqhz/tWO2bilnVO13zNSJlJ73usz7nU+0z02dSVxYV583f6PpeyZt3XLtWEjP99dzWLMbymdYN5cdu3fIQp236/1esivLmmXd0rOp2o0q2bvONfXB5fzrzm9a9T6mrMr2GBWe285DX1fPKnGYYduny/2rk+8NiE2n6gAmAAA=
   </data>
  </layer>
  <objectgroup name="Objects" width="152" height="16">
-  <object name="spawn" type="spawn" x="400" y="302" width="62" height="62"/>
+  <object name="spawn" type="spawn" x="512" y="322" width="62" height="62"/>
   <object name="plane" type="plane" x="2116" y="248" width="196" height="68"/>
   <object name="plane" type="plane" x="2124" y="488" width="188" height="64"/>
   <object name="plane" type="plane" x="2328" y="608" width="188" height="60"/>
@@ -337,7 +338,7 @@
     <property name="delay" value="500"/>
    </properties>
   </object>
-  <object name="checkpoint" type="checkpoint" x="130" y="82" width="124" height="392"/>
+  <object name="checkpoint" type="checkpoint" x="390" y="10" width="120" height="828"/>
   <object name="checkpoint" type="checkpoint" x="3368" y="6" width="64" height="880"/>
   <object name="checkpoint" type="checkpoint" x="7136" y="34" width="68" height="884"/>
   <object name="star" type="star" x="908" y="140" width="68" height="64">

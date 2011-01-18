@@ -4,18 +4,19 @@
   <image source="tileset.png"/>
  </tileset>
  <tileset firstgid="33" source="tilesheet.tsx"/>
- <layer name="Tile BG" width="136" height="16" visible="0">
+ <tileset firstgid="69" source="mountain.tsx"/>
+ <layer name="Tile BG" width="136" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VMQoAIAwDwPb/n3ZxrYNQKngH+UFIIgDelTtQ0Q/glo8BoINvASbYHk70AwDgHwtAzCsnACIAAA==
+   H4sIAAAAAAAAC+2VvRKDIBgE5eFi0iTa5KeJ8f2fwitswyBeEDK7M1tycvA5dB0AQL2EVYBvMB8AkAtvDAAA/ALeljY5yV6e5eXgvUB9XOVNDnI0Z7tmLxizcnF//+g+qXu5y4d8yteGdSm4Zi9kZjnvwP0f7c0r1e0tJ/mR84Z1KcRmr0SW806dXRx5NXTb2yE2eyWynHfq7OLIq6Gb+0xK0/r+Y/xzN2iHBUnMfHYAIgAA
   </data>
  </layer>
  <layer name="Tile FG" width="136" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YSQqDQBBG4XIhuPEWDhtdef+7mRAL2sKhHZoS8z74l8YOPCSmF5FegLnqs1p+bdAHLO0DAIAUOu8D4NG+v01pBJZ9f6ERhGwfNILQUh80ArXWhzbSTFvTmG3Jrh42ocL7AAnc8Z22+tBGYp4l3v+z5Y73fpLy5s/b6yO2E+8+/t1w8rq9nmL7sJ105nr68DVE7IyjfYRr2et3pQ/2/mkfIypd6AAAIgAA
+   H4sIAAAAAAAAC+3UTQqDMBRF4ddBoZMuwg60HQhK9r+3JjROqtw+JZKK54M78ocIB82AuSYPWEIfUOgDCn1AoQ8o9AGFPqDQBxT6gOLpo/1xrXXcl1y8h6rgVvsAOyjxTVMfXdwQNxZ4Zw3X2gf4E/fC7wt5fd7Ljt3JWYWNz6meHvb5b6T1X6OTYwmOrZHaeNq8i6VOOna6edpgbNobndbrJgAiAAA=
   </data>
  </layer>
  <objectgroup name="Objects" width="136" height="16">
-  <object name="spawn" type="spawn" x="476" y="382" width="62" height="62"/>
+  <object name="spawn" type="spawn" x="636" y="382" width="62" height="62"/>
   <object name="cloudL" type="cloud" x="898" y="66" width="196" height="124">
    <properties>
     <property name="neutral" value="9"/>
@@ -232,7 +233,7 @@
   </object>
   <object name="checkpoint" type="checkpoint" x="3372" y="40" width="112" height="816"/>
   <object name="checkpoint" type="checkpoint" x="5760" y="12" width="128" height="872"/>
-  <object name="checkpoint" type="checkpoint" x="136" y="74" width="116" height="380"/>
+  <object name="checkpoint" type="checkpoint" x="444" y="2" width="128" height="892"/>
  </objectgroup>
  <objectgroup name="Instructions" width="136" height="16"/>
 </map>

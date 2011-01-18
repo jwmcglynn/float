@@ -4,14 +4,15 @@
   <image source="tileset.png"/>
  </tileset>
  <tileset firstgid="33" source="tilesheet.tsx"/>
+ <tileset firstgid="69" source="mountain.tsx"/>
  <layer name="Tile BG" width="180" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WwQmAQAxFweTg0S60/xYVbCEY+MxAzsnhLWwVZOvtA2BQl6bJoWeSdGmaHHoGAP7gv0ESPcNn+x0cy/vJst3zubwfYML1zr19BAzRM0n0TJIHUly0XwAtAAA=
+   H4sIAAAAAAAAC+2XORLCMAxF5YKSY+UoLE2AhqVhOTqioHEYWZHl2Hj+m1GFxv4Sz0WIAOibUDsAAI4EgtOgH+Az6IlAcBr0A3wGXoSMAqAVcjyG46BFWnIZ7wHkAp9Bryzl85Zrx7V3zl6TVaV7N1Rmn//Ihqb7WMLpA9eR6+Q3SnWf14qeEu6NNH+f2hxz8+bM57Gbkab7kDxNua/NdOG6ct2EnhL/vfVMryySe9Y7zqTbpzaHpU/bL81oeZcxA033Ifmccl+b6cH15HoJPR7zeZ3plUVyz3rHnXT71Oaw9Gn7pRkt7zLm43O8D8nnlPsemb54npV7plcWyb0S81pyWPq0/dKMlncZM5De5fDjztTvOXielXtmiSw17qhNqzOmvgFT32ZvcGBOxgAtAAA=
   </data>
  </layer>
  <layer name="Tile FG" width="180" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Y3QqDMAyF8ypVx/Rif+z9322WGZDQtKl1MsP5IOxi5SSeHEUciOhCAJybgb455l8AzgxyDAAA/01YCgAPIM/AE3iPBh7A9w3ghfh+gTwDLyDPwBPIM/BER8gz8EHM8kj75/k+12Ou51yvHfSOpGb2t6Ei0eerotn6jTQs+r3hrPXcUbAvXC2zcZZvVM5zTc7XurGmxjnXuntd9zVTltlTuc3pSk35f69oahVEv3Glq3nTGc9ptGSPnxE5X6Q31vszpWXNc+k5IrPckmnpXy4TuR2WPCxVav+p/dTqanuUxc/0IPpq/TStVHb4PtLQ8qL5IuF5t3iT86TkucxzSadW3zrf1nxYd9hS0490a3rv3be0E0u/nMbRPsk8fwC9VbkhAC0AAA==
+   H4sIAAAAAAAAC+2YSwrDMAxEfRVDsknSVX/3v1ljiGkQlixXrkvFPJhVzUiRxiE0BAD+n8shADyAPANPIM/AE+c8x182AkAHkGfgCXxvAE8gz8AL6fsCeQZeQJ6BJ5Bn4IkpIM/ABynLS3jn+bHr2cH3tuve0W8kLb1fFUqkOW+MZwy2/0jj4T8rzmrPjSLPJcvSG81y1hpsOaS+q7HPs2+v594EaXov5VbypZ7095nx5BRJveXky81mUp7jsGQvvyOkudDZaO8n56XJde09It0R6/ykTEg7rM2wptL+S/tp9eX2SJV3EEldrh7nVcpOvkccUl409yL3+8lspJlYZq7x1fi3+LT2qt2hReuXfFtq965b24mmnuQxek5UL3EXp8gALQAA
   </data>
  </layer>
  <objectgroup name="Objects" width="180" height="16">
