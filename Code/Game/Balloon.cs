@@ -407,16 +407,23 @@ namespace Sputnik.Game
 
 			if (enableUp && (keyState.IsKeyDown(Keys.Up)
 				|| padState.IsButtonDown(Buttons.DPadUp)
-                || padState.ThumbSticks.Left.Y > threshold)) --dirY;
+                || padState.ThumbSticks.Left.Y > threshold
+				|| padState.ThumbSticks.Right.Y > threshold
+				|| padState.Triggers.Right > threshold
+				)) --dirY;
 
 			if ((enableDown && (keyState.IsKeyDown(Keys.Down) 
 				|| padState.IsButtonDown(Buttons.DPadDown) 
                 || padState.ThumbSticks.Left.Y < -threshold
+				|| padState.ThumbSticks.Right.Y < -threshold
+				|| padState.Triggers.Left > threshold
 				)) || endingDescent ) ++dirY;
 
 			if (enableLeft && (keyState.IsKeyDown(Keys.Left)
 				|| padState.IsButtonDown(Buttons.DPadLeft)
-				|| padState.ThumbSticks.Left.X < -threshold))
+				|| padState.ThumbSticks.Left.X < -threshold
+				|| padState.ThumbSticks.Right.X < -threshold
+				))
 			{
 				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
 				--dirX;
@@ -425,6 +432,7 @@ namespace Sputnik.Game
 			if ((enableRight && (keyState.IsKeyDown(Keys.Right)
 				|| padState.IsButtonDown(Buttons.DPadRight)
 				|| padState.ThumbSticks.Left.X > threshold
+				|| padState.ThumbSticks.Right.X > threshold
 				)) || endingDescent)
 			{
 				Environment.Camera.EffectScale = 1.0f;
