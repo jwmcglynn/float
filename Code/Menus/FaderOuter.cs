@@ -15,6 +15,7 @@ namespace Sputnik.Menus
 		Environment environment;
 		private bool fadingOut;
 		private float fadePerSecond;
+		public bool fadedOut;
 
 		public float FillPercent = 1.0f;
 		public FaderOuter(Environment env, float width, float height)
@@ -26,6 +27,7 @@ namespace Sputnik.Menus
 			FullWidth = width;
 			fadingOut = false;
 			Zindex = 0.1f;
+			fadedOut = false;
 
 			Texture2D dummyTexture = new Texture2D(env.Controller.GraphicsDevice, 1, 1);
 			dummyTexture.SetData(new Color[] { Color.White });
@@ -45,6 +47,8 @@ namespace Sputnik.Menus
 			if (fadingOut)
 			{
 				Alpha += elapsedTime * fadePerSecond;
+				if (Alpha >= 1.0f)
+					fadedOut = true;
 			}
 		}
 

@@ -31,7 +31,12 @@ namespace Sputnik.Game
 			else delay = 0.0f;
 			balloon.goToEndSequence(delay);
 			Environment.fade = true;
-			if (game.FadeOut.Alpha > 1.0f && !game.paused)
+		}
+
+		public override void Update(float elapsedTime)
+		{
+			base.Update(elapsedTime);
+			if (game.FadeOut.fadedOut)
 			{
 				game.pause(new EndPopUp(game.Controller, game));
 				Sound.PlayCue("scroll");

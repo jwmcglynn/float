@@ -33,18 +33,9 @@ namespace Sputnik.Menus {
 		}
 
 		public override void Update(float elapsedTime) {
-			KeyboardState kb = Keyboard.GetState();
-			MouseState ms = Mouse.GetState();
-			GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
 			
-			if (CreditsDone()
-					|| kb.IsKeyDown(Keys.Escape)
-					|| kb.IsKeyDown(Keys.Space)
-					|| (ms.LeftButton == ButtonState.Pressed &&
-							ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y)
-					|| gp.Buttons.Start == ButtonState.Pressed
-					|| gp.Buttons.A == ButtonState.Pressed
-					|| gp.Buttons.B == ButtonState.Pressed) {
+			if (CreditsDone() || canAdvance()) {
 				Controller.ChangeEnvironment(new MainMenu(Controller));
 			}
 

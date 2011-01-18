@@ -87,5 +87,21 @@ namespace Sputnik.Menus {
 			DrawChildren(m_spriteBatch);
 			m_spriteBatch.End();
 		}
+
+		public bool canAdvance()
+		{
+			KeyboardState kb = Keyboard.GetState();
+			MouseState ms = Mouse.GetState();
+			GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
+			return (kb.IsKeyDown(Keys.Escape)
+				|| kb.IsKeyDown(Keys.Space)
+				|| (ms.LeftButton == ButtonState.Pressed &&
+						ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y)
+				|| gp.Buttons.Start == ButtonState.Pressed
+				|| gp.Buttons.A == ButtonState.Pressed
+				|| gp.Buttons.B == ButtonState.Pressed
+				|| (kb.IsKeyDown(Keys.Enter) && !(kb.IsKeyDown(Keys.LeftAlt)|| kb.IsKeyDown(Keys.RightAlt))));
+		}
 	}
 }

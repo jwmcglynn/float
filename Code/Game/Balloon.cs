@@ -86,10 +86,10 @@ namespace Sputnik.Game
 		private Sequence [] animations;
 
 		//Enabling and disabling controls
-		public bool enableUp;
-		public bool enableDown;
-		public bool enableRight;
-		public bool enableLeft;
+		public bool enableUp = true;
+		public bool enableDown = true;
+		public bool enableRight = true;
+		public bool enableLeft = true;
 		private bool endingDescent;
 		private float descentDelay;
 
@@ -105,6 +105,12 @@ namespace Sputnik.Game
 			Position = sp.Position;
             Environment.Camera.MoveSpeed = Environment.defaultCameraMoveSpeed;
             Environment.Camera.Position = new Vector2(Position.X + 350, GameEnvironment.k_idealScreenSize.Y * 0.5f);
+
+
+			enableLeft = !SpawnPoint.Properties.ContainsKey("left") || SpawnPoint.Properties["left"] == "true";
+			enableRight = !SpawnPoint.Properties.ContainsKey("right") || SpawnPoint.Properties["right"] == "true";
+			enableUp = !SpawnPoint.Properties.ContainsKey("up") || SpawnPoint.Properties["up"] == "true";
+			enableDown = !SpawnPoint.Properties.ContainsKey("down") || SpawnPoint.Properties["down"] == "true";
 			Initialize();
 		}
 		private void up()
@@ -121,10 +127,6 @@ namespace Sputnik.Game
 			Scale = 0.5f;
 			m_dead = false;
 
-			enableUp = true;
-			enableDown = true;
-			enableRight = true;
-			enableLeft = true;
 			endingDescent = false;
 
 			currentState = BALLOON_STATE.INVULNERABLE;
@@ -403,30 +405,27 @@ namespace Sputnik.Game
 			dirX = 0;
 			dirY = 0;
 
-			if (((keyState.IsKeyDown(Keys.Up))
+			if (enableUp && (keyState.IsKeyDown(Keys.Up)
 				|| padState.IsButtonDown(Buttons.DPadUp)
-                || padState.ThumbSticks.Left.Y > threshold) 
-				&& enableUp) --dirY;
-			if ((keyState.IsKeyDown(Keys.Down) 
-				|| padState.IsButtonDown(Buttons.DPadDown) 
-                || (padState.ThumbSticks.Left.Y < -threshold)
-				&& enableDown) 
-				|| endingDescent ) ++dirY;
+                || padState.ThumbSticks.Left.Y > threshold)) --dirY;
 
-			if ((keyState.IsKeyDown(Keys.Left)
+			if ((enableDown && (keyState.IsKeyDown(Keys.Down) 
+				|| padState.IsButtonDown(Buttons.DPadDown) 
+                || padState.ThumbSticks.Left.Y < -threshold
+				)) || endingDescent ) ++dirY;
+
+			if (enableLeft && (keyState.IsKeyDown(Keys.Left)
 				|| padState.IsButtonDown(Buttons.DPadLeft)
-				|| padState.ThumbSticks.Left.X < -threshold)
-				&& enableLeft)
+				|| padState.ThumbSticks.Left.X < -threshold))
 			{
 				Environment.Camera.EffectScale = 1.0f + 2*zoomAmount;
 				--dirX;
 			} 
 
-			if (((keyState.IsKeyDown(Keys.Right)
+			if ((enableRight && (keyState.IsKeyDown(Keys.Right)
 				|| padState.IsButtonDown(Buttons.DPadRight)
-				|| padState.ThumbSticks.Left.X > threshold)
-				&& enableRight)
-				|| endingDescent)
+				|| padState.ThumbSticks.Left.X > threshold
+				)) || endingDescent)
 			{
 				Environment.Camera.EffectScale = 1.0f;
 				++dirX;
@@ -614,6 +613,15 @@ namespace Sputnik.Game
 				//    }
 				//}
 			}
+		}
+
+		public override void OnCull()
+		{
+			SpawnPoint.Properties["left"] = enableLeft ? "true" : "false";
+			SpawnPoint.Properties["right"] = enableRight ? "true" : "false";
+			SpawnPoint.Properties["down"] = enableDown ? "true" : "false";
+			SpawnPoint.Properties["up"] = enableUp ? "true" : "false";
+			base.OnCull();
 		}
 
 		public override void OnCollide(Entity entB, FarseerPhysics.Dynamics.Contacts.Contact contact)

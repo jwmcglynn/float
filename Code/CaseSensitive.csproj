@@ -152,6 +152,7 @@
     <Compile Include="Menus\EndPopUp.cs" />
     <Compile Include="Menus\GamePauseMenu.cs" />
     <Compile Include="Menus\HUD.cs" />
+    <Compile Include="Menus\Instructions.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\PopUp.cs" />

@@ -32,7 +32,7 @@ namespace Sputnik.Game
                 game.pause(new TutorialPopUp(game.Controller, game, Keys.Up));
 			if (TutorialType == "TempDown")
                 game.pause(new TutorialPopUp(game.Controller, game, Keys.Down));
-			CollisionBody.Active = false;
+			 spawnPoint.AllowRespawn = false;
 		}
     }
 }

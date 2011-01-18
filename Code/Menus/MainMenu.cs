@@ -167,7 +167,7 @@ namespace Sputnik.Menus
 
 		void onPressInstructions()
 		{
-			//need intructions;
+			Controller.ChangeEnvironment(new Instructions(Controller));
 		}
 
 		void onPressCredits()

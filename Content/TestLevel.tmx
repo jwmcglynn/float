@@ -9,34 +9,11 @@
  </layer>
  <layer name="Tile FG" width="73" height="16">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2U0QrCMAxFy4SoYEGdzv//UzNoIITbNpVt+JALB9atW8xZXEqRSCQSiUQikcgxIeYGSGZt99nreh+BOnOhl4k5M3fmMdzNfpGesjomtSaw1sngnGQ2vJg3szAfs3f1cynPW7mmfVzJe0CcOvdmdSxO9Hzode0+FI8j60ezpaup/A5UR2q1PCFHBLBOeo6ehZqjlp8tXYkfTa1ObcZQ7+h7NOpIghx5/Xh66GGf05onT12ZNzRH8u1p/a9rWEejfv4Jz7v6pT/r6MievpFXb1tAEgAA
+   H4sIAAAAAAAAC+2S2wqAIBAFpaDLQ9C9///TNlBYFq0t1urhDAwEgquTzgEAAAAAAPAO1dcHEBRkTfbk8PFZOFXiOwczuZAruYm1o09Ddt7W5WkV/kPM0niWlomZaiT7cC1bFf4csTlhlraT5XsavalGZ30sW4U+3NScJ2/MolmskbaP5g5Xyn3O3pNmbi5ko7t9/mRoZgHfVzZ68047zvYJsEASAAA=
   </data>
  </layer>
  <objectgroup name="Objects" width="73" height="16">
   <object name="spawn" type="spawn" x="790" y="364" width="62" height="62"/>
-  <object name="cloudH" type="cloud" x="2276" y="16" width="196" height="128">
-   <properties>
-    <property name="neutral" value="1"/>
-   </properties>
-  </object>
-  <object name="cloudL" type="cloud" x="2276" y="716" width="196" height="128">
-   <properties>
-    <property name="neutral" value="9"/>
-   </properties>
-  </object>
-  <object name="cloudT" type="cloud" x="2276" y="548" width="196" height="128">
-   <properties>
-    <property name="neutral" value="7"/>
-   </properties>
-  </object>
-  <object name="cloudN" type="cloud" x="2276" y="364" width="196" height="128"/>
-  <object name="cloudR" type="cloud" x="1346" y="74" width="196" height="128">
-   <properties>
-    <property name="neutral" value="2"/>
-   </properties>
-  </object>
-  <object name="bird" type="bird" x="1802" y="134" width="116" height="60"/>
-  <object name="plane" type="plane" x="1984" y="130" width="184" height="64"/>
   <object name="star" type="star" x="3458" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3586" y="-8" width="64" height="68"/>
   <object name="star" type="star" x="3522" y="-8" width="64" height="68"/>
@@ -47,15 +24,9 @@
   <object name="bird" type="bird" x="4356" y="260" width="128" height="60"/>
   <object name="bird" type="bird" x="4356" y="380" width="124" height="60"/>
   <object name="bird" type="bird" x="4356" y="508" width="128" height="60"/>
-  <object name="star" type="star" x="1790" y="58" width="70" height="66"/>
   <object name="check1" type="checkpoint" x="1844" y="88" width="34" height="498"/>
-  <object name="cloudR" type="cloud" x="2270" y="194" width="196" height="128">
-   <properties>
-    <property name="neutral" value="2"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="1862" y="58" width="70" height="66"/>
   <object name="theEnd" type="end" x="4524" y="14" width="118" height="814"/>
+  <object name="theEnd" type="end" x="1150" y="26" width="116" height="862"/>
  </objectgroup>
  <objectgroup name="Instructions" width="73" height="16"/>
 </map>

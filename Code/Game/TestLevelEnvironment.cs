@@ -9,9 +9,10 @@ namespace Sputnik.Game {
 		public TestLevelEnvironment(Controller ctrl)
 			: base(ctrl) {
 
-			LoadMap("LevelDesignSix.tmx");
+			/*LoadMap("LevelDesignSix.tmx");
             LoadOrExtendMap("LevelDesignFour.tmx");
-            LoadOrExtendMap("LevelDesignOne.tmx");
+            LoadOrExtendMap("LevelDesignOne.tmx");*/
+				LoadMap("TestLevel.tmx");
 
 			AddChild(new RepeatingBackground(this));
 			AddChild(new Moon(this));
