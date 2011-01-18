@@ -104,10 +104,9 @@ namespace Sputnik.Menus {
 			return (
 				((kb.IsKeyDown(Keys.Escape) && !okb.IsKeyDown(Keys.Escape))
 				|| (kb.IsKeyDown(Keys.Space) && !okb.IsKeyDown(Keys.Space))
-				|| ((ms.LeftButton == ButtonState.Pressed &&
-						ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y)
-					&& !(oms.LeftButton == ButtonState.Pressed &&
-						oms.X >= 0 && oms.Y >= 0 && oms.X < ScreenSize.X && oms.Y < ScreenSize.Y))
+				|| ((ms.LeftButton != ButtonState.Pressed &&
+						ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y
+						&& oms.LeftButton == ButtonState.Pressed))
 
 				|| (gp.Buttons.Start == ButtonState.Pressed && ogp.Buttons.Start != ButtonState.Pressed)
 				|| (gp.Buttons.A == ButtonState.Pressed && ogp.Buttons.A != ButtonState.Pressed)
