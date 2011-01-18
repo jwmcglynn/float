@@ -45,6 +45,8 @@ namespace Sputnik.Menus
 					unPause();
 					Sound.PlayCue("scroll");
 				}
+				if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
+					unPause();
 				const float threshold = 0.4f;
                 switch (quitKey)
                 {
