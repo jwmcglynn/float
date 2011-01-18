@@ -30,6 +30,9 @@ namespace Sputnik.Menus
         {
             if (!m_justPaused)
             {
+				KeyboardState kb = Keyboard.GetState();
+				GamePadState gp = GamePad.GetState(PlayerIndex.One);
+
 				const float threshold = 0.4f;
                 switch (quitKey)
                 {
@@ -40,28 +43,36 @@ namespace Sputnik.Menus
 						}
 						break;
                     case Keys.Up:
-						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadUp)
-							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y > threshold)
+						if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W)
+								|| gp.IsButtonDown(Input.Buttons.DPadUp)
+								|| gp.ThumbSticks.Left.Y > threshold) {
 							Sound.PlayCue("scroll");
 							unPause();
+						}
 						break;
 					case Keys.Down:
-						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadDown)
-							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y < -threshold)
+						if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S)
+								|| gp.IsButtonDown(Input.Buttons.DPadDown)
+								|| gp.ThumbSticks.Left.Y < -threshold) {
 							Sound.PlayCue("scroll");
 							unPause();
+						}
 						break;
 					case Keys.Right:
-						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadRight)
-							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > threshold)
+						if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D)
+								|| gp.IsButtonDown(Input.Buttons.DPadRight)
+								|| gp.ThumbSticks.Left.X > threshold) {
 							Sound.PlayCue("scroll");
 							unPause();
+						}
 						break;
 					case Keys.Left:
-						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadLeft)
-							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -threshold)
+						if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A)
+								|| gp.IsButtonDown(Input.Buttons.DPadLeft)
+								|| gp.ThumbSticks.Left.X < -threshold) {
 							Sound.PlayCue("scroll");
 							unPause();
+						}
 						break;
                 }
             }
