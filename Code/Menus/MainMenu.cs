@@ -25,11 +25,13 @@ namespace Sputnik.Menus
 				value.prevButton = this;
 			}
 		}
+
 		public bool isSelected;
 		public bool isPressed;
 		public MainMenuButton(MainMenu menu, string textureName)
 			: base(menu)
 		{
+
 			theMenu = menu;
 			isSelected = false;
 			isPressed = false;
@@ -82,6 +84,8 @@ namespace Sputnik.Menus
 
 		public bool buttonPressed;
 
+		public FaderOuter Fader;
+
 		private static void CreateButton(MainMenuButton ent) {
 			const int offset = 10;
 			ent.CreateButton(new Rectangle(offset, offset,
@@ -99,6 +103,10 @@ namespace Sputnik.Menus
 			menuBackground.PositionPercent = new Vector2(0.5f, 0.5f);
 			menuBackground.Zindex = 0.6f;
 			AddChild(menuBackground);
+
+			Fader = new FaderOuter(this);
+			Fader.resetOpaque();
+			Fader.fadeIn(1.0f);
 
 			//The buttons:
 			playButton = new MainMenuButton(this, "buttons\\introButton1");
@@ -239,6 +247,8 @@ namespace Sputnik.Menus
 				}
 			}
 
+			Fader.Update(elapsedTime);
+
 			base.Update(elapsedTime);
 		}
 
@@ -257,5 +267,10 @@ namespace Sputnik.Menus
 			currentButton.isSelected = false;
 		}
 
+		public override void Draw()
+		{
+			base.Draw();
+			Fader.Draw(m_spriteBatch);
+		}
 	}
 }

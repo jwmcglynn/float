@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Sputnik.Menus {
 	public class Menu : Environment {
-		private SpriteBatch m_spriteBatch;
+		protected SpriteBatch m_spriteBatch;
 		internal List<Widget> Buttons = new List<Widget>();
 		public Vector2 ScreenSize { get; private set; }
 

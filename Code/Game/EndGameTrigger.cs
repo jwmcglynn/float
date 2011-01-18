@@ -38,7 +38,7 @@ namespace Sputnik.Game
 		public override void Update(float elapsedTime)
 		{
 			base.Update(elapsedTime);
-			if (game.FadeOut.doneFading)
+			if (game.FadeOut.Alpha == 1.0f)
 			{
 				if (!changedMusic)
 				{
