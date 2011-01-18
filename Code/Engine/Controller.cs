@@ -134,7 +134,7 @@ namespace Sputnik {
 			#if DEBUG
 				m_env = new TestLevelEnvironment(this);
 			#else
-				m_env = new MainMenu(this);
+				m_env = new SplashScreen(this);
 			#endif
 		}
 

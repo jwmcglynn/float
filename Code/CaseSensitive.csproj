@@ -155,6 +155,7 @@
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\PopUp.cs" />
     <Compile Include="Menus\FaderOuter.cs" />
+    <Compile Include="Menus\SplashScreen.cs" />
     <Compile Include="Menus\TextWidget.cs" />
     <Compile Include="Menus\TutorialPopUp.cs" />
     <Compile Include="Menus\Widget.cs" />
