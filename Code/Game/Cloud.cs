@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Sputnik.Game
 {
@@ -367,8 +368,10 @@ namespace Sputnik.Game
 
                 switch(currentState) {
 					case CLOUD_STATE.LIGHTNING:
-						if (!hitRain) OnNextUpdate += () => b.Kill();
-                        Sound.PlayCue("thunder");
+                        if (!hitRain){
+                            OnNextUpdate += () => b.Kill();
+                            Sound.PlayCue("thunder");
+                        }
 						break;
                     case CLOUD_STATE.HAIL:
 						if (hitRain) OnNextUpdate += () => b.Kill();

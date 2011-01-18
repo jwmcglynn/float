@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Input = Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Sputnik.Game;
+using System.Threading;
 namespace Sputnik.Menus
 {
 	internal class TutorialButton : Widget
@@ -100,11 +102,11 @@ namespace Sputnik.Menus
 			button.Zindex = 0.05f;
 			button.Visible = true;
 			AddChild(button);
-           
         }
 
 		protected override void  unPause()
 		{
+			System.Threading.Thread.Sleep(2000);
 			switch (quitKey)
 			{
 				case Keys.Up:
