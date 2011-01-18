@@ -49,7 +49,7 @@ namespace Sputnik.Menus {
 
 			List<Widget> collidingButtons = Buttons.FindAll(b => b.Visible && b.Collides(mousePos));
 			Widget button = null;
-			if (collidingButtons.Count > 0) button = collidingButtons.OrderByDescending(b => b.Zindex).First();
+			if (collidingButtons.Count > 0) button = collidingButtons.OrderBy(b => b.Zindex).First();
 
 			// We switched to a new button.
 			if (m_activeButton != button) {

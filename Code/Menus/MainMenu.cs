@@ -82,6 +82,12 @@ namespace Sputnik.Menus
 
 		public bool buttonPressed;
 
+		private static void CreateButton(MainMenuButton ent) {
+			const int offset = 10;
+			ent.CreateButton(new Rectangle(offset, offset,
+				(int) ent.Size.X - 2 * offset, (int) ent.Size.Y - 2 * offset));
+		}
+
 		public MainMenu(Controller cntl)
 			: base(cntl)
 		{
@@ -111,8 +117,7 @@ namespace Sputnik.Menus
 
 			playButton.PositionPercent = new Vector2(xPercentage, prevButton);
 			playButton.Registration = playButton.Size / 2;
-			playButton.CreateButton(new Rectangle(0, 0,
-				(int)playButton.Size.X, (int)playButton.Size.Y));
+			CreateButton(playButton);
 			playButton.Zindex = 0.4f;
 			playButton.OnActivate += () =>
 			{
@@ -124,8 +129,7 @@ namespace Sputnik.Menus
 			prevButton += distanceBetweenButtons;
 			instructionButton.PositionPercent = new Vector2(xPercentage, prevButton);
 			instructionButton.Registration = instructionButton.Size / 2;
-			instructionButton.CreateButton(new Rectangle(0, 0,
-				 (int)instructionButton.Size.X, (int)instructionButton.Size.Y));
+			CreateButton(instructionButton);
 			instructionButton.Zindex = 0.5f;
 			instructionButton.OnActivate += () =>
 			{
@@ -136,9 +140,8 @@ namespace Sputnik.Menus
 			prevButton += distanceBetweenButtons;
 			creditsButton.PositionPercent = new Vector2(xPercentage, prevButton);
 			creditsButton.Registration = creditsButton.Size / 2;
-			creditsButton.CreateButton(new Rectangle(0, 0,
-				 (int)creditsButton.Size.X, (int)creditsButton.Size.Y));
-			creditsButton.Zindex = 0.5f;
+			CreateButton(creditsButton);
+			creditsButton.Zindex = 0.55f;
 			creditsButton.OnActivate += () =>
 			{
 				onPressCredits();
@@ -148,9 +151,8 @@ namespace Sputnik.Menus
 			prevButton += distanceBetweenButtons;
 			quitButton.PositionPercent = new Vector2(xPercentage, prevButton);
 			quitButton.Registration = quitButton.Size / 2;
-			quitButton.CreateButton(new Rectangle(0, 0,
-				 (int)quitButton.Size.X, (int)quitButton.Size.Y));
-			quitButton.Zindex = 0.5f;
+			CreateButton(quitButton);
+			quitButton.Zindex = 0.56f;
 			quitButton.OnActivate += () =>
 			{
 				onPressQuit();

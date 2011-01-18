@@ -50,9 +50,11 @@ namespace Sputnik.Menus {
 		}
 
 		public bool Collides(Vector2 pos) {
-			pos -= AbsolutePosition - Registration;
-			return (pos.X >= m_buttonRect.Left && pos.X <= m_buttonRect.Right
-					&& pos.Y >= m_buttonRect.Top && pos.Y <= m_buttonRect.Bottom);
+			Vector2 tl = new Vector2(m_buttonRect.Left, m_buttonRect.Top) * Scale + AbsolutePosition - Registration * Scale;
+			Vector2 br = new Vector2(m_buttonRect.Right, m_buttonRect.Bottom) * Scale + AbsolutePosition - Registration * Scale;
+
+			return (pos.X >= tl.X && pos.X <= br.X
+					&& pos.Y >= tl.Y && pos.Y <= br.Y);
 		}
 
 		// Notification events.
