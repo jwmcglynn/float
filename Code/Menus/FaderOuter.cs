@@ -10,21 +10,16 @@ namespace Sputnik.Menus
 {
 	public class FaderOuter : Entity
 	{
-		public float Height;
-		public float FullWidth;
 		Environment environment;
 		private bool fadingOut;
 		private float fadePerSecond;
 		public bool fadedOut;
 
-		public float FillPercent = 1.0f;
-		public FaderOuter(Environment env, float width, float height)
+		public FaderOuter(Environment env)
 		{
 			environment = env;
 			Registration = new Vector2(0.5f, 0.5f);
 			Alpha = 0.0f;
-			Height = height;
-			FullWidth = width;
 			fadingOut = false;
 			Zindex = 0.1f;
 			fadedOut = false;
@@ -55,7 +50,7 @@ namespace Sputnik.Menus
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
-			spriteBatch.Draw(Texture, new Vector2(0,0), environment.Camera.Rect,
+			spriteBatch.Draw(Texture, new Vector2(0, 0), environment.Controller.Window.ClientBounds,
 		 Color.Black * Alpha, 0.0f, new Vector2(0, 0), 1.0f, SpriteEffects.None, Zindex);
 			spriteBatch.End();
 		}

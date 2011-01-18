@@ -30,44 +30,37 @@ namespace Sputnik.Menus
         {
             if (!m_justPaused)
             {
-				//Code taken from credits
-
-					if (quitKey == Keys.Enter && canAdvance())
-					{
-						unPause();
-					}
-
-                // Try unpausing with keyboard.
-				if ((Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape))
-					|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.Start)
-							&& !OldGamePad.GetState().IsButtonDown(Input.Buttons.Start)))
-				{
-					unPause();
-					Sound.PlayCue("scroll");
-				}
-				if (Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
-					unPause();
 				const float threshold = 0.4f;
                 switch (quitKey)
                 {
+					case Keys.Enter:
+						if (canAdvance()) {
+							Sound.PlayCue("scroll");
+							unPause();
+						}
+						break;
                     case Keys.Up:
 						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadUp)
 							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y > threshold)
+							Sound.PlayCue("scroll");
 							unPause();
 						break;
 					case Keys.Down:
 						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadDown)
 							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y < -threshold)
+							Sound.PlayCue("scroll");
 							unPause();
 						break;
 					case Keys.Right:
 						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadRight)
 							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X > threshold)
+							Sound.PlayCue("scroll");
 							unPause();
 						break;
 					case Keys.Left:
 						if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.DPadLeft)
 							|| GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X < -threshold)
+							Sound.PlayCue("scroll");
 							unPause();
 						break;
                 }

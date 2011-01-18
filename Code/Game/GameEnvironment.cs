@@ -116,7 +116,7 @@ namespace Sputnik {
 			// Effects.
 			m_tintEffect = contentManager.Load<Effect>("TintEffect");
 
-			FadeOut = new FaderOuter(this, ScreenVirtualSize.X, ScreenVirtualSize.Y);
+			FadeOut = new FaderOuter(this);
 
 			SpawnController = new SpawnController(this);
 
