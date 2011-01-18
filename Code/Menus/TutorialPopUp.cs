@@ -18,31 +18,37 @@ namespace Sputnik.Menus
 			:base(menu)
 		{
 			Scale = 0.1f;
+			bool xbox = GamePad.GetState(PlayerIndex.One).IsConnected;
+
+			
 			string keyStandard = null;
 			string keyPressed = null;
+
+			if (xbox) keyStandard = "tutorial\\controler_neutral";
+
 			switch (key)
 			{
 				case Keys.Down:
-					keyStandard = "tutorial\\Keydown_standard";
-					keyPressed = "tutorial\\Keydown_pressed";
+					keyPressed = (xbox) ? "tutorial\\controler_down" : "tutorial\\Keydown_pressed";
+					if(!xbox) keyStandard = "tutorial\\keydown_standard";
 					break;
 				case Keys.Up:
-					keyStandard = "tutorial\\Keyup_standard";
-					keyPressed = "tutorial\\Keyup_pressed";
+					keyPressed = (xbox) ? "tutorial\\controler_up" : "tutorial\\Keyup_pressed";
+					if(!xbox) keyStandard = "tutorial\\Keyup_standard";
 					break;
 				case Keys.Right:
-					keyStandard = "tutorial\\Keyright_standard";
-					keyPressed = "tutorial\\Keyright_pressed";
+					keyPressed = (xbox) ? "tutorial\\controler_right" : "tutorial\\Keyright_pressed";
+					if(!xbox) keyStandard = "tutorial\\Keyright_standard";
 					break;
 				case Keys.Left:
-					keyStandard = "tutorial\\Keyleft_standard";
-					keyPressed = "tutorial\\Keyleft_pressed";
+					keyPressed = (xbox) ? "tutorial\\controler_left" : "tutorial\\Keyleft_pressed";
+					if(!xbox) keyStandard = "tutorial\\Keyleft_standard";
 					break;
 			}
 
 			blink = new Sequence(menu.contentManager);
 			float pressDuration = 1.0f;
-			if (keyPressed != null && keyStandard != null)
+			if (!(keyPressed == null || keyStandard == null))
 			{
 				Texture = menu.contentManager.Load<Texture2D>(keyStandard);
 				blink.AddFrame(keyStandard, pressDuration);

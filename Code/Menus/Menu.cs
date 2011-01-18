@@ -94,14 +94,29 @@ namespace Sputnik.Menus {
 			MouseState ms = Mouse.GetState();
 			GamePadState gp = GamePad.GetState(PlayerIndex.One);
 
-			return (kb.IsKeyDown(Keys.Escape)
+			KeyboardState okb = OldKeyboard.GetState();
+			MouseState oms = OldMouse.GetState();
+			GamePadState ogp = OldGamePad.GetState();
+
+			return (
+				(kb.IsKeyDown(Keys.Escape)
 				|| kb.IsKeyDown(Keys.Space)
 				|| (ms.LeftButton == ButtonState.Pressed &&
 						ms.X >= 0 && ms.Y >= 0 && ms.X < ScreenSize.X && ms.Y < ScreenSize.Y)
 				|| gp.Buttons.Start == ButtonState.Pressed
 				|| gp.Buttons.A == ButtonState.Pressed
 				|| gp.Buttons.B == ButtonState.Pressed
-				|| (kb.IsKeyDown(Keys.Enter) && !(kb.IsKeyDown(Keys.LeftAlt)|| kb.IsKeyDown(Keys.RightAlt))));
+				|| (kb.IsKeyDown(Keys.Enter) && !(kb.IsKeyDown(Keys.LeftAlt)|| kb.IsKeyDown(Keys.RightAlt))))
+				&& !(okb.IsKeyDown(Keys.Escape)
+				|| okb.IsKeyDown(Keys.Space)
+				|| (oms.LeftButton == ButtonState.Pressed &&
+						oms.X >= 0 && oms.Y >= 0 && oms.X < ScreenSize.X && oms.Y < ScreenSize.Y)
+				|| ogp.Buttons.Start == ButtonState.Pressed
+				|| ogp.Buttons.A == ButtonState.Pressed
+				|| ogp.Buttons.B == ButtonState.Pressed
+				|| (okb.IsKeyDown(Keys.Enter) && !(okb.IsKeyDown(Keys.LeftAlt) || okb.IsKeyDown(Keys.RightAlt))))
+				);
 		}
+
 	}
 }
