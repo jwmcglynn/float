@@ -70,7 +70,8 @@ namespace Sputnik.Game
 
 		ParticleEntity m_rainParticle;
 		ParticleEntity m_hailParticle;
-	
+
+		Cue rumbleSound;
 		
 		public Cloud(GameEnvironment env) : base(env) {
 			Initialize();
@@ -83,6 +84,19 @@ namespace Sputnik.Game
 
 			Position = sp.Position;
 			Initialize();
+		}
+
+		public override void Dispose()
+		{
+			if (currentState == CLOUD_STATE.LIGHTNING)
+			{
+				if (rumbleSound != null)
+				{
+					rumbleSound.Stop(AudioStopOptions.AsAuthored);
+					rumbleSound = null;
+				}
+			}
+			base.Dispose();
 		}
 		
 		public override void OnTempChange(float amount) {
@@ -107,6 +121,11 @@ namespace Sputnik.Game
                     break;
                 case 1:
                     transitionTarget = CLOUD_STATE.THUNDER;
+					if (rumbleSound != null)
+					{
+						rumbleSound.Stop(AudioStopOptions.AsAuthored);
+						rumbleSound = null;
+					}
                     break;
                 case 2:
                     transitionTarget = CLOUD_STATE.NORM;
@@ -309,9 +328,15 @@ namespace Sputnik.Game
             {
                 case CLOUD_STATE.LIGHTNING:
                     m_anim.PlaySequence(m_lightning);
+					rumbleSound = Sound.PlayCue("rumble1", this);
                     break;
                 case CLOUD_STATE.THUNDER:
                     m_anim.PlaySequence(m_thunder);
+					if (rumbleSound != null)
+					{
+						rumbleSound.Stop(AudioStopOptions.AsAuthored);
+						rumbleSound = null;
+					}
                     break;
                 case CLOUD_STATE.NORM:
                     m_anim.PlaySequence(m_norm);
@@ -328,6 +353,11 @@ namespace Sputnik.Game
 		public override void Update(float elapsedTime)
 		{
 			CLOUD_STATE emitterState = currentState;
+
+			if (currentState == CLOUD_STATE.LIGHTNING){
+				if (rumbleSound == null)
+					rumbleSound = Sound.PlayCue("rumble1");
+			}
 
 			if (currentState == CLOUD_STATE.TRANSITION) {
 				if (m_anim.Done) {
@@ -369,8 +399,8 @@ namespace Sputnik.Game
                 switch(currentState) {
 					case CLOUD_STATE.LIGHTNING:
                         if (!hitRain){
+							Sound.PlayCue("thunder");
                             OnNextUpdate += () => b.Kill();
-                            Sound.PlayCue("thunder");
                         }
 						break;
                     case CLOUD_STATE.HAIL:

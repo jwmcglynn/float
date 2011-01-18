@@ -16,8 +16,8 @@ Global Settings
     Header File = CaseSensitiveSound.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 2583261812;
-    Last Modified High = 30127803;
+    Last Modified Low = 755340306;
+    Last Modified High = 30127814;
 
     Category
     {
@@ -209,10 +209,43 @@ Global Settings
         Reserved = 1;
         Read Only = 0;
         Time = 0;
-        Value = 0.000000;
+        Value = 10000.000000;
         Initial Value = 0.000000;
         Min = 0.000000;
         Max = 1000000.000000;
+    }
+
+    RPC
+    {
+        Name = Attenuation;
+
+        RPC Curve
+        {
+            Name = Sound::fc3ec9f0-69f0-4291-8544-16d378d75990;
+            Property = 0;
+            Sound = 1;
+            Line Color = 4290350116;
+            Viewable = 1;
+
+            Variable Entry
+            {
+                Name = Distance;
+            }
+
+            RPC Point
+            {
+                X = 3723.715576;
+                Y = -635.294128;
+                Curve = 2;
+            }
+
+            RPC Point
+            {
+                X = 9373.256836;
+                Y = -4870.588379;
+                Curve = 2;
+            }
+        }
     }
 
     Compression Preset
@@ -570,12 +603,10 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 3230297848;
-    PC Bank Last Modified High = 30127612;
-    Header Last Modified Low = 0;
-    Header Last Modified High = 0;
-    Bank Last Revised Low = 2594047848;
-    Bank Last Revised High = 30127612;
+    PC Bank Last Modified Low = 3034486378;
+    PC Bank Last Modified High = 30127807;
+    Bank Last Revised Low = 3034486378;
+    Bank Last Revised High = 30127807;
 
     Wave
     {
@@ -631,8 +662,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 4022324312;
-    Bank Last Modified High = 30127803;
+    Bank Last Modified Low = 870249464;
+    Bank Last Modified High = 30127816;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1292,13 +1323,18 @@ Sound Bank
     Sound
     {
         Name = rumble1;
-        Volume = -2090;
+        Volume = -1380;
         Pitch = 0;
         Priority = 0;
 
         Category Entry
         {
             Name = Default;
+        }
+
+        RPC Entry
+        {
+            RPC Name = Attenuation;
         }
 
         Track
@@ -1308,7 +1344,6 @@ Sound Bank
 
             Play Wave Event
             {
-                Loop Count = 255;
                 Break Loop = 0;
                 Use Speaker Position = 0;
                 Use Center Speaker = 1;
@@ -1329,15 +1364,7 @@ Sound Bank
                     Min = -100;
                     Max = 100;
                     Operator = 0;
-                    New Variation On Loop = 0;
-                }
-
-                Volume Variation
-                {
-                    Min = -300;
-                    Max = 300;
-                    Volume = 0;
-                    New Variation On Loop = 0;
+                    New Variation On Loop = 1;
                 }
 
                 Wave Entry
@@ -1813,19 +1840,6 @@ Sound Bank
             Index = 11;
             Weight Min = 0;
             Weight Max = 255;
-        }
-
-        Instance Limit
-        {
-            Max Instances = 1;
-            Behavior = 0;
-
-            Crossfade
-            {
-                Fade In = 0;
-                Fade Out = 0;
-                Crossfade Type = 0;
-            }
         }
     }
 
