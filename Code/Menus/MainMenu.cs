@@ -85,6 +85,8 @@ namespace Sputnik.Menus
 		public MainMenu(Controller cntl)
 			: base(cntl)
 		{
+			Sound.StopAll();
+			Sound.PlayCue("music_title");
 			Controller.IsMouseVisible = true;
 			menuBackground = new MainMenuButton(this, "main-menu");
 			menuBackground.Registration = menuBackground.Size / 2;

@@ -16,8 +16,8 @@ Global Settings
     Header File = CaseSensitiveSound.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 2486713830;
-    Last Modified High = 30127770;
+    Last Modified Low = 2583261812;
+    Last Modified High = 30127803;
 
     Category
     {
@@ -252,10 +252,10 @@ Wave Bank
     Compression Preset Name = Compression Preset;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 1220162246;
-    PC Bank Last Modified High = 30127799;
-    Bank Last Revised Low = 1220162246;
-    Bank Last Revised High = 30127799;
+    PC Bank Last Modified Low = 4022011812;
+    PC Bank Last Modified High = 30127803;
+    Bank Last Revised Low = 4022011812;
+    Bank Last Revised High = 30127803;
 
     Wave
     {
@@ -631,8 +631,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2772037246;
-    Bank Last Modified High = 30127799;
+    Bank Last Modified Low = 4022324312;
+    Bank Last Modified High = 30127803;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1292,7 +1292,7 @@ Sound Bank
     Sound
     {
         Name = rumble1;
-        Volume = -2030;
+        Volume = -2090;
         Pitch = 0;
         Priority = 0;
 
