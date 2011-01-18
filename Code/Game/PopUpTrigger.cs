@@ -27,11 +27,11 @@ namespace Sputnik.Game
 			if (TutorialType == "HighPressure")
 				game.pause(new TutorialPopUp(game.Controller, game, Keys.Left));
 			if (TutorialType == "LowPressure")
-				game.pause(new TutorialPopUp(game.Controller, game, Keys.Right));
+                game.pause(new TutorialPopUp(game.Controller, game, Keys.Right));
 			if (TutorialType == "TempUp")
-				game.pause(new TutorialPopUp(game.Controller, game, Keys.Up));
+                game.pause(new TutorialPopUp(game.Controller, game, Keys.Up));
 			if (TutorialType == "TempDown")
-				game.pause(new TutorialPopUp(game.Controller, game, Keys.Down));
+                game.pause(new TutorialPopUp(game.Controller, game, Keys.Down));
 			CollisionBody.Active = false;
 		}
     }

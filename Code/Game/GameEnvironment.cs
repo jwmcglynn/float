@@ -334,7 +334,10 @@ namespace Sputnik {
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape)
                     || (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start) && !OldGamePad.GetState().IsButtonDown(Buttons.Start))
                 )
+				{
                     pause(new GamePauseMenu(Controller, this));
+					Sound.PlayCue("scroll");
+				}
             }
 
 			// Debug Menu = F10.

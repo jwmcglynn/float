@@ -109,7 +109,6 @@ namespace Sputnik.Game
 		}
 		private void up()
 		{
-
 			// Update controls.
 			KeyboardState keyState = Keyboard.GetState();
 			KeyboardState oldkeyState = OldKeyboard.GetState();
@@ -226,7 +225,7 @@ namespace Sputnik.Game
 			}
 		}
 
-		Cue downSound, upSound, leftSound, rightSound, rainSound;
+		Cue downSound, upSound, leftSound, rightSound;
 
 		int lastDirX = 0;
 		int lastDirY = 0;
@@ -479,6 +478,8 @@ namespace Sputnik.Game
 			}
 		}
 
+		Cue rainSound;
+
 		private void UpdateDistortion(float elapsedTime) {
 			bool init = (m_lastDistortState != m_distortState);
 			m_lastDistortState = m_distortState;
@@ -514,6 +515,12 @@ namespace Sputnik.Game
 					m_distortRestoreDelay -= elapsedTime;
 					if (m_distortRestoreDelay <= 0.0f) {
 						m_distortState = DistortState.RISING;
+
+						if (rainSound != null)
+						{
+							rainSound.Stop(AudioStopOptions.AsAuthored);
+							rainSound = null;
+						}
 					}
 
 					break;
@@ -595,8 +602,17 @@ namespace Sputnik.Game
 		public void HitByRain() {
 			if (m_distortState == DistortState.NONE) {
 				m_distortState = DistortState.FALLING;
+				rainSound = Sound.PlayCue("rain");
 			} else {
 				m_distortRestoreDelay = k_rainRestoreDelay;
+				//if (m_distortState != DistortState.FALLING)
+				//{
+				//    if (rainSound != null)
+				//    {
+				//        rainSound.Stop(AudioStopOptions.AsAuthored);
+				//        rainSound = null;
+				//    }
+				//}
 			}
 		}
 

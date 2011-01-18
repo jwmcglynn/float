@@ -49,10 +49,13 @@ namespace Sputnik.Menus
 					}
 
                 // Try unpausing with keyboard.
-				if ((Keyboard.GetState().IsKeyDown(quitKey) && !OldKeyboard.GetState().IsKeyDown(quitKey))
+				if ((Keyboard.GetState().IsKeyDown(Keys.Escape) && !OldKeyboard.GetState().IsKeyDown(Keys.Escape))
 					|| (GamePad.GetState(PlayerIndex.One).IsButtonDown(Input.Buttons.Start)
 							&& !OldGamePad.GetState().IsButtonDown(Input.Buttons.Start)))
+				{
 					unPause();
+					Sound.PlayCue("scroll");
+				}
 				const float threshold = 0.4f;
                 switch (quitKey)
                 {

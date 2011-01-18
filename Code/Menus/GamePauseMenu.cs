@@ -157,6 +157,7 @@ namespace Sputnik.Menus
         void onPressResume()
         {
             m_game.unPause();
+			Sound.PlayCue("scroll");
         }
 
         void onPressCheckpoint()

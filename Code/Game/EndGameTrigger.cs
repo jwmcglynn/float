@@ -34,6 +34,7 @@ namespace Sputnik.Game
 			if (game.FadeOut.Alpha > 1.0f && !game.paused)
 			{
 				game.pause(new EndPopUp(game.Controller, game));
+				Sound.PlayCue("scroll");
 			}
 		}
 	}
