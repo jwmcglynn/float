@@ -54,7 +54,7 @@
   </object>
   <object name="star" type="star" x="4100" y="138" width="64" height="60">
    <properties>
-    <property name="delay" value="200"/>
+    <property name="delay" value="190"/>
    </properties>
   </object>
   <object name="star" type="star" x="4036" y="138" width="64" height="60">
@@ -64,17 +64,17 @@
   </object>
   <object name="star" type="star" x="3972" y="138" width="64" height="60">
    <properties>
-    <property name="delay" value="340"/>
+    <property name="delay" value="350"/>
    </properties>
   </object>
   <object name="star" type="star" x="3904" y="134" width="64" height="60">
    <properties>
-    <property name="delay" value="410"/>
+    <property name="delay" value="430"/>
    </properties>
   </object>
   <object name="star" type="star" x="3840" y="134" width="64" height="60">
    <properties>
-    <property name="delay" value="480"/>
+    <property name="delay" value="510"/>
    </properties>
   </object>
   <object name="bird" type="bird" x="1994" y="254" width="124" height="60"/>
@@ -160,105 +160,25 @@
   <object name="plane" type="plane" x="10570" y="58" width="192" height="68"/>
   <object name="bird" type="bird" x="10938" y="650" width="120" height="56"/>
   <object name="plane" type="plane" x="11278" y="674" width="192" height="68"/>
-  <object name="star" type="star" x="11518" y="318" width="72" height="64">
+  <object name="star" type="star" x="12454" y="126" width="72" height="64">
    <properties>
     <property name="delay" value="500"/>
    </properties>
   </object>
-  <object name="star" type="star" x="12238" y="130" width="72" height="64">
+  <object name="star" type="star" x="11614" y="162" width="72" height="64">
    <properties>
     <property name="delay" value="500"/>
    </properties>
   </object>
-  <object name="star" type="star" x="11798" y="122" width="72" height="64">
+  <object name="cloudR" type="cloud" x="11982" y="174" width="188" height="124">
    <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11730" y="162" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11658" y="214" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11586" y="258" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="12166" y="142" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="12090" y="154" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="12018" y="138" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11946" y="122" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11870" y="114" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11490" y="390" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11374" y="82" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11446" y="74" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11558" y="190" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="11506" y="118" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="12390" y="206" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="star" type="star" x="12310" y="146" width="72" height="64">
-   <properties>
-    <property name="delay" value="500"/>
-   </properties>
-  </object>
-  <object name="cloudN" type="cloud" x="11914" y="254" width="188" height="124">
-   <properties>
-    <property name="neutral" value="5"/>
+    <property name="neutral" value="3"/>
    </properties>
   </object>
   <object name="TempUp" type="TempUp" x="1388" y="0" width="88" height="896"/>
   <object name="TempDown" type="TempDown" x="1916" y="16" width="88" height="896"/>
-  <object name="LowPressure" type="LowPressure" x="2708" y="-4" width="88" height="896"/>
-  <object name="HighPressure" type="HighPressure" x="3488" y="0" width="88" height="896"/>
+  <object name="LowPressure" type="LowPressure" x="2792" y="-8" width="88" height="896"/>
+  <object name="HighPressure" type="HighPressure" x="3688" y="4" width="88" height="896"/>
   <object name="cloudR" type="cloud" x="10048" y="150" width="200" height="120">
    <properties>
     <property name="neutral" value="3"/>

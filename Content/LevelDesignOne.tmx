@@ -37,9 +37,9 @@
   </object>
   <object name="bird" type="bird" x="1784" y="54" width="140" height="72"/>
   <object name="plane" type="plane" x="2546" y="720" width="188" height="60"/>
-  <object name="cloudT" type="cloud" x="2772" y="192" width="196" height="136">
+  <object name="cloudH" type="cloud" x="2772" y="192" width="196" height="136">
    <properties>
-    <property name="neutral" value="7"/>
+    <property name="neutral" value="1"/>
    </properties>
   </object>
   <object name="cloudL" type="cloud" x="3152" y="470" width="192" height="124">
@@ -49,16 +49,16 @@
   </object>
   <object name="plane" type="plane" x="3696" y="102" width="192" height="64"/>
   <object name="bird" type="bird" x="3468" y="226" width="124" height="64"/>
-  <object name="cloudR" type="cloud" x="3714" y="522" width="192" height="128">
+  <object name="cloudR" type="cloud" x="3726" y="262" width="192" height="128">
    <properties>
     <property name="neutral" value="3"/>
    </properties>
   </object>
   <object name="bird" type="bird" x="4594" y="246" width="132" height="56"/>
   <object name="plane" type="plane" x="5108" y="306" width="192" height="72"/>
-  <object name="cloudT" type="cloud" x="4424" y="52" width="200" height="124">
+  <object name="cloudN" type="cloud" x="4424" y="52" width="200" height="124">
    <properties>
-    <property name="neutral" value="7"/>
+    <property name="neutral" value="5"/>
    </properties>
   </object>
   <object name="cloudH" type="cloud" x="5192" y="134" width="192" height="132">
