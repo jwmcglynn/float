@@ -15,7 +15,7 @@
   </data>
  </layer>
  <objectgroup name="Objects" width="200" height="16">
-  <object name="spawn" type="spawn" x="1220" y="382" width="62" height="62"/>
+  <object name="spawn" type="spawn" x="892" y="386" width="62" height="62"/>
   <object name="cloudH" type="cloud" x="1666" y="364" width="196" height="128">
    <properties>
     <property name="neutral" value="1"/>
@@ -83,7 +83,7 @@
   <object name="bird" type="bird" x="2754" y="194" width="124" height="60"/>
   <object name="bird" type="bird" x="2754" y="126" width="124" height="60"/>
   <object name="plane" type="plane" x="5130" y="450" width="180" height="64"/>
-  <object name="plane" type="plane" x="5126" y="286" width="180" height="64"/>
+  <object name="plane" type="plane" x="5134" y="362" width="180" height="64"/>
   <object name="plane" type="plane" x="5130" y="578" width="180" height="64"/>
   <object name="cloudT" type="cloud" x="5064" y="66" width="180" height="128">
    <properties>
@@ -311,6 +311,10 @@
     <property name="neutral" value="5"/>
    </properties>
   </object>
+  <object name="TempUp" type="TempUp" x="1388" y="0" width="88" height="896"/>
+  <object name="TempDown" type="TempDown" x="1916" y="16" width="88" height="896"/>
+  <object name="LowPressure" type="LowPressure" x="2852" y="24" width="88" height="896"/>
+  <object name="HighPressure" type="HighPressure" x="3948" y="8" width="88" height="896"/>
  </objectgroup>
  <objectgroup name="Instructions" width="200" height="16"/>
 </map>
