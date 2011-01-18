@@ -107,7 +107,7 @@ namespace Sputnik.Menus
 			AddChild(button);
         }
 
-		protected override void  unPause()
+		protected override void unPause()
 		{
 			switch (quitKey)
 			{

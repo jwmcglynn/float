@@ -29,7 +29,7 @@ namespace Sputnik.Menus
 
 		protected override void unPause()
 		{
-			Control.ChangeEnvironment(new MainMenu(Control));
+			Control.ChangeEnvironment(new Credits(Control));
 		}
 	}
 }

@@ -40,6 +40,7 @@ namespace Sputnik.Game
 			{
 				game.pause(new EndPopUp(game.Controller, game));
 				Sound.PlayCue("scroll");
+				Sound.StopAllExceptMusic();
 			}
 		}
 	}
