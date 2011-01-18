@@ -158,6 +158,7 @@
   <object name="checkpoint" type="checkpoint" x="6144" y="4" width="128" height="888"/>
   <object name="checkpoint" type="checkpoint" x="9584" y="36" width="128" height="888"/>
   <object name="checkpoint" type="checkpoint" x="12448" y="20" width="128" height="888"/>
+  <object name="" type="end" x="1314" y="22" width="72" height="842"/>
  </objectgroup>
  <objectgroup name="Instructions" width="230" height="16"/>
  <layer name="Tile Layer 3" width="230" height="16">

@@ -43,7 +43,7 @@ namespace Sputnik {
 
 		private Matrix m_projection;
 
-		FaderOuter FadeOut;
+		public FaderOuter FadeOut;
 		public bool fade = false;
 
 		// Particles.

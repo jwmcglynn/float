@@ -8,12 +8,12 @@ using Sputnik.Game;
 
 namespace Sputnik.Menus
 {
-	class FaderOuter : Entity
+	public class FaderOuter : Entity
 	{
 		public float Height;
 		public float FullWidth;
 		Environment environment;
-		private bool fading;
+		private bool fadingOut;
 		private float fadePerSecond;
 
 		public float FillPercent = 1.0f;
@@ -24,7 +24,7 @@ namespace Sputnik.Menus
 			Alpha = 0.0f;
 			Height = height;
 			FullWidth = width;
-			fading = false;
+			fadingOut = false;
 			Zindex = 0.1f;
 
 			Texture2D dummyTexture = new Texture2D(env.Controller.GraphicsDevice, 1, 1);
@@ -35,21 +35,16 @@ namespace Sputnik.Menus
 
 		public void fadeOut(float _fadePerSecond)
 		{
-			fading = true;
+			fadingOut = true;
 			fadePerSecond = _fadePerSecond;
 		}
 
 		public override void Update(float elapsedTime)
 		{
 			base.Update(elapsedTime);
-			if (fading)
+			if (fadingOut)
 			{
 				Alpha += elapsedTime * fadePerSecond;
-				GameEnvironment game = ((GameEnvironment)environment);
-				if (Alpha > 1.0f && !game.paused)
-				{	
-					game.pause(new EndPopUp(game.Controller,game));
-				}
 			}
 		}
 

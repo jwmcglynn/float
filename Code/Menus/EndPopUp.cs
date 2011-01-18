@@ -9,11 +9,12 @@ namespace Sputnik.Menus
 {
 	class EndPopUp : PopUp
 	{
-		GameEnvironment currentGame;
+		//GameEnvironment currentGame;
+		Controller Control;
 		public EndPopUp(Controller cntl, GameEnvironment game)
 			: base(cntl, game)
 		{
-			currentGame = game;
+			Control = cntl;
 			quitKey = Microsoft.Xna.Framework.Input.Keys.Enter;
 
 			Widget letterBackground = new Widget(this);
@@ -28,7 +29,7 @@ namespace Sputnik.Menus
 
 		protected override void unPause()
 		{
-			// Go back to main menu.
+			Control.ChangeEnvironment(new MainMenu(Control));
 		}
 	}
 }

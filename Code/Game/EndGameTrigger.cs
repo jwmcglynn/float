@@ -16,7 +16,6 @@ namespace Sputnik.Game
 	{
 		private GameEnvironment game;
 		private SpawnPoint spawnPoint;
-		private bool activated;
 		float delay;
 
 		public EndGameTrigger(GameEnvironment env, SpawnPoint sp)
@@ -31,14 +30,10 @@ namespace Sputnik.Game
 				float.TryParse(spawnPoint.Properties["delay"], out delay);
 			else delay = 0.0f;
 			balloon.goToEndSequence(delay);
-			activated = true;
-		}
-		public override void Update(float elapsedTime)
-		{
-			base.Update(elapsedTime);
-			if (activated)
+			Environment.fade = true;
+			if (game.FadeOut.Alpha > 1.0f && !game.paused)
 			{
-				Environment.fade = true;
+				game.pause(new EndPopUp(game.Controller, game));
 			}
 		}
 	}

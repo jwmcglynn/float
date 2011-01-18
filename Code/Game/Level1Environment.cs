@@ -19,10 +19,10 @@ namespace Sputnik.Game {
 			AddChild(new Moon(this));
             Sound.PlayCue("music_dreaming");
 
-            //Balloon.enableUp = false;
-            //Balloon.enableDown = false;
-            //Balloon.enableRight = false;
-            //Balloon.enableLeft = false;
+            Balloon.enableUp = false;
+            Balloon.enableDown = false;
+            Balloon.enableRight = false;
+            Balloon.enableLeft = false;
 		}
 	}
 }

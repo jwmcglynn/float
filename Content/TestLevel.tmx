@@ -55,7 +55,7 @@
    </properties>
   </object>
   <object name="star" type="star" x="1862" y="58" width="70" height="66"/>
-  <object name="theEnd" type="end" x="4596" y="0" width="118" height="814"/>
+  <object name="theEnd" type="end" x="4524" y="14" width="118" height="814"/>
  </objectgroup>
  <objectgroup name="Instructions" width="73" height="16"/>
 </map>

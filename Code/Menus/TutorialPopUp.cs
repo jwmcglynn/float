@@ -88,6 +88,9 @@ namespace Sputnik.Menus
                case Keys.Left:
                    thePopUp.Texture = contentManager.Load<Texture2D>("buttons\\HighPressure");
                    break;
+			   case Keys.Enter:
+				   thePopUp.Texture = contentManager.Load<Texture2D>("Letterforsanta");
+				   break;
             }
             thePopUp.Registration = (thePopUp.Size / 2);
             thePopUp.PositionPercent = new Vector2(0.5f, 0.5f);
