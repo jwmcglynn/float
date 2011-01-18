@@ -43,7 +43,6 @@ namespace Sputnik.Game
 				if (!changedMusic)
 				{
 					Sound.StopAllExceptMusic();
-					Sound.PlayCue("music_title");
 				}
 				else
 				{ changedMusic = true; }

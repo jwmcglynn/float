@@ -23,7 +23,7 @@ namespace Sputnik {
 
 		// Windowed/fullscreen.
 		private Vector2 m_windowedSize = new Vector2(960, 640);
-		private bool m_fullscreen = false;
+		private bool m_fullscreen = true;
 
 		// FPS Counters.
 		private double m_frameTime;
@@ -40,8 +40,8 @@ namespace Sputnik {
 			Content.RootDirectory = "Content";
 			Graphics.SynchronizeWithVerticalRetrace = true;
 
-			Graphics.IsFullScreen = false;
-			m_fullscreen = false;
+			Graphics.IsFullScreen = true;
+			m_fullscreen = true;
 
 			if (m_fullscreen) {
 				// Set backbuffer size to screen size.
