@@ -45,7 +45,8 @@ namespace Sputnik.Menus
                     case Keys.Up:
 						if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W)
 								|| gp.IsButtonDown(Input.Buttons.DPadUp)
-								|| gp.ThumbSticks.Left.Y > threshold) {
+								|| gp.ThumbSticks.Left.Y > threshold
+								|| gp.ThumbSticks.Right.Y > threshold) {
 							Sound.PlayCue("scroll");
 							unPause();
 						}
@@ -53,7 +54,9 @@ namespace Sputnik.Menus
 					case Keys.Down:
 						if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S)
 								|| gp.IsButtonDown(Input.Buttons.DPadDown)
-								|| gp.ThumbSticks.Left.Y < -threshold) {
+								|| gp.ThumbSticks.Left.Y < -threshold
+								|| gp.ThumbSticks.Right.Y < -threshold)
+						{
 							Sound.PlayCue("scroll");
 							unPause();
 						}
@@ -61,7 +64,9 @@ namespace Sputnik.Menus
 					case Keys.Right:
 						if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D)
 								|| gp.IsButtonDown(Input.Buttons.DPadRight)
-								|| gp.ThumbSticks.Left.X > threshold) {
+								|| gp.ThumbSticks.Left.X > threshold
+								|| gp.ThumbSticks.Right.X > threshold)
+							{
 							Sound.PlayCue("scroll");
 							unPause();
 						}
@@ -69,7 +74,9 @@ namespace Sputnik.Menus
 					case Keys.Left:
 						if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A)
 								|| gp.IsButtonDown(Input.Buttons.DPadLeft)
-								|| gp.ThumbSticks.Left.X < -threshold) {
+								|| gp.ThumbSticks.Left.X < -threshold
+								|| gp.ThumbSticks.Right.X < -threshold)
+						{
 							Sound.PlayCue("scroll");
 							unPause();
 						}
