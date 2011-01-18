@@ -252,10 +252,10 @@ Wave Bank
     Compression Preset Name = Compression Preset;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 2486870080;
-    PC Bank Last Modified High = 30127770;
-    Bank Last Revised Low = 2486870080;
-    Bank Last Revised High = 30127770;
+    PC Bank Last Modified Low = 943083752;
+    PC Bank Last Modified High = 30127788;
+    Bank Last Revised Low = 360583752;
+    Bank Last Revised High = 30127788;
 
     Wave
     {
@@ -423,9 +423,9 @@ Wave Bank
     {
         Name = thunder;
         File = sfx\thunder.wav;
-        Build Settings Last Modified Low = 1386046312;
-        Build Settings Last Modified High = 30127678;
-        Compression Preset Name = adpcm;
+        Build Settings Last Modified Low = 360583752;
+        Build Settings Last Modified High = 30127788;
+        Compression Preset Name = <none>;
 
         Cache
         {
@@ -608,8 +608,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 2489838830;
-    Bank Last Modified High = 30127770;
+    Bank Last Modified Low = 1395740002;
+    Bank Last Modified High = 30127788;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1159,7 +1159,7 @@ Sound Bank
     Sound
     {
         Name = thunder;
-        Volume = -1670;
+        Volume = -2970;
         Pitch = 0;
         Priority = 0;
 
@@ -1200,8 +1200,8 @@ Sound Bank
 
                 Volume Variation
                 {
-                    Min = -400;
-                    Max = 400;
+                    Min = -580;
+                    Max = 210;
                     Volume = 0;
                     New Variation On Loop = 0;
                 }
@@ -1690,19 +1690,6 @@ Sound Bank
             Index = 9;
             Weight Min = 0;
             Weight Max = 255;
-        }
-
-        Instance Limit
-        {
-            Max Instances = 1;
-            Behavior = 0;
-
-            Crossfade
-            {
-                Fade In = 0;
-                Fade Out = 0;
-                Crossfade Type = 0;
-            }
         }
     }
 

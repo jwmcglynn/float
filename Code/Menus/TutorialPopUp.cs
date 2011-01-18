@@ -106,7 +106,7 @@ namespace Sputnik.Menus
 
 		protected override void  unPause()
 		{
-			System.Threading.Thread.Sleep(2000);
+			System.Threading.Thread.Sleep(1200);
 			switch (quitKey)
 			{
 				case Keys.Up:
