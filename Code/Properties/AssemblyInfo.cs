@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CaseSensitive")]
-[assembly: AssemblyProduct("CaseSensitive")]
+[assembly: AssemblyTitle("Float")]
+[assembly: AssemblyProduct("Float")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCompany("Case Sensitive Software")]
+[assembly: AssemblyCopyright("Copyright 2011 Case Sensitive Software")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
