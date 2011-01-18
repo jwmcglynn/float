@@ -16,8 +16,8 @@ Global Settings
     Header File = CaseSensitiveSound.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 755340306;
-    Last Modified High = 30127814;
+    Last Modified Low = 3304253826;
+    Last Modified High = 30127819;
 
     Category
     {
@@ -234,16 +234,16 @@ Global Settings
 
             RPC Point
             {
-                X = 3723.715576;
-                Y = -635.294128;
-                Curve = 2;
+                X = 35.496361;
+                Y = 0.000000;
+                Curve = 0;
             }
 
             RPC Point
             {
-                X = 9373.256836;
-                Y = -4870.588379;
-                Curve = 2;
+                X = 2419.431885;
+                Y = -2347.764648;
+                Curve = 0;
             }
         }
     }
