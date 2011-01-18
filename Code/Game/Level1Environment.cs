@@ -9,13 +9,7 @@ namespace Sputnik.Game {
 		public Level1Environment(Controller ctrl)
 				: base(ctrl) {
 
-            //LoadMap("LevelDesignFour.tmx");
-            //LoadOrExtendMap("LevelDesignOne.tmx");
-            //LoadOrExtendMap("LevelDesignThree.tmx");
-            //LoadOrExtendMap("LevelDesignTwo.tmx");
-            //LoadOrExtendMap("LevelDesignFive.tmx");
-
-            LoadMap("Level1.tmx");
+            LoadMap("LevelDesignSix.tmx");
             LoadOrExtendMap("LevelDesignFour.tmx");
             LoadOrExtendMap("LevelDesignOne.tmx");
             LoadOrExtendMap("LevelDesignThree.tmx");
